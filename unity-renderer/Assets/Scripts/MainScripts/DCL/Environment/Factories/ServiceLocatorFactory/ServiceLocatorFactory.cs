@@ -10,6 +10,7 @@ using DCL.Services;
 using DCL.Social.Chat;
 using DCLServices.Lambdas;
 using DCLServices.Lambdas.LandsService;
+using DCLServices.Lambdas.PlaceService;
 using DCLServices.Lambdas.NamesService;
 using DCLServices.WearablesCatalogService;
 using MainScripts.DCL.Controllers.AssetManager;
@@ -51,6 +52,7 @@ namespace DCL
             result.Register<ILambdasService>(() => new LambdasService());
             result.Register<INamesService>(() => new NamesService());
             result.Register<ILandsService>(() => new LandsService());
+            result.Register<IPlacesService>(() => new PlacesService());
             result.Register<IUpdateEventHandler>(() => new UpdateEventHandler());
             result.Register<IWebRequestMonitor>(() => new SentryWebRequestMonitor());
 

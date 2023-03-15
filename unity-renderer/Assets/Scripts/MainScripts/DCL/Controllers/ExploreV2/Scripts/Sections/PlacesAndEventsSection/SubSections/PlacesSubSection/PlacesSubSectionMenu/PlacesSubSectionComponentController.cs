@@ -1,9 +1,13 @@
+using Cysharp.Threading.Tasks;
 using DCL;
 using DCL.Social.Friends;
+using DCLServices.Lambdas.PlaceService;
 using ExploreV2Analytics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using static HotScenesController;
 using Environment = DCL.Environment;
@@ -20,13 +24,14 @@ public class PlacesSubSectionComponentController : IPlacesSubSectionComponentCon
     internal readonly FriendTrackerController friendsTrackerController;
     private readonly IExploreV2Analytics exploreV2Analytics;
     private readonly DataStore dataStore;
+    private IPlacesCatalogService placesCatalogService;
 
     internal readonly PlaceAndEventsCardsReloader cardsReloader;
 
     internal List<HotSceneInfo> placesFromAPI = new ();
     internal int availableUISlots;
 
-    public PlacesSubSectionComponentController(IPlacesSubSectionComponentView view, IPlacesAPIController placesAPI, IFriendsController friendsController, IExploreV2Analytics exploreV2Analytics, DataStore dataStore)
+    public PlacesSubSectionComponentController(IPlacesSubSectionComponentView view, IPlacesAPIController placesAPI, IFriendsController friendsController, IExploreV2Analytics exploreV2Analytics, DataStore dataStore, IPlacesCatalogService placesCatalogService)
     {
         cardsReloader = new PlaceAndEventsCardsReloader(view, this, dataStore.exploreV2);
 
@@ -49,6 +54,7 @@ public class PlacesSubSectionComponentController : IPlacesSubSectionComponentCon
         friendsTrackerController = new FriendTrackerController(friendsController, view.currentFriendColors);
 
         this.exploreV2Analytics = exploreV2Analytics;
+        this.placesCatalogService = placesCatalogService;
 
         view.ConfigurePools();
     }
@@ -86,8 +92,16 @@ public class PlacesSubSectionComponentController : IPlacesSubSectionComponentCon
 
     public void RequestAllFromAPI()
     {
+        TestReq().Forget();
         placesAPIApiController.GetAllPlaces(
             OnCompleted: OnRequestedEventsUpdated);
+    }
+
+    private async UniTaskVoid TestReq()
+    {
+        Debug.Log("Start req");
+        List<PlacesResponse.PlaceInfo> requestPlacesAsync = await placesCatalogService.RequestPlacesAsync(1, 40, false, CancellationToken.None);
+        Debug.Log($"count {requestPlacesAsync.Count()}");
     }
 
     private void OnRequestedEventsUpdated(List<HotSceneInfo> placeList)

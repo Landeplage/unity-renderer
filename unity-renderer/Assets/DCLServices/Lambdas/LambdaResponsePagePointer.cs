@@ -59,7 +59,7 @@ namespace DCLServices.Lambdas
                 ct = CancellationTokenSource.CreateLinkedTokenSource(this.cancellationToken, localCancellationToken).Token;
 
             var res = await serviceConsumer.CreateRequest(constEndPoint, pageSize, pageNum, ct);
-
+            UnityEngine.Debug.Log(res.response);
             if (res.success)
                 cachedPages[pageNum] = res.response;
 

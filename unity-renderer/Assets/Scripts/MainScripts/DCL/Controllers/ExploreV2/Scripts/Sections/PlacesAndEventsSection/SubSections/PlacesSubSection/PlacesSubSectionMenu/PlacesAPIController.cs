@@ -20,7 +20,7 @@ public interface IPlacesAPIController
     /// Request all places from the server.
     /// </summary>
     /// <param name="OnCompleted">It will be triggered when the operation has finished successfully.</param>
-    UniTask GetAllPlacesFromPlacesAPI(Action<List<PlaceInfo>> OnCompleted);
+    UniTask<List<PlaceInfo>> GetPlacesFromPlacesAPI();
 
     /// <summary>
     /// Request all favorite places from the server.
@@ -48,10 +48,11 @@ public class PlacesAPIController : IPlacesAPIController
         hotScenesController.OnHotSceneListFinishUpdating += OnFetchHotScenes;
     }
 
-    public async UniTask GetAllPlacesFromPlacesAPI(Action<List<PlaceInfo>> OnCompleted)
+    public async UniTask<List<PlaceInfo>> GetPlacesFromPlacesAPI()
     {
         UnityWebRequest result = await webRequestController.Ref.GetAsync(PLACES_URL, isSigned: true);
-        OnCompleted?.Invoke(Utils.SafeFromJson<PlacesAPIResponse>(result.downloadHandler.text).data);
+        List<PlaceInfo> placeInfos = Utils.SafeFromJson<PlacesAPIResponse>(result.downloadHandler.text).data;
+        return placeInfos;
     }
 
     public async UniTask GetAllFavorites(Action<List<PlaceInfo>> OnCompleted)

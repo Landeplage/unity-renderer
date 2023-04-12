@@ -55,265 +55,97 @@ public class NativeBridgeCommunication : IKernelCommunication
         SetCallback_Query(Query);
 #endif
     }
-    public void Dispose()
-    {
-        
-    }
 
-    [MonoPInvokeCallback(typeof(JS_Delegate_VSSS))]
-    internal static void OpenNftDialog(string contactAddress, string comment, string tokenId)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.OpenNftDialog payload = new Protocol.OpenNftDialog
-        {
-            contactAddress = contactAddress,
-            comment = comment,
-            tokenId = tokenId
-        };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.OPEN_NFT_DIALOG;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
-
-    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
-    internal static void OpenExternalUrl(string url)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.OpenExternalUrl payload = new Protocol.OpenExternalUrl
-        {
-            url = url
-        };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.OPEN_EXTERNAL_URL;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
-
-    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
-    internal static void EntityComponentDestroy(string name)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.EntityComponentDestroy payload = new Protocol.EntityComponentDestroy
-        {
-            entityId = currentEntityId,
-            name = name
-        };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.ENTITY_COMPONENT_DESTROY;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
-
-    [MonoPInvokeCallback(typeof(JS_Delegate_VSS))]
-    internal static void SharedComponentAttach(string id, string name)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.SharedComponentAttach payload = new Protocol.SharedComponentAttach
-        {
-            entityId = currentEntityId,
-            id = id,
-            name = name
-        };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.SHARED_COMPONENT_ATTACH;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    public void Dispose() { }
 
     [MonoPInvokeCallback(typeof(JS_Delegate_Query))]
     internal static void Query(Protocol.QueryPayload payload)
     {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        string queryId = Convert.ToString(payload.raycastPayload.id);
-
-        RaycastType raycastType = (RaycastType) payload.raycastPayload.raycastType;
-
-        Ray ray = new Ray()
+        Ray ray = new Ray
         {
             origin = payload.raycastPayload.origin,
             direction = payload.raycastPayload.direction,
-            distance = payload.raycastPayload.distance
+            distance = payload.raycastPayload.distance,
         };
 
-        queuedMessage.method = MessagingTypes.QUERY;
-        queuedMessage.payload = new QueryMessage()
+        var resultPayload = new QueryMessage
         {
-            payload = new RaycastQuery()
+            payload = new RaycastQuery
             {
-                id = queryId,
-                raycastType = raycastType,
+                id = Convert.ToString(payload.raycastPayload.id),
+                raycastType = (RaycastType)payload.raycastPayload.raycastType,
                 ray = ray,
-                sceneNumber = currentSceneNumber
-            }
+                sceneNumber = currentSceneNumber,
+            },
         };
 
-        queueHandler.EnqueueSceneMessage(queuedMessage);
+        EnqueueSceneMessage(MessagingTypes.QUERY, resultPayload);
     }
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_VSSS))]
+    internal static void OpenNftDialog(string contactAddress, string comment, string tokenId) =>
+        EnqueueSceneMessage(MessagingTypes.OPEN_NFT_DIALOG, new Protocol.OpenNftDialog { contactAddress = contactAddress, comment = comment, tokenId = tokenId });
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
+    internal static void OpenExternalUrl(string url) =>
+        EnqueueSceneMessage(MessagingTypes.OPEN_EXTERNAL_URL, new Protocol.OpenExternalUrl { url = url });
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
+    internal static void EntityComponentDestroy(string name) =>
+        EnqueueSceneMessage(MessagingTypes.ENTITY_COMPONENT_DESTROY, new Protocol.EntityComponentDestroy { entityId = currentEntityId, name = name });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VSS))]
-    internal static void SharedComponentUpdate(string id, string json)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
+    internal static void SharedComponentAttach(string id, string name) =>
+        EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_ATTACH, new Protocol.SharedComponentAttach { entityId = currentEntityId, id = id, name = name });
 
-        Protocol.SharedComponentUpdate payload =
-            new Protocol.SharedComponentUpdate
-            {
-                componentId = id,
-                json = json
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.SHARED_COMPONENT_UPDATE;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    [MonoPInvokeCallback(typeof(JS_Delegate_VSS))]
+    internal static void SharedComponentUpdate(string id, string json) =>
+        EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_UPDATE, new Protocol.SharedComponentUpdate { componentId = id, json = json });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
-    internal static void SharedComponentDispose(string id)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.SharedComponentDispose payload =
-            new Protocol.SharedComponentDispose
-            {
-                id = id
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.SHARED_COMPONENT_DISPOSE;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    internal static void SharedComponentDispose(string id) =>
+        EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_DISPOSE, new Protocol.SharedComponentDispose { id = id });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VIS))]
-    internal static void SharedComponentCreate(int classId, string id)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.SharedComponentCreate payload =
-            new Protocol.SharedComponentCreate
-            {
-                id = id,
-                classId = classId
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.SHARED_COMPONENT_CREATE;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    internal static void SharedComponentCreate(int classId, string id) =>
+        EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_CREATE, new Protocol.SharedComponentCreate { id = id, classId = classId });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VIS))]
-    internal static void EntityComponentCreateOrUpdate(int classId, string json)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.EntityComponentCreateOrUpdate payload =
-            new Protocol.EntityComponentCreateOrUpdate
-            {
-                entityId = currentEntityId,
-                classId = classId,
-                json = json
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    internal static void EntityComponentCreateOrUpdate(int classId, string json) =>
+        EnqueueSceneMessage(MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE,
+            new Protocol.EntityComponentCreateOrUpdate { entityId = currentEntityId, classId = classId, json = json });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
-    internal static void SetEntityParent(string parentId)
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.SetEntityParent payload =
-            new Protocol.SetEntityParent
-            {
-                entityId = currentEntityId,
-                parentId = parentId
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.ENTITY_REPARENT;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
-
-    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
-    internal static void SetEntityId(string id) { currentEntityId = id; }
-
-    // @deprecated use SetSceneNumber
-    [MonoPInvokeCallback(typeof(JS_Delegate_VI))]
-    internal static void SetSceneId(string _) { }
-
-    [MonoPInvokeCallback(typeof(JS_Delegate_VI))]
-    internal static void SetSceneNumber(int sceneNumber) { currentSceneNumber = sceneNumber; }
-
-    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
-    internal static void SetTag(string id) { currentTag = id; }
+    internal static void SetEntityParent(string parentId) =>
+        EnqueueSceneMessage(MessagingTypes.ENTITY_REPARENT, new Protocol.SetEntityParent { entityId = currentEntityId, parentId = parentId });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_V))]
-    internal static void CreateEntity()
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-
-        Protocol.CreateEntity payload =
-            new Protocol.CreateEntity
-            {
-                entityId = currentEntityId
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.ENTITY_CREATE;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    internal static void CreateEntity() =>
+        EnqueueSceneMessage(MessagingTypes.ENTITY_CREATE, new Protocol.CreateEntity { entityId = currentEntityId });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_V))]
-    internal static void RemoveEntity()
-    {
-        QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-        Protocol.RemoveEntity payload =
-            new Protocol.RemoveEntity()
-            {
-                entityId = currentEntityId
-            };
-
-        queuedMessage.payload = payload;
-        queuedMessage.method = MessagingTypes.ENTITY_DESTROY;
-
-        queueHandler.EnqueueSceneMessage(queuedMessage);
-    }
+    internal static void RemoveEntity() =>
+        EnqueueSceneMessage(MessagingTypes.ENTITY_DESTROY, new Protocol.RemoveEntity { entityId = currentEntityId });
 
     [MonoPInvokeCallback(typeof(JS_Delegate_V))]
-    internal static void SceneReady()
+    internal static void SceneReady() =>
+        EnqueueSceneMessage(MessagingTypes.INIT_DONE, new Protocol.SceneReady());
+
+    private static void EnqueueSceneMessage(string messageType, object payload)
     {
         QueuedSceneMessage_Scene queuedMessage = GetSceneMessageInstance();
-        queuedMessage.method = MessagingTypes.INIT_DONE;
-        queuedMessage.payload = new Protocol.SceneReady();
+        queuedMessage.method = messageType;
+        queuedMessage.payload = payload;
 
         queueHandler.EnqueueSceneMessage(queuedMessage);
     }
 
-    internal static QueuedSceneMessage_Scene GetSceneMessageInstance()
+    private static QueuedSceneMessage_Scene GetSceneMessageInstance()
     {
         var sceneMessagesPool = queueHandler.sceneMessagesPool;
 
         if (!sceneMessagesPool.TryDequeue(out QueuedSceneMessage_Scene message))
-        {
             message = new QueuedSceneMessage_Scene();
-        }
 
         message.sceneNumber = currentSceneNumber;
         message.tag = currentTag;
@@ -321,6 +153,22 @@ public class NativeBridgeCommunication : IKernelCommunication
 
         return message;
     }
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
+    internal static void SetEntityId(string id) =>
+        currentEntityId = id;
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_VI))]
+    internal static void SetSceneNumber(int sceneNumber) =>
+        currentSceneNumber = sceneNumber;
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_VS))]
+    internal static void SetTag(string id) =>
+        currentTag = id;
+
+    // @deprecated use SetSceneNumber
+    [MonoPInvokeCallback(typeof(JS_Delegate_VI))]
+    internal static void SetSceneId(string _) { }
 
     [DllImport("__Internal")]
     private static extern void SetCallback_CreateEntity(JS_Delegate_V callback);

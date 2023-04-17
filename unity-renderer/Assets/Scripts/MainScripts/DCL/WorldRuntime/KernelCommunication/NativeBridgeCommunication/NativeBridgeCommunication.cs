@@ -3,6 +3,9 @@ using DCL.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
+using Unity.Profiling;
+using UnityEngine;
+using Ray = DCL.Models.Ray;
 
 public class NativeBridgeCommunication : IKernelCommunication
 {
@@ -59,59 +62,73 @@ public class NativeBridgeCommunication : IKernelCommunication
     public void Dispose() { }
 
     [DllImport("__Internal")] private static extern void SetCallback_SetTag(JS_Delegate_VS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))] internal static void SetTag(string id) =>
         currentTag = id;
 
-    [DllImport("__Internal")] private static extern void SetCallback_SceneReady(JS_Delegate_V callback);
-    [MonoPInvokeCallback(typeof(JS_Delegate_V))] internal static void SceneReady() =>
-        EnqueueSceneMessage(MessagingTypes.INIT_DONE, new Protocol.SceneReady());
-
     [DllImport("__Internal")] private static extern void SetCallback_SetSceneNumber(JS_Delegate_VI callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VI))] internal static void SetSceneNumber(int sceneNumber) =>
         currentSceneNumber = sceneNumber;
 
+    [DllImport("__Internal")] private static extern void SetCallback_SceneReady(JS_Delegate_V callback);
+
+    [MonoPInvokeCallback(typeof(JS_Delegate_V))] internal static void SceneReady() =>
+        EnqueueSceneMessage(MessagingTypes.INIT_DONE, new Protocol.SceneReady());
+
     [DllImport("__Internal")] private static extern void SetCallback_CreateEntity(JS_Delegate_V callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_V))] internal static void CreateEntity() =>
         EnqueueSceneMessage(MessagingTypes.ENTITY_CREATE, new Protocol.CreateEntity { entityId = currentEntityId });
 
     [DllImport("__Internal")] private static extern void SetCallback_RemoveEntity(JS_Delegate_V callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_V))] internal static void RemoveEntity() =>
         EnqueueSceneMessage(MessagingTypes.ENTITY_DESTROY, new Protocol.RemoveEntity { entityId = currentEntityId });
 
     [DllImport("__Internal")] private static extern void SetCallback_SetEntityId(JS_Delegate_VS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))] internal static void SetEntityId(string id) =>
         currentEntityId = id;
 
     [DllImport("__Internal")] private static extern void SetCallback_SetEntityParent(JS_Delegate_VS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))] internal static void SetEntityParent(string parentId) =>
         EnqueueSceneMessage(MessagingTypes.ENTITY_REPARENT, new Protocol.SetEntityParent { entityId = currentEntityId, parentId = parentId });
 
     [DllImport("__Internal")] private static extern void SetCallback_EntityComponentCreateOrUpdate(JS_Delegate_VIS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VIS))] internal static void EntityComponentCreateOrUpdate(int classId, string json) =>
         EnqueueSceneMessage(MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE,
             new Protocol.EntityComponentCreateOrUpdate { entityId = currentEntityId, classId = classId, json = json });
 
     [DllImport("__Internal")] private static extern void SetCallback_EntityComponentDestroy(JS_Delegate_VS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))] internal static void EntityComponentDestroy(string name) =>
         EnqueueSceneMessage(MessagingTypes.ENTITY_COMPONENT_DESTROY, new Protocol.EntityComponentDestroy { entityId = currentEntityId, name = name });
 
     [DllImport("__Internal")] private static extern void SetCallback_SharedComponentCreate(JS_Delegate_VIS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VIS))] internal static void SharedComponentCreate(int classId, string id) =>
         EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_CREATE, new Protocol.SharedComponentCreate { id = id, classId = classId });
 
     [DllImport("__Internal")] private static extern void SetCallback_SharedComponentDispose(JS_Delegate_VS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))] internal static void SharedComponentDispose(string id) =>
         EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_DISPOSE, new Protocol.SharedComponentDispose { id = id });
 
     [DllImport("__Internal")] private static extern void SetCallback_SharedComponentAttach(JS_Delegate_VSS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VSS))] internal static void SharedComponentAttach(string id, string name) =>
         EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_ATTACH, new Protocol.SharedComponentAttach { entityId = currentEntityId, id = id, name = name });
 
     [DllImport("__Internal")] private static extern void SetCallback_SharedComponentUpdate(JS_Delegate_VSS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VSS))] internal static void SharedComponentUpdate(string id, string json) =>
         EnqueueSceneMessage(MessagingTypes.SHARED_COMPONENT_UPDATE, new Protocol.SharedComponentUpdate { componentId = id, json = json });
 
     [DllImport("__Internal")] private static extern void SetCallback_Query(JS_Delegate_Query callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_Query))] internal static void Query(Protocol.QueryPayload payload)
     {
         var ray = new Ray
@@ -136,10 +153,12 @@ public class NativeBridgeCommunication : IKernelCommunication
     }
 
     [DllImport("__Internal")] private static extern void SetCallback_OpenNftDialog(JS_Delegate_VSSS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VSSS))] internal static void OpenNftDialog(string contactAddress, string comment, string tokenId) =>
         EnqueueSceneMessage(MessagingTypes.OPEN_NFT_DIALOG, new Protocol.OpenNftDialog { contactAddress = contactAddress, comment = comment, tokenId = tokenId });
 
     [DllImport("__Internal")] private static extern void SetCallback_OpenExternalUrl(JS_Delegate_VS callback);
+
     [MonoPInvokeCallback(typeof(JS_Delegate_VS))] internal static void OpenExternalUrl(string url) =>
         EnqueueSceneMessage(MessagingTypes.OPEN_EXTERNAL_URL, new Protocol.OpenExternalUrl { url = url });
 

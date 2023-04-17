@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 using DCL.Interface;
 using DCL.Models;
 using MainScripts.DCL.Analytics.PerformanceAnalytics;
+using Unity.Profiling;
 using UnityEngine.SceneManagement;
 
 namespace DCL
@@ -19,6 +20,9 @@ namespace DCL
 
     public class MessagingBus : IDisposable
     {
+        static readonly ProfilerMarker k_ProcessQueue = new ("MessagingBus_ProcessQueue");
+        static readonly ProfilerMarker k_RemoveUnreliable = new ("MessagingBus_RemoveUnreliableMessages");
+
         public static bool VERBOSE = false;
 
         public IMessageProcessHandler handler;
@@ -88,8 +92,8 @@ namespace DCL
         public void Enqueue(QueuedSceneMessage message, QueueMode queueMode = QueueMode.Reliable)
         {
             lock (unreliableMessages)
-            {                
-                // TODO: If we check here for 'if (message == null || string.IsNullOrEmpty(message.message))' loading the scene breaks, as we get empty messages every frame... 
+            {
+                // TODO: If we check here for 'if (message == null || string.IsNullOrEmpty(message.message))' loading the scene breaks, as we get empty messages every frame...
                 if (message == null)
                     throw new Exception("A null message?");
 
@@ -157,6 +161,7 @@ namespace DCL
 
         public bool ProcessQueue(float timeBudget, out IEnumerator yieldReturn)
         {
+            k_ProcessQueue.Begin();
             yieldReturn = null;
 
             // Note (Zak): This check is to avoid calling Time.realtimeSinceStartup
@@ -186,21 +191,21 @@ namespace DCL
                 QueuedSceneMessage m = pendingMessagesFirst.Value;
 
                 PerformanceAnalytics.MessagesProcessedTracker.Track();
-                
+
                 RemoveFirstReliableMessage();
 
                 if (m.isUnreliable)
                     RemoveUnreliableMessage(m);
 
                 bool shouldLogMessage = VERBOSE;
-                
+
                 switch (m.type)
                 {
                     case QueuedSceneMessage.Type.NONE:
                         break;
                     case QueuedSceneMessage.Type.SCENE_MESSAGE:
 
-                        if (!(m is QueuedSceneMessage_Scene sceneMessage))
+                        if (m is not QueuedSceneMessage_Scene sceneMessage)
                             continue;
 
                         if (handler.ProcessMessage(sceneMessage, out msgYieldInstruction))
@@ -264,7 +269,7 @@ namespace DCL
                 }
 #endif
             }
-
+            k_ProcessQueue.End();
             return false;
         }
 
@@ -309,10 +314,12 @@ namespace DCL
 
         private void RemoveUnreliableMessage(QueuedSceneMessage message)
         {
+            k_RemoveUnreliable.Begin();
             lock (unreliableMessages)
             {
                 unreliableMessages.Remove(message.tag);
             }
+            k_RemoveUnreliable.End();
         }
 
         private void LogMessage(QueuedSceneMessage m, MessagingBus bus, bool logType = true)

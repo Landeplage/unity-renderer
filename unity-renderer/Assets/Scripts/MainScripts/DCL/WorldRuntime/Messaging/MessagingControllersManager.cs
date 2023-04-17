@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using MainScripts.DCL.Analytics.PerformanceAnalytics;
+using Unity.Profiling;
 using UnityEngine;
 
 namespace DCL
 {
     public class MessagingControllersManager : IMessagingControllersManager
     {
+        static readonly ProfilerMarker k_Enqueue = new ("MessagingControllersManager_in_Enqueue");
+        static readonly ProfilerMarker k_ProcessBus = new ("MessagingControllersManager_ProcessBus");
+
         public static bool VERBOSE = false;
 
         private const float MAX_GLOBAL_MSG_BUDGET = 0.02f;
@@ -241,8 +245,10 @@ namespace DCL
 
         public void Enqueue(bool isUiBus, QueuedSceneMessage_Scene queuedMessage)
         {
+            k_Enqueue.Begin();
             PerformanceAnalytics.MessagesEnqueuedTracker.Track();
             messagingControllers[queuedMessage.sceneNumber].Enqueue(isUiBus, queuedMessage, out MessagingBusType busId);
+            k_Enqueue.End();
         }
 
         public void ForceEnqueueToGlobal(MessagingBusType busId, QueuedSceneMessage queuedMessage)
@@ -323,6 +329,7 @@ namespace DCL
 
         bool ProcessBus(MessagingBus bus)
         {
+            k_ProcessBus.Begin();
             if (!bus.enabled || bus.pendingMessagesCount <= 0)
                 return false;
 
@@ -336,6 +343,8 @@ namespace DCL
             RefreshControllerEnabledState(bus.owner);
 
             timeBudgetCounter -= Time.realtimeSinceStartup - startTime;
+
+            k_ProcessBus.End();
 
             if (timeBudgetCounter <= 0)
                 return true;

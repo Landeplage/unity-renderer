@@ -6,12 +6,12 @@ using DCL.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DCL.Components;
-using System.Threading.Tasks;
+using MainScripts.DCL.WorldRuntime.KernelCommunication.WebSocketCommunication;
+using Unity.Profiling;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -66,7 +66,6 @@ namespace DCL
             TaskUtils.Run(async () => await WatchForNewChunksToDecode(tokenSourceToken), cancellationToken: tokenSourceToken).Forget();
 #endif
         }
-
         private void PrewarmSceneMessagesPool()
         {
             if (prewarmSceneMessagesPool)
@@ -82,7 +81,6 @@ namespace DCL
                 PoolManagerFactory.EnsureEntityPool(prewarmEntitiesPool);
             }
         }
-
         private void OnDebugModeSet(bool current, bool previous)
         {
             if (current == previous)
@@ -97,7 +95,6 @@ namespace DCL
                 Environment.i.world.sceneBoundsChecker.SetFeedbackStyle(new SceneBoundsFeedbackStyle_Simple());
             }
         }
-
         public void Dispose()
         {
             tokenSource.Cancel();
@@ -119,7 +116,6 @@ namespace DCL
             if (deferredDecodingCoroutine != null)
                 CoroutineStarter.Stop(deferredDecodingCoroutine);
         }
-
         public void Update()
         {
             if (!enabled)
@@ -132,7 +128,6 @@ namespace DCL
                 SortScenesByDistance();
             }
         }
-
         public void LateUpdate()
         {
             if (!enabled)
@@ -140,6 +135,16 @@ namespace DCL
 
             Environment.i.platform.physicsSyncController.Sync();
         }
+
+        static readonly ProfilerMarker k_sendSceneMessage = new ("SceneController_in_SendSceneMessage");
+        static readonly ProfilerMarker k_Decode = new ("SceneController_in_Decode");
+        static readonly ProfilerMarker k_EnqueueChunk = new ("SceneController_in_EnqueueChunk");
+        static readonly ProfilerMarker k_ThreadedDecodeAndEnqueue = new ("SceneController_in_ThreadedDecodeAndEnqueue");
+        static readonly ProfilerMarker k_EnqueueSceneMessage = new ("SceneController_in_EnqueueSceneMessage");
+        static readonly ProfilerMarker k_StringSplit = new ("SceneController_in_ChunkStringSplit");
+
+        static readonly ProfilerMarker k_processMessage = new ("SceneController_ProcessMessage_public");
+        static readonly ProfilerMarker k_processMessageInternal = new ("SceneController_ProcessMessage_Internal");
 
         //======================================================================
 
@@ -160,8 +165,12 @@ namespace DCL
 
         const float MAX_TIME_FOR_DECODE = 0.005f;
 
+
         public bool ProcessMessage(QueuedSceneMessage_Scene msgObject, out CustomYieldInstruction yieldInstruction)
         {
+            SDK6_Stats.precessedMessages.Value++;
+            k_processMessage.Begin();
+
             int sceneNumber = msgObject.sceneNumber;
             string method = msgObject.method;
 
@@ -208,12 +217,14 @@ namespace DCL
 
             sceneMessagesPool.Enqueue(msgObject);
 
+            k_processMessage.End();
             return res;
         }
 
         private void ProcessMessage(ParcelScene scene, string method, object msgPayload,
             out CustomYieldInstruction yieldInstruction)
         {
+            k_processMessageInternal.Begin();
             yieldInstruction = null;
             IDelayedComponent delayedComponent = null;
 
@@ -350,6 +361,8 @@ namespace DCL
                 if (delayedComponent.isRoutineRunning)
                     yieldInstruction = delayedComponent.yieldInstruction;
             }
+
+            k_processMessageInternal.End();
         }
 
         public void ParseQuery(object payload, int sceneNumber)
@@ -366,23 +379,28 @@ namespace DCL
             PhysicsCast.i.Query(raycastQuery, entityIdHelper);
         }
 
+
         public void SendSceneMessage(string chunk)
         {
-            var renderer = CommonScriptableObjects.rendererState.Get();
+            SDK6_Stats.messagesTotalSize.Value += System.Text.Encoding.UTF8.GetByteCount(chunk) / 1024.0f;
+            SDK6_Stats.sentMessagesAmount.Value ++;
 
-            if (!renderer)
-            {
-                EnqueueChunk(chunk);
-            }
-            else
-            {
+            k_sendSceneMessage.Begin();
+
+            if (CommonScriptableObjects.rendererState.Get())
                 chunksToDecode.Enqueue(chunk);
-            }
+            else
+                EnqueueChunk(chunk);
+
+            k_sendSceneMessage.End();
         }
+
 
         private QueuedSceneMessage_Scene Decode(string payload, QueuedSceneMessage_Scene queuedMessage)
         {
             ProfilingEvents.OnMessageDecodeStart?.Invoke("Misc");
+
+            k_Decode.Begin();
 
             if (!MessageDecoder.DecodePayloadChunk(payload,
                     out int sceneNumber,
@@ -395,10 +413,13 @@ namespace DCL
 
             MessageDecoder.DecodeSceneMessage(sceneNumber, message, messageTag, sendSceneMessage, ref queuedMessage);
 
+            k_Decode.End();
+
             ProfilingEvents.OnMessageDecodeEnds?.Invoke("Misc");
 
             return queuedMessage;
         }
+
 
         private IEnumerator DeferredDecodingAndEnqueue()
         {
@@ -422,9 +443,15 @@ namespace DCL
                 start = Time.unscaledTime;
             }
         }
+
         private void EnqueueChunk(string chunk)
         {
+            k_EnqueueChunk.Begin();
+
+            k_StringSplit.Begin();
             string[] payloads = chunk.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            k_StringSplit.End();
+
             var count = payloads.Length;
 
             for (int i = 0; i < count; i++)
@@ -440,6 +467,8 @@ namespace DCL
                     EnqueueSceneMessage(Decode(payloads[i], new QueuedSceneMessage_Scene()));
                 }
             }
+
+            k_EnqueueChunk.End();
         }
         private async UniTask WatchForNewChunksToDecode(CancellationToken cancellationToken)
         {
@@ -463,11 +492,16 @@ namespace DCL
 
         private void ThreadedDecodeAndEnqueue(CancellationToken cancellationToken)
         {
+            k_ThreadedDecodeAndEnqueue.Begin();
+
             while (chunksToDecode.TryDequeue(out string chunk))
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
+                k_StringSplit.Begin();
                 string[] payloads = chunk.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                k_StringSplit.End();
+
                 var count = payloads.Length;
 
                 for (int i = 0; i < count; i++)
@@ -485,13 +519,17 @@ namespace DCL
                     }
                 }
             }
+
+            k_ThreadedDecodeAndEnqueue.End();
         }
 
         public void EnqueueSceneMessage(QueuedSceneMessage_Scene message)
         {
+            k_EnqueueSceneMessage.Begin();
             bool isGlobalScene = WorldStateUtils.IsGlobalScene(message.sceneNumber);
             messagingControllersManager.AddControllerIfNotExists(this, message.sceneNumber);
             messagingControllersManager.Enqueue(isGlobalScene, message);
+            k_EnqueueSceneMessage.End();
         }
 
         //======================================================================

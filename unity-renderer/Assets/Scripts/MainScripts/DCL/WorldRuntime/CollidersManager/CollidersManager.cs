@@ -1,8 +1,10 @@
 using DCL.Components;
 using DCL.Configuration;
 using DCL.Models;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DCL
 {
@@ -183,8 +185,8 @@ namespace DCL
 
         private static bool IsCollider(Transform transform)
         {
-            bool transformName = transform.name.ToLower().Contains("_collider");
-            bool parentName = transform.parent.name.ToLower().Contains("_collider");
+            bool transformName = transform.name.Contains("_collider", StringComparison.InvariantCultureIgnoreCase);
+            bool parentName = transform.parent.name.Contains("_collider", StringComparison.InvariantCultureIgnoreCase);
 
             return parentName || transformName;
         }

@@ -2,6 +2,7 @@ using DCL.Controllers;
 using DCL.Models;
 using System;
 using System.Collections.Generic;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -9,6 +10,8 @@ namespace DCL
 {
     public class MessagingController : IDisposable
     {
+        static readonly ProfilerMarker k_Enqueue = new ("MessagingController_in_Enqueue");
+
         const char SEPARATOR = '_';
 
         public enum QueueState
@@ -104,6 +107,8 @@ namespace DCL
 
         public void Enqueue(bool isUiBus, QueuedSceneMessage_Scene queuedMessage, out MessagingBusType busType)
         {
+            k_Enqueue.Begin();
+
             busType = MessagingBusType.NONE;
 
             QueueMode queueMode = QueueMode.Reliable;
@@ -152,6 +157,8 @@ namespace DCL
                     uiBus.Enqueue(queuedMessage, queueMode);
                     break;
             }
+
+            k_Enqueue.End();
         }
 
         private void GetEntityIdAndClassIdFromTag(string tag, out int classId)

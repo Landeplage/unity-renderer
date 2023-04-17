@@ -6,12 +6,14 @@ using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using DCL.Rendering;
+using Unity.Profiling;
 using UnityEngine;
 
 namespace DCL
 {
     public class ECSComponentsManagerLegacy : IECSComponentsManagerLegacy
     {
+
         private readonly Dictionary<string, ISharedComponent> disposableComponents = new Dictionary<string, ISharedComponent>();
 
         private readonly Dictionary<long, Dictionary<Type, ISharedComponent>> entitiesSharedComponents =
@@ -58,8 +60,11 @@ namespace DCL
             isSBCNerfEnabled = featureFlags.IsFeatureEnabled("NERF_SBC");
         }
 
+        static readonly ProfilerMarker k_AddSharedComponent = new ("ECSComponentsManagerLegacy_AddSharedComponent");
+
         public void AddSharedComponent(IDCLEntity entity, Type componentType, ISharedComponent component)
         {
+            k_AddSharedComponent.Begin();
             if (component == null)
             {
                 return;
@@ -74,10 +79,14 @@ namespace DCL
             }
 
             entityComponents.Add(componentType, component);
+            k_AddSharedComponent.End();
         }
+
+        static readonly ProfilerMarker k_RemoveSharedComponent = new ("ECSComponentsManagerLegacy_RemoveSharedComponent");
 
         public void RemoveSharedComponent(IDCLEntity entity, Type targetType, bool triggerDetaching = true)
         {
+            k_RemoveSharedComponent.Begin();
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
                 return;
@@ -98,10 +107,15 @@ namespace DCL
 
             if (triggerDetaching)
                 component.DetachFrom(entity, targetType);
+
+            k_RemoveSharedComponent.End();
         }
+
+        static readonly ProfilerMarker k_TryGetComponent = new ("ECSComponentsManagerLegacy_TryGetComponent");
 
         public T TryGetComponent<T>(IDCLEntity entity) where T : class
         {
+            k_TryGetComponent.Begin();
             T component = null;
             if (entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
@@ -119,21 +133,31 @@ namespace DCL
                     return component;
             }
 
+            k_TryGetComponent.End();
+
             return null;
         }
 
+        static readonly ProfilerMarker k_TryGetBaseComponent = new ("ECSComponentsManagerLegacy_TryGetBaseComponent");
+
         public bool TryGetBaseComponent(IDCLEntity entity, CLASS_ID_COMPONENT componentId, out IEntityComponent component)
         {
+            k_TryGetBaseComponent.Begin();
             if (entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 return entityComponents.TryGetValue(componentId, out component);
             }
             component = null;
+
+            k_TryGetBaseComponent.End();
+
             return false;
         }
 
+        static readonly ProfilerMarker k_TryGetSharedComponent = new ("ECSComponentsManagerLegacy_TryGetSharedComponent");
         public bool TryGetSharedComponent(IDCLEntity entity, CLASS_ID componentId, out ISharedComponent component)
         {
+            k_TryGetSharedComponent.Begin();
             component = null;
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
@@ -152,11 +176,16 @@ namespace DCL
                 }
             }
 
+            k_TryGetSharedComponent.End();
+
             return component != null;
         }
 
+        static readonly ProfilerMarker k_GetSharedComponent = new ("ECSComponentsManagerLegacy_GetSharedComponent");
+
         public ISharedComponent GetSharedComponent(IDCLEntity entity, Type targetType)
         {
+            k_GetSharedComponent.Begin();
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
                 return null;
@@ -166,30 +195,44 @@ namespace DCL
             {
                 return component;
             }
+            k_GetSharedComponent.End();
 
             return null;
         }
 
+        static readonly ProfilerMarker k_HasComponent = new ("ECSComponentsManagerLegacy_HasComponent");
+
         public bool HasComponent(IDCLEntity entity, CLASS_ID_COMPONENT componentId)
         {
+            k_HasComponent.Begin();
             if (entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 return entityComponents.ContainsKey(componentId);
             }
+            k_HasComponent.End();
+
             return false;
         }
 
+        static readonly ProfilerMarker k_HasSharedComponent = new ("ECSComponentsManagerLegacy_HasSharedComponent");
+
         public bool HasSharedComponent(IDCLEntity entity, CLASS_ID componentId)
         {
+            k_HasSharedComponent.Begin();
             if (TryGetSharedComponent(entity, componentId, out ISharedComponent component))
             {
                 return component != null;
             }
+            k_HasSharedComponent.End();
+
             return false;
         }
 
+        static readonly ProfilerMarker k_RemoveComponent = new ("ECSComponentsManagerLegacy_RemoveComponent");
+
         public void RemoveComponent(IDCLEntity entity, CLASS_ID_COMPONENT componentId)
         {
+            k_RemoveComponent.Begin();
             if (entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 entityComponents.Remove(componentId);
@@ -199,10 +242,14 @@ namespace DCL
                     entitiesComponents.Remove(entity.entityId);
                 }
             }
+            k_RemoveComponent.End();
         }
+
+        static readonly ProfilerMarker k_AddComponent = new ("ECSComponentsManagerLegacy_AddComponent");
 
         public void AddComponent(IDCLEntity entity, CLASS_ID_COMPONENT componentId, IEntityComponent component)
         {
+            k_AddComponent.Begin();
             if (!entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 entityComponents = new Dictionary<CLASS_ID_COMPONENT, IEntityComponent>();
@@ -211,10 +258,14 @@ namespace DCL
                 entity.OnBaseComponentAdded?.Invoke(componentId, entity);
             }
             entityComponents.Add(componentId, component);
+            k_AddComponent.End();
         }
+
+        static readonly ProfilerMarker k_GetComponentsById = new ("ECSComponentsManagerLegacy_GetComponentsById");
 
         public IEntityComponent GetComponent(IDCLEntity entity, CLASS_ID_COMPONENT componentId)
         {
+            k_GetComponentsById.Begin();
             if (!entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 return null;
@@ -223,11 +274,17 @@ namespace DCL
             {
                 return component;
             }
+
+            k_GetComponentsById.End();
+
             return null;
         }
 
+        static readonly ProfilerMarker k_GetComponents = new ("ECSComponentsManagerLegacy_GetComponents");
+
         public IEnumerator<IEntityComponent> GetComponents(IDCLEntity entity)
         {
+            k_GetComponents.Begin();
             if (!entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 yield break;
@@ -240,10 +297,15 @@ namespace DCL
                     yield return iterator.Current.Value;
                 }
             }
+
+            k_GetComponents.End();
         }
+
+        static readonly ProfilerMarker k_GetSharedComponents = new ("ECSComponentsManagerLegacy_GetSharedComponents");
 
         public IEnumerator<ISharedComponent> GetSharedComponents(IDCLEntity entity)
         {
+            k_GetSharedComponents.Begin();
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
                 yield break;
@@ -256,17 +318,29 @@ namespace DCL
                     yield return iterator.Current.Value;
                 }
             }
+
+            k_GetSharedComponents.End();
         }
+
+        static readonly ProfilerMarker k_GetComponentsDictionary = new ("ECSComponentsManagerLegacy_GetComponentsDictionary");
 
         public IReadOnlyDictionary<CLASS_ID_COMPONENT, IEntityComponent> GetComponentsDictionary(IDCLEntity entity)
         {
+            k_GetComponentsDictionary.Begin();
             entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents);
+            k_GetComponentsDictionary.End();
+
             return entityComponents;
         }
 
+        static readonly ProfilerMarker k_GetSharedComponentsDictionary = new ("ECSComponentsManagerLegacy_GetSharedComponentsDictionary");
+
         public IReadOnlyDictionary<Type, ISharedComponent> GetSharedComponentsDictionary(IDCLEntity entity)
         {
+            k_GetSharedComponentsDictionary.Begin();
             entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents);
+            k_GetSharedComponentsDictionary.End();
+
             return entityComponents;
         }
 
@@ -283,8 +357,10 @@ namespace DCL
             return count;
         }
 
+        static readonly ProfilerMarker k_CleanComponents = new ("ECSComponentsManagerLegacy_CleanComponents");
         public void CleanComponents(IDCLEntity entity)
         {
+            k_CleanComponents.Begin();
             if (!entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
                 return;
@@ -310,6 +386,8 @@ namespace DCL
                 }
             }
             entitiesComponents.Remove(entity.entityId);
+
+            k_CleanComponents.End();
         }
 
         public bool HasSceneSharedComponent(string component)
@@ -317,11 +395,16 @@ namespace DCL
             return disposableComponents.ContainsKey(component);
         }
 
+        static readonly ProfilerMarker k_GetSceneSharedComponent = new ("ECSComponentsManagerLegacy_GetSceneSharedComponent");
+
         public ISharedComponent GetSceneSharedComponent(string component)
         {
+            k_GetSceneSharedComponent.Begin();
             disposableComponents.TryGetValue(component, out ISharedComponent sharedComponent);
+            k_GetSceneSharedComponent.End();
             return sharedComponent;
         }
+
 
         public bool TryGetSceneSharedComponent(string component, out ISharedComponent sharedComponent)
         {
@@ -338,10 +421,13 @@ namespace DCL
             return disposableComponents.Count;
         }
 
+        static readonly ProfilerMarker k_AddSceneSharedComponent = new ("ECSComponentsManagerLegacy_AddSceneSharedComponent");
         public void AddSceneSharedComponent(string component, ISharedComponent sharedComponent)
         {
+            k_AddSceneSharedComponent.Begin();
             disposableComponents.Add(component, sharedComponent);
             OnAddSharedComponent?.Invoke(component, sharedComponent);
+            k_AddSceneSharedComponent.End();
         }
 
         public bool RemoveSceneSharedComponent(string component)
@@ -349,8 +435,11 @@ namespace DCL
             return disposableComponents.Remove(component);
         }
 
+        static readonly ProfilerMarker k_SceneSharedComponentCreate = new ("ECSComponentsManagerLegacy_SceneSharedComponentCreate");
+
         public ISharedComponent SceneSharedComponentCreate(string id, int classId)
         {
+            k_SceneSharedComponentCreate.Begin();
             if (disposableComponents.TryGetValue(id, out ISharedComponent component))
                 return component;
 
@@ -371,6 +460,7 @@ namespace DCL
 
             newComponent.Initialize(scene, id);
 
+            k_SceneSharedComponentCreate.End();
             return newComponent;
         }
 
@@ -382,8 +472,11 @@ namespace DCL
         /**
           * This method is called when we need to attach a disposable component to the entity
           */
+
+        static readonly ProfilerMarker k_SceneSharedComponentAttach = new ("ECSComponentsManagerLegacy_SceneSharedComponentAttach");
         public void SceneSharedComponentAttach(long entityId, string componentId)
         {
+            k_SceneSharedComponentAttach.Begin();
             IDCLEntity entity = scene.GetEntityById(entityId);
 
             if (entity == null)
@@ -393,6 +486,7 @@ namespace DCL
             {
                 sharedComponent.AttachTo(entity);
             }
+            k_SceneSharedComponentAttach.End();
         }
 
         public IEntityComponent EntityComponentCreateOrUpdate(long entityId, CLASS_ID_COMPONENT classId, object data)
@@ -452,9 +546,12 @@ namespace DCL
             return targetComponent;
         }
 
+        static readonly ProfilerMarker k_EntityComponentUpdate = new ("ECSComponentsManagerLegacy_EntityComponentUpdate");
+
         public IEntityComponent EntityComponentUpdate(IDCLEntity entity, CLASS_ID_COMPONENT classId,
             string componentJson)
         {
+            k_EntityComponentUpdate.Begin();
             if (entity == null)
             {
                 Debug.LogError($"Can't update the {classId} component of a nonexistent entity!", scene.GetSceneTransform());
@@ -470,42 +567,58 @@ namespace DCL
             var targetComponent = GetComponent(entity, classId);
             targetComponent.UpdateFromJSON(componentJson);
 
+            k_EntityComponentUpdate.End();
             return targetComponent;
         }
 
+        static readonly ProfilerMarker k_SceneSharedComponentDispose = new ("ECSComponentsManagerLegacy_SceneSharedComponentDispose");
+
         public void SceneSharedComponentDispose(string id)
         {
+            k_SceneSharedComponentDispose.Begin();
             if (disposableComponents.TryGetValue(id, out ISharedComponent sharedComponent))
             {
                 sharedComponent?.Dispose();
                 disposableComponents.Remove(id);
             }
+            k_SceneSharedComponentDispose.End();
         }
+
+        static readonly ProfilerMarker k_SceneSharedComponentUpdate = new ("ECSComponentsManagerLegacy_SceneSharedComponentUpdate");
 
         public ISharedComponent SceneSharedComponentUpdate(string id, BaseModel model)
         {
+            k_SceneSharedComponentUpdate.Begin();
             if (disposableComponents.TryGetValue(id, out ISharedComponent sharedComponent))
             {
                 sharedComponent.UpdateFromModel(model);
                 return sharedComponent;
             }
 
+            k_SceneSharedComponentUpdate.End();
             return null;
         }
 
+        static readonly ProfilerMarker k_SceneSharedComponentUpdateJSON = new ("ECSComponentsManagerLegacy_SceneSharedComponentUpdateJSON");
+
         public ISharedComponent SceneSharedComponentUpdate(string id, string json)
         {
+            k_SceneSharedComponentUpdateJSON.Begin();
             if (disposableComponents.TryGetValue(id, out ISharedComponent disposableComponent))
             {
                 disposableComponent.UpdateFromJSON(json);
                 return disposableComponent;
             }
 
+            k_SceneSharedComponentUpdateJSON.End();
             return null;
         }
 
+        static readonly ProfilerMarker k_EntityComponentRemove = new ("ECSComponentsManagerLegacy_EntityComponentRemove");
+
         public void EntityComponentRemove(long entityId, string componentName)
         {
+            k_EntityComponentRemove.Begin();
             IDCLEntity entity = scene.GetEntityById(entityId);
 
             if (entity == null)
@@ -606,15 +719,20 @@ namespace DCL
                         break;
                     }
             }
+            k_EntityComponentRemove.End();
         }
+
+        static readonly ProfilerMarker k_DisposeAllSceneComponents = new ("ECSComponentsManagerLegacy_DisposeAllSceneComponents");
 
         public void DisposeAllSceneComponents()
         {
+            k_DisposeAllSceneComponents.Begin();
             List<string> allDisposableComponents = disposableComponents.Select(x => x.Key).ToList();
             foreach (string id in allDisposableComponents)
             {
                 parcelScenesCleaner.MarkDisposableComponentForCleanup(scene, id);
             }
+            k_DisposeAllSceneComponents.End();
         }
     }
 }

@@ -25,118 +25,122 @@ namespace Decentraland.Sdk.Ecs6 {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CjFkZWNlbnRyYWxhbmQvc2RrL2VjczYvZW5naW5lX2ludGVyZmFjZV9lY3M2",
-            "LnByb3RvEhVkZWNlbnRyYWxhbmQuc2RrLmVjczYaK2RlY2VudHJhbGFuZC9z",
-            "ZGsvZWNzNi9jb21wb25lbnRzX2VjczYucHJvdG8iIgoTT3BlbkV4dGVybmFs",
-            "VXJsQm9keRILCgN1cmwYASABKAkiZwoRT3Blbk5GVERpYWxvZ0JvZHkSHgoW",
-            "YXNzZXRfY29udHJhY3RfYWRkcmVzcxgBIAEoCRIQCgh0b2tlbl9pZBgCIAEo",
-            "CRIUCgdjb21tZW50GAMgASgJSACIAQFCCgoIX2NvbW1lbnQitRUKFENvbXBv",
-            "bmVudEJvZHlQYXlsb2FkElYKFGF2YXRhcl9tb2RpZmllcl9hcmVhGAEgASgL",
-            "MjYuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRBdmF0YXJN",
-            "b2RpZmllckFyZWFIABJCCgl0cmFuc2Zvcm0YAiABKAsyLS5kZWNlbnRyYWxh",
-            "bmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFRyYW5zZm9ybUgAEk4KEGF0dGFj",
-            "aF90b19hdmF0YXIYAyABKAsyMi5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNT",
-            "NkNvbXBvbmVudEF0dGFjaFRvQXZhdGFySAASQgoJYmlsbGJvYXJkGAQgASgL",
-            "Mi0uZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRCaWxsYm9h",
-            "cmRIABJBCglib3hfc2hhcGUYBSABKAsyLC5kZWNlbnRyYWxhbmQuc2RrLmVj",
-            "czYuRUNTNkNvbXBvbmVudEJveFNoYXBlSAASRwoMc3BoZXJlX3NoYXBlGAYg",
-            "ASgLMi8uZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRTcGhl",
-            "cmVTaGFwZUgAEkcKDGNpcmNsZV9zaGFwZRgHIAEoCzIvLmRlY2VudHJhbGFu",
-            "ZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50Q2lyY2xlU2hhcGVIABJFCgtwbGFu",
-            "ZV9zaGFwZRgIIAEoCzIuLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29t",
-            "cG9uZW50UGxhbmVTaGFwZUgAEkMKCmNvbmVfc2hhcGUYCSABKAsyLS5kZWNl",
-            "bnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudENvbmVTaGFwZUgAEksK",
-            "DmN5bGluZGVyX3NoYXBlGAogASgLMjEuZGVjZW50cmFsYW5kLnNkay5lY3M2",
-            "LkVDUzZDb21wb25lbnRDeWxpbmRlclNoYXBlSAASQwoKZ2x0Zl9zaGFwZRgL",
-            "IAEoCzItLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50R2x0",
-            "ZlNoYXBlSAASQQoJbmZ0X3NoYXBlGAwgASgLMiwuZGVjZW50cmFsYW5kLnNk",
-            "ay5lY3M2LkVDUzZDb21wb25lbnROZnRTaGFwZUgAEj4KB3RleHR1cmUYDSAB",
-            "KAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFRleHR1",
-            "cmVIABJACghhbmltYXRvchgOIAEoCzIsLmRlY2VudHJhbGFuZC5zZGsuZWNz",
-            "Ni5FQ1M2Q29tcG9uZW50QW5pbWF0b3JIABJBCglvYmpfc2hhcGUYDyABKAsy",
-            "LC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudE9ialNoYXBl",
-            "SAASOAoEZm9udBgQIAEoCzIoLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2",
-            "Q29tcG9uZW50Rm9udEgAEkMKCnRleHRfc2hhcGUYESABKAsyLS5kZWNlbnRy",
-            "YWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFRleHRTaGFwZUgAEkAKCG1h",
-            "dGVyaWFsGBIgASgLMiwuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21w",
-            "b25lbnRNYXRlcmlhbEgAEksKDmJhc2ljX21hdGVyaWFsGBMgASgLMjEuZGVj",
-            "ZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRCYXNpY01hdGVyaWFs",
-            "SAASSQoNdXVpZF9jYWxsYmFjaxgUIAEoCzIwLmRlY2VudHJhbGFuZC5zZGsu",
-            "ZWNzNi5FQ1M2Q29tcG9uZW50VXVpZENhbGxiYWNrSAASQwoKc21hcnRfaXRl",
-            "bRgVIAEoCzItLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50",
-            "U21hcnRJdGVtSAASQwoKdmlkZW9fY2xpcBgWIAEoCzItLmRlY2VudHJhbGFu",
-            "ZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50VmlkZW9DbGlwSAASSQoNdmlkZW9f",
-            "dGV4dHVyZRgXIAEoCzIwLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29t",
-            "cG9uZW50VmlkZW9UZXh0dXJlSAASTgoQY2FtZXJhX21vZGVfYXJlYRgYIAEo",
-            "CzIyLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50Q2FtZXJh",
-            "TW9kZUFyZWFIABJLCg5hdmF0YXJfdGV4dHVyZRgZIAEoCzIxLmRlY2VudHJh",
-            "bGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50QXZhdGFyVGV4dHVyZUgAEkMK",
-            "CmF1ZGlvX2NsaXAYGiABKAsyLS5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNT",
-            "NkNvbXBvbmVudEF1ZGlvQ2xpcEgAEkcKDGF1ZGlvX3NvdXJjZRgbIAEoCzIv",
-            "LmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50QXVkaW9Tb3Vy",
-            "Y2VIABJHCgxhdWRpb19zdHJlYW0YHCABKAsyLy5kZWNlbnRyYWxhbmQuc2Rr",
-            "LmVjczYuRUNTNkNvbXBvbmVudEF1ZGlvU3RyZWFtSAASRwoMYXZhdGFyX3No",
-            "YXBlGB0gASgLMi8uZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25l",
-            "bnRBdmF0YXJTaGFwZUgAEjwKBmdpem1vcxgeIAEoCzIqLmRlY2VudHJhbGFu",
-            "ZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50R2l6bW9zSAASPwoIdWlfc2hhcGUY",
-            "HyABKAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFVp",
-            "U2hhcGVIABJQChF1aV9jb250YWluZXJfcmVjdBggIAEoCzIzLmRlY2VudHJh",
-            "bGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50VWlDb250YWluZXJSZWN0SAAS",
-            "UgoSdWlfY29udGFpbmVyX3N0YWNrGCEgASgLMjQuZGVjZW50cmFsYW5kLnNk",
-            "ay5lY3M2LkVDUzZDb21wb25lbnRVaUNvbnRhaW5lclN0YWNrSAASQQoJdWlf",
-            "YnV0dG9uGCIgASgLMiwuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21w",
-            "b25lbnRVaUJ1dHRvbkgAEj0KB3VpX3RleHQYIyABKAsyKi5kZWNlbnRyYWxh",
-            "bmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFVpVGV4dEgAEkgKDXVpX2lucHV0",
-            "X3RleHQYJCABKAsyLy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBv",
-            "bmVudFVpSW5wdXRUZXh0SAASPwoIdWlfaW1hZ2UYJSABKAsyKy5kZWNlbnRy",
-            "YWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFVpSW1hZ2VIABJKCg51aV9z",
-            "Y3JvbGxfcmVjdBgmIAEoCzIwLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2",
-            "Q29tcG9uZW50VWlTY3JvbGxSZWN0SABCCQoHcGF5bG9hZCIeChBDcmVhdGVF",
-            "bnRpdHlCb2R5EgoKAmlkGAEgASgJIh4KEFJlbW92ZUVudGl0eUJvZHkSCgoC",
-            "aWQYASABKAkikwEKGVVwZGF0ZUVudGl0eUNvbXBvbmVudEJvZHkSEQoJZW50",
-            "aXR5X2lkGAEgASgJEhAKCGNsYXNzX2lkGAIgASgFEgwKBG5hbWUYAyABKAkS",
-            "QwoOY29tcG9uZW50X2RhdGEYBCABKAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVj",
-            "czYuQ29tcG9uZW50Qm9keVBheWxvYWQiSAoZQXR0YWNoRW50aXR5Q29tcG9u",
-            "ZW50Qm9keRIRCgllbnRpdHlfaWQYASABKAkSDAoEbmFtZRgCIAEoCRIKCgJp",
-            "ZBgDIAEoCSI3ChRDb21wb25lbnRSZW1vdmVkQm9keRIRCgllbnRpdHlfaWQY",
-            "ASABKAkSDAoEbmFtZRgCIAEoCSI7ChNTZXRFbnRpdHlQYXJlbnRCb2R5EhEK",
-            "CWVudGl0eV9pZBgBIAEoCRIRCglwYXJlbnRfaWQYAiABKAkiUAoJUXVlcnlC",
-            "b2R5EjIKCHF1ZXJ5X2lkGAEgASgOMiAuZGVjZW50cmFsYW5kLnNkay5lY3M2",
-            "LlF1ZXJ5VHlwZRIPCgdwYXlsb2FkGAIgASgJIkIKFENvbXBvbmVudENyZWF0",
-            "ZWRCb2R5EgoKAmlkGAEgASgJEhAKCGNsYXNzX2lkGAIgASgFEgwKBG5hbWUY",
-            "AyABKAkiIwoVQ29tcG9uZW50RGlzcG9zZWRCb2R5EgoKAmlkGAEgASgJImcK",
-            "FENvbXBvbmVudFVwZGF0ZWRCb2R5EgoKAmlkGAEgASgJEkMKDmNvbXBvbmVu",
-            "dF9kYXRhGAIgASgLMisuZGVjZW50cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVu",
-            "dEJvZHlQYXlsb2FkIhoKGEluaXRNZXNzYWdlc0ZpbmlzaGVkQm9keSLVBwoT",
-            "RW50aXR5QWN0aW9uUGF5bG9hZBJHChFvcGVuX2V4dGVybmFsX3VybBgBIAEo",
-            "CzIqLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5PcGVuRXh0ZXJuYWxVcmxCb2R5",
-            "SAASQwoPb3Blbl9uZnRfZGlhbG9nGAIgASgLMiguZGVjZW50cmFsYW5kLnNk",
-            "ay5lY3M2Lk9wZW5ORlREaWFsb2dCb2R5SAASQAoNY3JlYXRlX2VudGl0eRgD",
-            "IAEoCzInLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5DcmVhdGVFbnRpdHlCb2R5",
-            "SAASQAoNcmVtb3ZlX2VudGl0eRgEIAEoCzInLmRlY2VudHJhbGFuZC5zZGsu",
-            "ZWNzNi5SZW1vdmVFbnRpdHlCb2R5SAASUwoXdXBkYXRlX2VudGl0eV9jb21w",
-            "b25lbnQYBSABKAsyMC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuVXBkYXRlRW50",
-            "aXR5Q29tcG9uZW50Qm9keUgAElMKF2F0dGFjaF9lbnRpdHlfY29tcG9uZW50",
-            "GAYgASgLMjAuZGVjZW50cmFsYW5kLnNkay5lY3M2LkF0dGFjaEVudGl0eUNv",
-            "bXBvbmVudEJvZHlIABJIChFjb21wb25lbnRfcmVtb3ZlZBgHIAEoCzIrLmRl",
-            "Y2VudHJhbGFuZC5zZGsuZWNzNi5Db21wb25lbnRSZW1vdmVkQm9keUgAEkcK",
-            "EXNldF9lbnRpdHlfcGFyZW50GAggASgLMiouZGVjZW50cmFsYW5kLnNkay5l",
-            "Y3M2LlNldEVudGl0eVBhcmVudEJvZHlIABIxCgVxdWVyeRgJIAEoCzIgLmRl",
-            "Y2VudHJhbGFuZC5zZGsuZWNzNi5RdWVyeUJvZHlIABJIChFjb21wb25lbnRf",
-            "Y3JlYXRlZBgKIAEoCzIrLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Db21wb25l",
-            "bnRDcmVhdGVkQm9keUgAEkoKEmNvbXBvbmVudF9kaXNwb3NlZBgLIAEoCzIs",
-            "LmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Db21wb25lbnREaXNwb3NlZEJvZHlI",
-            "ABJIChFjb21wb25lbnRfdXBkYXRlZBgMIAEoCzIrLmRlY2VudHJhbGFuZC5z",
-            "ZGsuZWNzNi5Db21wb25lbnRVcGRhdGVkQm9keUgAElEKFmluaXRfbWVzc2Fn",
-            "ZXNfZmluaXNoZWQYDSABKAsyLy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuSW5p",
-            "dE1lc3NhZ2VzRmluaXNoZWRCb2R5SABCCQoHcGF5bG9hZCJlCgxFbnRpdHlB",
-            "Y3Rpb24SEAoDdGFnGAIgASgJSACIAQESOwoHcGF5bG9hZBgDIAEoCzIqLmRl",
-            "Y2VudHJhbGFuZC5zZGsuZWNzNi5FbnRpdHlBY3Rpb25QYXlsb2FkQgYKBF90",
-            "YWcqeQoJUXVlcnlUeXBlEhkKFVFUX0lOVkFMSURfUVVFUllfVFlQRRAAEhAK",
-            "DFFUX0hJVF9GSVJTVBABEg4KClFUX0hJVF9BTEwQAhIXChNRVF9ISVRfRklS",
-            "U1RfQVZBVEFSEAMSFgoSUVRfSElUX0FMTF9BVkFUQVJTEARiBnByb3RvMw=="));
+            "LnByb3RvEhVkZWNlbnRyYWxhbmQuc2RrLmVjczYaIWRlY2VudHJhbGFuZC9j",
+            "b21tb24vdmVjdG9ycy5wcm90bxorZGVjZW50cmFsYW5kL3Nkay9lY3M2L2Nv",
+            "bXBvbmVudHNfZWNzNi5wcm90byIiChNPcGVuRXh0ZXJuYWxVcmxCb2R5EgsK",
+            "A3VybBgBIAEoCSJnChFPcGVuTkZURGlhbG9nQm9keRIeChZhc3NldF9jb250",
+            "cmFjdF9hZGRyZXNzGAEgASgJEhAKCHRva2VuX2lkGAIgASgJEhQKB2NvbW1l",
+            "bnQYAyABKAlIAIgBAUIKCghfY29tbWVudCK1FQoUQ29tcG9uZW50Qm9keVBh",
+            "eWxvYWQSVgoUYXZhdGFyX21vZGlmaWVyX2FyZWEYASABKAsyNi5kZWNlbnRy",
+            "YWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudEF2YXRhck1vZGlmaWVyQXJl",
+            "YUgAEkIKCXRyYW5zZm9ybRgCIAEoCzItLmRlY2VudHJhbGFuZC5zZGsuZWNz",
+            "Ni5FQ1M2Q29tcG9uZW50VHJhbnNmb3JtSAASTgoQYXR0YWNoX3RvX2F2YXRh",
+            "chgDIAEoCzIyLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50",
+            "QXR0YWNoVG9BdmF0YXJIABJCCgliaWxsYm9hcmQYBCABKAsyLS5kZWNlbnRy",
+            "YWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudEJpbGxib2FyZEgAEkEKCWJv",
+            "eF9zaGFwZRgFIAEoCzIsLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29t",
+            "cG9uZW50Qm94U2hhcGVIABJHCgxzcGhlcmVfc2hhcGUYBiABKAsyLy5kZWNl",
+            "bnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFNwaGVyZVNoYXBlSAAS",
+            "RwoMY2lyY2xlX3NoYXBlGAcgASgLMi8uZGVjZW50cmFsYW5kLnNkay5lY3M2",
+            "LkVDUzZDb21wb25lbnRDaXJjbGVTaGFwZUgAEkUKC3BsYW5lX3NoYXBlGAgg",
+            "ASgLMi4uZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRQbGFu",
+            "ZVNoYXBlSAASQwoKY29uZV9zaGFwZRgJIAEoCzItLmRlY2VudHJhbGFuZC5z",
+            "ZGsuZWNzNi5FQ1M2Q29tcG9uZW50Q29uZVNoYXBlSAASSwoOY3lsaW5kZXJf",
+            "c2hhcGUYCiABKAsyMS5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBv",
+            "bmVudEN5bGluZGVyU2hhcGVIABJDCgpnbHRmX3NoYXBlGAsgASgLMi0uZGVj",
+            "ZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRHbHRmU2hhcGVIABJB",
+            "CgluZnRfc2hhcGUYDCABKAsyLC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNT",
+            "NkNvbXBvbmVudE5mdFNoYXBlSAASPgoHdGV4dHVyZRgNIAEoCzIrLmRlY2Vu",
+            "dHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50VGV4dHVyZUgAEkAKCGFu",
+            "aW1hdG9yGA4gASgLMiwuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21w",
+            "b25lbnRBbmltYXRvckgAEkEKCW9ial9zaGFwZRgPIAEoCzIsLmRlY2VudHJh",
+            "bGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50T2JqU2hhcGVIABI4CgRmb250",
+            "GBAgASgLMiguZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRG",
+            "b250SAASQwoKdGV4dF9zaGFwZRgRIAEoCzItLmRlY2VudHJhbGFuZC5zZGsu",
+            "ZWNzNi5FQ1M2Q29tcG9uZW50VGV4dFNoYXBlSAASQAoIbWF0ZXJpYWwYEiAB",
+            "KAsyLC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudE1hdGVy",
+            "aWFsSAASSwoOYmFzaWNfbWF0ZXJpYWwYEyABKAsyMS5kZWNlbnRyYWxhbmQu",
+            "c2RrLmVjczYuRUNTNkNvbXBvbmVudEJhc2ljTWF0ZXJpYWxIABJJCg11dWlk",
+            "X2NhbGxiYWNrGBQgASgLMjAuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZD",
+            "b21wb25lbnRVdWlkQ2FsbGJhY2tIABJDCgpzbWFydF9pdGVtGBUgASgLMi0u",
+            "ZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRTbWFydEl0ZW1I",
+            "ABJDCgp2aWRlb19jbGlwGBYgASgLMi0uZGVjZW50cmFsYW5kLnNkay5lY3M2",
+            "LkVDUzZDb21wb25lbnRWaWRlb0NsaXBIABJJCg12aWRlb190ZXh0dXJlGBcg",
+            "ASgLMjAuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRWaWRl",
+            "b1RleHR1cmVIABJOChBjYW1lcmFfbW9kZV9hcmVhGBggASgLMjIuZGVjZW50",
+            "cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRDYW1lcmFNb2RlQXJlYUgA",
+            "EksKDmF2YXRhcl90ZXh0dXJlGBkgASgLMjEuZGVjZW50cmFsYW5kLnNkay5l",
+            "Y3M2LkVDUzZDb21wb25lbnRBdmF0YXJUZXh0dXJlSAASQwoKYXVkaW9fY2xp",
+            "cBgaIAEoCzItLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50",
+            "QXVkaW9DbGlwSAASRwoMYXVkaW9fc291cmNlGBsgASgLMi8uZGVjZW50cmFs",
+            "YW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRBdWRpb1NvdXJjZUgAEkcKDGF1",
+            "ZGlvX3N0cmVhbRgcIAEoCzIvLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2",
+            "Q29tcG9uZW50QXVkaW9TdHJlYW1IABJHCgxhdmF0YXJfc2hhcGUYHSABKAsy",
+            "Ly5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudEF2YXRhclNo",
+            "YXBlSAASPAoGZ2l6bW9zGB4gASgLMiouZGVjZW50cmFsYW5kLnNkay5lY3M2",
+            "LkVDUzZDb21wb25lbnRHaXptb3NIABI/Cgh1aV9zaGFwZRgfIAEoCzIrLmRl",
+            "Y2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50VWlTaGFwZUgAElAK",
+            "EXVpX2NvbnRhaW5lcl9yZWN0GCAgASgLMjMuZGVjZW50cmFsYW5kLnNkay5l",
+            "Y3M2LkVDUzZDb21wb25lbnRVaUNvbnRhaW5lclJlY3RIABJSChJ1aV9jb250",
+            "YWluZXJfc3RhY2sYISABKAsyNC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNT",
+            "NkNvbXBvbmVudFVpQ29udGFpbmVyU3RhY2tIABJBCgl1aV9idXR0b24YIiAB",
+            "KAsyLC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFVpQnV0",
+            "dG9uSAASPQoHdWlfdGV4dBgjIAEoCzIqLmRlY2VudHJhbGFuZC5zZGsuZWNz",
+            "Ni5FQ1M2Q29tcG9uZW50VWlUZXh0SAASSAoNdWlfaW5wdXRfdGV4dBgkIAEo",
+            "CzIvLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50VWlJbnB1",
+            "dFRleHRIABI/Cgh1aV9pbWFnZRglIAEoCzIrLmRlY2VudHJhbGFuZC5zZGsu",
+            "ZWNzNi5FQ1M2Q29tcG9uZW50VWlJbWFnZUgAEkoKDnVpX3Njcm9sbF9yZWN0",
+            "GCYgASgLMjAuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRV",
+            "aVNjcm9sbFJlY3RIAEIJCgdwYXlsb2FkIh4KEENyZWF0ZUVudGl0eUJvZHkS",
+            "CgoCaWQYASABKAkiHgoQUmVtb3ZlRW50aXR5Qm9keRIKCgJpZBgBIAEoCSKT",
+            "AQoZVXBkYXRlRW50aXR5Q29tcG9uZW50Qm9keRIRCgllbnRpdHlfaWQYASAB",
+            "KAkSEAoIY2xhc3NfaWQYAiABKAUSDAoEbmFtZRgDIAEoCRJDCg5jb21wb25l",
+            "bnRfZGF0YRgEIAEoCzIrLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Db21wb25l",
+            "bnRCb2R5UGF5bG9hZCJIChlBdHRhY2hFbnRpdHlDb21wb25lbnRCb2R5EhEK",
+            "CWVudGl0eV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgoKAmlkGAMgASgJIjcK",
+            "FENvbXBvbmVudFJlbW92ZWRCb2R5EhEKCWVudGl0eV9pZBgBIAEoCRIMCgRu",
+            "YW1lGAIgASgJIjsKE1NldEVudGl0eVBhcmVudEJvZHkSEQoJZW50aXR5X2lk",
+            "GAEgASgJEhEKCXBhcmVudF9pZBgCIAEoCSK2AgoJUXVlcnlCb2R5EhAKCHF1",
+            "ZXJ5X2lkGAEgASgJEjoKB3BheWxvYWQYAiABKAsyKS5kZWNlbnRyYWxhbmQu",
+            "c2RrLmVjczYuUXVlcnlCb2R5LlJheVF1ZXJ5GnYKA1JheRIsCgZvcmlnaW4Y",
+            "ASABKAsyHC5kZWNlbnRyYWxhbmQuY29tbW9uLlZlY3RvcjMSLwoJZGlyZWN0",
+            "aW9uGAIgASgLMhwuZGVjZW50cmFsYW5kLmNvbW1vbi5WZWN0b3IzEhAKCGRp",
+            "c3RhbmNlGAMgASgCGmMKCFJheVF1ZXJ5EhAKCHF1ZXJ5X2lkGAEgASgJEhIK",
+            "CnF1ZXJ5X3R5cGUYAiABKAkSMQoDcmF5GAMgASgLMiQuZGVjZW50cmFsYW5k",
+            "LnNkay5lY3M2LlF1ZXJ5Qm9keS5SYXkiQgoUQ29tcG9uZW50Q3JlYXRlZEJv",
+            "ZHkSCgoCaWQYASABKAkSEAoIY2xhc3NfaWQYAiABKAUSDAoEbmFtZRgDIAEo",
+            "CSIjChVDb21wb25lbnREaXNwb3NlZEJvZHkSCgoCaWQYASABKAkiZwoUQ29t",
+            "cG9uZW50VXBkYXRlZEJvZHkSCgoCaWQYASABKAkSQwoOY29tcG9uZW50X2Rh",
+            "dGEYAiABKAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuQ29tcG9uZW50Qm9k",
+            "eVBheWxvYWQiGgoYSW5pdE1lc3NhZ2VzRmluaXNoZWRCb2R5ItUHChNFbnRp",
+            "dHlBY3Rpb25QYXlsb2FkEkcKEW9wZW5fZXh0ZXJuYWxfdXJsGAEgASgLMiou",
+            "ZGVjZW50cmFsYW5kLnNkay5lY3M2Lk9wZW5FeHRlcm5hbFVybEJvZHlIABJD",
+            "Cg9vcGVuX25mdF9kaWFsb2cYAiABKAsyKC5kZWNlbnRyYWxhbmQuc2RrLmVj",
+            "czYuT3Blbk5GVERpYWxvZ0JvZHlIABJACg1jcmVhdGVfZW50aXR5GAMgASgL",
+            "MicuZGVjZW50cmFsYW5kLnNkay5lY3M2LkNyZWF0ZUVudGl0eUJvZHlIABJA",
+            "Cg1yZW1vdmVfZW50aXR5GAQgASgLMicuZGVjZW50cmFsYW5kLnNkay5lY3M2",
+            "LlJlbW92ZUVudGl0eUJvZHlIABJTChd1cGRhdGVfZW50aXR5X2NvbXBvbmVu",
+            "dBgFIAEoCzIwLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VcGRhdGVFbnRpdHlD",
+            "b21wb25lbnRCb2R5SAASUwoXYXR0YWNoX2VudGl0eV9jb21wb25lbnQYBiAB",
+            "KAsyMC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuQXR0YWNoRW50aXR5Q29tcG9u",
+            "ZW50Qm9keUgAEkgKEWNvbXBvbmVudF9yZW1vdmVkGAcgASgLMisuZGVjZW50",
+            "cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudFJlbW92ZWRCb2R5SAASRwoRc2V0",
+            "X2VudGl0eV9wYXJlbnQYCCABKAsyKi5kZWNlbnRyYWxhbmQuc2RrLmVjczYu",
+            "U2V0RW50aXR5UGFyZW50Qm9keUgAEjEKBXF1ZXJ5GAkgASgLMiAuZGVjZW50",
+            "cmFsYW5kLnNkay5lY3M2LlF1ZXJ5Qm9keUgAEkgKEWNvbXBvbmVudF9jcmVh",
+            "dGVkGAogASgLMisuZGVjZW50cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudENy",
+            "ZWF0ZWRCb2R5SAASSgoSY29tcG9uZW50X2Rpc3Bvc2VkGAsgASgLMiwuZGVj",
+            "ZW50cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudERpc3Bvc2VkQm9keUgAEkgK",
+            "EWNvbXBvbmVudF91cGRhdGVkGAwgASgLMisuZGVjZW50cmFsYW5kLnNkay5l",
+            "Y3M2LkNvbXBvbmVudFVwZGF0ZWRCb2R5SAASUQoWaW5pdF9tZXNzYWdlc19m",
+            "aW5pc2hlZBgNIAEoCzIvLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Jbml0TWVz",
+            "c2FnZXNGaW5pc2hlZEJvZHlIAEIJCgdwYXlsb2FkImUKDEVudGl0eUFjdGlv",
+            "bhIQCgN0YWcYAiABKAlIAIgBARI7CgdwYXlsb2FkGAMgASgLMiouZGVjZW50",
+            "cmFsYW5kLnNkay5lY3M2LkVudGl0eUFjdGlvblBheWxvYWRCBgoEX3RhZ2IG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Decentraland.Sdk.Ecs6.ComponentsEcs6Reflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Decentraland.Sdk.Ecs6.QueryType), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::FileDescriptor[] { global::Decentraland.Common.VectorsReflection.Descriptor, global::Decentraland.Sdk.Ecs6.ComponentsEcs6Reflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.OpenExternalUrlBody), global::Decentraland.Sdk.Ecs6.OpenExternalUrlBody.Parser, new[]{ "Url" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.OpenNFTDialogBody), global::Decentraland.Sdk.Ecs6.OpenNFTDialogBody.Parser, new[]{ "AssetContractAddress", "TokenId", "Comment" }, new[]{ "Comment" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentBodyPayload), global::Decentraland.Sdk.Ecs6.ComponentBodyPayload.Parser, new[]{ "AvatarModifierArea", "Transform", "AttachToAvatar", "Billboard", "BoxShape", "SphereShape", "CircleShape", "PlaneShape", "ConeShape", "CylinderShape", "GltfShape", "NftShape", "Texture", "Animator", "ObjShape", "Font", "TextShape", "Material", "BasicMaterial", "UuidCallback", "SmartItem", "VideoClip", "VideoTexture", "CameraModeArea", "AvatarTexture", "AudioClip", "AudioSource", "AudioStream", "AvatarShape", "Gizmos", "UiShape", "UiContainerRect", "UiContainerStack", "UiButton", "UiText", "UiInputText", "UiImage", "UiScrollRect" }, new[]{ "Payload" }, null, null, null),
@@ -146,7 +150,8 @@ namespace Decentraland.Sdk.Ecs6 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.AttachEntityComponentBody), global::Decentraland.Sdk.Ecs6.AttachEntityComponentBody.Parser, new[]{ "EntityId", "Name", "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentRemovedBody), global::Decentraland.Sdk.Ecs6.ComponentRemovedBody.Parser, new[]{ "EntityId", "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.SetEntityParentBody), global::Decentraland.Sdk.Ecs6.SetEntityParentBody.Parser, new[]{ "EntityId", "ParentId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.QueryBody), global::Decentraland.Sdk.Ecs6.QueryBody.Parser, new[]{ "QueryId", "Payload" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.QueryBody), global::Decentraland.Sdk.Ecs6.QueryBody.Parser, new[]{ "QueryId", "Payload" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray), global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray.Parser, new[]{ "Origin", "Direction", "Distance" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery), global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery.Parser, new[]{ "QueryId", "QueryType", "Ray" }, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentCreatedBody), global::Decentraland.Sdk.Ecs6.ComponentCreatedBody.Parser, new[]{ "Id", "ClassId", "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentDisposedBody), global::Decentraland.Sdk.Ecs6.ComponentDisposedBody.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentUpdatedBody), global::Decentraland.Sdk.Ecs6.ComponentUpdatedBody.Parser, new[]{ "Id", "ComponentData" }, null, null, null, null),
@@ -158,17 +163,6 @@ namespace Decentraland.Sdk.Ecs6 {
     #endregion
 
   }
-  #region Enums
-  public enum QueryType {
-    [pbr::OriginalName("QT_INVALID_QUERY_TYPE")] QtInvalidQueryType = 0,
-    [pbr::OriginalName("QT_HIT_FIRST")] QtHitFirst = 1,
-    [pbr::OriginalName("QT_HIT_ALL")] QtHitAll = 2,
-    [pbr::OriginalName("QT_HIT_FIRST_AVATAR")] QtHitFirstAvatar = 3,
-    [pbr::OriginalName("QT_HIT_ALL_AVATARS")] QtHitAllAvatars = 4,
-  }
-
-  #endregion
-
   #region Messages
   public sealed partial class OpenExternalUrlBody : pb::IMessage<OpenExternalUrlBody>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -4264,7 +4258,7 @@ namespace Decentraland.Sdk.Ecs6 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public QueryBody(QueryBody other) : this() {
       queryId_ = other.queryId_;
-      payload_ = other.payload_;
+      payload_ = other.payload_ != null ? other.payload_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4276,25 +4270,25 @@ namespace Decentraland.Sdk.Ecs6 {
 
     /// <summary>Field number for the "query_id" field.</summary>
     public const int QueryIdFieldNumber = 1;
-    private global::Decentraland.Sdk.Ecs6.QueryType queryId_ = global::Decentraland.Sdk.Ecs6.QueryType.QtInvalidQueryType;
+    private string queryId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Decentraland.Sdk.Ecs6.QueryType QueryId {
+    public string QueryId {
       get { return queryId_; }
       set {
-        queryId_ = value;
+        queryId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "payload" field.</summary>
     public const int PayloadFieldNumber = 2;
-    private string payload_ = "";
+    private global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery payload_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Payload {
+    public global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery Payload {
       get { return payload_; }
       set {
-        payload_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        payload_ = value;
       }
     }
 
@@ -4314,7 +4308,7 @@ namespace Decentraland.Sdk.Ecs6 {
         return true;
       }
       if (QueryId != other.QueryId) return false;
-      if (Payload != other.Payload) return false;
+      if (!object.Equals(Payload, other.Payload)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4322,8 +4316,8 @@ namespace Decentraland.Sdk.Ecs6 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (QueryId != global::Decentraland.Sdk.Ecs6.QueryType.QtInvalidQueryType) hash ^= QueryId.GetHashCode();
-      if (Payload.Length != 0) hash ^= Payload.GetHashCode();
+      if (QueryId.Length != 0) hash ^= QueryId.GetHashCode();
+      if (payload_ != null) hash ^= Payload.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4342,13 +4336,13 @@ namespace Decentraland.Sdk.Ecs6 {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (QueryId != global::Decentraland.Sdk.Ecs6.QueryType.QtInvalidQueryType) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) QueryId);
+      if (QueryId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(QueryId);
       }
-      if (Payload.Length != 0) {
+      if (payload_ != null) {
         output.WriteRawTag(18);
-        output.WriteString(Payload);
+        output.WriteMessage(Payload);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -4360,13 +4354,13 @@ namespace Decentraland.Sdk.Ecs6 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (QueryId != global::Decentraland.Sdk.Ecs6.QueryType.QtInvalidQueryType) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) QueryId);
+      if (QueryId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(QueryId);
       }
-      if (Payload.Length != 0) {
+      if (payload_ != null) {
         output.WriteRawTag(18);
-        output.WriteString(Payload);
+        output.WriteMessage(Payload);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -4378,11 +4372,11 @@ namespace Decentraland.Sdk.Ecs6 {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (QueryId != global::Decentraland.Sdk.Ecs6.QueryType.QtInvalidQueryType) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) QueryId);
+      if (QueryId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(QueryId);
       }
-      if (Payload.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Payload);
+      if (payload_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Payload);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4396,11 +4390,14 @@ namespace Decentraland.Sdk.Ecs6 {
       if (other == null) {
         return;
       }
-      if (other.QueryId != global::Decentraland.Sdk.Ecs6.QueryType.QtInvalidQueryType) {
+      if (other.QueryId.Length != 0) {
         QueryId = other.QueryId;
       }
-      if (other.Payload.Length != 0) {
-        Payload = other.Payload;
+      if (other.payload_ != null) {
+        if (payload_ == null) {
+          Payload = new global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery();
+        }
+        Payload.MergeFrom(other.Payload);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4417,12 +4414,15 @@ namespace Decentraland.Sdk.Ecs6 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            QueryId = (global::Decentraland.Sdk.Ecs6.QueryType) input.ReadEnum();
+          case 10: {
+            QueryId = input.ReadString();
             break;
           }
           case 18: {
-            Payload = input.ReadString();
+            if (payload_ == null) {
+              Payload = new global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery();
+            }
+            input.ReadMessage(Payload);
             break;
           }
         }
@@ -4440,18 +4440,582 @@ namespace Decentraland.Sdk.Ecs6 {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            QueryId = (global::Decentraland.Sdk.Ecs6.QueryType) input.ReadEnum();
+          case 10: {
+            QueryId = input.ReadString();
             break;
           }
           case 18: {
-            Payload = input.ReadString();
+            if (payload_ == null) {
+              Payload = new global::Decentraland.Sdk.Ecs6.QueryBody.Types.RayQuery();
+            }
+            input.ReadMessage(Payload);
             break;
           }
         }
       }
     }
     #endif
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the QueryBody message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static partial class Types {
+      public sealed partial class Ray : pb::IMessage<Ray>
+      #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+          , pb::IBufferMessage
+      #endif
+      {
+        private static readonly pb::MessageParser<Ray> _parser = new pb::MessageParser<Ray>(() => new Ray());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public static pb::MessageParser<Ray> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Decentraland.Sdk.Ecs6.QueryBody.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public Ray() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public Ray(Ray other) : this() {
+          origin_ = other.origin_ != null ? other.origin_.Clone() : null;
+          direction_ = other.direction_ != null ? other.direction_.Clone() : null;
+          distance_ = other.distance_;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public Ray Clone() {
+          return new Ray(this);
+        }
+
+        /// <summary>Field number for the "origin" field.</summary>
+        public const int OriginFieldNumber = 1;
+        private global::Decentraland.Common.Vector3 origin_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public global::Decentraland.Common.Vector3 Origin {
+          get { return origin_; }
+          set {
+            origin_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "direction" field.</summary>
+        public const int DirectionFieldNumber = 2;
+        private global::Decentraland.Common.Vector3 direction_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public global::Decentraland.Common.Vector3 Direction {
+          get { return direction_; }
+          set {
+            direction_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "distance" field.</summary>
+        public const int DistanceFieldNumber = 3;
+        private float distance_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public float Distance {
+          get { return distance_; }
+          set {
+            distance_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public override bool Equals(object other) {
+          return Equals(other as Ray);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public bool Equals(Ray other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (!object.Equals(Origin, other.Origin)) return false;
+          if (!object.Equals(Direction, other.Direction)) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Distance, other.Distance)) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (origin_ != null) hash ^= Origin.GetHashCode();
+          if (direction_ != null) hash ^= Direction.GetHashCode();
+          if (Distance != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Distance);
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public void WriteTo(pb::CodedOutputStream output) {
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+          output.WriteRawMessage(this);
+        #else
+          if (origin_ != null) {
+            output.WriteRawTag(10);
+            output.WriteMessage(Origin);
+          }
+          if (direction_ != null) {
+            output.WriteRawTag(18);
+            output.WriteMessage(Direction);
+          }
+          if (Distance != 0F) {
+            output.WriteRawTag(29);
+            output.WriteFloat(Distance);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        #endif
+        }
+
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+          if (origin_ != null) {
+            output.WriteRawTag(10);
+            output.WriteMessage(Origin);
+          }
+          if (direction_ != null) {
+            output.WriteRawTag(18);
+            output.WriteMessage(Direction);
+          }
+          if (Distance != 0F) {
+            output.WriteRawTag(29);
+            output.WriteFloat(Distance);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(ref output);
+          }
+        }
+        #endif
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public int CalculateSize() {
+          int size = 0;
+          if (origin_ != null) {
+            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Origin);
+          }
+          if (direction_ != null) {
+            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Direction);
+          }
+          if (Distance != 0F) {
+            size += 1 + 4;
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public void MergeFrom(Ray other) {
+          if (other == null) {
+            return;
+          }
+          if (other.origin_ != null) {
+            if (origin_ == null) {
+              Origin = new global::Decentraland.Common.Vector3();
+            }
+            Origin.MergeFrom(other.Origin);
+          }
+          if (other.direction_ != null) {
+            if (direction_ == null) {
+              Direction = new global::Decentraland.Common.Vector3();
+            }
+            Direction.MergeFrom(other.Direction);
+          }
+          if (other.Distance != 0F) {
+            Distance = other.Distance;
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public void MergeFrom(pb::CodedInputStream input) {
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+          input.ReadRawMessage(this);
+        #else
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 10: {
+                if (origin_ == null) {
+                  Origin = new global::Decentraland.Common.Vector3();
+                }
+                input.ReadMessage(Origin);
+                break;
+              }
+              case 18: {
+                if (direction_ == null) {
+                  Direction = new global::Decentraland.Common.Vector3();
+                }
+                input.ReadMessage(Direction);
+                break;
+              }
+              case 29: {
+                Distance = input.ReadFloat();
+                break;
+              }
+            }
+          }
+        #endif
+        }
+
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+                break;
+              case 10: {
+                if (origin_ == null) {
+                  Origin = new global::Decentraland.Common.Vector3();
+                }
+                input.ReadMessage(Origin);
+                break;
+              }
+              case 18: {
+                if (direction_ == null) {
+                  Direction = new global::Decentraland.Common.Vector3();
+                }
+                input.ReadMessage(Direction);
+                break;
+              }
+              case 29: {
+                Distance = input.ReadFloat();
+                break;
+              }
+            }
+          }
+        }
+        #endif
+
+      }
+
+      public sealed partial class RayQuery : pb::IMessage<RayQuery>
+      #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+          , pb::IBufferMessage
+      #endif
+      {
+        private static readonly pb::MessageParser<RayQuery> _parser = new pb::MessageParser<RayQuery>(() => new RayQuery());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public static pb::MessageParser<RayQuery> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Decentraland.Sdk.Ecs6.QueryBody.Descriptor.NestedTypes[1]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public RayQuery() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public RayQuery(RayQuery other) : this() {
+          queryId_ = other.queryId_;
+          queryType_ = other.queryType_;
+          ray_ = other.ray_ != null ? other.ray_.Clone() : null;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public RayQuery Clone() {
+          return new RayQuery(this);
+        }
+
+        /// <summary>Field number for the "query_id" field.</summary>
+        public const int QueryIdFieldNumber = 1;
+        private string queryId_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public string QueryId {
+          get { return queryId_; }
+          set {
+            queryId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "query_type" field.</summary>
+        public const int QueryTypeFieldNumber = 2;
+        private string queryType_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public string QueryType {
+          get { return queryType_; }
+          set {
+            queryType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "ray" field.</summary>
+        public const int RayFieldNumber = 3;
+        private global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray ray_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray Ray {
+          get { return ray_; }
+          set {
+            ray_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public override bool Equals(object other) {
+          return Equals(other as RayQuery);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public bool Equals(RayQuery other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (QueryId != other.QueryId) return false;
+          if (QueryType != other.QueryType) return false;
+          if (!object.Equals(Ray, other.Ray)) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (QueryId.Length != 0) hash ^= QueryId.GetHashCode();
+          if (QueryType.Length != 0) hash ^= QueryType.GetHashCode();
+          if (ray_ != null) hash ^= Ray.GetHashCode();
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public void WriteTo(pb::CodedOutputStream output) {
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+          output.WriteRawMessage(this);
+        #else
+          if (QueryId.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(QueryId);
+          }
+          if (QueryType.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(QueryType);
+          }
+          if (ray_ != null) {
+            output.WriteRawTag(26);
+            output.WriteMessage(Ray);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        #endif
+        }
+
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+          if (QueryId.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(QueryId);
+          }
+          if (QueryType.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(QueryType);
+          }
+          if (ray_ != null) {
+            output.WriteRawTag(26);
+            output.WriteMessage(Ray);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(ref output);
+          }
+        }
+        #endif
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public int CalculateSize() {
+          int size = 0;
+          if (QueryId.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(QueryId);
+          }
+          if (QueryType.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(QueryType);
+          }
+          if (ray_ != null) {
+            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Ray);
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public void MergeFrom(RayQuery other) {
+          if (other == null) {
+            return;
+          }
+          if (other.QueryId.Length != 0) {
+            QueryId = other.QueryId;
+          }
+          if (other.QueryType.Length != 0) {
+            QueryType = other.QueryType;
+          }
+          if (other.ray_ != null) {
+            if (ray_ == null) {
+              Ray = new global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray();
+            }
+            Ray.MergeFrom(other.Ray);
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        public void MergeFrom(pb::CodedInputStream input) {
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+          input.ReadRawMessage(this);
+        #else
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 10: {
+                QueryId = input.ReadString();
+                break;
+              }
+              case 18: {
+                QueryType = input.ReadString();
+                break;
+              }
+              case 26: {
+                if (ray_ == null) {
+                  Ray = new global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray();
+                }
+                input.ReadMessage(Ray);
+                break;
+              }
+            }
+          }
+        #endif
+        }
+
+        #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+        void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+                break;
+              case 10: {
+                QueryId = input.ReadString();
+                break;
+              }
+              case 18: {
+                QueryType = input.ReadString();
+                break;
+              }
+              case 26: {
+                if (ray_ == null) {
+                  Ray = new global::Decentraland.Sdk.Ecs6.QueryBody.Types.Ray();
+                }
+                input.ReadMessage(Ray);
+                break;
+              }
+            }
+          }
+        }
+        #endif
+
+      }
+
+    }
+    #endregion
 
   }
 

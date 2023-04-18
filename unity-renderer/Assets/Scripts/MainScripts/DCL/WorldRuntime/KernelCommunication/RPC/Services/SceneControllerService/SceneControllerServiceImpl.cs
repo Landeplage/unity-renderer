@@ -374,34 +374,41 @@ namespace RPC.Services
                             break;
 
                  // This has changed!
-                        // case EntityActionPayload.PayloadOneofCase.UpdateEntityComponent:
-                        //     var updateData = ComponentModelFromPayload(action.Payload.UpdateEntityComponent.ComponentData);
-                        //     if (updateData != null) {
-                        //         queuedMessage.method = MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE;
-                        //         queuedMessage.payload =
-                        //             new Protocol.EntityComponentCreateOrUpdate
-                        //             {
-                        //                 entityId = action.Payload.UpdateEntityComponent.EntityId,
-                        //                 classId = action.Payload.UpdateEntityComponent.ClassId,
-                        //                 json = updateData.ToString()
-                        //             };
-                        //         crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                        //     }
-                        //     break;
+                        case EntityActionPayload.PayloadOneofCase.UpdateEntityComponent:
+                            var updateData = ComponentModelFromPayload(action.Payload.UpdateEntityComponent.ComponentData);
+                            if (updateData != null) {
+                                if (action.Payload.UpdateEntityComponent.ComponentData.PayloadCase == 
+                                    ComponentBodyPayload.PayloadOneofCase.Transform) {
+                                    queuedMessage.method = MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE;
+                                    queuedMessage.payload = action.Payload.UpdateEntityComponent;
+                                    crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
+                                } else {
+                                    queuedMessage.method = MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE;
+                                    queuedMessage.payload =
+                                        new Protocol.EntityComponentCreateOrUpdate
+                                        {
+                                            entityId = action.Payload.UpdateEntityComponent.EntityId,
+                                            classId = action.Payload.UpdateEntityComponent.ClassId,
+                                            json = updateData.ToString()
+                                        };
+                                    crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
+                                }
+                            }
+                            break;
 
-                        // case EntityActionPayload.PayloadOneofCase.ComponentUpdated:
-                        //     var componentData = ComponentModelFromPayload(action.Payload.ComponentUpdated.ComponentData);
-                        //     if (componentData != null) {
-                        //         queuedMessage.method = MessagingTypes.SHARED_COMPONENT_UPDATE;
-                        //         queuedMessage.payload =
-                        //             new Protocol.SharedComponentUpdate
-                        //             {
-                        //                 componentId = action.Payload.ComponentUpdated.Id,
-                        //                 json = componentData.ToString()
-                        //             };
-                        //         crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                        //     }
-                        //     break;
+                        case EntityActionPayload.PayloadOneofCase.ComponentUpdated:
+                            var componentData = ComponentModelFromPayload(action.Payload.ComponentUpdated.ComponentData);
+                            if (componentData != null) {
+                                queuedMessage.method = MessagingTypes.SHARED_COMPONENT_UPDATE;
+                                queuedMessage.payload =
+                                    new Protocol.SharedComponentUpdate
+                                    {
+                                        componentId = action.Payload.ComponentUpdated.Id,
+                                        json = componentData.ToString()
+                                    };
+                                crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
+                            }
+                            break;
 
                         // case EntityActionPayload.PayloadOneofCase.UpdateEntityComponent:
                         //     queuedMessage.method = MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE;
@@ -427,6 +434,8 @@ namespace RPC.Services
         }
 
         private static object ComponentModelFromPayload(ComponentBodyPayload payload) {
+            if (payload == null) return null;
+            
             switch (payload.PayloadCase) {
                 case ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea: return payload.AvatarModifierArea;
                 case ComponentBodyPayload.PayloadOneofCase.Transform: return payload.Transform;

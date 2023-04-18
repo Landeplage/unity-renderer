@@ -37,7 +37,7 @@ namespace DCL
         T GetSceneSharedComponent<T>() where T : class;
         void SceneSharedComponentAttach(long entityId, string componentId);
         IEntityComponent EntityComponentCreateOrUpdate(long entityId, CLASS_ID_COMPONENT classId, object data);
-        IEntityComponent EntityComponentUpdate(IDCLEntity entity, CLASS_ID_COMPONENT classId, string componentJson);
+        IEntityComponent EntityComponentUpdate(IDCLEntity entity, CLASS_ID_COMPONENT classId, object componentData);
         void SceneSharedComponentDispose(string id);
         ISharedComponent SceneSharedComponentUpdate(string id, BaseModel model);
         ISharedComponent SceneSharedComponentUpdate(string id, string json);

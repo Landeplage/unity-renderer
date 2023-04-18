@@ -440,7 +440,7 @@ namespace DCL
             }
             else
             {
-                targetComponent = EntityComponentUpdate(entity, classId, data as string);
+                targetComponent = EntityComponentUpdate(entity, classId, data);
             }
 
             var isTransform = classId == CLASS_ID_COMPONENT.TRANSFORM;
@@ -456,7 +456,7 @@ namespace DCL
         }
 
         public IEntityComponent EntityComponentUpdate(IDCLEntity entity, CLASS_ID_COMPONENT classId,
-            string componentJson)
+            object data)
         {
             if (entity == null)
             {
@@ -471,7 +471,12 @@ namespace DCL
             }
 
             var targetComponent = GetComponent(entity, classId);
-            targetComponent.UpdateFromJSON(componentJson);
+            if (data is string json)
+                targetComponent.UpdateFromJSON(json);
+            else if (data is Decentraland.Sdk.Ecs6.ComponentBodyPayload payload)
+                targetComponent.UpdateFromPb(payload);
+            else
+                targetComponent.UpdateFromModel(data as BaseModel);
 
             return targetComponent;
         }

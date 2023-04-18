@@ -25,26 +25,18 @@ namespace DCL.Components
             
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
                 if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Transform) {
-                    return new Model() {
-                        rotation = new Quaternion() { 
-                            x = pbModel.Transform.Rotation.X,
-                            y = pbModel.Transform.Rotation.Y,
-                            z = pbModel.Transform.Rotation.Z,
-                            w = pbModel.Transform.Rotation.W,
-                        },
-                        scale = new Vector3() { 
-                            x = pbModel.Transform.Scale.X,
-                            y = pbModel.Transform.Scale.Y,
-                            z = pbModel.Transform.Scale.Z
-                        },
-                        position = new Vector3() { 
-                            x = pbModel.Transform.Position.X,
-                            y = pbModel.Transform.Position.Y,
-                            z = pbModel.Transform.Position.Z
-                        }
-                    };
+                    DCLTransform.model.position.x = pbModel.Transform.Position.X;
+                    DCLTransform.model.position.y = pbModel.Transform.Position.Y;
+                    DCLTransform.model.position.z = pbModel.Transform.Position.Z;
+                    DCLTransform.model.scale.x = pbModel.Transform.Scale.X;
+                    DCLTransform.model.scale.y = pbModel.Transform.Scale.Y;
+                    DCLTransform.model.scale.z = pbModel.Transform.Scale.Z;
+                    DCLTransform.model.rotation.x = pbModel.Transform.Rotation.X;
+                    DCLTransform.model.rotation.y = pbModel.Transform.Rotation.Y;
+                    DCLTransform.model.rotation.z = pbModel.Transform.Rotation.Z;
+                    DCLTransform.model.rotation.w = pbModel.Transform.Rotation.W;
                 }
-                return Utils.SafeUnimplemented<Model>();
+                return DCLTransform.model;
             }
 
         }

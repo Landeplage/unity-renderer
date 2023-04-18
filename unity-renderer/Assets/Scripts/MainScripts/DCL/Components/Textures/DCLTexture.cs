@@ -19,15 +19,23 @@ namespace DCL
             public string src;
             public BabylonWrapMode wrap = BabylonWrapMode.CLAMP;
             public FilterMode samplingMode = FilterMode.Bilinear;
-            public bool hasAlpha = false;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Texture)
+                    return new Model
+                    {
+                        src = pbModel.Texture.Src,
+                        wrap = (BabylonWrapMode)pbModel.Texture.Wrap,
+                        samplingMode = (FilterMode)pbModel.Texture.SamplingMode,
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLTexture)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Texture)}!");
+                return null;
             }
-
         }
 
         public enum BabylonWrapMode
@@ -45,13 +53,19 @@ namespace DCL
         public TextureWrapMode unityWrap;
         public FilterMode unitySamplingMode;
         public Texture2D texture;
-        
+
         protected bool isDisposed;
         public float resizingFactor => texturePromise?.asset.resizingFactor ?? 1;
 
-        public override int GetClassId() { return (int) CLASS_ID.TEXTURE; }
+        public override int GetClassId()
+        {
+            return (int)CLASS_ID.TEXTURE;
+        }
 
-        public DCLTexture() { model = new Model(); }
+        public DCLTexture()
+        {
+            model = new Model();
+        }
 
         public static IEnumerator FetchFromComponent(IParcelScene scene, string componentId,
             System.Action<Texture2D> OnFinish)
@@ -90,7 +104,7 @@ namespace DCL
             if (isDisposed)
                 yield break;
 
-            Model model = (Model) newModel;
+            Model model = (Model)newModel;
 
             unitySamplingMode = model.samplingMode;
 
@@ -116,24 +130,18 @@ namespace DCL
                     string base64Data = model.src.Substring(model.src.IndexOf(',') + 1);
 
                     // The used texture variable can't be null for the ImageConversion.LoadImage to work
-                    if (texture == null)
-                    {
-                        texture = new Texture2D(1, 1);
-                    }
+                    if (texture == null) { texture = new Texture2D(1, 1); }
 
-                    if (!ImageConversion.LoadImage(texture, Convert.FromBase64String(base64Data)))
-                    {
-                        Debug.LogError($"DCLTexture with id {id} couldn't parse its base64 image data.");
-                    }
+                    if (!ImageConversion.LoadImage(texture, Convert.FromBase64String(base64Data))) { Debug.LogError($"DCLTexture with id {id} couldn't parse its base64 image data."); }
 
                     if (texture != null)
                     {
                         texture.wrapMode = unityWrap;
                         texture.filterMode = unitySamplingMode;
-                        
+
                         if (DataStore.i.textureConfig.runCompression.Get())
                             texture.Compress(false);
-                        
+
                         texture.Apply(unitySamplingMode != FilterMode.Point, true);
                         texture = TextureHelpers.ClampSize(texture, DataStore.i.textureConfig.generalMaxSize.Get());
                     }
@@ -193,10 +201,7 @@ namespace DCL
             if (!attachedEntitiesByComponent.ContainsKey(component))
                 return;
 
-            foreach (var entityId in attachedEntitiesByComponent[component])
-            {
-                DataStore.i.sceneWorldObjects.RemoveTexture(scene.sceneData.sceneNumber, entityId, texture);
-            }
+            foreach (var entityId in attachedEntitiesByComponent[component]) { DataStore.i.sceneWorldObjects.RemoveTexture(scene.sceneData.sceneNumber, entityId, texture); }
 
             attachedEntitiesByComponent.Remove(component);
         }
@@ -205,13 +210,10 @@ namespace DCL
         {
             if (isDisposed)
                 return;
-            
+
             isDisposed = true;
 
-            while (attachedEntitiesByComponent.Count > 0)
-            {
-                RemoveReference(attachedEntitiesByComponent.First().Key);
-            }
+            while (attachedEntitiesByComponent.Count > 0) { RemoveReference(attachedEntitiesByComponent.First().Key); }
 
             if (texturePromise != null)
             {

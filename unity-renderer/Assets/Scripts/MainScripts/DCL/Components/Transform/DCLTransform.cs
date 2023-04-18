@@ -18,30 +18,35 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json)
             {
-                DCLTransformUtils.DecodeTransform(json, ref DCLTransform.model);
-                return DCLTransform.model;
+                DCLTransformUtils.DecodeTransform(json, ref model);
+                return model;
             }
 
-            
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Transform) {
-                    DCLTransform.model.position.x = pbModel.Transform.Position.X;
-                    DCLTransform.model.position.y = pbModel.Transform.Position.Y;
-                    DCLTransform.model.position.z = pbModel.Transform.Position.Z;
-                    DCLTransform.model.scale.x = pbModel.Transform.Scale.X;
-                    DCLTransform.model.scale.y = pbModel.Transform.Scale.Y;
-                    DCLTransform.model.scale.z = pbModel.Transform.Scale.Z;
-                    DCLTransform.model.rotation.x = pbModel.Transform.Rotation.X;
-                    DCLTransform.model.rotation.y = pbModel.Transform.Rotation.Y;
-                    DCLTransform.model.rotation.z = pbModel.Transform.Rotation.Z;
-                    DCLTransform.model.rotation.w = pbModel.Transform.Rotation.W;
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Transform)
+                {
+                    var model = new Model();
+                    model.position.x = pbModel.Transform.Position.X;
+                    model.position.y = pbModel.Transform.Position.Y;
+                    model.position.z = pbModel.Transform.Position.Z;
+                    model.scale.x = pbModel.Transform.Scale.X;
+                    model.scale.y = pbModel.Transform.Scale.Y;
+                    model.scale.z = pbModel.Transform.Scale.Z;
+                    model.rotation.x = pbModel.Transform.Rotation.X;
+                    model.rotation.y = pbModel.Transform.Rotation.Y;
+                    model.rotation.z = pbModel.Transform.Rotation.Z;
+                    model.rotation.w = pbModel.Transform.Rotation.W;
+
+                    return model;
                 }
-                return DCLTransform.model;
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLTransform)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Transform)}!");
+                return null;
             }
 
         }
-        
-        public static Model model = new Model();
+
+        private static Model model = new Model();
 
         public void Cleanup() { }
 
@@ -54,7 +59,7 @@ namespace DCL.Components
         {
             this.scene = scene;
             this.entity = entity;
-        }   
+        }
 
         public void UpdateFromJSON(string json)
         {
@@ -62,7 +67,7 @@ namespace DCL.Components
             UpdateFromModel(model);
         }
 
-        
+
         public void UpdateFromPb(object payload)
         {
             model.GetDataFromPb(payload as ComponentBodyPayload);
@@ -84,7 +89,7 @@ namespace DCL.Components
                 entity.gameObject.transform.localPosition = DCLTransform.model.position;
                 entity.gameObject.transform.localRotation = DCLTransform.model.rotation;
             }
-            
+
             entity.gameObject.transform.localScale = DCLTransform.model.scale;
             entity.gameObject.transform.CapGlobalValuesToMax();
         }
@@ -97,7 +102,7 @@ namespace DCL.Components
         public BaseModel GetModel() => DCLTransform.model;
         public int GetClassId() => (int) CLASS_ID_COMPONENT.TRANSFORM;
         public void UpdateOutOfBoundariesState(bool enable) { }
-        
-        
+
+
     }
 }

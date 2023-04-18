@@ -41,31 +41,41 @@ namespace DCL.Components
         }
 
         [System.Serializable]
-        public class AvatarModel : DCLTexture.Model
+        public class AvatarModel : Model
         {
             public string userId;
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<AvatarModel>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<AvatarModel>(json);
 
-            
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AvatarTexture)
+                    return new AvatarModel
+                    {
+                        src = pbModel.AvatarTexture.UserId,
+                        wrap = (BabylonWrapMode)pbModel.AvatarTexture.Wrap,
+                        samplingMode = (FilterMode)pbModel.AvatarTexture.SamplingMode,
+                        userId = pbModel.AvatarTexture.UserId,
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLTexture)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AvatarTexture)}!");
+                return null;
             }
 
         }
 
-        public DCLAvatarTexture() { 
-            model = new AvatarModel(); 
+        public DCLAvatarTexture() {
+            model = new AvatarModel();
         }
-        
+
         public override IEnumerator ApplyChanges(BaseModel newModel)
         {
             yield return new WaitUntil(() => CommonScriptableObjects.rendererState.Get());
-            
+
             //If the scene creates and destroy the component before our renderer has been turned on bad things happen!
             //TODO: Analyze if we can catch this upstream and stop the IEnumerator
             if (isDisposed)
                 yield break;
-            
+
             AvatarModel model = (AvatarModel) newModel;
 
             if (texture == null && !string.IsNullOrEmpty(model.userId))
@@ -79,13 +89,13 @@ namespace DCL.Components
                 //      avatars[0] has the avatar and we have to access to
                 //      avatars[0].avatar.snapshots, and the links are
                 //      face,face128,face256 and body
-                
+
                 // TODO: check if this user data already exists to avoid this fetch.
                 yield return GetAvatarUrls(sourceUrl, (faceUrl) =>
                 {
                     textureUrl = faceUrl;
                 });
-                
+
                 if (!string.IsNullOrEmpty(textureUrl))
                 {
                     model.src = textureUrl;

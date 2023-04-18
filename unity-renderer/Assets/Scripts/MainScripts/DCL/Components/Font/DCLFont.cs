@@ -37,11 +37,17 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Font)
+                    return new Model
+                    {
+                        src = pbModel.Font.Src,
+                    };
 
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLFont)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Font)}!");
+                return null;
+            }
         }
 
         public bool loaded { private set; get; } = false;
@@ -113,9 +119,9 @@ namespace DCL.Components
 
             if (fontsMapping.TryGetValue(model.src, out string fontResourceName))
             {
-                ResourceRequest request = Resources.LoadAsync($"{RESOURCE_FONT_FOLDER}/{fontResourceName}", 
+                ResourceRequest request = Resources.LoadAsync($"{RESOURCE_FONT_FOLDER}/{fontResourceName}",
                     typeof(TMP_FontAsset));
-                
+
                 yield return request;
 
                 if (request.asset != null)

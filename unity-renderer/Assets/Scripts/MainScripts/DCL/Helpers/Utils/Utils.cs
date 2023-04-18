@@ -373,12 +373,8 @@ namespace DCL.Helpers
             return returningValue;
         }
 
-        
-        public static T SafeUnimplemented<T>()
-        {
-            T returningValue = default(T);
-            return returningValue;
-        }
+        public static T SafeUnimplemented<T>() =>
+            default(T);
 
         public static GameObject AttachPlaceholderRendererGameObject(Transform targetTransform)
         {

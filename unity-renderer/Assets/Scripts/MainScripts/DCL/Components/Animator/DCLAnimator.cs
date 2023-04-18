@@ -28,15 +28,43 @@ namespace DCL.Components
                 public bool looping = true;
                 public bool shouldReset = false;
 
-                public DCLAnimationState Clone() { return (DCLAnimationState) this.MemberwiseClone(); }
+                public DCLAnimationState Clone() =>
+                    (DCLAnimationState) this.MemberwiseClone();
             }
 
             public DCLAnimationState[] states;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Animator)
+                {
+                    var model = new Model
+                        {
+                            states = new DCLAnimationState[pbModel.Animator.States.Count],
+                        };
+
+                    for (var i = 0; i < pbModel.Animator.States.Count; i++)
+                    {
+                        model.states[i].name = pbModel.Animator.States[i].Name;
+                        model.states[i].clip = pbModel.Animator.States[i].Clip;
+                        // model.states[i].clipReference ??
+                        model.states[i].playing = pbModel.Animator.States[i].Playing;
+
+                        model.states[i].weight = pbModel.Animator.States[i].Weight;
+
+                        model.states[i].speed = pbModel.Animator.States[i].Speed;
+                        model.states[i].looping = pbModel.Animator.States[i].Looping;
+                        model.states[i].shouldReset = pbModel.Animator.States[i].ShouldReset;
+                    }
+
+                    return model;
+                }
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAnimator)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Animator)}!");
+                return null;
             }
         }
 
@@ -50,7 +78,10 @@ namespace DCL.Components
 
         public override string componentName => "animator";
 
-        private void Awake() { model = new Model(); }
+        private void Awake()
+        {
+            model = new Model();
+        }
 
         private void OnDestroy()
         {
@@ -185,7 +216,7 @@ namespace DCL.Components
                     if (state.shouldReset)
                         ResetAnimation(state);
 
-                    
+
                     if (state.playing && !animComponent.IsPlaying(state.clip))
                     {
                         animComponent.Play(state.clip);

@@ -352,9 +352,44 @@ namespace RPC.Services
                             break;
 
                         case EntityActionPayload.PayloadOneofCase.Query:
-                            // queuedMessage.method = MessagingTypes.QUERY;
-                            // queuedMessage.payload = action.Payload.Query;
-                            // crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
+                            queuedMessage.method = MessagingTypes.QUERY;
+
+                            string queryId = action.Payload.Query.QueryId;
+                            RaycastType raycastType = RaycastType.NONE;
+                            switch (action.Payload.Query.Payload.QueryType) {
+                                case "HitFirst":
+                                    raycastType = RaycastType.HIT_FIRST;
+                                    break; 
+                                case "HitAll":
+                                    raycastType = RaycastType.HIT_ALL;
+                                    break; 
+                                case "HitFirstAvatar":
+                                    raycastType = RaycastType.HIT_FIRST_AVATAR;
+                                    break; 
+                                case "HitAllAvatars":
+                                    raycastType = RaycastType.HIT_ALL_AVATARS;
+                                    break; 
+                            }
+
+                            DCL.Models.Ray ray = new DCL.Models.Ray()
+                            {
+                                origin = new Vector3(){ x = action.Payload.Query.Payload.Ray.Origin.X, y = action.Payload.Query.Payload.Ray.Origin.Y, z = action.Payload.Query.Payload.Ray.Origin.Z },
+                                direction = new Vector3(){ x = action.Payload.Query.Payload.Ray.Direction.X, y = action.Payload.Query.Payload.Ray.Direction.Y, z = action.Payload.Query.Payload.Ray.Direction.Z },
+                                distance = action.Payload.Query.Payload.Ray.Distance
+                            };
+
+                            queuedMessage.method = MessagingTypes.QUERY;
+                            queuedMessage.payload = new QueryMessage()
+                            {
+                                payload = new RaycastQuery()
+                                {
+                                    id = queryId,
+                                    raycastType = raycastType,
+                                    ray = ray,
+                                    sceneNumber = sceneNumber
+                                }
+                            };
+                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
                             break;
 
                         case EntityActionPayload.PayloadOneofCase.ComponentCreated:

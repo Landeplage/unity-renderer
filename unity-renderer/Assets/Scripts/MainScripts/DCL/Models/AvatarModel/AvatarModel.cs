@@ -150,8 +150,7 @@ public class AvatarModel : BaseModel
             return model;
         }
 
-        Debug.LogError($"Payload provided for SDK6 {nameof(AvatarModel)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AvatarShape)}!");
-        return null;
+        return Utils.SafeUnimplemented<AvatarModel, BaseModel>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarShape, actual: pbModel.PayloadCase);
     }
 
 }

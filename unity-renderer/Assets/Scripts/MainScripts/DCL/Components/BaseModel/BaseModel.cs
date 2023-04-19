@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Decentraland.Sdk.Ecs6;
 
 /// <summary>

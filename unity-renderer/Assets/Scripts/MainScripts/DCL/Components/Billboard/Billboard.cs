@@ -20,19 +20,15 @@ namespace DCL
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Billboard)
-                    return new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Billboard
+                    ? new Model
                     {
                         x = pbModel.Billboard.X,
                         y = pbModel.Billboard.Y,
                         z = pbModel.Billboard.Z,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(Billboard)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Billboard)}!");
-                return null;
-            }
+                    }
+                    : Utils.SafeUnimplemented<Billboard, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Billboard, actual: pbModel.PayloadCase);
         }
 
         private const string COMPONENT_NAME = "billboard";

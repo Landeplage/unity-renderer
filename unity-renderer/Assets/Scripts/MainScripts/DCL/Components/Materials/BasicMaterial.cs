@@ -25,19 +25,15 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BasicMaterial)
-                    return new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BasicMaterial
+                    ? new Model
                     {
                         texture = pbModel.BasicMaterial.Texture,
                         alphaTest = pbModel.BasicMaterial.AlphaTest,
                         castShadows = pbModel.BasicMaterial.CastShadows,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(BasicMaterial)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.BasicMaterial)}!");
-                return null;
-            }
-
+                    }
+                    : Utils.SafeUnimplemented<BasicMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.BasicMaterial, actual: pbModel.PayloadCase);
         }
 
         public Material material;

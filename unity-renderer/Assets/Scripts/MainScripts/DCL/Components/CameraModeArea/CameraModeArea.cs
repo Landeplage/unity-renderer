@@ -7,6 +7,7 @@ using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -21,19 +22,20 @@ namespace DCL.Components
                 public Vector3 box;
             }
 
-            public Area area = new Area();
+            public Area area = new ();
             public CameraMode.ModeId cameraMode = CameraMode.ModeId.ThirdPerson;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                return null;//Utils.SafeUnimplemented<Model>();
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.CameraModeArea
+                    ? new Model
+                    {
+                        area = new Area { box = pbModel.CameraModeArea.Area.Box.AsUnityVector3() },
+                        cameraMode = (CameraMode.ModeId)pbModel.CameraModeArea.CameraMode,
+                    }
+                    : Utils.SafeUnimplemented<CameraModeArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.CameraModeArea, actual: pbModel.PayloadCase);
         }
 
         private static CameraModeAreasController areasController { get; } = new CameraModeAreasController();

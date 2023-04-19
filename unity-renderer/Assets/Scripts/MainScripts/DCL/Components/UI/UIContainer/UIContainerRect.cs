@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -20,8 +21,31 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null; //Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiContainerRect)
+                    return Utils.SafeUnimplemented<UIContainerRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerRect, actual: pbModel.PayloadCase);
+
+                var model = new Model
+                {
+                    color = pbModel.UiContainerRect.Color.AsUnityColor(),
+                    thickness = pbModel.UiContainerRect.Thickness,
+
+                    name = pbModel.UiContainerRect.Name,
+                    // parentComponent = ??
+                    visible = pbModel.UiContainerRect.Visible,
+                    opacity = pbModel.UiContainerRect.Opacity,
+                    hAlign = pbModel.UiContainerRect.HAlign,
+                    vAlign = pbModel.UiContainerRect.VAlign,
+                    // width = new UIValue(pbModel.UiShape.Width.Value, (UIValue.Unit) pbModel.UiShape.Width.Type),
+                    // height = new UIValue(pbModel.UiShape.Height.Value, (UIValue.Unit) pbModel.UiShape.Height.Type),
+                    // positionX = new UIValue(pbModel.UiShape.PositionX.Value, (UIValue.Unit) pbModel.UiShape.PositionX.Type),
+                    // positionY = new UIValue(pbModel.UiShape.PositionY.Value, (UIValue.Unit) pbModel.UiShape.PositionY.Type),
+                    isPointerBlocker = pbModel.UiContainerRect.IsPointerBlocker,
+                    // onClick = ??
+                };
+
+                return model;
             }
 
         }

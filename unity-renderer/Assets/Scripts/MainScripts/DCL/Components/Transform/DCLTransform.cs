@@ -33,8 +33,7 @@ namespace DCL.Components
                         rotation = pbModel.Transform.Rotation.AsUnityQuaternion(),
                     };
 
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLTransform)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Transform)}!");
-                return null;
+                return Utils.SafeUnimplemented<DCLTransform, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Transform, pbModel.PayloadCase);
             }
 
         }

@@ -19,8 +19,18 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null;//Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AttachToAvatar)
+                    return Utils.SafeUnimplemented<AvatarAttachComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AttachToAvatar, actual: pbModel.PayloadCase);
+
+                var model = new Model
+                {
+                    avatarId = pbModel.AttachToAvatar.AvatarId,
+                    // anchorPointId = pbModel.AttachToAvatar.AnchorPointId. ??
+                };
+
+                return model;
             }
 
         }

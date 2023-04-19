@@ -18,10 +18,19 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return JsonConvert.DeserializeObject<Model>(json); }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null; //Utils.SafeUnimplemented<Model>();
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.SmartItem)
+                    return Utils.SafeUnimplemented<SmartItemComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.SmartItem, actual: pbModel.PayloadCase);
 
+                var model = new Model
+                {
+                    // model.src = ??
+                    // model.assetId = ??
+                };
+
+                return model;
+            }
         }
 
         public override void Initialize(IParcelScene scene, IDCLEntity entity)

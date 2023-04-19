@@ -11,20 +11,20 @@ namespace DCL.Components
 {
     public class DCLVideoClip : BaseDisposable
     {
-        private static readonly string[] NO_STREAM_EXTENSIONS = new[] { ".mp4", ".ogg", ".mov", ".webm" };
+        private static readonly string[] NO_STREAM_EXTENSIONS = { ".mp4", ".ogg", ".mov", ".webm" };
 
-        [System.Serializable]
+        [Serializable]
         public class Model : BaseModel
         {
             public string url;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                return null; //Utils.SafeUnimplemented<Model>();
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.VideoClip
+                    ? new Model { url = pbModel.VideoClip.Url }
+                    : Utils.SafeUnimplemented<DCLVideoClip, Model>(expected: ComponentBodyPayload.PayloadOneofCase.VideoClip, actual: pbModel.PayloadCase);
         }
 
         public bool isExternalURL { get; private set; }

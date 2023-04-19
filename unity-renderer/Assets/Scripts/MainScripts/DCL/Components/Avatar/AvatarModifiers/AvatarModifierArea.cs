@@ -8,6 +8,7 @@ using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 public class AvatarModifierArea : BaseComponent
 {
@@ -19,13 +20,18 @@ public class AvatarModifierArea : BaseComponent
         public string[] modifiers;
         public string[] excludeIds;
 
-        public override BaseModel GetDataFromJSON(string json)
-        {
-            return Utils.SafeFromJson<Model>(json);
-        }
-        public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-            return null;//Utils.SafeUnimplemented<Model>();
-        }
+        public override BaseModel GetDataFromJSON(string json) =>
+            Utils.SafeFromJson<Model>(json);
+
+        public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+            pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea
+                ? new Model
+                {
+                    modifiers = pbModel.AvatarModifierArea.Modifiers.ToArray(),
+                    excludeIds = pbModel.AvatarModifierArea.ExcludeIds.ToArray(),
+                    area = { box = pbModel.AvatarModifierArea.Area.Box.AsUnityVector3() },
+                }
+                : Utils.SafeUnimplemented<AvatarModifierArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea, actual: pbModel.PayloadCase);
 
     }
 

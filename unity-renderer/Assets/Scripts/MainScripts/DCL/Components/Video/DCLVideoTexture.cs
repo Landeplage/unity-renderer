@@ -24,7 +24,7 @@ namespace DCL.Components
         public static System.Func<IVideoPluginWrapper> videoPluginWrapperBuilder = () => new VideoPluginWrapper_WebGL();
 
         [System.Serializable]
-        new public class Model : BaseModel
+        public new class Model : BaseModel
         {
             public string videoClipId;
             public bool playing = false;
@@ -35,16 +35,23 @@ namespace DCL.Components
             public BabylonWrapMode wrap = BabylonWrapMode.CLAMP;
             public FilterMode samplingMode = FilterMode.Bilinear;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null; //Utils.SafeUnimplemented<Model>();
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.VideoTexture
+                    ? new Model
+                    {
+                        // videoClipId = ??
+                        playing = pbModel.VideoTexture.Playing,
+                        volume = pbModel.VideoTexture.Volume,
+                        playbackRate = pbModel.VideoTexture.PlaybackRate,
+                        // loop = ??
+                        seek = pbModel.VideoTexture.Seek,
+                        wrap = (BabylonWrapMode)pbModel.VideoTexture.Wrap,
+                        samplingMode = (FilterMode)pbModel.VideoTexture.SamplingMode
+                    }
+                    : Utils.SafeUnimplemented<DCLVideoTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.VideoTexture, actual: pbModel.PayloadCase);
         }
 
         internal WebVideoPlayer texturePlayer;

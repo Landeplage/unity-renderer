@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -44,18 +45,37 @@ namespace DCL.Components
             public float paddingBottom = 0f;
             public float paddingLeft = 0f;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                Model model = Utils.SafeFromJson<Model>(json);
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-                return model;
-            }
-
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null; //Utils.SafeUnimplemented<Model>();
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiText
+                    ? new Model
+                    {
+                        outlineWidth = pbModel.UiText.OutlineWidth,
+                        outlineColor = pbModel.UiText.OutlineColor.AsUnityColor(),
+                        color = pbModel.UiText.Color.AsUnityColor(),
+                        adaptWidth = pbModel.UiText.AdaptWidth,
+                        adaptHeight = pbModel.UiText.AdaptHeight,
+                        fontSize = pbModel.UiText.FontSize,
+                        fontAutoSize = pbModel.UiText.FontAutoSize,
+                        font = pbModel.UiText.Font,
+                        value = pbModel.UiText.Value,
+                        lineSpacing = pbModel.UiText.LineSpacing,
+                        lineCount = pbModel.UiText.LineCount,
+                        hTextAlign = pbModel.UiText.HTextAlign,
+                        vTextAlign = pbModel.UiText.VTextAlign,
+                        textWrapping = pbModel.UiText.TextWrapping,
+                        shadowBlur = pbModel.UiText.ShadowBlur,
+                        shadowOffsetX = pbModel.UiText.ShadowOffsetX,
+                        shadowOffsetY = pbModel.UiText.ShadowOffsetY,
+                        shadowColor = pbModel.UiText.ShadowColor.AsUnityColor(),
+                        paddingTop = pbModel.UiText.PaddingTop,
+                        paddingRight = pbModel.UiText.PaddingRight,
+                        paddingBottom = pbModel.UiText.PaddingBottom,
+                        paddingLeft = pbModel.UiText.PaddingLeft
+                    }
+                    : Utils.SafeUnimplemented<UIText, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiText, actual: pbModel.PayloadCase);
         }
 
         public override string referencesContainerPrefabName => "UIText";

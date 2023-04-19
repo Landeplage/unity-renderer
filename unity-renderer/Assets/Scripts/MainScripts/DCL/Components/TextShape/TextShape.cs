@@ -6,6 +6,7 @@ using DCL.Models;
 using TMPro;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -29,7 +30,6 @@ namespace DCL.Components
 
             [Header("Text box properties")]
             public string hTextAlign = "bottom";
-
             public string vTextAlign = "left";
             public float width = 1f;
             public float height = 0.2f;
@@ -43,7 +43,6 @@ namespace DCL.Components
 
             [Header("Text shadow properties")]
             public float shadowBlur = 0f;
-
             public float shadowOffsetX = 0f;
             public float shadowOffsetY = 0f;
             public Color shadowColor = new Color(1, 1, 1);
@@ -57,7 +56,39 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                return null;// Utils.SafeUnimplemented<Model>();
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.TextShape)
+                    return Utils.SafeUnimplemented<TextShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.TextShape, actual: pbModel.PayloadCase);
+
+                var model = new Model
+                    {
+                        billboard = pbModel.TextShape.Billboard,
+                        color = pbModel.TextShape.Color.AsUnityColor(),
+                        font = pbModel.TextShape.Font,
+                        height = pbModel.TextShape.Height,
+                        opacity = pbModel.TextShape.Opacity,
+                        value = pbModel.TextShape.Value,
+                        visible = pbModel.TextShape.Visible,
+                        width = pbModel.TextShape.Width,
+                        lineCount = pbModel.TextShape.LineCount,
+                        lineSpacing = float.Parse(pbModel.TextShape.LineSpacing), // ??
+                        outlineColor = pbModel.TextShape.OutlineColor.AsUnityColor(),
+                        outlineWidth = pbModel.TextShape.OutlineWidth,
+                        paddingBottom = pbModel.TextShape.PaddingBottom,
+                        paddingLeft = pbModel.TextShape.PaddingLeft,
+                        paddingRight = pbModel.TextShape.PaddingRight,
+                        paddingTop = pbModel.TextShape.PaddingTop,
+                        shadowBlur = pbModel.TextShape.ShadowBlur,
+                        shadowColor = pbModel.TextShape.ShadowColor.AsUnityColor(),
+                        shadowOffsetX = pbModel.TextShape.ShadowOffsetX,
+                        shadowOffsetY = pbModel.TextShape.ShadowOffsetY,
+                        textWrapping = pbModel.TextShape.TextWrapping,
+                        vTextAlign = pbModel.TextShape.VTextAlign,
+                        hTextAlign = pbModel.TextShape.HTextAlign,
+                        fontAutoSize = pbModel.TextShape.FontSize == 0, // model.fontAutoSize = ??
+                        fontSize = pbModel.TextShape.FontSize,
+                    };
+
+                return model;
             }
 
         }

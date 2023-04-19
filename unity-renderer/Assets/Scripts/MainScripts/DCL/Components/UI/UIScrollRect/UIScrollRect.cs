@@ -1,20 +1,19 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Interface;
 using DCL.Models;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
     public class UIScrollRect : UIShape<UIScrollRectRefContainer, UIScrollRect.Model>
     {
         [System.Serializable]
-        new public class Model : UIShape.Model
+        public new class Model : UIShape.Model
         {
             public float valueX = 0;
             public float valueY = 0;
@@ -27,12 +26,42 @@ namespace DCL.Components
             public float paddingLeft = 0f;
             public string OnChanged;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                return null;// Utils.SafeUnimplemented<Model>();
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiScrollRect)
+                    return Utils.SafeUnimplemented<UIScrollRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiScrollRect, actual: pbModel.PayloadCase);
+
+                var model = new Model
+                {
+                    valueX = pbModel.UiScrollRect.ValueX,
+                    valueY = pbModel.UiScrollRect.ValueY,
+                    backgroundColor = pbModel.UiScrollRect.BackgroundColor.AsUnityColor(),
+                    isHorizontal = pbModel.UiScrollRect.IsHorizontal,
+                    isVertical = pbModel.UiScrollRect.IsVertical,
+                    paddingTop = pbModel.UiScrollRect.PaddingTop,
+                    paddingRight = pbModel.UiScrollRect.PaddingRight,
+                    paddingBottom = pbModel.UiScrollRect.PaddingBottom,
+                    paddingLeft = pbModel.UiScrollRect.PaddingLeft,
+                    OnChanged = pbModel.UiScrollRect.OnChanged,
+
+                    // name = ??
+                    // parentComponent = ??
+                    // visible = ??
+                    // opacity = ??
+                    // hAlign = ??
+                    // vAlign = ??
+                    // width = ??
+                    // height = ??
+                    // positionX = ??
+                    // positionY = ??
+                    // isPointerBlocker = ??
+                    // onClick = ??
+                };
+
+                return model;
             }
 
         }

@@ -12,7 +12,7 @@ namespace DCL.Components
     public class UIImage : UIShape<UIImageReferencesContainer, UIImage.Model>
     {
         [System.Serializable]
-        new public class Model : UIShape.Model
+        public new class Model : UIShape.Model
         {
             public string source;
             public float sourceLeft = 0f;
@@ -25,13 +25,25 @@ namespace DCL.Components
             public float paddingLeft = 0f;
             public bool sizeInPixels = true;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null; //Utils.SafeUnimplemented<Model>();
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiImage
+                    ? new Model
+                    {
+                        source = pbModel.UiImage.Source,
+                        sourceLeft = pbModel.UiImage.SourceLeft,
+                        sourceTop = pbModel.UiImage.SourceTop,
+                        sourceWidth = pbModel.UiImage.SourceWidth,
+                        sourceHeight = pbModel.UiImage.SourceHeight,
+                        paddingTop = pbModel.UiImage.PaddingTop,
+                        paddingRight = pbModel.UiImage.PaddingRight,
+                        paddingBottom = pbModel.UiImage.PaddingBottom,
+                        paddingLeft = pbModel.UiImage.PaddingLeft,
+                        sizeInPixels = pbModel.UiImage.SizeInPixels,
+                    }
+                    : Utils.SafeUnimplemented<UIImage, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiImage, actual: pbModel.PayloadCase);
         }
 
         public override string referencesContainerPrefabName => "UIImage";

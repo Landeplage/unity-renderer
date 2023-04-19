@@ -3,6 +3,7 @@ using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using System.Linq;
 
 namespace DCL.Components
 {
@@ -15,15 +16,21 @@ namespace DCL.Components
             public float width = 1f; // Plane
             public float height = 1f; // Plane
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                // return Utils.SafeUnimplemented<Model>();
-                return null;
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.PlaneShape
+                    ? new Model
+                    {
+                        uvs = pbModel.PlaneShape.Uvs.ToArray(),
+                        height = pbModel.PlaneShape.Height,
+                        width = pbModel.PlaneShape.Width,
+                        visible = pbModel.PlaneShape.Visible,
+                        withCollisions = pbModel.PlaneShape.WithCollisions,
+                        isPointerBlocker = pbModel.PlaneShape.IsPointerBlocker,
+                    }
+                    : Utils.SafeUnimplemented<PlaneShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.PlaneShape, actual: pbModel.PayloadCase);
         }
 
         public PlaneShape() { model = new Model(); }

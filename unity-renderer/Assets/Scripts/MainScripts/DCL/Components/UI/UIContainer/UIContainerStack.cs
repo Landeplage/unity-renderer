@@ -7,13 +7,14 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
     public class UIContainerStack : UIShape<UIContainerRectReferencesContainer, UIContainerStack.Model>
     {
         [System.Serializable]
-        new public class Model : UIShape.Model
+        public new class Model : UIShape.Model
         {
             public Color color = Color.clear;
             public StackOrientation stackOrientation = StackOrientation.VERTICAL;
@@ -21,11 +22,37 @@ namespace DCL.Components
             public bool adaptHeight = true;
             public float spacing = 0;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiContainerStack)
+                    return Utils.SafeUnimplemented<UIContainerStack, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerStack, actual: pbModel.PayloadCase);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null; //Utils.SafeUnimplemented<Model>();
+                var model = new Model
+                {
+                    color = pbModel.UiContainerStack.Color.AsUnityColor(),
+                    stackOrientation = (StackOrientation) pbModel.UiContainerStack.StackOrientation,
+                    adaptWidth = pbModel.UiContainerStack.AdaptWidth,
+                    adaptHeight = pbModel.UiContainerStack.AdaptHeight,
+                    spacing = pbModel.UiContainerStack.Spacing,
+
+                    name = pbModel.UiContainerStack.Name,
+                    // parentComponent = ??
+                    visible = pbModel.UiContainerStack.Visible,
+                    opacity = pbModel.UiContainerStack.Opacity,
+                    hAlign = pbModel.UiContainerStack.HAlign,
+                    vAlign = pbModel.UiContainerStack.VAlign,
+                    // width = new UIValue(pbModel.UiShape.Width.Value, (UIValue.Unit) pbModel.UiShape.Width.Type),
+                    // height = new UIValue(pbModel.UiShape.Height.Value, (UIValue.Unit) pbModel.UiShape.Height.Type),
+                    // positionX = new UIValue(pbModel.UiShape.PositionX.Value, (UIValue.Unit) pbModel.UiShape.PositionX.Type),
+                    // positionY = new UIValue(pbModel.UiShape.PositionY.Value, (UIValue.Unit) pbModel.UiShape.PositionY.Type),
+                    isPointerBlocker = pbModel.UiContainerStack.IsPointerBlocker,
+                    // onClick = ??
+                };
+
+                return model;
             }
 
         }

@@ -131,7 +131,6 @@ namespace DCL.Components
 
     public class UIShape : BaseDisposable, IUIRefreshable
     {
-
         [System.Serializable]
         public class Model : BaseModel
         {
@@ -151,8 +150,28 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null;// Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiShape)
+                    return Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
+
+                var model = new Model
+                {
+                    name = pbModel.UiShape.Name,
+                    // parentComponent = ??
+                    visible = pbModel.UiShape.Visible,
+                    opacity = pbModel.UiShape.Opacity,
+                    hAlign = pbModel.UiShape.HAlign,
+                    vAlign = pbModel.UiShape.VAlign,
+                    // width = new UIValue(pbModel.UiShape.Width.Value, (UIValue.Unit) pbModel.UiShape.Width.Type),
+                    // height = new UIValue(pbModel.UiShape.Height.Value, (UIValue.Unit) pbModel.UiShape.Height.Type),
+                    // positionX = new UIValue(pbModel.UiShape.PositionX.Value, (UIValue.Unit) pbModel.UiShape.PositionX.Type),
+                    // positionY = new UIValue(pbModel.UiShape.PositionY.Value, (UIValue.Unit) pbModel.UiShape.PositionY.Type),
+                    isPointerBlocker = pbModel.UiShape.IsPointerBlocker,
+                    // onClick = ??
+                };
+
+                return model;
             }
 
         }

@@ -20,13 +20,23 @@ namespace DCL.Components
             public float volume = 1;
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioStream)
+                    return new Model
+                    {
+                        playing = pbModel.AudioStream.Playing,
+                        url = pbModel.AudioStream.Url,
+                        volume = pbModel.AudioStream.Volume,
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAudioStream)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AudioStream)}!");
+                return null;
             }
         }
 
         private void Awake() { model = new Model(); }
-        
+
         public override void Initialize(IParcelScene scene, IDCLEntity entity)
         {
             base.Initialize(scene, entity);
@@ -88,7 +98,7 @@ namespace DCL.Components
 
             bool canPlayStream = scene.isPersistent || scene.sceneData.sceneNumber == CommonScriptableObjects.sceneNumber.Get();
             canPlayStream &= CommonScriptableObjects.rendererState;
-            
+
             Model model = (Model) this.model;
             bool shouldStopStream = (isPlaying && !model.playing) || (isPlaying && !canPlayStream);
             bool shouldStartStream = !isPlaying && canPlayStream && model.playing;

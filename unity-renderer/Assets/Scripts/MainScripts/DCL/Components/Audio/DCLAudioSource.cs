@@ -23,11 +23,22 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioSource)
+                    return new Model
+                    {
+                        loop = pbModel.AudioSource.Loop,
+                        pitch = pbModel.AudioSource.Pitch,
+                        playing = pbModel.AudioSource.Playing,
+                        volume = pbModel.AudioSource.Volume,
+                        audioClipId = pbModel.AudioSource.AudioClipId,
+                        playedAtTimestamp = pbModel.AudioSource.PlayedAtTimestamp,
+                    };
 
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAudioSource)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AudioSource)}!");
+                return null;
+            }
         }
 
         public float playTime => audioSource.time;
@@ -47,7 +58,7 @@ namespace DCL.Components
 
             if (Settings.i != null)
                 Settings.i.audioSettings.OnChanged += OnAudioSettingsChanged;
-    
+
             DataStore.i.virtualAudioMixer.sceneSFXVolume.OnChange += OnVirtualAudioMixerChangedValue;
         }
 
@@ -146,7 +157,7 @@ namespace DCL.Components
         private void UpdateAudioSourceVolume()
         {
             float newVolume = 0;
-            
+
             // isOutOfBoundaries will always be false for global scenes.
             if (!isOutOfBoundaries)
             {
@@ -188,7 +199,7 @@ namespace DCL.Components
 
             if (Settings.i != null)
                 Settings.i.audioSettings.OnChanged -= OnAudioSettingsChanged;
-            
+
             DataStore.i.virtualAudioMixer.sceneSFXVolume.OnChange -= OnVirtualAudioMixerChangedValue;
             DataStore.i.sceneBoundariesChecker.Remove(entity,this);
 

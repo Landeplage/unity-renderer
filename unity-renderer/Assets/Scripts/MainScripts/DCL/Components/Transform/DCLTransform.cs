@@ -22,7 +22,8 @@ namespace DCL.Components
                 return model;
             }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
                 if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Transform)
                 {
                     var model = new Model();

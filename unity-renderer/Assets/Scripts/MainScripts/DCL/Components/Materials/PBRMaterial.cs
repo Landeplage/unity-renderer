@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using DCL.Shaders;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -39,11 +40,31 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
-            }
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BasicMaterial)
+                    return new Model
+                    {
+                        metallic = pbModel.Material.Metallic,
+                        roughness = pbModel.Material.Roughness,
+                        alphaTest = pbModel.Material.AlphaTest,
+                        directIntensity = pbModel.Material.DirectIntensity,
+                        microSurface = pbModel.Material.MicroSurface,
+                        specularIntensity = pbModel.Material.SpecularIntensity,
+                        albedoTexture = pbModel.Material.AlbedoTexture,
+                        alphaTexture = pbModel.Material.AlphaTexture,
+                        bumpTexture = pbModel.Material.BumpTexture,
+                        castShadows = pbModel.Material.CastShadows,
+                        emissiveIntensity = pbModel.Material.EmissiveIntensity,
+                        emissiveTexture = pbModel.Material.EmissiveTexture,
+                        transparencyMode = (int)pbModel.Material.TransparencyMode,
+                        albedoColor = pbModel.Material.AlbedoColor.AsUnityColor(),
+                        emissiveColor = pbModel.Material.EmissiveColor.AsUnityColor(),
+                        reflectivityColor = pbModel.Material.ReflectivityColor.AsUnityColor(),
+                    };
 
+                Debug.LogError($"Payload provided for SDK6 {nameof(BasicMaterial)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.BasicMaterial)}!");
+                return null;
+            }
         }
 
         enum TransparencyMode
@@ -342,7 +363,7 @@ namespace DCL.Components
                 if ( coroutine != null )
                     CoroutineStarter.Stop(coroutine);
             }
-            
+
             albedoDCLTexture = null;
             alphaDCLTexture = null;
             emissiveDCLTexture = null;

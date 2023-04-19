@@ -16,11 +16,9 @@ namespace DCL.Components
             public string avatarId = null;
             public int anchorPointId = 0;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
-            
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
+
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
                 return Utils.SafeUnimplemented<Model>();
             }

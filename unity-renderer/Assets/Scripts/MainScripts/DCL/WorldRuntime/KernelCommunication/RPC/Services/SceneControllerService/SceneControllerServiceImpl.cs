@@ -363,16 +363,16 @@ namespace RPC.Services
                             switch (action.Payload.Query.Payload.QueryType) {
                                 case "HitFirst":
                                     raycastType = RaycastType.HIT_FIRST;
-                                    break; 
+                                    break;
                                 case "HitAll":
                                     raycastType = RaycastType.HIT_ALL;
-                                    break; 
+                                    break;
                                 case "HitFirstAvatar":
                                     raycastType = RaycastType.HIT_FIRST_AVATAR;
-                                    break; 
+                                    break;
                                 case "HitAllAvatars":
                                     raycastType = RaycastType.HIT_ALL_AVATARS;
-                                    break; 
+                                    break;
                             }
 
                             DCL.Models.Ray ray = new DCL.Models.Ray()
@@ -424,11 +424,18 @@ namespace RPC.Services
                                         is ComponentBodyPayload.PayloadOneofCase.Animator
                                         or ComponentBodyPayload.PayloadOneofCase.Billboard
                                         or ComponentBodyPayload.PayloadOneofCase.Font
-                                        // or ComponentBodyPayload.PayloadOneofCase.Gizmos
-                                        // or ComponentBodyPayload.PayloadOneofCase.Material
-
+                                        or ComponentBodyPayload.PayloadOneofCase.Gizmos
+                                        or ComponentBodyPayload.PayloadOneofCase.BasicMaterial
+                                        or ComponentBodyPayload.PayloadOneofCase.Material
                                         or ComponentBodyPayload.PayloadOneofCase.Texture
                                         or ComponentBodyPayload.PayloadOneofCase.Transform
+                                        or ComponentBodyPayload.PayloadOneofCase.AudioClip
+                                        or ComponentBodyPayload.PayloadOneofCase.AudioSource
+                                        or ComponentBodyPayload.PayloadOneofCase.AudioStream
+                                        or ComponentBodyPayload.PayloadOneofCase.AvatarShape
+                                        or ComponentBodyPayload.PayloadOneofCase.AvatarTexture
+
+
                                         ? action.Payload.UpdateEntityComponent
                                     : new Protocol.EntityComponentCreateOrUpdate
                                     {

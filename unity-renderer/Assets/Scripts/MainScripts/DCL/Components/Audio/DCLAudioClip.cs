@@ -21,9 +21,20 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioClip)
+                    return new Model
+                    {
+                        loop = pbModel.AudioClip.Loop,
+                        url = pbModel.AudioClip.Url,
+                        volume = pbModel.AudioClip.Volume,
+                        // shouldTryToLoad = ??
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAudioClip)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AudioClip)}!");
+                return null;
             }
 
         }

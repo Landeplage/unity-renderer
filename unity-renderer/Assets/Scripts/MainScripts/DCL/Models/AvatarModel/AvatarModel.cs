@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 [Serializable]
 public class AvatarModel : BaseModel
@@ -112,9 +113,45 @@ public class AvatarModel : BaseModel
         emotes = other.emotes.Select(x => new AvatarEmoteEntry() { slot = x.slot, urn = x.urn }).ToList();
     }
 
-    public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<AvatarModel>(json); }
-    public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-        return Utils.SafeUnimplemented<AvatarModel>();
+    public override BaseModel GetDataFromJSON(string json) =>
+        Utils.SafeFromJson<AvatarModel>(json);
+
+    public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+    {
+        if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AvatarShape)
+        {
+            var model = new AvatarModel
+                {
+                    id = pbModel.AvatarShape.Id,
+                    name = pbModel.AvatarShape.Name,
+                    talking = pbModel.AvatarShape.Talking,
+                    bodyShape = pbModel.AvatarShape.BodyShape,
+                    eyeColor = pbModel.AvatarShape.EyeColor.AsUnityColor(),
+                    hairColor = pbModel.AvatarShape.HairColor.AsUnityColor(),
+                    skinColor = pbModel.AvatarShape.SkinColor.AsUnityColor(),
+                    expressionTriggerId = pbModel.AvatarShape.ExpressionTriggerId,
+                    expressionTriggerTimestamp = pbModel.AvatarShape.ExpressionTriggerTimestamp,
+                    // model.stickerTriggerTimestamp = ??
+                    // model.stickerTriggerId = ??
+
+                    wearables = new List<string>(pbModel.AvatarShape.Wearables.Count),
+                    emotes = new List<AvatarEmoteEntry>(pbModel.AvatarShape.Emotes.Count),
+                };
+
+            for (var i = 0; i < pbModel.AvatarShape.Wearables.Count; i++)
+                model.wearables[i] = pbModel.AvatarShape.Wearables[i];
+
+            for (var i = 0; i < pbModel.AvatarShape.Emotes.Count; i++)
+            {
+                model.emotes[i].slot = pbModel.AvatarShape.Emotes[i].Slot;
+                model.emotes[i].urn = pbModel.AvatarShape.Emotes[i].Urn;
+            }
+
+            return model;
+        }
+
+        Debug.LogError($"Payload provided for SDK6 {nameof(AvatarModel)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AvatarShape)}!");
+        return null;
     }
 
 }

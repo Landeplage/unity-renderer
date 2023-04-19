@@ -5,6 +5,7 @@ using DCL.Helpers;
 using UnityEngine;
 using DCL.Controllers;
 using Decentraland.Sdk.Ecs6;
+using System.Linq;
 
 namespace DCL.Components
 {
@@ -39,32 +40,29 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Animator)
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Animator)
+                    return Utils.SafeUnimplemented<DCLAnimator, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Animator, actual: pbModel.PayloadCase);
+
+                var model = new Model
                 {
-                    var model = new Model
-                        {
-                            states = new DCLAnimationState[pbModel.Animator.States.Count],
-                        };
+                    states = new DCLAnimationState[pbModel.Animator.States.Count],
+                };
 
-                    for (var i = 0; i < pbModel.Animator.States.Count; i++)
-                    {
-                        model.states[i].name = pbModel.Animator.States[i].Name;
-                        model.states[i].clip = pbModel.Animator.States[i].Clip;
-                        // model.states[i].clipReference ??
-                        model.states[i].playing = pbModel.Animator.States[i].Playing;
+                for (var i = 0; i < pbModel.Animator.States.Count; i++)
+                {
+                    model.states[i].name = pbModel.Animator.States[i].Name;
+                    model.states[i].clip = pbModel.Animator.States[i].Clip;
+                    // model.states[i].clipReference ??
+                    model.states[i].playing = pbModel.Animator.States[i].Playing;
 
-                        model.states[i].weight = pbModel.Animator.States[i].Weight;
+                    model.states[i].weight = pbModel.Animator.States[i].Weight;
 
-                        model.states[i].speed = pbModel.Animator.States[i].Speed;
-                        model.states[i].looping = pbModel.Animator.States[i].Looping;
-                        model.states[i].shouldReset = pbModel.Animator.States[i].ShouldReset;
-                    }
-
-                    return model;
+                    model.states[i].speed = pbModel.Animator.States[i].Speed;
+                    model.states[i].looping = pbModel.Animator.States[i].Looping;
+                    model.states[i].shouldReset = pbModel.Animator.States[i].ShouldReset;
                 }
 
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAnimator)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Animator)}!");
-                return null;
+                return model;
             }
         }
 

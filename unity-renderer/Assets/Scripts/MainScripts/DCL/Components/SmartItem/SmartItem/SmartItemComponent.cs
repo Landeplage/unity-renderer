@@ -17,9 +17,9 @@ namespace DCL.Components
             public Dictionary<object, object> values = new Dictionary<object, object>();
 
             public override BaseModel GetDataFromJSON(string json) { return JsonConvert.DeserializeObject<Model>(json); }
-            
+
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+                return null; //Utils.SafeUnimplemented<Model>();
             }
 
         }
@@ -44,7 +44,7 @@ namespace DCL.Components
         public override int GetClassId() { return (int) CLASS_ID_COMPONENT.SMART_ITEM; }
 
         public Dictionary<object, object> GetValues() { return ((Model)model).values; }
-        
+
         public override string componentName => "smartItem";
     }
 }

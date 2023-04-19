@@ -68,9 +68,9 @@ public class QuestModel : BaseModel
     public float progress => sections.Average(x => x.progress);
 
     public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<QuestModel>(json); }
-    
+
     public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-        return Utils.SafeUnimplemented<QuestModel>();
+        return null;// Utils.SafeUnimplemented<QuestModel>();
     }
 
 }

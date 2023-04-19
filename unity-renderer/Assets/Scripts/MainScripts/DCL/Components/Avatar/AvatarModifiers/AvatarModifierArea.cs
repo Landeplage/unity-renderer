@@ -24,7 +24,7 @@ public class AvatarModifierArea : BaseComponent
             return Utils.SafeFromJson<Model>(json);
         }
         public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-            return Utils.SafeUnimplemented<Model>();
+            return null;//Utils.SafeUnimplemented<Model>();
         }
 
     }
@@ -34,7 +34,7 @@ public class AvatarModifierArea : BaseComponent
     private HashSet<GameObject> avatarsInArea = new HashSet<GameObject>();
     private event Action<GameObject> OnAvatarEnter;
     private event Action<GameObject> OnAvatarExit;
-    
+
     internal readonly Dictionary<string, IAvatarModifier> modifiers;
 
     private HashSet<Collider> excludedColliders;
@@ -190,7 +190,7 @@ public class AvatarModifierArea : BaseComponent
                 DataStore.i.player.ownPlayer.OnChange += OwnPlayerOnOnChange;
                 DataStore.i.player.otherPlayers.OnAdded += OtherPlayersOnOnAdded;
             }
-            
+
             // Force update due to after model update modifiers are removed and re-added
             // leaving a frame with the avatar without the proper modifications
             Update();

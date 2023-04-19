@@ -20,9 +20,9 @@ namespace DCL
                 return Utils.SafeFromJson<Model>(json);
             }
 
-            
+
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+                return null;//Utils.SafeUnimplemented<Model>();
             }
 
             public CLASS_ID_COMPONENT GetClassIdFromType()

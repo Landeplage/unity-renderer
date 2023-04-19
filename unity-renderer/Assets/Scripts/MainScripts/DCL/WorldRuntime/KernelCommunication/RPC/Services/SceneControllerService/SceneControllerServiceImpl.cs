@@ -16,6 +16,7 @@ using System.Threading;
 using UnityEngine;
 using BinaryWriter = KernelCommunication.BinaryWriter;
 using Decentraland.Sdk.Ecs6;
+using NSubstitute.ReceivedExtensions;
 
 namespace RPC.Services
 {
@@ -434,7 +435,14 @@ namespace RPC.Services
                                         or ComponentBodyPayload.PayloadOneofCase.AudioStream
                                         or ComponentBodyPayload.PayloadOneofCase.AvatarShape
                                         or ComponentBodyPayload.PayloadOneofCase.AvatarTexture
-
+                                        or ComponentBodyPayload.PayloadOneofCase.BoxShape
+                                        // or ComponentBodyPayload.PayloadOneofCase.CircleShape ??
+                                        or ComponentBodyPayload.PayloadOneofCase.ConeShape
+                                        or ComponentBodyPayload.PayloadOneofCase.CylinderShape
+                                        or ComponentBodyPayload.PayloadOneofCase.GltfShape
+                                        or ComponentBodyPayload.PayloadOneofCase.NftShape
+                                        or ComponentBodyPayload.PayloadOneofCase.ObjShape
+                                        // or ComponentBodyPayload.PayloadOneofCase.PlaneShape
 
                                         ? action.Payload.UpdateEntityComponent
                                     : new Protocol.EntityComponentCreateOrUpdate

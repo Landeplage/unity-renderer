@@ -150,9 +150,9 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            
+
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+                return null;// Utils.SafeUnimplemented<Model>();
             }
 
         }
@@ -172,7 +172,7 @@ namespace DCL.Components
         public UIShape()
         {
             screenSize.OnChange += OnScreenResize;
-            model = new Model(); 
+            model = new Model();
         }
 
         private void OnScreenResize(Vector2Int current, Vector2Int previous)
@@ -239,11 +239,11 @@ namespace DCL.Components
 
             return referencesContainer as T;
         }
-        
+
         public virtual void RequestRefresh()
         {
             if (isLayoutDirty) return;
-            
+
             isLayoutDirty = true;
 
             var dirtyShapesByScene = dirtyShapesBySceneVariable.Get();
@@ -255,7 +255,7 @@ namespace DCL.Components
             {
                 dirtyShapesByScene.Add(sceneDataSceneNumber, new Queue<IUIRefreshable>());
             }
-            
+
             dirtyShapesByScene[sceneDataSceneNumber].Enqueue(this);
         }
 
@@ -278,7 +278,7 @@ namespace DCL.Components
                 return;
 
             rootParent.RequestRefresh();
-            
+
             if ( OnRefresh != null )
                 rootParent.OnLayoutRefresh += OnRefresh;
         }
@@ -509,9 +509,9 @@ namespace DCL.Components
         public virtual void OnChildDetached(UIShape parentComponent, UIShape childComponent) { }
         public void Refresh()
         {
-            RefreshRecursively(); 
+            RefreshRecursively();
             isLayoutDirty = false;
-            
+
             OnLayoutRefresh?.Invoke();
             OnLayoutRefresh = null;
         }

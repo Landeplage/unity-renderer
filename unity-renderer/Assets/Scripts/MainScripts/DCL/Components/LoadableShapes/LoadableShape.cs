@@ -5,38 +5,46 @@ using System.Collections;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Decentraland.Sdk.Ecs6;
+using UnityEditor.SceneManagement;
 
 namespace DCL.Components
 {
     public class LoadableShape : BaseShape, IAssetCatalogReferenceHolder
     {
-        [System.Serializable]
+        [Serializable]
         public new class Model : BaseShape.Model
         {
             public string src;
             public string assetId;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.GltfShape) {
-                    Debug.LogWarning($"LoadableShape from PB '{pbModel.GltfShape.ToString()}'.");
-                    return new Model() {
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase switch
+                {
+                    ComponentBodyPayload.PayloadOneofCase.GltfShape => new Model
+                    {
                         src = pbModel.GltfShape.Src,
+
+                        // assetId = ??
                         withCollisions = pbModel.GltfShape.WithCollisions,
                         visible = pbModel.GltfShape.Visible,
-                        isPointerBlocker = pbModel.GltfShape.IsPointerBlocker
-                    };
-                } else {
-                    Debug.LogWarning($"LoadableShape from unregonized PB {pbModel.PayloadCase}.");
-                }
-                return Utils.SafeUnimplemented<Model>();
-            }
+                        isPointerBlocker = pbModel.GltfShape.IsPointerBlocker,
+                    },
+                    
+                    ComponentBodyPayload.PayloadOneofCase.ObjShape => new Model
+                    {
+                        src = pbModel.ObjShape.Src,
 
+                        // assetId = ??
+                        withCollisions = pbModel.ObjShape.WithCollisions,
+                        visible = pbModel.ObjShape.Visible,
+                        isPointerBlocker = pbModel.ObjShape.IsPointerBlocker,
+                    },
+
+                    _ => Utils.SafeUnimplemented<LoadableShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.GltfShape, actual: pbModel.PayloadCase)
+                };
         }
 
         public bool isLoaded { get; protected set; }

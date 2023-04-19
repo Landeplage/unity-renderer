@@ -10,7 +10,7 @@ namespace DCL.Components
     public class ConeShape : ParametrizedShape<ConeShape.Model>
     {
         [System.Serializable]
-        new public class Model : BaseShape.Model
+        public new class Model : BaseShape.Model
         {
             public float radiusTop = 0f;
             public float radiusBottom = 1f;
@@ -20,11 +20,28 @@ namespace DCL.Components
             public float? radius;
             public float arc = 360f;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.ConeShape)
+                    return new Model
+                    {
+                        arc = pbModel.ConeShape.Arc,
+                        radius = pbModel.ConeShape.Radius,
+                        openEnded = pbModel.ConeShape.OpenEnded,
+                        radiusBottom = pbModel.ConeShape.RadiusBottom,
+                        radiusTop = pbModel.ConeShape.RadiusTop,
+                        segmentsHeight = pbModel.ConeShape.SegmentsHeight,
+                        segmentsRadial = pbModel.ConeShape.SegmentsRadial,
+                        visible = pbModel.ConeShape.Visible,
+                        withCollisions = pbModel.ConeShape.WithCollisions,
+                        isPointerBlocker = pbModel.ConeShape.IsPointerBlocker,
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(ConeShape)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.ConeShape)}!");
+                return null;
             }
 
         }

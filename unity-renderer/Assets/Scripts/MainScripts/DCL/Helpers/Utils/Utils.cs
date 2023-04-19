@@ -21,6 +21,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using UnityEngine.Rendering.Universal;
+using static Decentraland.Sdk.Ecs6.ComponentBodyPayload;
 
 namespace DCL.Helpers
 {
@@ -373,8 +374,11 @@ namespace DCL.Helpers
             return returningValue;
         }
 
-        public static T SafeUnimplemented<T>() =>
-            default(T);
+        public static TModel SafeUnimplemented<TComponent, TModel>(PayloadOneofCase expected, PayloadOneofCase actual)
+        {
+            Debug.LogError($"Payload provided for SDK6 {typeof(TComponent).Name} component is not a {expected} but {actual} instead!");
+            return default(TModel);
+        }
 
         public static GameObject AttachPlaceholderRendererGameObject(Transform targetTransform)
         {

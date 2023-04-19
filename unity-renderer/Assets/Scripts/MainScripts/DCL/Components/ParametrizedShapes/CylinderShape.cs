@@ -22,9 +22,26 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.CylinderShape)
+                    return new Model
+                    {
+                        arc = pbModel.CylinderShape.Arc,
+                        radius = pbModel.CylinderShape.Radius,
+                        openEnded = pbModel.CylinderShape.OpenEnded,
+                        radiusBottom = pbModel.CylinderShape.RadiusBottom,
+                        radiusTop = pbModel.CylinderShape.RadiusTop,
+                        segmentsHeight = pbModel.CylinderShape.SegmentsHeight,
+                        segmentsRadial = pbModel.CylinderShape.SegmentsRadial,
+                        visible = pbModel.CylinderShape.Visible,
+                        withCollisions = pbModel.CylinderShape.WithCollisions,
+                        isPointerBlocker = pbModel.CylinderShape.IsPointerBlocker,
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(CylinderShape)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.CylinderShape)}!");
+                return null;
             }
 
         }

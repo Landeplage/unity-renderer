@@ -3,21 +3,33 @@ using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using System.Linq;
 
 namespace DCL.Components
 {
     public class BoxShape : ParametrizedShape<BoxShape.Model>
     {
         [System.Serializable]
-        new public class Model : BaseShape.Model
+        public new class Model : BaseShape.Model
         {
             public float[] uvs;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BoxShape)
+                    return new Model
+                    {
+                        visible = pbModel.BoxShape.Visible,
+                        withCollisions = pbModel.BoxShape.WithCollisions,
+                        isPointerBlocker = pbModel.BoxShape.IsPointerBlocker,
+                        uvs = pbModel.BoxShape.Uvs.ToArray(),
+                    };
+
+                Debug.LogError($"Payload provided for SDK6 {nameof(BoxShape)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.BoxShape)}!");
+                return null;
             }
 
         }

@@ -19,9 +19,10 @@ namespace DCL.Components
             public string url;
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                return null; //Utils.SafeUnimplemented<Model>();
             }
 
         }

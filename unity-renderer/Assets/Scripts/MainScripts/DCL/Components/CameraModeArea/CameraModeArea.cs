@@ -28,9 +28,10 @@ namespace DCL.Components
             {
                 return Utils.SafeFromJson<Model>(json);
             }
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                return null;//Utils.SafeUnimplemented<Model>();
             }
 
         }
@@ -56,12 +57,12 @@ namespace DCL.Components
         string IComponent.componentName => "CameraModeArea";
 
 
-        
+
         public void UpdateFromPb(object payload)
         {
             OnModelUpdated(areaModel.GetDataFromPb(payload as ComponentBodyPayload) as Model);
         }
-        
+
         void IComponent.UpdateFromJSON(string json)
         {
             OnModelUpdated(areaModel.GetDataFromJSON(json) as Model);

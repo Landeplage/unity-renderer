@@ -16,17 +16,20 @@ namespace DCL.Components
             public bool isPointerBlocker = true;
             public bool visible = true;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-            
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                default;
         }
 
-        public BaseShape() { model = new Model(); }
+        protected BaseShape()
+        {
+            model = new Model();
+        }
 
-        new public Model GetModel() { return (Model) model; }
+        public new Model GetModel() =>
+            (Model) model;
 
         public override void AttachTo(IDCLEntity entity, System.Type overridenAttachedType = null)
         {

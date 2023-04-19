@@ -10,5 +10,12 @@ namespace MainScripts.DCL.Components
 
         public static Color AsUnityColor(this Color3 color3) =>
             new (color3.R, color3.G, color3.B);
+
+        public static UnityEngine.Vector3 AsUnityVector3(this Decentraland.Common.Vector3 vector3) =>
+            new (vector3.X, vector3.Y, vector3.Z);
+
+        public static UnityEngine.Quaternion AsUnityQuaternion(this Decentraland.Common.Quaternion quaternion) =>
+            new (quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
+
     }
 }

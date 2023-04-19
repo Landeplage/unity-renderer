@@ -51,9 +51,9 @@ namespace DCL.Components
                 return model;
             }
 
-            
+
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return Utils.SafeUnimplemented<Model>();
+                return null; //Utils.SafeUnimplemented<Model>();
             }
 
         }

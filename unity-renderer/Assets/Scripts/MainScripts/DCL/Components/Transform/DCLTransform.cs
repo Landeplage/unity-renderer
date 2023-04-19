@@ -4,6 +4,7 @@ using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -25,21 +26,12 @@ namespace DCL.Components
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
                 if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Transform)
-                {
-                    var model = new Model();
-                    model.position.x = pbModel.Transform.Position.X;
-                    model.position.y = pbModel.Transform.Position.Y;
-                    model.position.z = pbModel.Transform.Position.Z;
-                    model.scale.x = pbModel.Transform.Scale.X;
-                    model.scale.y = pbModel.Transform.Scale.Y;
-                    model.scale.z = pbModel.Transform.Scale.Z;
-                    model.rotation.x = pbModel.Transform.Rotation.X;
-                    model.rotation.y = pbModel.Transform.Rotation.Y;
-                    model.rotation.z = pbModel.Transform.Rotation.Z;
-                    model.rotation.w = pbModel.Transform.Rotation.W;
-
-                    return model;
-                }
+                    return new Model
+                    {
+                        position = pbModel.Transform.Position.AsUnityVector3(),
+                        scale = pbModel.Transform.Scale.AsUnityVector3(),
+                        rotation = pbModel.Transform.Rotation.AsUnityQuaternion(),
+                    };
 
                 Debug.LogError($"Payload provided for SDK6 {nameof(DCLTransform)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Transform)}!");
                 return null;

@@ -20,8 +20,17 @@ namespace DCL.Components
                 return Utils.SafeFromJson<Model>(json);
             }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null;//Utils.SafeUnimplemented<Model>();
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+
+                return pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
+                    ? new Model
+                    {
+                        // uuid = ??
+                        type = pbModel.UuidCallback.Type,
+                        distance = pbModel.UuidCallback.Distance,
+                    }
+                    : Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
             }
         }
 

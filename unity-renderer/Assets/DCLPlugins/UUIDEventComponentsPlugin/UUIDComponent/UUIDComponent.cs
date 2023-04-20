@@ -15,15 +15,17 @@ namespace DCL
             public string type;
             public string uuid;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null;//Utils.SafeUnimplemented<Model>();
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
+                    ? new Model
+                    {
+                        type = pbModel.UuidCallback.Type,
+                        // uuid = ??
+                    }
+                    : Utils.SafeUnimplemented<UUIDComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
 
             public CLASS_ID_COMPONENT GetClassIdFromType()
             {

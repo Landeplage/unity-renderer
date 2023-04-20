@@ -413,7 +413,7 @@ namespace RPC.Services
                             crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
                             break;
 
-                 // This has changed!
+                        // This has changed!
                         case EntityActionPayload.PayloadOneofCase.UpdateEntityComponent:
                             object updateData = ComponentModelFromPayload(action.Payload.UpdateEntityComponent.ComponentData);
 
@@ -421,55 +421,21 @@ namespace RPC.Services
                             {
                                 queuedMessage.payload =
                                     action.Payload.UpdateEntityComponent.ComponentData.PayloadCase
-                                        is ComponentBodyPayload.PayloadOneofCase.Animator
-                                        or ComponentBodyPayload.PayloadOneofCase.Billboard
-                                        or ComponentBodyPayload.PayloadOneofCase.Font
-                                        or ComponentBodyPayload.PayloadOneofCase.Gizmos
-                                        or ComponentBodyPayload.PayloadOneofCase.BasicMaterial
-                                        or ComponentBodyPayload.PayloadOneofCase.Material
-                                        or ComponentBodyPayload.PayloadOneofCase.Texture
-                                        or ComponentBodyPayload.PayloadOneofCase.Transform
-                                        or ComponentBodyPayload.PayloadOneofCase.AudioClip
-                                        or ComponentBodyPayload.PayloadOneofCase.AudioSource
-                                        or ComponentBodyPayload.PayloadOneofCase.AudioStream
-                                        or ComponentBodyPayload.PayloadOneofCase.AvatarShape
-                                        or ComponentBodyPayload.PayloadOneofCase.AvatarTexture
-                                        or ComponentBodyPayload.PayloadOneofCase.BoxShape
-                                        // or ComponentBodyPayload.PayloadOneofCase.CircleShape ??
-                                        or ComponentBodyPayload.PayloadOneofCase.ConeShape
-                                        or ComponentBodyPayload.PayloadOneofCase.CylinderShape
-                                        or ComponentBodyPayload.PayloadOneofCase.GltfShape
-                                        or ComponentBodyPayload.PayloadOneofCase.NftShape
-                                        or ComponentBodyPayload.PayloadOneofCase.ObjShape
-                                        or ComponentBodyPayload.PayloadOneofCase.PlaneShape
-                                        or ComponentBodyPayload.PayloadOneofCase.SmartItem
-                                        or ComponentBodyPayload.PayloadOneofCase.SphereShape
-                                        or ComponentBodyPayload.PayloadOneofCase.TextShape
-                                        // or ComponentBodyPayload.PayloadOneofCase.UiButton ??
-                                        or ComponentBodyPayload.PayloadOneofCase.UiImage
-                                        or ComponentBodyPayload.PayloadOneofCase.UiShape
-                                        or ComponentBodyPayload.PayloadOneofCase.UiText
-                                        // or ComponentBodyPayload.PayloadOneofCase.UuidCallback ??
-                                        or ComponentBodyPayload.PayloadOneofCase.VideoClip
-                                        or ComponentBodyPayload.PayloadOneofCase.VideoTexture
-                                        or ComponentBodyPayload.PayloadOneofCase.AttachToAvatar
-                                        or ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea
-                                        or ComponentBodyPayload.PayloadOneofCase.CameraModeArea
-                                        or ComponentBodyPayload.PayloadOneofCase.UiContainerRect
-                                        or ComponentBodyPayload.PayloadOneofCase.UiContainerStack
-                                        or ComponentBodyPayload.PayloadOneofCase.UiInputText
-                                        or ComponentBodyPayload.PayloadOneofCase.UiScrollRect
-                                        ? action.Payload.UpdateEntityComponent
-                                        : new Protocol.EntityComponentCreateOrUpdate
+                                        is ComponentBodyPayload.PayloadOneofCase.UuidCallback
+                                        or ComponentBodyPayload.PayloadOneofCase.UiButton
+                                        // or ComponentBodyPayload.PayloadOneofCase.CircleShape
+                                        ? new Protocol.EntityComponentCreateOrUpdate
                                         {
                                             entityId = action.Payload.UpdateEntityComponent.EntityId,
                                             classId = action.Payload.UpdateEntityComponent.ClassId,
                                             json = updateData.ToString(),
-                                        };
+                                        }
+                                        : action.Payload.UpdateEntityComponent;
 
                                 queuedMessage.method = MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE;
                                 crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
                             }
+
                             break;
 
                         case EntityActionPayload.PayloadOneofCase.ComponentUpdated:

@@ -73,7 +73,7 @@ namespace DCL.Components
     {
         public static bool enableInteractionHoverFeedback = true;
 
-        [System.Serializable]
+        [Serializable]
         public new class Model : UUIDComponent.Model
         {
             public string button = WebInterface.ACTION_BUTTON.ANY.ToString();
@@ -81,29 +81,31 @@ namespace DCL.Components
             public float distance = 10f;
             public bool showFeedback = true;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                return null;//Utils.SafeUnimplemented<Model>();
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
+                    ? new Model
+                    {
+                        // uuid = ??
+                        type = pbModel.UuidCallback.Type,
 
-            public WebInterface.ACTION_BUTTON GetActionButton()
-            {
-                switch (button)
+                        button = pbModel.UuidCallback.Button,
+                        hoverText = pbModel.UuidCallback.HoverText,
+                        distance = pbModel.UuidCallback.Distance,
+                        showFeedback = pbModel.UuidCallback.ShowFeedback,
+                    }
+                    : Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
+
+            public WebInterface.ACTION_BUTTON GetActionButton() =>
+                button switch
                 {
-                    case "PRIMARY":
-                        return WebInterface.ACTION_BUTTON.PRIMARY;
-                    case "SECONDARY":
-                        return WebInterface.ACTION_BUTTON.SECONDARY;
-                    case "POINTER":
-                        return WebInterface.ACTION_BUTTON.POINTER;
-                    default:
-                        return WebInterface.ACTION_BUTTON.ANY;
-                }
-            }
+                    "PRIMARY" => WebInterface.ACTION_BUTTON.PRIMARY,
+                    "SECONDARY" => WebInterface.ACTION_BUTTON.SECONDARY,
+                    "POINTER" => WebInterface.ACTION_BUTTON.POINTER,
+                    _ => WebInterface.ACTION_BUTTON.ANY,
+                };
         }
 
         public OnPointerEventHandler pointerEventHandler;

@@ -49,7 +49,7 @@ namespace DCL.Components
                         // loop = ??
                         seek = pbModel.VideoTexture.Seek,
                         wrap = (BabylonWrapMode)pbModel.VideoTexture.Wrap,
-                        samplingMode = (FilterMode)pbModel.VideoTexture.SamplingMode
+                        samplingMode = (FilterMode)pbModel.VideoTexture.SamplingMode,
                     }
                     : Utils.SafeUnimplemented<DCLVideoTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.VideoTexture, actual: pbModel.PayloadCase);
         }

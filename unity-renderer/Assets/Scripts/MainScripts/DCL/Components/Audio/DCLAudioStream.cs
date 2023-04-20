@@ -12,27 +12,25 @@ namespace DCL.Components
 {
     public class DCLAudioStream : BaseComponent, IOutOfSceneBoundariesHandler
     {
-        [System.Serializable]
+        [Serializable]
         public class Model : BaseModel
         {
             public string url;
-            public bool playing = false;
+            public bool playing;
             public float volume = 1;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioStream)
-                    return new Model
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
+
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioStream
+                    ? new Model
                     {
                         playing = pbModel.AudioStream.Playing,
                         url = pbModel.AudioStream.Url,
                         volume = pbModel.AudioStream.Volume,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAudioStream)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AudioStream)}!");
-                return null;
-            }
+                    }
+                    : Utils.SafeUnimplemented<DCLAudioStream, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioStream, actual: pbModel.PayloadCase);
         }
 
         private void Awake() { model = new Model(); }

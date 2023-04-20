@@ -18,7 +18,7 @@ namespace DCL.Components
         private const string DEFAULT_SANS_SERIF_SEMIBOLD = "Inter-SemiBold SDF";
         private const string DEFAULT_SANS_SERIF = "Inter-Regular SDF";
 
-        private readonly Dictionary<string, string> fontsMapping = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> fontsMapping = new ()
         {
             { "builtin:SF-UI-Text-Regular SDF", DEFAULT_SANS_SERIF },
             { "builtin:SF-UI-Text-Heavy SDF", DEFAULT_SANS_SERIF_HEAVY },
@@ -35,29 +35,27 @@ namespace DCL.Components
         {
             public string src;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Font)
-                    return new Model
-                    {
-                        src = pbModel.Font.Src,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLFont)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Font)}!");
-                return null;
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Font
+                    ? new Model { src = pbModel.Font.Src }
+                    : Utils.SafeUnimplemented<DCLFont, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Font, actual: pbModel.PayloadCase);
         }
 
-        public bool loaded { private set; get; } = false;
-        public bool error { private set; get; } = false;
+        public bool loaded { private set; get; }
+        public bool error { private set; get; }
 
         public TMP_FontAsset fontAsset { private set; get; }
 
-        public DCLFont() { model = new Model(); }
+        public DCLFont()
+        {
+            model = new Model();
+        }
 
-        public override int GetClassId() { return (int) CLASS_ID.FONT; }
+        public override int GetClassId() =>
+            (int) CLASS_ID.FONT;
 
         public static bool IsFontLoaded(IParcelScene scene, string componentId)
         {

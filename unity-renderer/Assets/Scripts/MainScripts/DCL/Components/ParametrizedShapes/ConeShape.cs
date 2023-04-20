@@ -1,7 +1,5 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
-using System;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
 
@@ -12,21 +10,20 @@ namespace DCL.Components
         [System.Serializable]
         public new class Model : BaseShape.Model
         {
-            public float radiusTop = 0f;
+            public float radiusTop;
             public float radiusBottom = 1f;
             public float segmentsHeight = 1f;
             public float segmentsRadial = 36f;
-            public bool openEnded = false;
+            public bool openEnded;
             public float? radius;
             public float arc = 360f;
 
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.ConeShape)
-                    return new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.ConeShape
+                    ? new Model
                     {
                         arc = pbModel.ConeShape.Arc,
                         radius = pbModel.ConeShape.Radius,
@@ -38,17 +35,17 @@ namespace DCL.Components
                         visible = pbModel.ConeShape.Visible,
                         withCollisions = pbModel.ConeShape.WithCollisions,
                         isPointerBlocker = pbModel.ConeShape.IsPointerBlocker,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(ConeShape)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.ConeShape)}!");
-                return null;
-            }
-
+                    }
+                    : Utils.SafeUnimplemented<ConeShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.ConeShape, actual: pbModel.PayloadCase);
         }
 
-        public ConeShape() { model = new Model(); }
+        public ConeShape()
+        {
+            model = new Model();
+        }
 
-        public override int GetClassId() { return (int) CLASS_ID.CONE_SHAPE; }
+        public override int GetClassId() =>
+            (int) CLASS_ID.CONE_SHAPE;
 
         public override Mesh GenerateGeometry()
         {

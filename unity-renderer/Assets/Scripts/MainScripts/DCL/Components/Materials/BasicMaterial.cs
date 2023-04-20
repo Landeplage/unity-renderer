@@ -1,8 +1,6 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -23,7 +21,8 @@ namespace DCL.Components
 
             public bool castShadows = true;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
                 pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BasicMaterial

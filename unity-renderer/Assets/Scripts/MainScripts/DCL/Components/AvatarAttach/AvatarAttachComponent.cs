@@ -13,26 +13,20 @@ namespace DCL.Components
         [Serializable]
         public class Model : BaseModel
         {
-            public string avatarId = null;
-            public int anchorPointId = 0;
+            public string avatarId;
+            public int anchorPointId;
 
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AttachToAvatar)
-                    return Utils.SafeUnimplemented<AvatarAttachComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AttachToAvatar, actual: pbModel.PayloadCase);
-
-                var model = new Model
-                {
-                    avatarId = pbModel.AttachToAvatar.AvatarId,
-                    // anchorPointId = pbModel.AttachToAvatar.AnchorPointId. ??
-                };
-
-                return model;
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AttachToAvatar
+                    ? new Model
+                    {
+                        avatarId = pbModel.AttachToAvatar.AvatarId,
+                        anchorPointId = (int)pbModel.AttachToAvatar.AnchorPointId,
+                    }
+                    : Utils.SafeUnimplemented<AvatarAttachComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AttachToAvatar, actual: pbModel.PayloadCase);
         }
 
         IParcelScene IComponent.scene => handler.scene;

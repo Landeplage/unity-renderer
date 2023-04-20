@@ -32,12 +32,11 @@ public class AvatarModifierArea : BaseComponent
                     area = { box = pbModel.AvatarModifierArea.Area.Box.AsUnityVector3() },
                 }
                 : Utils.SafeUnimplemented<AvatarModifierArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea, actual: pbModel.PayloadCase);
-
     }
 
-    private Model cachedModel = new Model();
+    private Model cachedModel = new ();
 
-    private HashSet<GameObject> avatarsInArea = new HashSet<GameObject>();
+    private HashSet<GameObject> avatarsInArea = new ();
     private event Action<GameObject> OnAvatarEnter;
     private event Action<GameObject> OnAvatarExit;
 

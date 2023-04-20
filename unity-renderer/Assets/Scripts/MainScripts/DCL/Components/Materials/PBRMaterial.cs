@@ -40,9 +40,9 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BasicMaterial)
-                    return new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Material
+                    ? new Model
                     {
                         metallic = pbModel.Material.Metallic,
                         roughness = pbModel.Material.Roughness,
@@ -60,11 +60,8 @@ namespace DCL.Components
                         albedoColor = pbModel.Material.AlbedoColor.AsUnityColor(),
                         emissiveColor = pbModel.Material.EmissiveColor.AsUnityColor(),
                         reflectivityColor = pbModel.Material.ReflectivityColor.AsUnityColor(),
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(BasicMaterial)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.BasicMaterial)}!");
-                return null;
-            }
+                    }
+                    : Utils.SafeUnimplemented<PBRMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Material, actual: pbModel.PayloadCase);
         }
 
         enum TransparencyMode

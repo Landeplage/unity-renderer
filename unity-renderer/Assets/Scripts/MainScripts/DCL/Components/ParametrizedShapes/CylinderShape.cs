@@ -1,7 +1,5 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
-using System;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
 
@@ -10,18 +8,18 @@ namespace DCL.Components
     public class CylinderShape : ParametrizedShape<CylinderShape.Model>
     {
         [System.Serializable]
-        new public class Model : BaseShape.Model
+        public new class Model : BaseShape.Model
         {
             public float radiusTop = 1f;
             public float radiusBottom = 1f;
             public float segmentsHeight = 1f;
             public float segmentsRadial = 36f;
-            public bool openEnded = false;
+            public bool openEnded;
             public float? radius;
             public float arc = 360f;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
@@ -40,15 +38,17 @@ namespace DCL.Components
                         isPointerBlocker = pbModel.CylinderShape.IsPointerBlocker,
                     };
 
-                Debug.LogError($"Payload provided for SDK6 {nameof(CylinderShape)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.CylinderShape)}!");
-                return null;
+                return Utils.SafeUnimplemented<CylinderShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.CylinderShape, actual: pbModel.PayloadCase);
             }
-
         }
 
-        public CylinderShape() { model = new Model(); }
+        public CylinderShape()
+        {
+            model = new Model();
+        }
 
-        public override int GetClassId() { return (int) CLASS_ID.CYLINDER_SHAPE; }
+        public override int GetClassId() =>
+            (int) CLASS_ID.CYLINDER_SHAPE;
 
         public override Mesh GenerateGeometry()
         {

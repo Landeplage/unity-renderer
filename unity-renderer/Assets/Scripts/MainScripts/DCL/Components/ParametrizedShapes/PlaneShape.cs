@@ -1,4 +1,3 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace DCL.Components
     public class PlaneShape : ParametrizedShape<PlaneShape.Model>
     {
         [System.Serializable]
-        new public class Model : BaseShape.Model
+        public new class Model : BaseShape.Model
         {
             public float[] uvs;
             public float width = 1f; // Plane

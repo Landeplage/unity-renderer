@@ -1,10 +1,7 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Decentraland.Sdk.Ecs6;
 
 namespace DCL.Components
@@ -48,16 +45,18 @@ namespace DCL.Components
 
         public override string referencesContainerPrefabName => "UIImage";
 
-        DCLTexture dclTexture = null;
+        DCLTexture dclTexture;
 
         public UIImage()
         {
             model = new Model();
         }
 
-        public override int GetClassId() { return (int) CLASS_ID.UI_IMAGE_SHAPE; }
+        public override int GetClassId() =>
+            (int) CLASS_ID.UI_IMAGE_SHAPE;
 
-        public override void AttachTo(IDCLEntity entity, System.Type overridenAttachedType = null) { Debug.LogError("Aborted UIImageShape attachment to an entity. UIShapes shouldn't be attached to entities."); }
+        public override void AttachTo(IDCLEntity entity, System.Type overridenAttachedType = null) =>
+            Debug.LogError("Aborted UIImageShape attachment to an entity. UIShapes shouldn't be attached to entities.");
 
         public override void DetachFrom(IDCLEntity entity, System.Type overridenAttachedType = null) { }
 

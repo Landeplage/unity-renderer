@@ -1,10 +1,7 @@
 using System;
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
@@ -80,9 +77,13 @@ namespace DCL.Components
 
         public override string referencesContainerPrefabName => "UIText";
 
-        public UIText() { model = new Model(); }
+        public UIText()
+        {
+            model = new Model();
+        }
 
-        public override int GetClassId() { return (int) CLASS_ID.UI_TEXT_SHAPE; }
+        public override int GetClassId() =>
+            (int) CLASS_ID.UI_TEXT_SHAPE;
 
         public override void AttachTo(IDCLEntity entity, System.Type overridenAttachedType = null) { Debug.LogError("Aborted UITextShape attachment to an entity. UIShapes shouldn't be attached to entities."); }
 
@@ -94,9 +95,7 @@ namespace DCL.Components
 
             // We avoid using even yield break; as this instruction skips a frame and we don't want that.
             if ( !DCLFont.IsFontLoaded(scene, model.font) )
-            {
                 yield return DCLFont.WaitUntilFontIsReady(scene, model.font);
-            }
 
             DCLFont.SetFontFromComponent(scene, model.font, referencesContainer.text);
             bool shouldMarkDirty = ShouldMarkDirty();

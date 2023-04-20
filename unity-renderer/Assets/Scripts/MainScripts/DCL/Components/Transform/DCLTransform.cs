@@ -38,11 +38,11 @@ namespace DCL.Components
 
         }
 
-        private static Model model = new Model();
+        private static Model model = new ();
 
         public void Cleanup() { }
 
-        public string componentName { get; } = "Transform";
+        public string componentName => "Transform";
         public IParcelScene scene { get; private set; }
         public IDCLEntity entity { get; private set; }
         public Transform GetTransform() => null;

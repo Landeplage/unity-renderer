@@ -13,14 +13,14 @@ namespace DCL.Components
         public class Model : BaseModel
         {
             public string url;
-            public bool loop = false;
+            public bool loop;
             public bool shouldTryToLoad = true;
 
             [Range(0f, 1f)]
             public double volume = 1f;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
-
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
@@ -33,8 +33,7 @@ namespace DCL.Components
                         // shouldTryToLoad = ??
                     };
 
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAudioClip)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AudioClip)}!");
-                return null;
+                return Utils.SafeUnimplemented<DCLAudioClip, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioClip, actual: pbModel.PayloadCase);
             }
 
         }

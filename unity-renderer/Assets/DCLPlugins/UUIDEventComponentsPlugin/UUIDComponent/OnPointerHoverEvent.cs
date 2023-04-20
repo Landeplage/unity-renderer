@@ -15,15 +15,11 @@ namespace DCL.Components
         {
             public float distance = 10f;
 
-            public override BaseModel GetDataFromJSON(string json)
-            {
-                return Utils.SafeFromJson<Model>(json);
-            }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-
-                return pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
                     ? new Model
                     {
                         // uuid = ??
@@ -31,7 +27,6 @@ namespace DCL.Components
                         distance = pbModel.UuidCallback.Distance,
                     }
                     : Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
-            }
         }
 
         internal OnPointerEventColliders pointerEventColliders;

@@ -13,7 +13,7 @@ namespace DCL
 {
     public class DCLTexture : BaseDisposable
     {
-        [System.Serializable]
+        [Serializable]
         public class Model : BaseModel
         {
             public string src;
@@ -23,19 +23,15 @@ namespace DCL
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Texture)
-                    return new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Texture
+                    ? new Model
                     {
                         src = pbModel.Texture.Src,
                         wrap = (BabylonWrapMode)pbModel.Texture.Wrap,
                         samplingMode = (FilterMode)pbModel.Texture.SamplingMode,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLTexture)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.Texture)}!");
-                return null;
-            }
+                    }
+                    : Utils.SafeUnimplemented<DCLTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Texture, actual: pbModel.PayloadCase);
         }
 
         public enum BabylonWrapMode
@@ -45,10 +41,9 @@ namespace DCL
             MIRROR
         }
 
-        AssetPromise_Texture texturePromise = null;
+        AssetPromise_Texture texturePromise;
 
-        private Dictionary<ISharedComponent, HashSet<long>> attachedEntitiesByComponent =
-            new Dictionary<ISharedComponent, HashSet<long>>();
+        private Dictionary<ISharedComponent, HashSet<long>> attachedEntitiesByComponent = new ();
 
         public TextureWrapMode unityWrap;
         public FilterMode unitySamplingMode;
@@ -57,24 +52,20 @@ namespace DCL
         protected bool isDisposed;
         public float resizingFactor => texturePromise?.asset.resizingFactor ?? 1;
 
-        public override int GetClassId()
-        {
-            return (int)CLASS_ID.TEXTURE;
-        }
+        public override int GetClassId() =>
+            (int)CLASS_ID.TEXTURE;
 
         public DCLTexture()
         {
             model = new Model();
         }
 
-        public static IEnumerator FetchFromComponent(IParcelScene scene, string componentId,
-            System.Action<Texture2D> OnFinish)
+        public static IEnumerator FetchFromComponent(IParcelScene scene, string componentId, System.Action<Texture2D> OnFinish)
         {
             yield return FetchTextureComponent(scene, componentId, (dclTexture) => { OnFinish?.Invoke(dclTexture.texture); });
         }
 
-        public static IEnumerator FetchTextureComponent(IParcelScene scene, string componentId,
-            System.Action<DCLTexture> OnFinish)
+        public static IEnumerator FetchTextureComponent(IParcelScene scene, string componentId, System.Action<DCLTexture> OnFinish)
         {
             if (!scene.componentsManagerLegacy.HasSceneSharedComponent(componentId))
             {

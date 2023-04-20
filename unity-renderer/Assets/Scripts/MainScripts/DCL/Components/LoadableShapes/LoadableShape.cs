@@ -3,9 +3,7 @@ using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Decentraland.Sdk.Ecs6;
-using UnityEditor.SceneManagement;
 
 namespace DCL.Components
 {
@@ -26,17 +24,15 @@ namespace DCL.Components
                     ComponentBodyPayload.PayloadOneofCase.GltfShape => new Model
                     {
                         src = pbModel.GltfShape.Src,
-
                         // assetId = ??
                         withCollisions = pbModel.GltfShape.WithCollisions,
                         visible = pbModel.GltfShape.Visible,
                         isPointerBlocker = pbModel.GltfShape.IsPointerBlocker,
                     },
-                    
+
                     ComponentBodyPayload.PayloadOneofCase.ObjShape => new Model
                     {
                         src = pbModel.ObjShape.Src,
-
                         // assetId = ??
                         withCollisions = pbModel.ObjShape.WithCollisions,
                         visible = pbModel.ObjShape.Visible,
@@ -51,40 +47,27 @@ namespace DCL.Components
 
         public Action<LoadableShape> OnLoaded;
 
-        protected Model previousModel = new Model();
+        protected Model previousModel = new ();
 
         protected LoadableShape()
         {
             model = new Model();
         }
 
-        public override int GetClassId()
-        {
-            return -1;
-        }
+        public override int GetClassId() =>
+            -1;
 
-        public override IEnumerator ApplyChanges(BaseModel newModel)
-        {
-            return null;
-        }
+        public override IEnumerator ApplyChanges(BaseModel newModel) =>
+            null;
 
-        public override bool IsVisible()
-        {
-            Model model = (Model)this.model;
-            return model.visible;
-        }
+        public override bool IsVisible() =>
+            ((Model)this.model).visible;
 
-        public override bool HasCollisions()
-        {
-            Model model = (Model)this.model;
-            return model.withCollisions;
-        }
+        public override bool HasCollisions() =>
+            ((Model)this.model).withCollisions;
 
-        public string GetAssetId()
-        {
-            Model model = (Model)this.model;
-            return model.assetId;
-        }
+        public string GetAssetId() =>
+            ((Model)this.model).assetId;
     }
 
     public class LoadableShape<LoadWrapperType, LoadWrapperModelType> : LoadableShape

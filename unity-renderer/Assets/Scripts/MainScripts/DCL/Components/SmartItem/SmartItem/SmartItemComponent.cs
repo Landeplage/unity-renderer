@@ -12,25 +12,13 @@ namespace DCL.Components
     {
         public class Model : BaseModel
         {
-            public string assetId;
-            public string src;
-            public Dictionary<object, object> values = new Dictionary<object, object>();
+            public override BaseModel GetDataFromJSON(string json) =>
+                JsonConvert.DeserializeObject<Model>(json);
 
-            public override BaseModel GetDataFromJSON(string json) { return JsonConvert.DeserializeObject<Model>(json); }
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.SmartItem)
-                    return Utils.SafeUnimplemented<SmartItemComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.SmartItem, actual: pbModel.PayloadCase);
-
-                var model = new Model
-                {
-                    // model.src = ??
-                    // model.assetId = ??
-                };
-
-                return model;
-            }
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.SmartItem
+                    ? new Model()
+                    : Utils.SafeUnimplemented<SmartItemComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.SmartItem, actual: pbModel.PayloadCase);
         }
 
         public override void Initialize(IParcelScene scene, IDCLEntity entity)
@@ -50,9 +38,8 @@ namespace DCL.Components
 
         public override IEnumerator ApplyChanges(BaseModel newModel) { yield break; }
 
-        public override int GetClassId() { return (int) CLASS_ID_COMPONENT.SMART_ITEM; }
-
-        public Dictionary<object, object> GetValues() { return ((Model)model).values; }
+        public override int GetClassId() =>
+            (int) CLASS_ID_COMPONENT.SMART_ITEM;
 
         public override string componentName => "smartItem";
     }

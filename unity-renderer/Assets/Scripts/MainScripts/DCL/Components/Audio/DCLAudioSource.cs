@@ -15,18 +15,18 @@ namespace DCL.Components
         public class Model : BaseModel
         {
             public string audioClipId;
-            public bool playing = false;
+            public bool playing;
             public float volume = 1f;
-            public bool loop = false;
+            public bool loop;
             public float pitch = 1f;
-            public long playedAtTimestamp = 0;
+            public long playedAtTimestamp;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioSource)
-                    return new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioSource
+                    ? new Model
                     {
                         loop = pbModel.AudioSource.Loop,
                         pitch = pbModel.AudioSource.Pitch,
@@ -34,11 +34,8 @@ namespace DCL.Components
                         volume = pbModel.AudioSource.Volume,
                         audioClipId = pbModel.AudioSource.AudioClipId,
                         playedAtTimestamp = pbModel.AudioSource.PlayedAtTimestamp,
-                    };
-
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLAudioSource)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AudioSource)}!");
-                return null;
-            }
+                    }
+                    : Utils.SafeUnimplemented<DCLAudioSource, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioSource, actual: pbModel.PayloadCase);
         }
 
         public float playTime => audioSource.time;

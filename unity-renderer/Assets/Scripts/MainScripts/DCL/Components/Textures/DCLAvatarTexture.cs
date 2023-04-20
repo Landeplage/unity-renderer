@@ -1,20 +1,14 @@
-using DCL.Components;
-using DCL.Controllers;
-using DCL.Models;
 using System;
 using System.Collections;
 using DCL.Helpers;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections.Generic;
-using DCL;
 using Decentraland.Sdk.Ecs6;
 
 namespace DCL.Components
 {
     public class DCLAvatarTexture : DCLTexture
     {
-
         [System.Serializable]
         public class ProfileRequestData
         {
@@ -57,13 +51,12 @@ namespace DCL.Components
                         userId = pbModel.AvatarTexture.UserId,
                     };
 
-                Debug.LogError($"Payload provided for SDK6 {nameof(DCLTexture)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.AvatarTexture)}!");
-                return null;
+                return Utils.SafeUnimplemented<DCLTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarTexture, actual: pbModel.PayloadCase);
             }
-
         }
 
-        public DCLAvatarTexture() {
+        public DCLAvatarTexture()
+        {
             model = new AvatarModel();
         }
 

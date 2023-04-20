@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using Decentraland.Sdk.Ecs6;
@@ -30,9 +28,13 @@ namespace DCL.Components
         public bool isExternalURL { get; private set; }
         public bool isStream { get; private set; }
 
-        public DCLVideoClip() { model = new Model(); }
+        public DCLVideoClip()
+        {
+            model = new Model();
+        }
 
-        public override int GetClassId() { return (int) CLASS_ID.VIDEO_CLIP; }
+        public override int GetClassId() =>
+            (int) CLASS_ID.VIDEO_CLIP;
 
         public override IEnumerator ApplyChanges(BaseModel newModel)
         {

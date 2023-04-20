@@ -50,13 +50,11 @@ namespace DCL.Components
 
                 for (var i = 0; i < pbModel.Animator.States.Count; i++)
                 {
+                    // model.states[i].clipReference = ??
                     model.states[i].name = pbModel.Animator.States[i].Name;
                     model.states[i].clip = pbModel.Animator.States[i].Clip;
-                    // model.states[i].clipReference ??
                     model.states[i].playing = pbModel.Animator.States[i].Playing;
-
                     model.states[i].weight = pbModel.Animator.States[i].Weight;
-
                     model.states[i].speed = pbModel.Animator.States[i].Speed;
                     model.states[i].looping = pbModel.Animator.States[i].Looping;
                     model.states[i].shouldReset = pbModel.Animator.States[i].ShouldReset;

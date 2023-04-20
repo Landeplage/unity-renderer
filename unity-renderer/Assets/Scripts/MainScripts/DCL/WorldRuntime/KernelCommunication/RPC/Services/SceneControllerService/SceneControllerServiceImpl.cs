@@ -421,8 +421,7 @@ namespace RPC.Services
                             {
                                 queuedMessage.payload =
                                     action.Payload.UpdateEntityComponent.ComponentData.PayloadCase
-                                        is ComponentBodyPayload.PayloadOneofCase.UuidCallback
-                                        or ComponentBodyPayload.PayloadOneofCase.UiButton
+                                        is ComponentBodyPayload.PayloadOneofCase.UiButton
                                         // or ComponentBodyPayload.PayloadOneofCase.CircleShape
                                         ? new Protocol.EntityComponentCreateOrUpdate
                                         {

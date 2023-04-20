@@ -1,8 +1,6 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Decentraland.Sdk.Ecs6;
@@ -13,7 +11,7 @@ namespace DCL.Components
     public class UIContainerRect : UIShape<UIContainerRectReferencesContainer, UIContainerRect.Model>
     {
         [System.Serializable]
-        new public class Model : UIShape.Model
+        public new class Model : UIShape.Model
         {
             public float thickness = 0f;
             public Color color = Color.clear;

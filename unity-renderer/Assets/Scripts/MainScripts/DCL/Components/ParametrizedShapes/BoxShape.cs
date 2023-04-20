@@ -1,4 +1,3 @@
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using UnityEngine;
@@ -28,10 +27,8 @@ namespace DCL.Components
                         uvs = pbModel.BoxShape.Uvs.ToArray(),
                     };
 
-                Debug.LogError($"Payload provided for SDK6 {nameof(BoxShape)} component is not a {nameof(ComponentBodyPayload.PayloadOneofCase.BoxShape)}!");
-                return null;
+                return Utils.SafeUnimplemented<BoxShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.BoxShape, actual: pbModel.PayloadCase);
             }
-
         }
 
         public BoxShape() { model = new Model(); }

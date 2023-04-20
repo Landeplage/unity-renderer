@@ -60,9 +60,9 @@ namespace DCL.Components
 
 
 
-        public void UpdateFromPb(object payload)
+        public void UpdateFromPb(ComponentBodyPayload payload)
         {
-            OnModelUpdated(areaModel.GetDataFromPb(payload as ComponentBodyPayload) as Model);
+            OnModelUpdated(areaModel.GetDataFromPb(payload) as Model);
         }
 
         void IComponent.UpdateFromJSON(string json)

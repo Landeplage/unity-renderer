@@ -47,9 +47,9 @@ namespace DCL.Components
 
         int IComponent.GetClassId() => (int)CLASS_ID_COMPONENT.AVATAR_ATTACH;
 
-        void IComponent.UpdateFromPb(object payload)
+        void IComponent.UpdateFromPb(ComponentBodyPayload payload)
         {
-            handler.OnModelUpdated(handler.model.GetDataFromPb(payload as ComponentBodyPayload) as Model);
+            handler.OnModelUpdated(handler.model.GetDataFromPb(payload) as Model);
         }
 
         void IComponent.UpdateFromJSON(string json)

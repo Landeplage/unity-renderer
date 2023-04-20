@@ -36,11 +36,14 @@ namespace DCL.Components
 
         protected BaseModel model;
 
-        public HashSet<IDCLEntity> GetAttachedEntities() { return attachedEntities; }
+        public HashSet<IDCLEntity> GetAttachedEntities() =>
+            attachedEntities;
 
-        public virtual void UpdateFromJSON(string json) { UpdateFromModel(model.GetDataFromJSON(json)); }
+        public virtual void UpdateFromJSON(string json) =>
+            UpdateFromModel(model.GetDataFromJSON(json));
 
-        public virtual void UpdateFromPb(object payload) { UpdateFromModel(model.GetDataFromPb(payload as Decentraland.Sdk.Ecs6.ComponentBodyPayload)); }
+        public virtual void UpdateFromPb(ComponentBodyPayload payload) =>
+            UpdateFromModel(model.GetDataFromPb(payload));
 
         public virtual void UpdateFromModel(BaseModel newModel)
         {

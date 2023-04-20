@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using TMPro;
@@ -70,7 +69,7 @@ namespace DCL.Components
                         visible = pbModel.TextShape.Visible,
                         width = pbModel.TextShape.Width,
                         lineCount = pbModel.TextShape.LineCount,
-                        lineSpacing = float.Parse(pbModel.TextShape.LineSpacing), // ??
+                        lineSpacing = float.Parse(pbModel.TextShape.LineSpacing[..^2]),
                         outlineColor = pbModel.TextShape.OutlineColor.AsUnityColor(),
                         outlineWidth = pbModel.TextShape.OutlineWidth,
                         paddingBottom = pbModel.TextShape.PaddingBottom,
@@ -84,7 +83,7 @@ namespace DCL.Components
                         textWrapping = pbModel.TextShape.TextWrapping,
                         vTextAlign = pbModel.TextShape.VTextAlign,
                         hTextAlign = pbModel.TextShape.HTextAlign,
-                        fontAutoSize = pbModel.TextShape.FontSize == 0, // model.fontAutoSize = ??
+                        fontAutoSize = pbModel.TextShape.FontSize == 0,
                         fontSize = pbModel.TextShape.FontSize,
                     };
 

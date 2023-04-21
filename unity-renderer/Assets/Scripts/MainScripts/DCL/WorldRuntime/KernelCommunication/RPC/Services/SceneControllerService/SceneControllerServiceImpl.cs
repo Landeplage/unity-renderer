@@ -293,7 +293,7 @@ namespace RPC.Services
                             type = QueuedSceneMessage.Type.SCENE_MESSAGE,
                             method = MapMessagingMethodType(action),
                             sceneNumber = sceneNumber,
-                            payload = FillPayload(action),
+                            payload = ExtractPayload(from: action),
                             tag = action.Tag,
                         };
 
@@ -308,78 +308,65 @@ namespace RPC.Services
             return defaultSendBatchResult;
         }
 
-        private object FillPayload(EntityAction action)
+        private object ExtractPayload(EntityAction from)
         {
-            return action.Payload.PayloadCase switch
+            return from.Payload.PayloadCase switch
                    {
                        EntityActionPayload.PayloadOneofCase.InitMessagesFinished => new Protocol.SceneReady(),
-                       EntityActionPayload.PayloadOneofCase.OpenExternalUrl => new Protocol.OpenExternalUrl()
+                       EntityActionPayload.PayloadOneofCase.OpenExternalUrl => new Protocol.OpenExternalUrl { url = from.Payload.OpenExternalUrl.Url },
+                       EntityActionPayload.PayloadOneofCase.OpenNftDialog => new Protocol.OpenNftDialog
                        {
-                           url = action.Payload.OpenExternalUrl.Url
+                           contactAddress = from.Payload.OpenNftDialog.AssetContractAddress,
+                           comment = from.Payload.OpenNftDialog.Comment,
+                           tokenId = from.Payload.OpenNftDialog.TokenId
                        },
-                       EntityActionPayload.PayloadOneofCase.OpenNftDialog => new Protocol.OpenNftDialog()
+                       EntityActionPayload.PayloadOneofCase.CreateEntity => new Protocol.CreateEntity { entityId = from.Payload.CreateEntity.Id },
+                       EntityActionPayload.PayloadOneofCase.RemoveEntity => new Protocol.RemoveEntity { entityId = from.Payload.RemoveEntity.Id },
+                       EntityActionPayload.PayloadOneofCase.AttachEntityComponent => new Protocol.SharedComponentAttach
                        {
-                           contactAddress = action.Payload.OpenNftDialog.AssetContractAddress,
-                           comment = action.Payload.OpenNftDialog.Comment,
-                           tokenId = action.Payload.OpenNftDialog.TokenId
-                       },
-                       EntityActionPayload.PayloadOneofCase.CreateEntity => new Protocol.CreateEntity()
-                       {
-                           entityId = action.Payload.CreateEntity.Id
-                       },
-                       EntityActionPayload.PayloadOneofCase.RemoveEntity => new Protocol.RemoveEntity()
-                       {
-                           entityId = action.Payload.RemoveEntity.Id
-                       },
-                       EntityActionPayload.PayloadOneofCase.AttachEntityComponent => new Protocol.SharedComponentAttach()
-                       {
-                           entityId = action.Payload.AttachEntityComponent.EntityId,
-                           id = action.Payload.AttachEntityComponent.Id,
-                           name = action.Payload.AttachEntityComponent.Name
+                           entityId = from.Payload.AttachEntityComponent.EntityId,
+                           id = from.Payload.AttachEntityComponent.Id,
+                           name = from.Payload.AttachEntityComponent.Name
                        },
                        EntityActionPayload.PayloadOneofCase.ComponentRemoved => new Protocol.EntityComponentDestroy()
                        {
-                           entityId = action.Payload.ComponentRemoved.EntityId,
-                           name = action.Payload.ComponentRemoved.Name
+                           entityId = from.Payload.ComponentRemoved.EntityId,
+                           name = from.Payload.ComponentRemoved.Name
                        },
                        EntityActionPayload.PayloadOneofCase.SetEntityParent => new Protocol.SetEntityParent()
                        {
-                           entityId = action.Payload.SetEntityParent.EntityId,
-                           parentId = action.Payload.SetEntityParent.ParentId
+                           entityId = from.Payload.SetEntityParent.EntityId,
+                           parentId = from.Payload.SetEntityParent.ParentId
                        },
-                       EntityActionPayload.PayloadOneofCase.Query => new QueryMessage
+                       EntityActionPayload.PayloadOneofCase.Query => new QueryMessage { payload = CreateRaycastPayload(from) },
+                       EntityActionPayload.PayloadOneofCase.ComponentCreated => new Protocol.SharedComponentCreate
                        {
-                           payload = CreateRaycastPayload(action)
+                           id = from.Payload.ComponentCreated.Id,
+                           classId = from.Payload.ComponentCreated.ClassId,
+                           name = from.Payload.ComponentCreated.Name,
                        },
-                       EntityActionPayload.PayloadOneofCase.ComponentCreated => new Protocol.SharedComponentCreate()
-                       {
-                           id = action.Payload.ComponentCreated.Id,
-                           classId = action.Payload.ComponentCreated.ClassId,
-                           name = action.Payload.ComponentCreated.Name
-                       },
-                       EntityActionPayload.PayloadOneofCase.ComponentDisposed => new Protocol.SharedComponentDispose()
-                       {
-                           id = action.Payload.ComponentDisposed.Id
-                       },
+                       EntityActionPayload.PayloadOneofCase.ComponentDisposed => new Protocol.SharedComponentDispose { id = from.Payload.ComponentDisposed.Id },
                        EntityActionPayload.PayloadOneofCase.ComponentUpdated => new Protocol.SharedComponentUpdate
                        {
-                           componentId = action.Payload.ComponentUpdated.Id,
-                           json = ComponentModelFromPayload(action.Payload.ComponentUpdated.ComponentData).ToString()
+                           componentId = from.Payload.ComponentUpdated.Id,
+                           json = ComponentModelFromPayload(from.Payload.ComponentUpdated.ComponentData).ToString()
                        },
 
-                       // NEW FLOW!
-                       EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => action.Payload.UpdateEntityComponent.ComponentData.PayloadCase is ComponentBodyPayload.PayloadOneofCase.UiButton
-
-                           // or ComponentBodyPayload.PayloadOneofCase.CircleShape
+                       //--- NEW FLOW!
+                       EntityActionPayload.PayloadOneofCase.UpdateEntityComponent =>
+                           from.Payload.UpdateEntityComponent.ComponentData.PayloadCase
+                               is ComponentBodyPayload.PayloadOneofCase.UiButton
+                               // or ComponentBodyPayload.PayloadOneofCase.CircleShape
                            ? new Protocol.EntityComponentCreateOrUpdate
                            {
-                               entityId = action.Payload.UpdateEntityComponent.EntityId,
-                               classId = action.Payload.UpdateEntityComponent.ClassId,
-                               json = ComponentModelFromPayload(action.Payload.UpdateEntityComponent.ComponentData).ToString(),
+                               entityId = from.Payload.UpdateEntityComponent.EntityId,
+                               classId = from.Payload.UpdateEntityComponent.ClassId,
+                               json = ComponentModelFromPayload(from.Payload.UpdateEntityComponent.ComponentData).ToString(),
                            }
-                           : action.Payload.UpdateEntityComponent,
+                           : from.Payload.UpdateEntityComponent,
+
                        EntityActionPayload.PayloadOneofCase.None => null,
-                       _ => throw new ArgumentOutOfRangeException()
+                       _ => throw new ArgumentOutOfRangeException(),
                    };
         }
 
@@ -424,10 +411,10 @@ namespace RPC.Services
                 EntityActionPayload.PayloadOneofCase.Query => MessagingTypes.QUERY,
                 EntityActionPayload.PayloadOneofCase.ComponentCreated => MessagingTypes.SHARED_COMPONENT_CREATE,
                 EntityActionPayload.PayloadOneofCase.ComponentDisposed => MessagingTypes.SHARED_COMPONENT_DISPOSE,
-                EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE,
+                EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE,  //--- NEW FLOW!
                 EntityActionPayload.PayloadOneofCase.ComponentUpdated => MessagingTypes.SHARED_COMPONENT_UPDATE,
                 EntityActionPayload.PayloadOneofCase.None => null,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(),
             };
 
         private static object ComponentModelFromPayload(ComponentBodyPayload payload) =>
@@ -471,7 +458,9 @@ namespace RPC.Services
                 ComponentBodyPayload.PayloadOneofCase.UiInputText => payload.UiInputText,
                 ComponentBodyPayload.PayloadOneofCase.UiImage => payload.UiImage,
                 ComponentBodyPayload.PayloadOneofCase.UiScrollRect => payload.UiScrollRect,
-                _ => null,
+                ComponentBodyPayload.PayloadOneofCase.None => null,
+                null => null,
+                _ => throw new ArgumentOutOfRangeException(),
             };
     }
 }

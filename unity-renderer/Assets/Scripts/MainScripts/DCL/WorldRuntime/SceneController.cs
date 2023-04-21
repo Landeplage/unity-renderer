@@ -211,8 +211,7 @@ namespace DCL
             return res;
         }
 
-        private void ProcessMessage(ParcelScene scene, string method, object msgPayload,
-            out CustomYieldInstruction yieldInstruction)
+        private void ProcessMessage(ParcelScene scene, string method, object msgPayload, out CustomYieldInstruction yieldInstruction)
         {
             yieldInstruction = null;
             IDelayedComponent delayedComponent = null;
@@ -239,6 +238,7 @@ namespace DCL
                             delayedComponent = scene.componentsManagerLegacy.SceneSharedComponentUpdate(payload.componentId, payload.json) as IDelayedComponent;
                         break;
                     }
+                    //--- NEW FLOW!
                     case MessagingTypes.PB_SHARED_COMPONENT_UPDATE:
                     {
                         if (msgPayload is Decentraland.Sdk.Ecs6.ComponentUpdatedBody payload)

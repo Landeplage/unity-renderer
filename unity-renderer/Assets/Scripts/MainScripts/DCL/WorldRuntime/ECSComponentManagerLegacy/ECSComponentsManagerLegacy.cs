@@ -512,15 +512,12 @@ namespace DCL
             return null;
         }
 
-        public ISharedComponent SceneSharedComponentUpdate(string id, object payload)
+        public ISharedComponent SceneSharedComponentUpdate(string id, ComponentBodyPayload payload)
         {
-            if (disposableComponents.TryGetValue(id, out ISharedComponent disposableComponent))
-            {
-                disposableComponent.UpdateFromPb(payload as ComponentBodyPayload);
-                return disposableComponent;
-            }
+            if (!disposableComponents.TryGetValue(id, out ISharedComponent disposableComponent)) return null;
 
-            return null;
+            disposableComponent.UpdateFromPb(payload);
+            return disposableComponent;
         }
 
         public void EntityComponentRemove(long entityId, string componentName)

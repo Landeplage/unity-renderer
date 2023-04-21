@@ -11,12 +11,12 @@ using RPC.Context;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using UnityEngine;
 using BinaryWriter = KernelCommunication.BinaryWriter;
 using Decentraland.Sdk.Ecs6;
-using NSubstitute.ReceivedExtensions;
+using MainScripts.DCL.Components;
+using Ray = DCL.Models.Ray;
 
 namespace RPC.Services
 {
@@ -280,190 +280,24 @@ namespace RPC.Services
 
         public async UniTask<SendBatchResponse> SendBatch(SendBatchRequest request, RPCContext context, CancellationToken ct)
         {
-            CRDTServiceContext crdtContext = context.crdt;
             await UniTask.SwitchToMainThread(ct);
 
             try
             {
+                CRDTServiceContext crdtContext = context.crdt;
+
                 foreach(var action in request.Actions)
                 {
                     QueuedSceneMessage_Scene queuedMessage = new QueuedSceneMessage_Scene
                         {
                             type = QueuedSceneMessage.Type.SCENE_MESSAGE,
+                            method = MapMessagingMethodType(action),
                             sceneNumber = sceneNumber,
+                            payload = FillPayload(action),
                             tag = action.Tag,
                         };
 
-                    switch (action.Payload.PayloadCase)
-                    {
-
-                        case EntityActionPayload.PayloadOneofCase.InitMessagesFinished:
-                            queuedMessage.method = MessagingTypes.INIT_DONE;
-                            queuedMessage.payload = new Protocol.SceneReady();
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-
-                        case EntityActionPayload.PayloadOneofCase.OpenExternalUrl:
-                            queuedMessage.method = MessagingTypes.OPEN_EXTERNAL_URL;
-                            queuedMessage.payload = new Protocol.OpenExternalUrl() {url = action.Payload.OpenExternalUrl.Url};
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.OpenNftDialog:
-                            queuedMessage.method = MessagingTypes.OPEN_NFT_DIALOG;
-                            queuedMessage.payload = new Protocol.OpenNftDialog()
-                                {
-                                    contactAddress = action.Payload.OpenNftDialog.AssetContractAddress,
-                                    comment = action.Payload.OpenNftDialog.Comment,
-                                    tokenId = action.Payload.OpenNftDialog.TokenId
-                                };
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.CreateEntity:
-                            queuedMessage.method = MessagingTypes.ENTITY_CREATE;
-                            queuedMessage.payload = new Protocol.CreateEntity() {entityId = action.Payload.CreateEntity.Id};
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.RemoveEntity:
-                            queuedMessage.method = MessagingTypes.ENTITY_DESTROY;
-                            queuedMessage.payload = new Protocol.RemoveEntity() {entityId = action.Payload.RemoveEntity.Id};
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.AttachEntityComponent:
-                            queuedMessage.method = MessagingTypes.SHARED_COMPONENT_ATTACH;
-                            queuedMessage.payload = new Protocol.SharedComponentAttach()
-                                {
-                                    entityId = action.Payload.AttachEntityComponent.EntityId,
-                                    id = action.Payload.AttachEntityComponent.Id,
-                                    name = action.Payload.AttachEntityComponent.Name
-                                };
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.ComponentRemoved:
-                            queuedMessage.method = MessagingTypes.ENTITY_COMPONENT_DESTROY;
-                            queuedMessage.payload = new Protocol.EntityComponentDestroy() {entityId = action.Payload.ComponentRemoved.EntityId, name = action.Payload.ComponentRemoved.Name};
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.SetEntityParent:
-                            queuedMessage.method = MessagingTypes.ENTITY_REPARENT;
-                            queuedMessage.payload = new Protocol.SetEntityParent() {entityId = action.Payload.SetEntityParent.EntityId, parentId = action.Payload.SetEntityParent.ParentId};
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.Query:
-                            queuedMessage.method = MessagingTypes.QUERY;
-
-                            string queryId = action.Payload.Query.QueryId;
-                            RaycastType raycastType = RaycastType.NONE;
-                            switch (action.Payload.Query.Payload.QueryType) {
-                                case "HitFirst":
-                                    raycastType = RaycastType.HIT_FIRST;
-                                    break;
-                                case "HitAll":
-                                    raycastType = RaycastType.HIT_ALL;
-                                    break;
-                                case "HitFirstAvatar":
-                                    raycastType = RaycastType.HIT_FIRST_AVATAR;
-                                    break;
-                                case "HitAllAvatars":
-                                    raycastType = RaycastType.HIT_ALL_AVATARS;
-                                    break;
-                            }
-
-                            DCL.Models.Ray ray = new DCL.Models.Ray()
-                            {
-                                origin = new Vector3(){ x = action.Payload.Query.Payload.Ray.Origin.X, y = action.Payload.Query.Payload.Ray.Origin.Y, z = action.Payload.Query.Payload.Ray.Origin.Z },
-                                direction = new Vector3(){ x = action.Payload.Query.Payload.Ray.Direction.X, y = action.Payload.Query.Payload.Ray.Direction.Y, z = action.Payload.Query.Payload.Ray.Direction.Z },
-                                distance = action.Payload.Query.Payload.Ray.Distance
-                            };
-
-                            queuedMessage.method = MessagingTypes.QUERY;
-                            queuedMessage.payload = new QueryMessage()
-                            {
-                                payload = new RaycastQuery()
-                                {
-                                    id = queryId,
-                                    raycastType = raycastType,
-                                    ray = ray,
-                                    sceneNumber = sceneNumber
-                                }
-                            };
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.ComponentCreated:
-                            queuedMessage.method = MessagingTypes.SHARED_COMPONENT_CREATE;
-                            queuedMessage.payload =  new Protocol.SharedComponentCreate() {
-                                id = action.Payload.ComponentCreated.Id,
-                                classId = action.Payload.ComponentCreated.ClassId,
-                                name = action.Payload.ComponentCreated.Name
-                            };
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.ComponentDisposed:
-                            queuedMessage.method = MessagingTypes.SHARED_COMPONENT_DISPOSE;
-                            queuedMessage.payload = new Protocol.SharedComponentDispose() {id = action.Payload.ComponentDisposed.Id};
-                            crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            break;
-
-                        // This has changed!
-                        case EntityActionPayload.PayloadOneofCase.UpdateEntityComponent:
-                            object updateData = ComponentModelFromPayload(action.Payload.UpdateEntityComponent.ComponentData);
-
-                            if (updateData != null)
-                            {
-                                queuedMessage.payload =
-                                    action.Payload.UpdateEntityComponent.ComponentData.PayloadCase
-                                        is ComponentBodyPayload.PayloadOneofCase.UiButton
-                                        // or ComponentBodyPayload.PayloadOneofCase.CircleShape
-                                        ? new Protocol.EntityComponentCreateOrUpdate
-                                        {
-                                            entityId = action.Payload.UpdateEntityComponent.EntityId,
-                                            classId = action.Payload.UpdateEntityComponent.ClassId,
-                                            json = updateData.ToString(),
-                                        }
-                                        : action.Payload.UpdateEntityComponent;
-
-                                queuedMessage.method = MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE;
-                                crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            }
-
-                            break;
-
-                        case EntityActionPayload.PayloadOneofCase.ComponentUpdated:
-                            var componentData = ComponentModelFromPayload(action.Payload.ComponentUpdated.ComponentData);
-                            if (componentData != null) {
-                                queuedMessage.method = MessagingTypes.SHARED_COMPONENT_UPDATE;
-                                queuedMessage.payload =
-                                    new Protocol.SharedComponentUpdate
-                                    {
-                                        componentId = action.Payload.ComponentUpdated.Id,
-                                        json = componentData.ToString()
-                                    };
-                                crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                            }
-                            break;
-
-                        // case EntityActionPayload.PayloadOneofCase.UpdateEntityComponent:
-                        //     queuedMessage.method = MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE;
-                        //     queuedMessage.payload = action.Payload.UpdateEntityComponent;
-                        //     crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                        //     break;
-
-                        // case EntityActionPayload.PayloadOneofCase.ComponentUpdated:
-                        //     queuedMessage.method = MessagingTypes.PB_SHARED_COMPONENT_UPDATE;
-                        //     queuedMessage.payload = action.Payload.ComponentUpdated;
-                        //     crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                        //     break;
-                    }
-
+                    crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
                 }
             }
             catch (Exception e)
@@ -473,6 +307,128 @@ namespace RPC.Services
 
             return defaultSendBatchResult;
         }
+
+        private object FillPayload(EntityAction action)
+        {
+            return action.Payload.PayloadCase switch
+                   {
+                       EntityActionPayload.PayloadOneofCase.InitMessagesFinished => new Protocol.SceneReady(),
+                       EntityActionPayload.PayloadOneofCase.OpenExternalUrl => new Protocol.OpenExternalUrl()
+                       {
+                           url = action.Payload.OpenExternalUrl.Url
+                       },
+                       EntityActionPayload.PayloadOneofCase.OpenNftDialog => new Protocol.OpenNftDialog()
+                       {
+                           contactAddress = action.Payload.OpenNftDialog.AssetContractAddress,
+                           comment = action.Payload.OpenNftDialog.Comment,
+                           tokenId = action.Payload.OpenNftDialog.TokenId
+                       },
+                       EntityActionPayload.PayloadOneofCase.CreateEntity => new Protocol.CreateEntity()
+                       {
+                           entityId = action.Payload.CreateEntity.Id
+                       },
+                       EntityActionPayload.PayloadOneofCase.RemoveEntity => new Protocol.RemoveEntity()
+                       {
+                           entityId = action.Payload.RemoveEntity.Id
+                       },
+                       EntityActionPayload.PayloadOneofCase.AttachEntityComponent => new Protocol.SharedComponentAttach()
+                       {
+                           entityId = action.Payload.AttachEntityComponent.EntityId,
+                           id = action.Payload.AttachEntityComponent.Id,
+                           name = action.Payload.AttachEntityComponent.Name
+                       },
+                       EntityActionPayload.PayloadOneofCase.ComponentRemoved => new Protocol.EntityComponentDestroy()
+                       {
+                           entityId = action.Payload.ComponentRemoved.EntityId,
+                           name = action.Payload.ComponentRemoved.Name
+                       },
+                       EntityActionPayload.PayloadOneofCase.SetEntityParent => new Protocol.SetEntityParent()
+                       {
+                           entityId = action.Payload.SetEntityParent.EntityId,
+                           parentId = action.Payload.SetEntityParent.ParentId
+                       },
+                       EntityActionPayload.PayloadOneofCase.Query => new QueryMessage
+                       {
+                           payload = CreateRaycastPayload(action)
+                       },
+                       EntityActionPayload.PayloadOneofCase.ComponentCreated => new Protocol.SharedComponentCreate()
+                       {
+                           id = action.Payload.ComponentCreated.Id,
+                           classId = action.Payload.ComponentCreated.ClassId,
+                           name = action.Payload.ComponentCreated.Name
+                       },
+                       EntityActionPayload.PayloadOneofCase.ComponentDisposed => new Protocol.SharedComponentDispose()
+                       {
+                           id = action.Payload.ComponentDisposed.Id
+                       },
+                       EntityActionPayload.PayloadOneofCase.ComponentUpdated => new Protocol.SharedComponentUpdate
+                       {
+                           componentId = action.Payload.ComponentUpdated.Id,
+                           json = ComponentModelFromPayload(action.Payload.ComponentUpdated.ComponentData).ToString()
+                       },
+
+                       // NEW FLOW!
+                       EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => action.Payload.UpdateEntityComponent.ComponentData.PayloadCase is ComponentBodyPayload.PayloadOneofCase.UiButton
+
+                           // or ComponentBodyPayload.PayloadOneofCase.CircleShape
+                           ? new Protocol.EntityComponentCreateOrUpdate
+                           {
+                               entityId = action.Payload.UpdateEntityComponent.EntityId,
+                               classId = action.Payload.UpdateEntityComponent.ClassId,
+                               json = ComponentModelFromPayload(action.Payload.UpdateEntityComponent.ComponentData).ToString(),
+                           }
+                           : action.Payload.UpdateEntityComponent,
+                       EntityActionPayload.PayloadOneofCase.None => null,
+                       _ => throw new ArgumentOutOfRangeException()
+                   };
+        }
+
+        private RaycastQuery CreateRaycastPayload(EntityAction action)
+        {
+            var raycastType = action.Payload.Query.Payload.QueryType switch
+                {
+                    "HitFirst" => RaycastType.HIT_FIRST,
+                    "HitAll" => RaycastType.HIT_ALL,
+                    "HitFirstAvatar" => RaycastType.HIT_FIRST_AVATAR,
+                    "HitAllAvatars" => RaycastType.HIT_ALL_AVATARS,
+                    _ => RaycastType.NONE,
+                };
+
+            var ray = new Ray
+            {
+                origin = action.Payload.Query.Payload.Ray.Origin.AsUnityVector3(),
+                direction =  action.Payload.Query.Payload.Ray.Direction.AsUnityVector3(),
+                distance = action.Payload.Query.Payload.Ray.Distance
+            };
+
+            return new RaycastQuery
+            {
+                id = action.Payload.Query.QueryId,
+                raycastType = raycastType,
+                ray = ray,
+                sceneNumber = sceneNumber,
+            };
+        }
+
+        private static string MapMessagingMethodType(EntityAction action) =>
+            action.Payload.PayloadCase switch
+            {
+                EntityActionPayload.PayloadOneofCase.InitMessagesFinished => MessagingTypes.INIT_DONE,
+                EntityActionPayload.PayloadOneofCase.OpenExternalUrl => MessagingTypes.OPEN_EXTERNAL_URL,
+                EntityActionPayload.PayloadOneofCase.OpenNftDialog => MessagingTypes.OPEN_NFT_DIALOG,
+                EntityActionPayload.PayloadOneofCase.CreateEntity => MessagingTypes.ENTITY_CREATE,
+                EntityActionPayload.PayloadOneofCase.RemoveEntity => MessagingTypes.ENTITY_DESTROY,
+                EntityActionPayload.PayloadOneofCase.AttachEntityComponent => MessagingTypes.SHARED_COMPONENT_ATTACH,
+                EntityActionPayload.PayloadOneofCase.ComponentRemoved => MessagingTypes.ENTITY_COMPONENT_DESTROY,
+                EntityActionPayload.PayloadOneofCase.SetEntityParent => MessagingTypes.ENTITY_REPARENT,
+                EntityActionPayload.PayloadOneofCase.Query => MessagingTypes.QUERY,
+                EntityActionPayload.PayloadOneofCase.ComponentCreated => MessagingTypes.SHARED_COMPONENT_CREATE,
+                EntityActionPayload.PayloadOneofCase.ComponentDisposed => MessagingTypes.SHARED_COMPONENT_DISPOSE,
+                EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE,
+                EntityActionPayload.PayloadOneofCase.ComponentUpdated => MessagingTypes.SHARED_COMPONENT_UPDATE,
+                EntityActionPayload.PayloadOneofCase.None => null,
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
         private static object ComponentModelFromPayload(ComponentBodyPayload payload) =>
             payload?.PayloadCase switch

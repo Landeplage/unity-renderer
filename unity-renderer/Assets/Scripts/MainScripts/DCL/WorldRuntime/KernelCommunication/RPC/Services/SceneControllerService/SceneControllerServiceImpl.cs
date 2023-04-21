@@ -284,21 +284,15 @@ namespace RPC.Services
 
             try
             {
-                CRDTServiceContext crdtContext = context.crdt;
-
                 foreach(var action in request.Actions)
-                {
-                    QueuedSceneMessage_Scene queuedMessage = new QueuedSceneMessage_Scene
-                        {
-                            type = QueuedSceneMessage.Type.SCENE_MESSAGE,
-                            method = MapMessagingMethodType(action),
-                            sceneNumber = sceneNumber,
-                            payload = ExtractPayload(from: action),
-                            tag = action.Tag,
-                        };
-
-                    crdtContext.SceneController.EnqueueSceneMessage(queuedMessage);
-                }
+                    context.crdt.SceneController.EnqueueSceneMessage(new QueuedSceneMessage_Scene
+                    {
+                        type = QueuedSceneMessage.Type.SCENE_MESSAGE,
+                        method = MapMessagingMethodType(action),
+                        sceneNumber = sceneNumber,
+                        payload = ExtractPayload(from: action),
+                        tag = action.Tag,
+                    });
             }
             catch (Exception e)
             {

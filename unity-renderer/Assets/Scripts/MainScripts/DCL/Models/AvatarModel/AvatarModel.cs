@@ -28,8 +28,6 @@ public class AvatarModel : BaseModel
 
     public string expressionTriggerId = null;
     public long expressionTriggerTimestamp = -1;
-    public string stickerTriggerId = null;
-    public long stickerTriggerTimestamp = -1;
     public bool talking = false;
 
     public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
@@ -104,8 +102,7 @@ public class AvatarModel : BaseModel
     public bool HaveSameExpressions(AvatarModel other)
     {
         return expressionTriggerId == other.expressionTriggerId &&
-               expressionTriggerTimestamp == other.expressionTriggerTimestamp &&
-               stickerTriggerTimestamp == other.stickerTriggerTimestamp;
+               expressionTriggerTimestamp == other.expressionTriggerTimestamp;
     }
 
     public bool Equals(AvatarModel other)
@@ -124,7 +121,6 @@ public class AvatarModel : BaseModel
                eyeColor == other.eyeColor &&
                expressionTriggerId == other.expressionTriggerId &&
                expressionTriggerTimestamp == other.expressionTriggerTimestamp &&
-               stickerTriggerTimestamp == other.stickerTriggerTimestamp &&
                wearablesAreEqual;
     }
 
@@ -141,8 +137,6 @@ public class AvatarModel : BaseModel
         eyeColor = other.eyeColor;
         expressionTriggerId = other.expressionTriggerId;
         expressionTriggerTimestamp = other.expressionTriggerTimestamp;
-        stickerTriggerId = other.stickerTriggerId;
-        stickerTriggerTimestamp = other.stickerTriggerTimestamp;
         wearables = new List<string>(other.wearables);
         emotes = other.emotes.Select(x => new AvatarEmoteEntry() { slot = x.slot, urn = x.urn }).ToList();
     }

@@ -141,6 +141,7 @@ namespace DCL.Controllers
 
         public void Restart()
         {
+            return;
             Stop();
             Start();
         }
@@ -151,7 +152,7 @@ namespace DCL.Controllers
                 return;
 
             lastCheckTime = Time.realtimeSinceStartup;
-            entitiesCheckRoutine = CoroutineStarter.Start(CheckEntities());
+            //entitiesCheckRoutine = CoroutineStarter.Start(CheckEntities());
         }
 
         public void Stop()
@@ -170,8 +171,8 @@ namespace DCL.Controllers
 
         public void AddEntityToBeChecked(IDCLEntity entity, bool isPersistent = false, bool runPreliminaryEvaluation = false)
         {
+            return;
             IParcelScene entityScene = entity.scene;
-
             // Entities from global or sdk7 scenes should not be added to this boundaries checker system
             bool isInvalidEntity = entityScene != null && (entityScene.isPersistent || entityScene.sceneData.sdk7);
 
@@ -197,6 +198,7 @@ namespace DCL.Controllers
 
         public void RemoveEntity(IDCLEntity entity, bool removeIfPersistent = false, bool resetState = false)
         {
+            return;
             if (!enabled || (!removeIfPersistent && persistentEntities.Contains(entity)))
                 return;
 

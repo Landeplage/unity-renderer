@@ -110,7 +110,14 @@ namespace RPC.Services
                     icon = string.Empty // TODO: add icon url!
                 };
 
-                context.crdt.SceneController.CreateGlobalScene(globalScene);
+                try
+                {
+                    context.crdt.SceneController.CreateGlobalScene(globalScene);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
             }
             else
             {
@@ -128,7 +135,14 @@ namespace RPC.Services
                     allowedMediaHostnames = parsedMetadata.allowedMediaHostnames
                 };
 
-                context.crdt.SceneController.LoadUnityParcelScene(unityParcelScene);
+                try
+                {
+                    context.crdt.SceneController.LoadUnityParcelScene(unityParcelScene);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
             }
 
             LoadSceneResult result = new LoadSceneResult() { Success = true };
@@ -167,7 +181,7 @@ namespace RPC.Services
                 {
                     while (iterator.MoveNext())
                     {
-                        if (!(iterator.Current is CRDTMessage crdtMessage))
+                        if (!(iterator.Current is CrdtMessage crdtMessage))
                             continue;
 
                         crdtContext.CrdtMessageReceived?.Invoke(sceneNumber, crdtMessage);
@@ -192,7 +206,7 @@ namespace RPC.Services
                     }
                 }
 
-                if (crdtContext.scenesOutgoingCrdts.TryGetValue(sceneNumber, out DualKeyValueSet<int, long, CRDTMessage> sceneCrdtOutgoing))
+                if (crdtContext.scenesOutgoingCrdts.TryGetValue(sceneNumber, out DualKeyValueSet<int, long, CrdtMessage> sceneCrdtOutgoing))
                 {
                     sendCrdtMemoryStream.SetLength(0);
                     crdtContext.scenesOutgoingCrdts.Remove(sceneNumber);
@@ -201,7 +215,6 @@ namespace RPC.Services
                     {
                         CRDTSerializer.Serialize(sendCrdtBinaryWriter, sceneCrdtOutgoing.Pairs[i].value);
                     }
-
 
                     sceneCrdtOutgoing.Clear();
                     reusableCrdtMessageResult.Payload = ByteString.CopyFrom(sendCrdtMemoryStream.ToArray());
@@ -217,7 +230,7 @@ namespace RPC.Services
 
         public async UniTask<CRDTSceneCurrentState> GetCurrentState(GetCurrentStateMessage request, RPCContext context, CancellationToken ct)
         {
-            DualKeyValueSet<int, long, CRDTMessage> outgoingMessages = null;
+            DualKeyValueSet<int, long, CrdtMessage> outgoingMessages = null;
             CRDTProtocol sceneState = null;
             CRDTServiceContext crdtContext = context.crdt;
 
@@ -243,24 +256,18 @@ namespace RPC.Services
 
                 // serialize outgoing messages
                 crdtContext.scenesOutgoingCrdts.Remove(sceneNumber);
+
                 foreach (var msg in outgoingMessages)
                 {
                     CRDTSerializer.Serialize(getStateBinaryWriter, msg.value);
                 }
+
                 outgoingMessages.Clear();
 
                 // serialize scene state
                 if (sceneState != null)
                 {
                     var crdtMessages = sceneState.GetStateAsMessages();
-
-                    for (int i = 0; i < crdtMessages.Count; i++)
-                    {
-                        if (crdtMessages[i].data != null){
-                            result.HasOwnEntities = true;
-                            break;
-                        }
-                    }
 
                     for (int i = 0; i < crdtMessages.Count; i++)
                     {

@@ -72,10 +72,9 @@ namespace DCL.Components
                         paddingLeft = pbModel.UiInputText.PaddingLeft,
                         placeholder = pbModel.UiInputText.Placeholder,
 
-                        // placeholderColor = ??
                         focusedBackground = pbModel.UiInputText.FocusedBackground.AsUnityColor(),
 
-                        // onTextSubmit = ??
+                        onTextSubmit = pbModel.UiInputText.OnTextSubmit,
                         onChanged = pbModel.UiInputText.OnTextChanged,
                         onFocus = pbModel.UiInputText.OnFocus,
                         onBlur = pbModel.UiInputText.OnBlur,

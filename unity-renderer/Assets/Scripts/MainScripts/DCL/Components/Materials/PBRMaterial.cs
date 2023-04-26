@@ -58,9 +58,9 @@ namespace DCL.Components
                         emissiveIntensity = pbModel.Material.EmissiveIntensity,
                         emissiveTexture = pbModel.Material.EmissiveTexture,
                         transparencyMode = (int)pbModel.Material.TransparencyMode,
-                        albedoColor = pbModel.Material.AlbedoColor.AsUnityColor(),
-                        emissiveColor = pbModel.Material.EmissiveColor.AsUnityColor(),
-                        reflectivityColor = pbModel.Material.ReflectivityColor.AsUnityColor(),
+                        albedoColor = pbModel.Material.AlbedoColor != null ? pbModel.Material.AlbedoColor.AsUnityColor() : Color.white,
+                        emissiveColor = pbModel.Material.EmissiveColor != null ? pbModel.Material.EmissiveColor.AsUnityColor() : Color.black,
+                        reflectivityColor = pbModel.Material.ReflectivityColor != null ? pbModel.Material.ReflectivityColor.AsUnityColor() : Color.white,
                     }
                     : Utils.SafeUnimplemented<PBRMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Material, actual: pbModel.PayloadCase);
         }

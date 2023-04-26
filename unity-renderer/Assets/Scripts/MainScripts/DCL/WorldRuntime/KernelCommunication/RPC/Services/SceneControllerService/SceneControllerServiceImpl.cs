@@ -347,24 +347,10 @@ namespace RPC.Services
                            name = from.Payload.ComponentCreated.Name,
                        },
                        EntityActionPayload.PayloadOneofCase.ComponentDisposed => new Protocol.SharedComponentDispose { id = from.Payload.ComponentDisposed.Id },
-                       EntityActionPayload.PayloadOneofCase.ComponentUpdated => new Protocol.SharedComponentUpdate
-                       {
-                           componentId = from.Payload.ComponentUpdated.Id,
-                           json = ComponentModelFromPayload(from.Payload.ComponentUpdated.ComponentData).ToString()
-                       },
-
+                       
                        //--- NEW FLOW!
-                       EntityActionPayload.PayloadOneofCase.UpdateEntityComponent =>
-                           from.Payload.UpdateEntityComponent.ComponentData.PayloadCase
-                               is ComponentBodyPayload.PayloadOneofCase.UiButton
-                               // or ComponentBodyPayload.PayloadOneofCase.CircleShape
-                           ? new Protocol.EntityComponentCreateOrUpdate
-                           {
-                               entityId = from.Payload.UpdateEntityComponent.EntityId,
-                               classId = from.Payload.UpdateEntityComponent.ClassId,
-                               json = ComponentModelFromPayload(from.Payload.UpdateEntityComponent.ComponentData).ToString(),
-                           }
-                           : from.Payload.UpdateEntityComponent,
+                       EntityActionPayload.PayloadOneofCase.ComponentUpdated => from.Payload.ComponentUpdated,
+                       EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => from.Payload.UpdateEntityComponent,
 
                        EntityActionPayload.PayloadOneofCase.None => null,
                        _ => throw new ArgumentOutOfRangeException(),
@@ -413,55 +399,10 @@ namespace RPC.Services
                 EntityActionPayload.PayloadOneofCase.ComponentCreated => MessagingTypes.SHARED_COMPONENT_CREATE,
                 EntityActionPayload.PayloadOneofCase.ComponentDisposed => MessagingTypes.SHARED_COMPONENT_DISPOSE,
                 EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE,  //--- NEW FLOW!
-                EntityActionPayload.PayloadOneofCase.ComponentUpdated => MessagingTypes.SHARED_COMPONENT_UPDATE,
+                EntityActionPayload.PayloadOneofCase.ComponentUpdated => MessagingTypes.PB_SHARED_COMPONENT_UPDATE,
                 EntityActionPayload.PayloadOneofCase.None => null,
                 _ => throw new ArgumentOutOfRangeException(),
             };
 
-        private static object ComponentModelFromPayload(ComponentBodyPayload payload) =>
-            payload?.PayloadCase switch
-            {
-                ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea => payload.AvatarModifierArea,
-                ComponentBodyPayload.PayloadOneofCase.Transform => payload.Transform,
-                ComponentBodyPayload.PayloadOneofCase.AttachToAvatar => payload.AttachToAvatar,
-                ComponentBodyPayload.PayloadOneofCase.Billboard => payload.Billboard,
-                ComponentBodyPayload.PayloadOneofCase.BoxShape => payload.BoxShape,
-                ComponentBodyPayload.PayloadOneofCase.SphereShape => payload.SphereShape,
-                ComponentBodyPayload.PayloadOneofCase.CircleShape => payload.CircleShape,
-                ComponentBodyPayload.PayloadOneofCase.PlaneShape => payload.PlaneShape,
-                ComponentBodyPayload.PayloadOneofCase.ConeShape => payload.ConeShape,
-                ComponentBodyPayload.PayloadOneofCase.CylinderShape => payload.CylinderShape,
-                ComponentBodyPayload.PayloadOneofCase.GltfShape => payload.GltfShape,
-                ComponentBodyPayload.PayloadOneofCase.NftShape => payload.NftShape,
-                ComponentBodyPayload.PayloadOneofCase.Texture => payload.Texture,
-                ComponentBodyPayload.PayloadOneofCase.Animator => payload.Animator,
-                ComponentBodyPayload.PayloadOneofCase.ObjShape => payload.ObjShape,
-                ComponentBodyPayload.PayloadOneofCase.Font => payload.Font,
-                ComponentBodyPayload.PayloadOneofCase.TextShape => payload.TextShape,
-                ComponentBodyPayload.PayloadOneofCase.Material => payload.Material,
-                ComponentBodyPayload.PayloadOneofCase.BasicMaterial => payload.BasicMaterial,
-                ComponentBodyPayload.PayloadOneofCase.UuidCallback => payload.UuidCallback,
-                ComponentBodyPayload.PayloadOneofCase.SmartItem => payload.SmartItem,
-                ComponentBodyPayload.PayloadOneofCase.VideoClip => payload.VideoClip,
-                ComponentBodyPayload.PayloadOneofCase.VideoTexture => payload.VideoTexture,
-                ComponentBodyPayload.PayloadOneofCase.CameraModeArea => payload.CameraModeArea,
-                ComponentBodyPayload.PayloadOneofCase.AvatarTexture => payload.AvatarTexture,
-                ComponentBodyPayload.PayloadOneofCase.AudioClip => payload.AudioClip,
-                ComponentBodyPayload.PayloadOneofCase.AudioSource => payload.AudioSource,
-                ComponentBodyPayload.PayloadOneofCase.AudioStream => payload.AudioStream,
-                ComponentBodyPayload.PayloadOneofCase.AvatarShape => payload.AvatarShape,
-                ComponentBodyPayload.PayloadOneofCase.Gizmos => payload.Gizmos,
-                ComponentBodyPayload.PayloadOneofCase.UiShape => payload.UiShape,
-                ComponentBodyPayload.PayloadOneofCase.UiContainerRect => payload.UiContainerRect,
-                ComponentBodyPayload.PayloadOneofCase.UiContainerStack => payload.UiContainerStack,
-                ComponentBodyPayload.PayloadOneofCase.UiButton => payload.UiButton,
-                ComponentBodyPayload.PayloadOneofCase.UiText => payload.UiText,
-                ComponentBodyPayload.PayloadOneofCase.UiInputText => payload.UiInputText,
-                ComponentBodyPayload.PayloadOneofCase.UiImage => payload.UiImage,
-                ComponentBodyPayload.PayloadOneofCase.UiScrollRect => payload.UiScrollRect,
-                ComponentBodyPayload.PayloadOneofCase.None => null,
-                null => null,
-                _ => throw new ArgumentOutOfRangeException(),
-            };
     }
 }

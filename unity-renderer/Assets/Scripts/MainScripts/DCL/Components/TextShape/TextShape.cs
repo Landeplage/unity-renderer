@@ -58,34 +58,39 @@ namespace DCL.Components
                 if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.TextShape)
                     return Utils.SafeUnimplemented<TextShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.TextShape, actual: pbModel.PayloadCase);
 
-                var model = new Model
-                    {
-                        billboard = pbModel.TextShape.Billboard,
-                        color = pbModel.TextShape.Color.AsUnityColor(),
-                        font = pbModel.TextShape.Font,
-                        height = pbModel.TextShape.Height,
-                        opacity = pbModel.TextShape.Opacity,
-                        value = pbModel.TextShape.Value,
-                        visible = pbModel.TextShape.Visible,
-                        width = pbModel.TextShape.Width,
-                        lineCount = pbModel.TextShape.LineCount,
-                        lineSpacing = float.Parse(pbModel.TextShape.LineSpacing[..^2]),
-                        outlineColor = pbModel.TextShape.OutlineColor.AsUnityColor(),
-                        outlineWidth = pbModel.TextShape.OutlineWidth,
-                        paddingBottom = pbModel.TextShape.PaddingBottom,
-                        paddingLeft = pbModel.TextShape.PaddingLeft,
-                        paddingRight = pbModel.TextShape.PaddingRight,
-                        paddingTop = pbModel.TextShape.PaddingTop,
-                        shadowBlur = pbModel.TextShape.ShadowBlur,
-                        shadowColor = pbModel.TextShape.ShadowColor.AsUnityColor(),
-                        shadowOffsetX = pbModel.TextShape.ShadowOffsetX,
-                        shadowOffsetY = pbModel.TextShape.ShadowOffsetY,
-                        textWrapping = pbModel.TextShape.TextWrapping,
-                        vTextAlign = pbModel.TextShape.VTextAlign,
-                        hTextAlign = pbModel.TextShape.HTextAlign,
-                        fontAutoSize = pbModel.TextShape.FontSize == 0,
-                        fontSize = pbModel.TextShape.FontSize,
-                    };
+                var model = new Model {};
+                try {
+                    if (pbModel.TextShape.Billboard != null) model.billboard = pbModel.TextShape.Billboard;
+                    if (pbModel.TextShape.Color != null) model.color = pbModel.TextShape.Color.AsUnityColor();
+                    if (pbModel.TextShape.Font != null) model.font = pbModel.TextShape.Font;
+                    if (pbModel.TextShape.Height != null) model.height = pbModel.TextShape.Height;
+                    if (pbModel.TextShape.Opacity != null) model.opacity = pbModel.TextShape.Opacity;
+                    if (pbModel.TextShape.Value != null) model.value = pbModel.TextShape.Value;
+                    if (pbModel.TextShape.Visible != null) model.visible = pbModel.TextShape.Visible;
+                    if (pbModel.TextShape.Width != null) model.width = pbModel.TextShape.Width;
+                    if (pbModel.TextShape.LineCount != null) model.lineCount = pbModel.TextShape.LineCount;
+                    if (pbModel.TextShape.OutlineColor != null) model.outlineColor = pbModel.TextShape.OutlineColor.AsUnityColor();
+                    if (pbModel.TextShape.OutlineWidth != null) model.outlineWidth = pbModel.TextShape.OutlineWidth;
+                    if (pbModel.TextShape.PaddingBottom != null) model.paddingBottom = pbModel.TextShape.PaddingBottom;
+                    if (pbModel.TextShape.PaddingLeft != null) model.paddingLeft = pbModel.TextShape.PaddingLeft;
+                    if (pbModel.TextShape.PaddingRight != null) model.paddingRight = pbModel.TextShape.PaddingRight;
+                    if (pbModel.TextShape.PaddingTop != null) model.paddingTop = pbModel.TextShape.PaddingTop;
+                    if (pbModel.TextShape.ShadowBlur != null) model.shadowBlur = pbModel.TextShape.ShadowBlur;
+                    if (pbModel.TextShape.ShadowColor != null) model.shadowColor = pbModel.TextShape.ShadowColor.AsUnityColor();
+                    if (pbModel.TextShape.ShadowOffsetX != null) model.shadowOffsetX = pbModel.TextShape.ShadowOffsetX;
+                    if (pbModel.TextShape.ShadowOffsetY != null) model.shadowOffsetY = pbModel.TextShape.ShadowOffsetY;
+                    if (pbModel.TextShape.TextWrapping != null) model.textWrapping = pbModel.TextShape.TextWrapping;
+                    if (pbModel.TextShape.VTextAlign != null) model.vTextAlign = pbModel.TextShape.VTextAlign;
+                    if (pbModel.TextShape.HTextAlign != null) model.hTextAlign = pbModel.TextShape.HTextAlign;
+                    if (pbModel.TextShape.FontSize != null) model.fontAutoSize = pbModel.TextShape.FontSize == 0;
+                    if (pbModel.TextShape.FontSize != null) model.fontSize = pbModel.TextShape.FontSize;
+                    // TODO revise this, is failing
+                    if (pbModel.TextShape.LineSpacing != null) model.lineSpacing = float.Parse(pbModel.TextShape.LineSpacing[..^2]);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
 
                 return model;
             }

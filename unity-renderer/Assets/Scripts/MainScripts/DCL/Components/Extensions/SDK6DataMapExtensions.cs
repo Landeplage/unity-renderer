@@ -1,4 +1,5 @@
-﻿using Decentraland.Common;
+﻿using DCL.Components;
+using Decentraland.Common;
 using UnityEngine;
 
 namespace MainScripts.DCL.Components
@@ -17,5 +18,7 @@ namespace MainScripts.DCL.Components
         public static UnityEngine.Quaternion AsUnityQuaternion(this Decentraland.Common.Quaternion quaternion) =>
             new (quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
 
+        public static UIValue AsUiValue(this Decentraland.Sdk.Ecs6.UiValue uiValue) =>
+            new UIValue(uiValue.Value, (UIValue.Unit)uiValue.Type);
     }
 }

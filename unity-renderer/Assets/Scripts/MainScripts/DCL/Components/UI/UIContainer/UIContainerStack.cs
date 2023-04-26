@@ -25,36 +25,29 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiContainerStack)
-                    return Utils.SafeUnimplemented<UIContainerStack, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerStack, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiContainerStack
+                    ? new Model
+                    {
+                        color = pbModel.UiContainerStack.Color.AsUnityColor(),
+                        stackOrientation = (StackOrientation)pbModel.UiContainerStack.StackOrientation,
+                        adaptWidth = pbModel.UiContainerStack.AdaptWidth,
+                        adaptHeight = pbModel.UiContainerStack.AdaptHeight,
+                        spacing = pbModel.UiContainerStack.Spacing,
 
-                var model = new Model
-                {
-                    color = pbModel.UiContainerStack.Color.AsUnityColor(),
-                    stackOrientation = (StackOrientation) pbModel.UiContainerStack.StackOrientation,
-                    adaptWidth = pbModel.UiContainerStack.AdaptWidth,
-                    adaptHeight = pbModel.UiContainerStack.AdaptHeight,
-                    spacing = pbModel.UiContainerStack.Spacing,
-
-                    name = pbModel.UiContainerStack.Name,
-                    // parentComponent = ??
-                    visible = pbModel.UiContainerStack.Visible,
-                    opacity = pbModel.UiContainerStack.Opacity,
-                    hAlign = pbModel.UiContainerStack.HAlign,
-                    vAlign = pbModel.UiContainerStack.VAlign,
-                    // width = new UIValue(pbModel.UiShape.Width.Value, (UIValue.Unit) pbModel.UiShape.Width.Type),
-                    // height = new UIValue(pbModel.UiShape.Height.Value, (UIValue.Unit) pbModel.UiShape.Height.Type),
-                    // positionX = new UIValue(pbModel.UiShape.PositionX.Value, (UIValue.Unit) pbModel.UiShape.PositionX.Type),
-                    // positionY = new UIValue(pbModel.UiShape.PositionY.Value, (UIValue.Unit) pbModel.UiShape.PositionY.Type),
-                    isPointerBlocker = pbModel.UiContainerStack.IsPointerBlocker,
-                    // onClick = ??
-                };
-
-                return model;
-            }
-
+                        name = pbModel.UiContainerStack.Name,
+                        parentComponent = pbModel.UiContainerStack.ParentComponent,
+                        visible = pbModel.UiContainerStack.Visible,
+                        opacity = pbModel.UiContainerStack.Opacity,
+                        hAlign = pbModel.UiContainerStack.HAlign,
+                        vAlign = pbModel.UiContainerStack.VAlign,
+                        width = pbModel.UiContainerStack.Width.AsUiValue(),
+                        height = pbModel.UiContainerStack.Height.AsUiValue(),
+                        positionX = pbModel.UiContainerStack.PositionX.AsUiValue(),
+                        positionY = pbModel.UiContainerStack.PositionY.AsUiValue(),
+                        isPointerBlocker = pbModel.UiContainerStack.IsPointerBlocker,
+                    }
+                    : Utils.SafeUnimplemented<UIContainerStack, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerStack, actual: pbModel.PayloadCase);
         }
 
         public enum StackOrientation

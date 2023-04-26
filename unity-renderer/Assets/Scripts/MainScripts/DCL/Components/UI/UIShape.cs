@@ -8,52 +8,10 @@ using UnityEngine.Assertions;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
-    [System.Serializable]
-    public struct UIValue
-    {
-        public enum Unit
-        {
-            PERCENT,
-            PIXELS
-        }
-
-        public float value;
-        public Unit type;
-
-        public void SetPixels(float value)
-        {
-            this.type = Unit.PIXELS;
-            this.value = value;
-        }
-
-        public void SetPercent(float value)
-        {
-            this.type = Unit.PERCENT;
-            this.value = value;
-        }
-
-        public UIValue(float value, Unit unitType = Unit.PIXELS)
-        {
-            this.value = value;
-            this.type = unitType;
-        }
-
-        public float GetScaledValue(float parentSize)
-        {
-            if (type == Unit.PIXELS)
-                return value;
-
-            // Prevent division by zero
-            if (parentSize <= Mathf.Epsilon)
-                parentSize = 1;
-
-            return value / 100 * parentSize;
-        }
-    }
-
     public class UIShape<ReferencesContainerType, ModelType> : UIShape
         where ReferencesContainerType : UIReferencesContainer
         where ModelType : UIShape.Model
@@ -140,40 +98,33 @@ namespace DCL.Components
             public float opacity = 1f;
             public string hAlign = "center";
             public string vAlign = "center";
-            public UIValue width = new UIValue(100f);
-            public UIValue height = new UIValue(50f);
-            public UIValue positionX = new UIValue(0f);
-            public UIValue positionY = new UIValue(0f);
+            public UIValue width = new (100f);
+            public UIValue height = new (50f);
+            public UIValue positionX = new (0f);
+            public UIValue positionY = new (0f);
             public bool isPointerBlocker = true;
             public string onClick;
 
-            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
+            public override BaseModel GetDataFromJSON(string json) =>
+                Utils.SafeFromJson<Model>(json);
 
-
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
-            {
-                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiShape)
-                    return Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
-
-                var model = new Model
-                {
-                    name = pbModel.UiShape.Name,
-                    // parentComponent = ??
-                    visible = pbModel.UiShape.Visible,
-                    opacity = pbModel.UiShape.Opacity,
-                    hAlign = pbModel.UiShape.HAlign,
-                    vAlign = pbModel.UiShape.VAlign,
-                    // width = new UIValue(pbModel.UiShape.Width.Value, (UIValue.Unit) pbModel.UiShape.Width.Type),
-                    // height = new UIValue(pbModel.UiShape.Height.Value, (UIValue.Unit) pbModel.UiShape.Height.Type),
-                    // positionX = new UIValue(pbModel.UiShape.PositionX.Value, (UIValue.Unit) pbModel.UiShape.PositionX.Type),
-                    // positionY = new UIValue(pbModel.UiShape.PositionY.Value, (UIValue.Unit) pbModel.UiShape.PositionY.Type),
-                    isPointerBlocker = pbModel.UiShape.IsPointerBlocker,
-                    // onClick = ??
-                };
-
-                return model;
-            }
-
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
+                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiShape
+                    ? new Model
+                    {
+                        name = pbModel.UiShape.Name,
+                        parentComponent = pbModel.UiShape.ParentComponent,
+                        visible = pbModel.UiShape.Visible,
+                        opacity = pbModel.UiShape.Opacity,
+                        hAlign = pbModel.UiShape.HAlign,
+                        vAlign = pbModel.UiShape.VAlign,
+                        width = pbModel.UiShape.Width.AsUiValue(),
+                        height = pbModel.UiShape.Height.AsUiValue(),
+                        positionX = pbModel.UiShape.PositionX.AsUiValue(),
+                        positionY = pbModel.UiShape.PositionY.AsUiValue(),
+                        isPointerBlocker = pbModel.UiShape.IsPointerBlocker,
+                    }
+                    : Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
         }
 
         public override string componentName => GetDebugName();

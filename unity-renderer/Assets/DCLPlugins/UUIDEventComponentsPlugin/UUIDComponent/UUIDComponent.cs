@@ -22,8 +22,8 @@ namespace DCL
                 pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
                     ? new Model
                     {
-                        uuid = pbModel.UuidCallback.Uuid,
                         type = pbModel.UuidCallback.Type,
+                        // uuid = ??
                     }
                     : Utils.SafeUnimplemented<UUIDComponent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
 

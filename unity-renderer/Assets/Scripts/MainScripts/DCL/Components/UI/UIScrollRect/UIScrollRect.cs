@@ -47,21 +47,19 @@ namespace DCL.Components
                     paddingLeft = pbModel.UiScrollRect.PaddingLeft,
                     OnChanged = pbModel.UiScrollRect.OnChanged,
 
-                    name = pbModel.UiScrollRect.Name,
-                    parentComponent = pbModel.UiScrollRect.ParentComponent,
-                    visible = pbModel.UiScrollRect.Visible,
-                    opacity = pbModel.UiScrollRect.Opacity,
-                    hAlign = pbModel.UiScrollRect.HAlign,
-                    vAlign = pbModel.UiScrollRect.VAlign,
-                    width = pbModel.UiScrollRect.Width.AsUIValue(),
-                    height = pbModel.UiScrollRect.Height.AsUIValue(),
-                    positionX = pbModel.UiScrollRect.PositionX.AsUIValue(),
-                    positionY = pbModel.UiScrollRect.PositionY.AsUIValue(),
-                    isPointerBlocker = pbModel.UiScrollRect.IsPointerBlocker,
+                    // name = ??
+                    // parentComponent = ??
+                    // visible = ??
+                    // opacity = ??
+                    // hAlign = ??
+                    // vAlign = ??
+                    // width = ??
+                    // height = ??
+                    // positionX = ??
+                    // positionY = ??
+                    // isPointerBlocker = ??
+                    // onClick = ??
                 };
-
-                model.width.type = (UIValue.Unit)pbModel.UiScrollRect.Width.Type;
-                model.width.value = pbModel.UiScrollRect.Width.Value;
 
                 return model;
             }

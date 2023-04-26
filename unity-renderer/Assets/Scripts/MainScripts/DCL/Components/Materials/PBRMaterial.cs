@@ -370,19 +370,6 @@ namespace DCL.Components
                 Utils.SafeDestroy(material);
             }
 
-            for (int i = 0; i < textureFetchCoroutines.Count; i++)
-            {
-                var coroutine = textureFetchCoroutines[i];
-
-                if ( coroutine != null )
-                    CoroutineStarter.Stop(coroutine);
-            }
-
-            albedoDCLTexture = null;
-            alphaDCLTexture = null;
-            emissiveDCLTexture = null;
-            bumpDCLTexture = null;
-
             base.Dispose();
         }
     }

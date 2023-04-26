@@ -67,16 +67,6 @@ namespace DCL
             model = new Model();
         }
 
-        public override int GetClassId()
-        {
-            return (int)CLASS_ID.TEXTURE;
-        }
-
-        public DCLTexture()
-        {
-            model = new Model();
-        }
-
         public override IEnumerator ApplyChanges(BaseModel newModel)
         {
             yield return new WaitUntil(() => CommonScriptableObjects.rendererState.Get());

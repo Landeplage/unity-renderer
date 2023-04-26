@@ -62,8 +62,8 @@ namespace DCL.Components
 
         public void UpdateFromPb(ComponentBodyPayload payload)
         {
-            model.GetDataFromPb(payload);
-            UpdateFromModel(model);
+            Model newModel = (Model)model.GetDataFromPb(payload);
+            UpdateFromModel(newModel);
         }
 
         public void UpdateFromModel(BaseModel model)

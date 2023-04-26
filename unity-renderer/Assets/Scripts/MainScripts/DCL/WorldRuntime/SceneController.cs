@@ -232,12 +232,12 @@ namespace DCL
                                 scene.SetEntityParent(entityIdHelper.EntityFromLegacyEntityString(payload.entityId),entityIdHelper.EntityFromLegacyEntityString(payload.parentId));
                             break;
                         }
-                    case MessagingTypes.SHARED_COMPONENT_UPDATE:
-                    {
-                        if (msgPayload is Protocol.SharedComponentUpdate payload)
-                            delayedComponent = scene.componentsManagerLegacy.SceneSharedComponentUpdate(payload.componentId, payload.json) as IDelayedComponent;
-                        break;
-                    }
+                    // case MessagingTypes.SHARED_COMPONENT_UPDATE:
+                    // {
+                    //     if (msgPayload is Protocol.SharedComponentUpdate payload)
+                    //         delayedComponent = scene.componentsManagerLegacy.SceneSharedComponentUpdate(payload.componentId, payload.json) as IDelayedComponent;
+                    //     break;
+                    // }
                     //--- NEW FLOW!
                     case MessagingTypes.PB_SHARED_COMPONENT_UPDATE:
                     {
@@ -248,17 +248,17 @@ namespace DCL
                         }
                         break;
                     }
-                    case MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE:
-                        {
-                            if (msgPayload is Protocol.EntityComponentCreateOrUpdate payload)
-                                delayedComponent = scene.componentsManagerLegacy.EntityComponentCreateOrUpdate(entityIdHelper.EntityFromLegacyEntityString(payload.entityId),
-                                    (CLASS_ID_COMPONENT) payload.classId, payload.json) as IDelayedComponent;
-                            break;
-                        }
+                    // case MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE:
+                    //     {
+                    //         if (msgPayload is Protocol.EntityComponentCreateOrUpdate payload)
+                    //             delayedComponent = scene.componentsManagerLegacy.EntityComponentCreateOrUpdate(entityIdHelper.EntityFromLegacyEntityString(payload.entityId),
+                    //                 (CLASS_ID_COMPONENT) payload.classId, payload.json) as IDelayedComponent;
+                    //         break;
+                    //     }
                     case MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE:
                         {
                             if (msgPayload is Decentraland.Sdk.Ecs6.UpdateEntityComponentBody payload) {
-                                
+
                                 if (payload.ComponentData != null) {
                                     delayedComponent = scene.componentsManagerLegacy.EntityComponentCreateOrUpdate(entityIdHelper.EntityFromLegacyEntityString(payload.EntityId),
                                     (CLASS_ID_COMPONENT) payload.ClassId, payload.ComponentData) as IDelayedComponent;
@@ -332,8 +332,13 @@ namespace DCL
                 Debug.LogError($"Scene message error. scene: {scene.sceneData.sceneNumber} method: {method} payload: {JsonUtility.ToJson(msgPayload)}");
             }
 
-            if (delayedComponent is { isRoutineRunning: true })
-                yieldInstruction = delayedComponent.yieldInstruction;
+            if (delayedComponent != null)
+            {
+                if (delayedComponent.isRoutineRunning)
+                {
+                    yieldInstruction = delayedComponent.yieldInstruction;
+                }
+            }
         }
 
         public void ParseQuery(object payload, int sceneNumber)

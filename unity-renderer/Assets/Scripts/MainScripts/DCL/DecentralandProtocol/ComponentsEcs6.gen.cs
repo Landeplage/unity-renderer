@@ -347,7 +347,7 @@ namespace Decentraland.Sdk.Ecs6 {
             "QhIKEF9zaGFkb3dfb2Zmc2V0X3lCDwoNX3NoYWRvd19jb2xvckIPCg1faF90",
             "ZXh0X2FsaWduQg8KDV92X3RleHRfYWxpZ25CDgoMX3BhZGRpbmdfdG9wQhAK",
             "Dl9wYWRkaW5nX3JpZ2h0QhEKD19wYWRkaW5nX2JvdHRvbUIPCg1fcGFkZGlu",
-            "Z19sZWZ0IvQMChhFQ1M2Q29tcG9uZW50VWlJbnB1dFRleHQSEQoEbmFtZRgB",
+            "Z19sZWZ0IqQNChhFQ1M2Q29tcG9uZW50VWlJbnB1dFRleHQSEQoEbmFtZRgB",
             "IAEoCUgAiAEBEhQKB3Zpc2libGUYAiABKAhIAYgBARIUCgdvcGFjaXR5GAMg",
             "ASgCSAKIAQESFAoHaF9hbGlnbhgEIAEoCUgDiAEBEhQKB3ZfYWxpZ24YBSAB",
             "KAlIBIgBARIyCgV3aWR0aBgGIAEoCzIeLmRlY2VudHJhbGFuZC5zZGsuZWNz",
@@ -372,64 +372,66 @@ namespace Decentraland.Sdk.Ecs6 {
             "bmdfcmlnaHQYHiABKAJIHIgBARIbCg5wYWRkaW5nX2JvdHRvbRgfIAEoAkgd",
             "iAEBEhkKDHBhZGRpbmdfbGVmdBggIAEoAkgeiAEBEhwKD29uX3RleHRfY2hh",
             "bmdlZBgkIAEoCUgfiAEBEhUKCG9uX2ZvY3VzGCUgASgJSCCIAQESFAoHb25f",
-            "Ymx1chgmIAEoCUghiAEBQgcKBV9uYW1lQgoKCF92aXNpYmxlQgoKCF9vcGFj",
-            "aXR5QgoKCF9oX2FsaWduQgoKCF92X2FsaWduQggKBl93aWR0aEIJCgdfaGVp",
-            "Z2h0Qg0KC19wb3NpdGlvbl94Qg0KC19wb3NpdGlvbl95QhUKE19pc19wb2lu",
-            "dGVyX2Jsb2NrZXJCEwoRX3BhcmVudF9jb21wb25lbnRCEAoOX291dGxpbmVf",
-            "d2lkdGhCEAoOX291dGxpbmVfY29sb3JCCAoGX2NvbG9yQgwKCl9mb250X3Np",
-            "emVCBwoFX2ZvbnRCCAoGX3ZhbHVlQg4KDF9wbGFjZWhvbGRlckIJCgdfbWFy",
-            "Z2luQhUKE19mb2N1c2VkX2JhY2tncm91bmRCEAoOX3RleHRfd3JhcHBpbmdC",
-            "DgoMX3NoYWRvd19ibHVyQhIKEF9zaGFkb3dfb2Zmc2V0X3hCEgoQX3NoYWRv",
-            "d19vZmZzZXRfeUIPCg1fc2hhZG93X2NvbG9yQg8KDV9oX3RleHRfYWxpZ25C",
-            "DwoNX3ZfdGV4dF9hbGlnbkIOCgxfcGFkZGluZ190b3BCEAoOX3BhZGRpbmdf",
-            "cmlnaHRCEQoPX3BhZGRpbmdfYm90dG9tQg8KDV9wYWRkaW5nX2xlZnRCEgoQ",
-            "X29uX3RleHRfY2hhbmdlZEILCglfb25fZm9jdXNCCgoIX29uX2JsdXIiiAgK",
-            "FEVDUzZDb21wb25lbnRVaUltYWdlEhEKBG5hbWUYASABKAlIAIgBARIUCgd2",
-            "aXNpYmxlGAIgASgISAGIAQESFAoHb3BhY2l0eRgDIAEoAkgCiAEBEhQKB2hf",
-            "YWxpZ24YBCABKAlIA4gBARIUCgd2X2FsaWduGAUgASgJSASIAQESMgoFd2lk",
-            "dGgYBiABKAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVjczYuVWlWYWx1ZUgFiAEB",
-            "EjMKBmhlaWdodBgHIAEoCzIeLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VaVZh",
-            "bHVlSAaIAQESNwoKcG9zaXRpb25feBgIIAEoCzIeLmRlY2VudHJhbGFuZC5z",
-            "ZGsuZWNzNi5VaVZhbHVlSAeIAQESNwoKcG9zaXRpb25feRgJIAEoCzIeLmRl",
-            "Y2VudHJhbGFuZC5zZGsuZWNzNi5VaVZhbHVlSAiIAQESHwoSaXNfcG9pbnRl",
-            "cl9ibG9ja2VyGAogASgISAmIAQESHQoQcGFyZW50X2NvbXBvbmVudBgWIAEo",
-            "CUgKiAEBEhgKC3NvdXJjZV9sZWZ0GAsgASgCSAuIAQESFwoKc291cmNlX3Rv",
-            "cBgMIAEoAkgMiAEBEhkKDHNvdXJjZV93aWR0aBgNIAEoAkgNiAEBEhoKDXNv",
-            "dXJjZV9oZWlnaHQYDiABKAJIDogBARITCgZzb3VyY2UYDyABKAlID4gBARIY",
-            "CgtwYWRkaW5nX3RvcBgQIAEoAkgQiAEBEhoKDXBhZGRpbmdfcmlnaHQYESAB",
-            "KAJIEYgBARIbCg5wYWRkaW5nX2JvdHRvbRgSIAEoAkgSiAEBEhkKDHBhZGRp",
-            "bmdfbGVmdBgTIAEoAkgTiAEBEhsKDnNpemVfaW5fcGl4ZWxzGBQgASgISBSI",
-            "AQESFQoIb25fY2xpY2sYFSABKAlIFYgBAUIHCgVfbmFtZUIKCghfdmlzaWJs",
-            "ZUIKCghfb3BhY2l0eUIKCghfaF9hbGlnbkIKCghfdl9hbGlnbkIICgZfd2lk",
-            "dGhCCQoHX2hlaWdodEINCgtfcG9zaXRpb25feEINCgtfcG9zaXRpb25feUIV",
-            "ChNfaXNfcG9pbnRlcl9ibG9ja2VyQhMKEV9wYXJlbnRfY29tcG9uZW50Qg4K",
-            "DF9zb3VyY2VfbGVmdEINCgtfc291cmNlX3RvcEIPCg1fc291cmNlX3dpZHRo",
-            "QhAKDl9zb3VyY2VfaGVpZ2h0QgkKB19zb3VyY2VCDgoMX3BhZGRpbmdfdG9w",
-            "QhAKDl9wYWRkaW5nX3JpZ2h0QhEKD19wYWRkaW5nX2JvdHRvbUIPCg1fcGFk",
-            "ZGluZ19sZWZ0QhEKD19zaXplX2luX3BpeGVsc0ILCglfb25fY2xpY2sigggK",
-            "GUVDUzZDb21wb25lbnRVaVNjcm9sbFJlY3QSEQoEbmFtZRgLIAEoCUgAiAEB",
-            "EhQKB3Zpc2libGUYDCABKAhIAYgBARIUCgdvcGFjaXR5GA0gASgCSAKIAQES",
-            "FAoHaF9hbGlnbhgOIAEoCUgDiAEBEhQKB3ZfYWxpZ24YDyABKAlIBIgBARIy",
-            "CgV3aWR0aBgQIAEoCzIeLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VaVZhbHVl",
-            "SAWIAQESMwoGaGVpZ2h0GBEgASgLMh4uZGVjZW50cmFsYW5kLnNkay5lY3M2",
-            "LlVpVmFsdWVIBogBARI3Cgpwb3NpdGlvbl94GBIgASgLMh4uZGVjZW50cmFs",
-            "YW5kLnNkay5lY3M2LlVpVmFsdWVIB4gBARI3Cgpwb3NpdGlvbl95GBMgASgL",
-            "Mh4uZGVjZW50cmFsYW5kLnNkay5lY3M2LlVpVmFsdWVICIgBARIfChJpc19w",
-            "b2ludGVyX2Jsb2NrZXIYFCABKAhICYgBARIdChBwYXJlbnRfY29tcG9uZW50",
-            "GBUgASgJSAqIAQESFAoHdmFsdWVfeBgBIAEoAkgLiAEBEhQKB3ZhbHVlX3kY",
-            "AiABKAJIDIgBARI6ChBiYWNrZ3JvdW5kX2NvbG9yGAMgASgLMhsuZGVjZW50",
-            "cmFsYW5kLmNvbW1vbi5Db2xvcjRIDYgBARIaCg1pc19ob3Jpem9udGFsGAQg",
-            "ASgISA6IAQESGAoLaXNfdmVydGljYWwYBSABKAhID4gBARIYCgtwYWRkaW5n",
-            "X3RvcBgGIAEoAkgQiAEBEhoKDXBhZGRpbmdfcmlnaHQYByABKAJIEYgBARIb",
-            "Cg5wYWRkaW5nX2JvdHRvbRgIIAEoAkgSiAEBEhkKDHBhZGRpbmdfbGVmdBgJ",
-            "IAEoAkgTiAEBEhcKCm9uX2NoYW5nZWQYCiABKAlIFIgBAUIHCgVfbmFtZUIK",
-            "CghfdmlzaWJsZUIKCghfb3BhY2l0eUIKCghfaF9hbGlnbkIKCghfdl9hbGln",
-            "bkIICgZfd2lkdGhCCQoHX2hlaWdodEINCgtfcG9zaXRpb25feEINCgtfcG9z",
-            "aXRpb25feUIVChNfaXNfcG9pbnRlcl9ibG9ja2VyQhMKEV9wYXJlbnRfY29t",
-            "cG9uZW50QgoKCF92YWx1ZV94QgoKCF92YWx1ZV95QhMKEV9iYWNrZ3JvdW5k",
-            "X2NvbG9yQhAKDl9pc19ob3Jpem9udGFsQg4KDF9pc192ZXJ0aWNhbEIOCgxf",
-            "cGFkZGluZ190b3BCEAoOX3BhZGRpbmdfcmlnaHRCEQoPX3BhZGRpbmdfYm90",
-            "dG9tQg8KDV9wYWRkaW5nX2xlZnRCDQoLX29uX2NoYW5nZWRiBnByb3RvMw=="));
+            "Ymx1chgmIAEoCUghiAEBEhsKDm9uX3RleHRfc3VibWl0GCggASgJSCKIAQFC",
+            "BwoFX25hbWVCCgoIX3Zpc2libGVCCgoIX29wYWNpdHlCCgoIX2hfYWxpZ25C",
+            "CgoIX3ZfYWxpZ25CCAoGX3dpZHRoQgkKB19oZWlnaHRCDQoLX3Bvc2l0aW9u",
+            "X3hCDQoLX3Bvc2l0aW9uX3lCFQoTX2lzX3BvaW50ZXJfYmxvY2tlckITChFf",
+            "cGFyZW50X2NvbXBvbmVudEIQCg5fb3V0bGluZV93aWR0aEIQCg5fb3V0bGlu",
+            "ZV9jb2xvckIICgZfY29sb3JCDAoKX2ZvbnRfc2l6ZUIHCgVfZm9udEIICgZf",
+            "dmFsdWVCDgoMX3BsYWNlaG9sZGVyQgkKB19tYXJnaW5CFQoTX2ZvY3VzZWRf",
+            "YmFja2dyb3VuZEIQCg5fdGV4dF93cmFwcGluZ0IOCgxfc2hhZG93X2JsdXJC",
+            "EgoQX3NoYWRvd19vZmZzZXRfeEISChBfc2hhZG93X29mZnNldF95Qg8KDV9z",
+            "aGFkb3dfY29sb3JCDwoNX2hfdGV4dF9hbGlnbkIPCg1fdl90ZXh0X2FsaWdu",
+            "Qg4KDF9wYWRkaW5nX3RvcEIQCg5fcGFkZGluZ19yaWdodEIRCg9fcGFkZGlu",
+            "Z19ib3R0b21CDwoNX3BhZGRpbmdfbGVmdEISChBfb25fdGV4dF9jaGFuZ2Vk",
+            "QgsKCV9vbl9mb2N1c0IKCghfb25fYmx1ckIRCg9fb25fdGV4dF9zdWJtaXQi",
+            "iAgKFEVDUzZDb21wb25lbnRVaUltYWdlEhEKBG5hbWUYASABKAlIAIgBARIU",
+            "Cgd2aXNpYmxlGAIgASgISAGIAQESFAoHb3BhY2l0eRgDIAEoAkgCiAEBEhQK",
+            "B2hfYWxpZ24YBCABKAlIA4gBARIUCgd2X2FsaWduGAUgASgJSASIAQESMgoF",
+            "d2lkdGgYBiABKAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVjczYuVWlWYWx1ZUgF",
+            "iAEBEjMKBmhlaWdodBgHIAEoCzIeLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5V",
+            "aVZhbHVlSAaIAQESNwoKcG9zaXRpb25feBgIIAEoCzIeLmRlY2VudHJhbGFu",
+            "ZC5zZGsuZWNzNi5VaVZhbHVlSAeIAQESNwoKcG9zaXRpb25feRgJIAEoCzIe",
+            "LmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VaVZhbHVlSAiIAQESHwoSaXNfcG9p",
+            "bnRlcl9ibG9ja2VyGAogASgISAmIAQESHQoQcGFyZW50X2NvbXBvbmVudBgW",
+            "IAEoCUgKiAEBEhgKC3NvdXJjZV9sZWZ0GAsgASgCSAuIAQESFwoKc291cmNl",
+            "X3RvcBgMIAEoAkgMiAEBEhkKDHNvdXJjZV93aWR0aBgNIAEoAkgNiAEBEhoK",
+            "DXNvdXJjZV9oZWlnaHQYDiABKAJIDogBARITCgZzb3VyY2UYDyABKAlID4gB",
+            "ARIYCgtwYWRkaW5nX3RvcBgQIAEoAkgQiAEBEhoKDXBhZGRpbmdfcmlnaHQY",
+            "ESABKAJIEYgBARIbCg5wYWRkaW5nX2JvdHRvbRgSIAEoAkgSiAEBEhkKDHBh",
+            "ZGRpbmdfbGVmdBgTIAEoAkgTiAEBEhsKDnNpemVfaW5fcGl4ZWxzGBQgASgI",
+            "SBSIAQESFQoIb25fY2xpY2sYFSABKAlIFYgBAUIHCgVfbmFtZUIKCghfdmlz",
+            "aWJsZUIKCghfb3BhY2l0eUIKCghfaF9hbGlnbkIKCghfdl9hbGlnbkIICgZf",
+            "d2lkdGhCCQoHX2hlaWdodEINCgtfcG9zaXRpb25feEINCgtfcG9zaXRpb25f",
+            "eUIVChNfaXNfcG9pbnRlcl9ibG9ja2VyQhMKEV9wYXJlbnRfY29tcG9uZW50",
+            "Qg4KDF9zb3VyY2VfbGVmdEINCgtfc291cmNlX3RvcEIPCg1fc291cmNlX3dp",
+            "ZHRoQhAKDl9zb3VyY2VfaGVpZ2h0QgkKB19zb3VyY2VCDgoMX3BhZGRpbmdf",
+            "dG9wQhAKDl9wYWRkaW5nX3JpZ2h0QhEKD19wYWRkaW5nX2JvdHRvbUIPCg1f",
+            "cGFkZGluZ19sZWZ0QhEKD19zaXplX2luX3BpeGVsc0ILCglfb25fY2xpY2si",
+            "gggKGUVDUzZDb21wb25lbnRVaVNjcm9sbFJlY3QSEQoEbmFtZRgLIAEoCUgA",
+            "iAEBEhQKB3Zpc2libGUYDCABKAhIAYgBARIUCgdvcGFjaXR5GA0gASgCSAKI",
+            "AQESFAoHaF9hbGlnbhgOIAEoCUgDiAEBEhQKB3ZfYWxpZ24YDyABKAlIBIgB",
+            "ARIyCgV3aWR0aBgQIAEoCzIeLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VaVZh",
+            "bHVlSAWIAQESMwoGaGVpZ2h0GBEgASgLMh4uZGVjZW50cmFsYW5kLnNkay5l",
+            "Y3M2LlVpVmFsdWVIBogBARI3Cgpwb3NpdGlvbl94GBIgASgLMh4uZGVjZW50",
+            "cmFsYW5kLnNkay5lY3M2LlVpVmFsdWVIB4gBARI3Cgpwb3NpdGlvbl95GBMg",
+            "ASgLMh4uZGVjZW50cmFsYW5kLnNkay5lY3M2LlVpVmFsdWVICIgBARIfChJp",
+            "c19wb2ludGVyX2Jsb2NrZXIYFCABKAhICYgBARIdChBwYXJlbnRfY29tcG9u",
+            "ZW50GBUgASgJSAqIAQESFAoHdmFsdWVfeBgBIAEoAkgLiAEBEhQKB3ZhbHVl",
+            "X3kYAiABKAJIDIgBARI6ChBiYWNrZ3JvdW5kX2NvbG9yGAMgASgLMhsuZGVj",
+            "ZW50cmFsYW5kLmNvbW1vbi5Db2xvcjRIDYgBARIaCg1pc19ob3Jpem9udGFs",
+            "GAQgASgISA6IAQESGAoLaXNfdmVydGljYWwYBSABKAhID4gBARIYCgtwYWRk",
+            "aW5nX3RvcBgGIAEoAkgQiAEBEhoKDXBhZGRpbmdfcmlnaHQYByABKAJIEYgB",
+            "ARIbCg5wYWRkaW5nX2JvdHRvbRgIIAEoAkgSiAEBEhkKDHBhZGRpbmdfbGVm",
+            "dBgJIAEoAkgTiAEBEhcKCm9uX2NoYW5nZWQYCiABKAlIFIgBAUIHCgVfbmFt",
+            "ZUIKCghfdmlzaWJsZUIKCghfb3BhY2l0eUIKCghfaF9hbGlnbkIKCghfdl9h",
+            "bGlnbkIICgZfd2lkdGhCCQoHX2hlaWdodEINCgtfcG9zaXRpb25feEINCgtf",
+            "cG9zaXRpb25feUIVChNfaXNfcG9pbnRlcl9ibG9ja2VyQhMKEV9wYXJlbnRf",
+            "Y29tcG9uZW50QgoKCF92YWx1ZV94QgoKCF92YWx1ZV95QhMKEV9iYWNrZ3Jv",
+            "dW5kX2NvbG9yQhAKDl9pc19ob3Jpem9udGFsQg4KDF9pc192ZXJ0aWNhbEIO",
+            "CgxfcGFkZGluZ190b3BCEAoOX3BhZGRpbmdfcmlnaHRCEQoPX3BhZGRpbmdf",
+            "Ym90dG9tQg8KDV9wYWRkaW5nX2xlZnRCDQoLX29uX2NoYW5nZWRiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Decentraland.Common.VectorsReflection.Descriptor, global::Decentraland.Common.ColorsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -470,7 +472,7 @@ namespace Decentraland.Sdk.Ecs6 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiContainerStack), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiContainerStack.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "AdaptWidth", "AdaptHeight", "Color", "StackOrientation", "Spacing" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "AdaptWidth", "AdaptHeight", "Color", "StackOrientation", "Spacing" }, new[]{ typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiContainerStack.Types.UIStackOrientation) }, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiButton), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiButton.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "FontSize", "FontWeight", "Thickness", "CornerRadius", "Color", "Background", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "Text" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "FontSize", "FontWeight", "Thickness", "CornerRadius", "Color", "Background", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "Text" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiText), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiText.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "FontAutoSize", "Font", "Value", "LineSpacing", "LineCount", "AdaptWidth", "AdaptHeight", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "FontAutoSize", "Font", "Value", "LineSpacing", "LineCount", "AdaptWidth", "AdaptHeight", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiInputText), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiInputText.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "Font", "Value", "Placeholder", "Margin", "FocusedBackground", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnTextChanged", "OnFocus", "OnBlur" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "Font", "Value", "Placeholder", "Margin", "FocusedBackground", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnTextChanged", "OnFocus", "OnBlur" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiInputText), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiInputText.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "Font", "Value", "Placeholder", "Margin", "FocusedBackground", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnTextChanged", "OnFocus", "OnBlur", "OnTextSubmit" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "Font", "Value", "Placeholder", "Margin", "FocusedBackground", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnTextChanged", "OnFocus", "OnBlur", "OnTextSubmit" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiImage), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiImage.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "SourceLeft", "SourceTop", "SourceWidth", "SourceHeight", "Source", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "SizeInPixels", "OnClick" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "SourceLeft", "SourceTop", "SourceWidth", "SourceHeight", "Source", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "SizeInPixels", "OnClick" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "ValueX", "ValueY", "BackgroundColor", "IsHorizontal", "IsVertical", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnChanged" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "ValueX", "ValueY", "BackgroundColor", "IsHorizontal", "IsVertical", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnChanged" }, null, null, null)
           }));
@@ -20228,6 +20230,7 @@ namespace Decentraland.Sdk.Ecs6 {
       onTextChanged_ = other.onTextChanged_;
       onFocus_ = other.onFocus_;
       onBlur_ = other.onBlur_;
+      onTextSubmit_ = other.onTextSubmit_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -20977,6 +20980,30 @@ namespace Decentraland.Sdk.Ecs6 {
       onBlur_ = null;
     }
 
+    /// <summary>Field number for the "on_text_submit" field.</summary>
+    public const int OnTextSubmitFieldNumber = 40;
+    private string onTextSubmit_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string OnTextSubmit {
+      get { return onTextSubmit_ ?? ""; }
+      set {
+        onTextSubmit_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "on_text_submit" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasOnTextSubmit {
+      get { return onTextSubmit_ != null; }
+    }
+    /// <summary>Clears the value of the "on_text_submit" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearOnTextSubmit() {
+      onTextSubmit_ = null;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -21026,6 +21053,7 @@ namespace Decentraland.Sdk.Ecs6 {
       if (OnTextChanged != other.OnTextChanged) return false;
       if (OnFocus != other.OnFocus) return false;
       if (OnBlur != other.OnBlur) return false;
+      if (OnTextSubmit != other.OnTextSubmit) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -21067,6 +21095,7 @@ namespace Decentraland.Sdk.Ecs6 {
       if (HasOnTextChanged) hash ^= OnTextChanged.GetHashCode();
       if (HasOnFocus) hash ^= OnFocus.GetHashCode();
       if (HasOnBlur) hash ^= OnBlur.GetHashCode();
+      if (HasOnTextSubmit) hash ^= OnTextSubmit.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -21221,6 +21250,10 @@ namespace Decentraland.Sdk.Ecs6 {
         output.WriteRawTag(186, 2);
         output.WriteString(ParentComponent);
       }
+      if (HasOnTextSubmit) {
+        output.WriteRawTag(194, 2);
+        output.WriteString(OnTextSubmit);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -21367,6 +21400,10 @@ namespace Decentraland.Sdk.Ecs6 {
         output.WriteRawTag(186, 2);
         output.WriteString(ParentComponent);
       }
+      if (HasOnTextSubmit) {
+        output.WriteRawTag(194, 2);
+        output.WriteString(OnTextSubmit);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -21478,6 +21515,9 @@ namespace Decentraland.Sdk.Ecs6 {
       }
       if (HasOnBlur) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(OnBlur);
+      }
+      if (HasOnTextSubmit) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(OnTextSubmit);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -21616,6 +21656,9 @@ namespace Decentraland.Sdk.Ecs6 {
       }
       if (other.HasOnBlur) {
         OnBlur = other.OnBlur;
+      }
+      if (other.HasOnTextSubmit) {
+        OnTextSubmit = other.OnTextSubmit;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -21792,6 +21835,10 @@ namespace Decentraland.Sdk.Ecs6 {
             ParentComponent = input.ReadString();
             break;
           }
+          case 322: {
+            OnTextSubmit = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -21965,6 +22012,10 @@ namespace Decentraland.Sdk.Ecs6 {
           }
           case 314: {
             ParentComponent = input.ReadString();
+            break;
+          }
+          case 322: {
+            OnTextSubmit = input.ReadString();
             break;
           }
         }

@@ -42,11 +42,11 @@ namespace DCL.Components
                 pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.VideoTexture
                     ? new Model
                     {
-                        // videoClipId = ??
+                        videoClipId = pbModel.VideoTexture.VideoClipId,
                         playing = pbModel.VideoTexture.Playing,
                         volume = pbModel.VideoTexture.Volume,
                         playbackRate = pbModel.VideoTexture.PlaybackRate,
-                        // loop = ??
+                        loop = pbModel.VideoTexture.Loop,
                         seek = pbModel.VideoTexture.Seek,
                         wrap = (BabylonWrapMode)pbModel.VideoTexture.Wrap,
                         samplingMode = (FilterMode)pbModel.VideoTexture.SamplingMode,

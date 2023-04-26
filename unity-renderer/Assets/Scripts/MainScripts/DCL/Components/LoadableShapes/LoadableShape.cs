@@ -24,7 +24,6 @@ namespace DCL.Components
                     ComponentBodyPayload.PayloadOneofCase.GltfShape => new Model
                     {
                         src = pbModel.GltfShape.Src,
-                        // assetId = ??
                         withCollisions = pbModel.GltfShape.WithCollisions,
                         visible = pbModel.GltfShape.Visible,
                         isPointerBlocker = pbModel.GltfShape.IsPointerBlocker,
@@ -33,7 +32,6 @@ namespace DCL.Components
                     ComponentBodyPayload.PayloadOneofCase.ObjShape => new Model
                     {
                         src = pbModel.ObjShape.Src,
-                        // assetId = ??
                         withCollisions = pbModel.ObjShape.WithCollisions,
                         visible = pbModel.ObjShape.Visible,
                         isPointerBlocker = pbModel.ObjShape.IsPointerBlocker,

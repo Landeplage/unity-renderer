@@ -50,15 +50,16 @@ namespace DCL.Components
 
                 for (var i = 0; i < pbModel.Animator.States.Count; i++)
                 {
-                    if (pbModel.Animator.States[i] != null) {
-                        if (pbModel.Animator.States[i].Name != null) model.states[i].name = pbModel.Animator.States[i].Name;
-                        if (pbModel.Animator.States[i].Clip != null) model.states[i].clip = pbModel.Animator.States[i].Clip;
-                        if (pbModel.Animator.States[i].Playing != null) model.states[i].playing = pbModel.Animator.States[i].Playing;
-                        if (pbModel.Animator.States[i].Weight != null) model.states[i].weight = pbModel.Animator.States[i].Weight;
-                        if (pbModel.Animator.States[i].Speed != null) model.states[i].speed = pbModel.Animator.States[i].Speed;
-                        if (pbModel.Animator.States[i].Looping != null) model.states[i].looping = pbModel.Animator.States[i].Looping;
-                        if (pbModel.Animator.States[i].ShouldReset != null) model.states[i].shouldReset = pbModel.Animator.States[i].ShouldReset;
-                    }
+                    model.states[i] = new DCLAnimationState()
+                    {
+                        name = pbModel.Animator.States[i].Name,
+                        clip = pbModel.Animator.States[i].Clip,
+                        playing = pbModel.Animator.States[i].Playing,
+                        weight = pbModel.Animator.States[i].Weight,
+                        speed = pbModel.Animator.States[i].Speed,
+                        looping = pbModel.Animator.States[i].Looping,
+                        shouldReset = pbModel.Animator.States[i].ShouldReset
+                    };
                 }
 
                 return model;

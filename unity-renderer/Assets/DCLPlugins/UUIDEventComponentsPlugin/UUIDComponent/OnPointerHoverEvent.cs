@@ -22,7 +22,7 @@ namespace DCL.Components
                 pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
                     ? new Model
                     {
-                        uuid = pbModel.UuidCallback.Uuid,
+                        // uuid = ??
                         type = pbModel.UuidCallback.Type,
                         distance = pbModel.UuidCallback.Distance,
                     }

@@ -13,32 +13,39 @@ namespace DCL.Components
         [System.Serializable]
         public new class Model : UIShape.Model
         {
-            public float thickness;
+            public float thickness = 0f;
             public Color color = Color.clear;
 
-            public override BaseModel GetDataFromJSON(string json) =>
-                Utils.SafeFromJson<Model>(json);
+            public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiContainerRect
-                    ? new Model
-                    {
-                        color = pbModel.UiContainerRect.Color.AsUnityColor(),
-                        thickness = pbModel.UiContainerRect.Thickness,
 
-                        name = pbModel.UiContainerRect.Name,
-                        parentComponent = pbModel.UiContainerRect.ParentComponent,
-                        visible = pbModel.UiContainerRect.Visible,
-                        opacity = pbModel.UiContainerRect.Opacity,
-                        hAlign = pbModel.UiContainerRect.HAlign,
-                        vAlign = pbModel.UiContainerRect.VAlign,
-                        width = pbModel.UiContainerRect.Width.AsUiValue(),
-                        height = pbModel.UiContainerRect.Height.AsUiValue(),
-                        positionX = pbModel.UiContainerRect.PositionX.AsUiValue(),
-                        positionY = pbModel.UiContainerRect.PositionY.AsUiValue(),
-                        isPointerBlocker = pbModel.UiContainerRect.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<UIContainerRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerRect, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiContainerRect)
+                    return Utils.SafeUnimplemented<UIContainerRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerRect, actual: pbModel.PayloadCase);
+
+                var model = new Model
+                {
+                    color = pbModel.UiContainerRect.Color.AsUnityColor(),
+                    thickness = pbModel.UiContainerRect.Thickness,
+
+                    name = pbModel.UiContainerRect.Name,
+                    // parentComponent = ??
+                    visible = pbModel.UiContainerRect.Visible,
+                    opacity = pbModel.UiContainerRect.Opacity,
+                    hAlign = pbModel.UiContainerRect.HAlign,
+                    vAlign = pbModel.UiContainerRect.VAlign,
+                    // width = new UIValue(pbModel.UiShape.Width.Value, (UIValue.Unit) pbModel.UiShape.Width.Type),
+                    // height = new UIValue(pbModel.UiShape.Height.Value, (UIValue.Unit) pbModel.UiShape.Height.Type),
+                    // positionX = new UIValue(pbModel.UiShape.PositionX.Value, (UIValue.Unit) pbModel.UiShape.PositionX.Type),
+                    // positionY = new UIValue(pbModel.UiShape.PositionY.Value, (UIValue.Unit) pbModel.UiShape.PositionY.Type),
+                    isPointerBlocker = pbModel.UiContainerRect.IsPointerBlocker,
+                    // onClick = ??
+                };
+
+                return model;
+            }
+
         }
 
         public override string referencesContainerPrefabName => "UIContainerRect";

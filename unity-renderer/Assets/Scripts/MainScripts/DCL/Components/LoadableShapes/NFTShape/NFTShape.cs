@@ -25,6 +25,7 @@ namespace DCL.Components
                         style = (int)pbModel.NftShape.Style,
                         src = pbModel.NftShape.Src,
                         visible = pbModel.NftShape.Visible,
+                        // assetId = ??
                         withCollisions = pbModel.NftShape.WithCollisions,
                         isPointerBlocker = pbModel.NftShape.IsPointerBlocker,
                     }

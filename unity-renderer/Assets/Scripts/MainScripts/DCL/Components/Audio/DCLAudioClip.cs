@@ -22,15 +22,20 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioClip
-                    ? new Model
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioClip)
+                    return new Model
                     {
                         loop = pbModel.AudioClip.Loop,
                         url = pbModel.AudioClip.Url,
-                        volume = pbModel.AudioClip.Volume
-                    }
-                    : Utils.SafeUnimplemented<DCLAudioClip, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioClip, actual: pbModel.PayloadCase);
+                        volume = pbModel.AudioClip.Volume,
+                        // shouldTryToLoad = ??
+                    };
+
+                return Utils.SafeUnimplemented<DCLAudioClip, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioClip, actual: pbModel.PayloadCase);
+            }
+
         }
 
         public AudioClip audioClip;

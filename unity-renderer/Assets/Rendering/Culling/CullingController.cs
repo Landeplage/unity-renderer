@@ -102,6 +102,7 @@ namespace DCL.Rendering
 
         private void StartInternal()
         {
+            return;
             if (updateCoroutine != null)
                 return;
 
@@ -115,6 +116,7 @@ namespace DCL.Rendering
         /// </summary>
         public void Stop()
         {
+            return;
             if (!running)
                 return;
 

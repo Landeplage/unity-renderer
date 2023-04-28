@@ -86,10 +86,10 @@ namespace DCL.Components
                 if (pbModel.UiInputText.HasHAlign) pb.hAlign = pbModel.UiInputText.HAlign;
                 if (pbModel.UiInputText.HasVAlign) pb.vAlign = pbModel.UiInputText.VAlign;
                 if (pbModel.UiInputText.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiInputText.IsPointerBlocker;
-                if (pbModel.UiInputText.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiShape.Width);
-                if (pbModel.UiInputText.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiShape.Height);
-                if (pbModel.UiInputText.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiShape.PositionX);
-                if (pbModel.UiInputText.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiShape.PositionY);
+                if (pbModel.UiInputText.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiInputText.Width);
+                if (pbModel.UiInputText.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiInputText.Height);
+                if (pbModel.UiInputText.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiInputText.PositionX);
+                if (pbModel.UiInputText.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiInputText.PositionY);
 
                 return pb;
             }

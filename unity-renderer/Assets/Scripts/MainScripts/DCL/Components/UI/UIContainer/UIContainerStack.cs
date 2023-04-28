@@ -43,10 +43,10 @@ namespace DCL.Components
                 if (pbModel.UiContainerStack.HasVAlign) pb.vAlign = pbModel.UiContainerStack.VAlign;
                 if (pbModel.UiContainerStack.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiContainerStack.IsPointerBlocker;
                 if (pbModel.UiContainerStack.Color != null) pb.color = pbModel.UiContainerStack.Color.AsUnityColor();
-                if (pbModel.UiContainerStack.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiContainerStack.Width);
-                if (pbModel.UiContainerStack.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiContainerStack.Height);
-                if (pbModel.UiContainerStack.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiContainerStack.PositionX);
-                if (pbModel.UiContainerStack.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiContainerStack.PositionY);
+                if (pbModel.UiContainerStack.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiContainerStack.Width);
+                if (pbModel.UiContainerStack.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiContainerStack.Height);
+                if (pbModel.UiContainerStack.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiContainerStack.PositionX);
+                if (pbModel.UiContainerStack.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiContainerStack.PositionY);
 
                 return pb;
             }

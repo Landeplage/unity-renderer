@@ -74,10 +74,10 @@ namespace DCL.Components
                 if (pbModel.UiText.HasPaddingBottom) pb.paddingBottom = pbModel.UiText.PaddingBottom;
                 if (pbModel.UiText.HasPaddingLeft) pb.paddingLeft = pbModel.UiText.PaddingLeft;
                 if (pbModel.UiText.HasOpacity) pb.opacity = pbModel.UiText.Opacity;
-                if (pbModel.UiText.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiText.Width);
-                if (pbModel.UiText.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiText.Height);
-                if (pbModel.UiText.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiText.PositionX);
-                if (pbModel.UiText.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiText.PositionY);
+                if (pbModel.UiText.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiText.Width);
+                if (pbModel.UiText.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiText.Height);
+                if (pbModel.UiText.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiText.PositionX);
+                if (pbModel.UiText.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiText.PositionY);
                 if (pbModel.UiText.HasVisible) pb.visible = pbModel.UiText.Visible;
                 if (pbModel.UiText.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiText.IsPointerBlocker;
                 

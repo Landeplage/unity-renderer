@@ -120,10 +120,10 @@ namespace DCL.Components
                 if (pbModel.UiShape.HasOpacity) pb.opacity = pbModel.UiShape.Opacity;
                 if (pbModel.UiShape.HasHAlign) pb.hAlign = pbModel.UiShape.HAlign;
                 if (pbModel.UiShape.HasVAlign) pb.vAlign = pbModel.UiShape.VAlign;
-                if (pbModel.UiShape.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiShape.Width);
-                if (pbModel.UiShape.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiShape.Height);
-                if (pbModel.UiShape.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiShape.PositionX);
-                if (pbModel.UiShape.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiShape.PositionY);
+                if (pbModel.UiShape.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiShape.Width);
+                if (pbModel.UiShape.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiShape.Height);
+                if (pbModel.UiShape.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiShape.PositionX);
+                if (pbModel.UiShape.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiShape.PositionY);
                 if (pbModel.UiShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiShape.IsPointerBlocker;
 
                 return pb;

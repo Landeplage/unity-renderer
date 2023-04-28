@@ -52,10 +52,10 @@ namespace DCL.Components
                 if (pbModel.UiScrollRect.HasHAlign) pb.hAlign = pbModel.UiScrollRect.HAlign;
                 if (pbModel.UiScrollRect.HasVAlign) pb.vAlign = pbModel.UiScrollRect.VAlign;
                 if (pbModel.UiScrollRect.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiScrollRect.IsPointerBlocker;
-                if (pbModel.UiScrollRect.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiScrollRect.Width);
-                if (pbModel.UiScrollRect.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiScrollRect.Height);
-                if (pbModel.UiScrollRect.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiScrollRect.PositionX);
-                if (pbModel.UiScrollRect.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiScrollRect.PositionY);
+                if (pbModel.UiScrollRect.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiScrollRect.Width);
+                if (pbModel.UiScrollRect.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiScrollRect.Height);
+                if (pbModel.UiScrollRect.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiScrollRect.PositionX);
+                if (pbModel.UiScrollRect.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiScrollRect.PositionY);
 
                 return pb;
             }

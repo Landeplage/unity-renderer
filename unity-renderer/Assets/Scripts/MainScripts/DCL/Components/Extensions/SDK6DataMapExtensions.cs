@@ -17,11 +17,12 @@ namespace MainScripts.DCL.Components
 
         public static UnityEngine.Quaternion AsUnityQuaternion(this Decentraland.Common.Quaternion quaternion) =>
             new (quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
-
-        public static UIValue FromProtobufUiValue(this UIValue value, Decentraland.Sdk.Ecs6.UiValue uiValue) =>
-            new(
-                uiValue.HasValue ? uiValue.Value : value.value,
-                uiValue.HasType ? (UIValue.Unit)uiValue.Type : value.type
-            );
+        
+        public static UIValue FromProtobuf(UIValue defaultValue, Decentraland.Sdk.Ecs6.UiValue uiValue) =>
+            new()
+            {
+                value = uiValue.HasValue ? uiValue.Value : defaultValue.value,
+                type = uiValue.HasType ? (UIValue.Unit)uiValue.Type : defaultValue.type
+            };
     }
 }

@@ -21,22 +21,25 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.ConeShape
-                    ? new Model
-                    {
-                        arc = pbModel.ConeShape.Arc,
-                        radius = pbModel.ConeShape.Radius,
-                        openEnded = pbModel.ConeShape.OpenEnded,
-                        radiusBottom = pbModel.ConeShape.RadiusBottom,
-                        radiusTop = pbModel.ConeShape.RadiusTop,
-                        segmentsHeight = pbModel.ConeShape.SegmentsHeight,
-                        segmentsRadial = pbModel.ConeShape.SegmentsRadial,
-                        visible = pbModel.ConeShape.Visible,
-                        withCollisions = pbModel.ConeShape.WithCollisions,
-                        isPointerBlocker = pbModel.ConeShape.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<ConeShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.ConeShape, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.ConeShape)
+                    return Utils.SafeUnimplemented<ConeShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.ConeShape, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.ConeShape.HasArc) pb.arc = pbModel.ConeShape.Arc;
+                if (pbModel.ConeShape.HasRadius) pb.radius = pbModel.ConeShape.Radius;
+                if (pbModel.ConeShape.HasOpenEnded) pb.openEnded = pbModel.ConeShape.OpenEnded;
+                if (pbModel.ConeShape.HasRadiusBottom) pb.radiusBottom = pbModel.ConeShape.RadiusBottom;
+                if (pbModel.ConeShape.HasRadiusTop) pb.radiusTop = pbModel.ConeShape.RadiusTop;
+                if (pbModel.ConeShape.HasSegmentsHeight) pb.segmentsHeight = pbModel.ConeShape.SegmentsHeight;
+                if (pbModel.ConeShape.HasSegmentsRadial) pb.segmentsRadial = pbModel.ConeShape.SegmentsRadial;
+                if (pbModel.ConeShape.HasVisible) pb.visible = pbModel.ConeShape.Visible;
+                if (pbModel.ConeShape.HasWithCollisions) pb.withCollisions = pbModel.ConeShape.WithCollisions;
+                if (pbModel.ConeShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.ConeShape.IsPointerBlocker;
+                
+                return pb;
+            }
         }
 
         public ConeShape()

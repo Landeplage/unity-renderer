@@ -108,23 +108,26 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiShape
-                    ? new Model
-                    {
-                        name = pbModel.UiShape.Name,
-                        parentComponent = pbModel.UiShape.ParentComponent,
-                        visible = pbModel.UiShape.Visible,
-                        opacity = pbModel.UiShape.Opacity,
-                        hAlign = pbModel.UiShape.HAlign,
-                        vAlign = pbModel.UiShape.VAlign,
-                        width = pbModel.UiShape.Width.AsUiValue(),
-                        height = pbModel.UiShape.Height.AsUiValue(),
-                        positionX = pbModel.UiShape.PositionX.AsUiValue(),
-                        positionY = pbModel.UiShape.PositionY.AsUiValue(),
-                        isPointerBlocker = pbModel.UiShape.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiShape)
+                    return Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.UiShape.HasName) pb.name = pbModel.UiShape.Name;
+                if (pbModel.UiShape.HasParentComponent) pb.parentComponent = pbModel.UiShape.ParentComponent;
+                if (pbModel.UiShape.HasVisible) pb.visible = pbModel.UiShape.Visible;
+                if (pbModel.UiShape.HasOpacity) pb.opacity = pbModel.UiShape.Opacity;
+                if (pbModel.UiShape.HasHAlign) pb.hAlign = pbModel.UiShape.HAlign;
+                if (pbModel.UiShape.HasVAlign) pb.vAlign = pbModel.UiShape.VAlign;
+                if (pbModel.UiShape.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiShape.Width);
+                if (pbModel.UiShape.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiShape.Height);
+                if (pbModel.UiShape.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiShape.PositionX);
+                if (pbModel.UiShape.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiShape.PositionY);
+                if (pbModel.UiShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiShape.IsPointerBlocker;
+
+                return pb;
+            }
         }
 
         public override string componentName => GetDebugName();

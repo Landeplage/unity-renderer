@@ -27,15 +27,18 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BasicMaterial
-                    ? new Model
-                    {
-                        texture = pbModel.BasicMaterial.Texture,
-                        alphaTest = pbModel.BasicMaterial.AlphaTest,
-                        castShadows = pbModel.BasicMaterial.CastShadows,
-                    }
-                    : Utils.SafeUnimplemented<BasicMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.BasicMaterial, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.BasicMaterial)
+                    return Utils.SafeUnimplemented<BasicMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.BasicMaterial, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.BasicMaterial.HasTexture) pb.texture = pbModel.BasicMaterial.Texture;
+                if (pbModel.BasicMaterial.HasAlphaTest) pb.alphaTest = pbModel.BasicMaterial.AlphaTest;
+                if (pbModel.BasicMaterial.HasCastShadows) pb.castShadows = pbModel.BasicMaterial.CastShadows;
+                
+                return pb;
+            }
         }
 
         public Material material;

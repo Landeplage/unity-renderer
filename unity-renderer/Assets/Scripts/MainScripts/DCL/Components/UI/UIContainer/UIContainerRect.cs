@@ -19,26 +19,28 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiContainerRect
-                    ? new Model
-                    {
-                        color = pbModel.UiContainerRect.Color.AsUnityColor(),
-                        thickness = pbModel.UiContainerRect.Thickness,
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiContainerRect)
+                    return Utils.SafeUnimplemented<UIContainerRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerRect, actual: pbModel.PayloadCase);
 
-                        name = pbModel.UiContainerRect.Name,
-                        parentComponent = pbModel.UiContainerRect.ParentComponent,
-                        visible = pbModel.UiContainerRect.Visible,
-                        opacity = pbModel.UiContainerRect.Opacity,
-                        hAlign = pbModel.UiContainerRect.HAlign,
-                        vAlign = pbModel.UiContainerRect.VAlign,
-                        width = pbModel.UiContainerRect.Width.AsUiValue(),
-                        height = pbModel.UiContainerRect.Height.AsUiValue(),
-                        positionX = pbModel.UiContainerRect.PositionX.AsUiValue(),
-                        positionY = pbModel.UiContainerRect.PositionY.AsUiValue(),
-                        isPointerBlocker = pbModel.UiContainerRect.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<UIContainerRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerRect, actual: pbModel.PayloadCase);
+                var pb = new Model();
+                if (pbModel.UiContainerRect.Color != null) pb.color = pbModel.UiContainerRect.Color.AsUnityColor();
+                if (pbModel.UiContainerRect.HasThickness) pb.thickness = pbModel.UiContainerRect.Thickness;
+                if (pbModel.UiContainerRect.HasName) pb.name = pbModel.UiContainerRect.Name;
+                if (pbModel.UiContainerRect.HasParentComponent) pb.parentComponent = pbModel.UiContainerRect.ParentComponent;
+                if (pbModel.UiContainerRect.HasVisible) pb.visible = pbModel.UiContainerRect.Visible;
+                if (pbModel.UiContainerRect.HasOpacity) pb.opacity = pbModel.UiContainerRect.Opacity;
+                if (pbModel.UiContainerRect.HasHAlign) pb.hAlign = pbModel.UiContainerRect.HAlign;
+                if (pbModel.UiContainerRect.HasVAlign) pb.vAlign = pbModel.UiContainerRect.VAlign;
+                if (pbModel.UiContainerRect.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiContainerRect.Width);
+                if (pbModel.UiContainerRect.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiContainerRect.Height);
+                if (pbModel.UiContainerRect.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiContainerRect.PositionX);
+                if (pbModel.UiContainerRect.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiContainerRect.PositionY);
+                if (pbModel.UiContainerRect.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiContainerRect.IsPointerBlocker;
+
+                return pb;
+            }
         }
 
         public override string referencesContainerPrefabName => "UIContainerRect";

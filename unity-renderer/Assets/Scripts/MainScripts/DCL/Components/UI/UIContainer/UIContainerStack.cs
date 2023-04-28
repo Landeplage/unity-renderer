@@ -25,29 +25,31 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiContainerStack
-                    ? new Model
-                    {
-                        color = pbModel.UiContainerStack.Color.AsUnityColor(),
-                        stackOrientation = (StackOrientation)pbModel.UiContainerStack.StackOrientation,
-                        adaptWidth = pbModel.UiContainerStack.AdaptWidth,
-                        adaptHeight = pbModel.UiContainerStack.AdaptHeight,
-                        spacing = pbModel.UiContainerStack.Spacing,
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiContainerStack)
+                    return Utils.SafeUnimplemented<UIContainerStack, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerStack, actual: pbModel.PayloadCase);
 
-                        name = pbModel.UiContainerStack.Name,
-                        parentComponent = pbModel.UiContainerStack.ParentComponent,
-                        visible = pbModel.UiContainerStack.Visible,
-                        opacity = pbModel.UiContainerStack.Opacity,
-                        hAlign = pbModel.UiContainerStack.HAlign,
-                        vAlign = pbModel.UiContainerStack.VAlign,
-                        width = pbModel.UiContainerStack.Width.AsUiValue(),
-                        height = pbModel.UiContainerStack.Height.AsUiValue(),
-                        positionX = pbModel.UiContainerStack.PositionX.AsUiValue(),
-                        positionY = pbModel.UiContainerStack.PositionY.AsUiValue(),
-                        isPointerBlocker = pbModel.UiContainerStack.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<UIContainerStack, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerStack, actual: pbModel.PayloadCase);
+                var pb = new Model();
+                if (pbModel.UiContainerStack.HasStackOrientation) pb.stackOrientation = (StackOrientation)pbModel.UiContainerStack.StackOrientation;
+                if (pbModel.UiContainerStack.HasAdaptWidth) pb.adaptWidth = pbModel.UiContainerStack.AdaptWidth;
+                if (pbModel.UiContainerStack.HasAdaptHeight) pb.adaptHeight = pbModel.UiContainerStack.AdaptHeight;
+                if (pbModel.UiContainerStack.HasSpacing) pb.spacing = pbModel.UiContainerStack.Spacing;
+                if (pbModel.UiContainerStack.HasName) pb.name = pbModel.UiContainerStack.Name;
+                if (pbModel.UiContainerStack.HasParentComponent) pb.parentComponent = pbModel.UiContainerStack.ParentComponent;
+                if (pbModel.UiContainerStack.HasVisible) pb.visible = pbModel.UiContainerStack.Visible;
+                if (pbModel.UiContainerStack.HasOpacity) pb.opacity = pbModel.UiContainerStack.Opacity;
+                if (pbModel.UiContainerStack.HasHAlign) pb.hAlign = pbModel.UiContainerStack.HAlign;
+                if (pbModel.UiContainerStack.HasVAlign) pb.vAlign = pbModel.UiContainerStack.VAlign;
+                if (pbModel.UiContainerStack.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiContainerStack.IsPointerBlocker;
+                if (pbModel.UiContainerStack.Color != null) pb.color = pbModel.UiContainerStack.Color.AsUnityColor();
+                if (pbModel.UiContainerStack.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiContainerStack.Width);
+                if (pbModel.UiContainerStack.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiContainerStack.Height);
+                if (pbModel.UiContainerStack.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiContainerStack.PositionX);
+                if (pbModel.UiContainerStack.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiContainerStack.PositionY);
+
+                return pb;
+            }
         }
 
         public enum StackOrientation

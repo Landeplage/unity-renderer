@@ -28,14 +28,20 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.CameraModeArea
-                    ? new Model
-                    {
-                        area = new Area { box = pbModel.CameraModeArea.Area.Box.AsUnityVector3() },
-                        cameraMode = (CameraMode.ModeId)pbModel.CameraModeArea.CameraMode,
-                    }
-                    : Utils.SafeUnimplemented<CameraModeArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.CameraModeArea, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.CameraModeArea)
+                    return Utils.SafeUnimplemented<CameraModeArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.CameraModeArea, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+
+                if (pbModel.CameraModeArea.Area is { Box: { } })
+                    pb.area = new Area { box = pbModel.CameraModeArea.Area.Box.AsUnityVector3() };
+
+                pb.cameraMode = (CameraMode.ModeId)pbModel.CameraModeArea.CameraMode;
+
+                return pb;
+            }
         }
 
         private static CameraModeAreasController areasController { get; } = new CameraModeAreasController();

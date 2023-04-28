@@ -41,28 +41,31 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromJSON(string json) { return Utils.SafeFromJson<Model>(json); }
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Material
-                    ? new Model
-                    {
-                        metallic = pbModel.Material.Metallic,
-                        roughness = pbModel.Material.Roughness,
-                        alphaTest = pbModel.Material.AlphaTest,
-                        directIntensity = pbModel.Material.DirectIntensity,
-                        microSurface = pbModel.Material.MicroSurface,
-                        specularIntensity = pbModel.Material.SpecularIntensity,
-                        albedoTexture = pbModel.Material.AlbedoTexture,
-                        alphaTexture = pbModel.Material.AlphaTexture,
-                        bumpTexture = pbModel.Material.BumpTexture,
-                        castShadows = pbModel.Material.CastShadows,
-                        emissiveIntensity = pbModel.Material.EmissiveIntensity,
-                        emissiveTexture = pbModel.Material.EmissiveTexture,
-                        transparencyMode = (int)pbModel.Material.TransparencyMode,
-                        albedoColor = pbModel.Material.AlbedoColor != null ? pbModel.Material.AlbedoColor.AsUnityColor() : Color.white,
-                        emissiveColor = pbModel.Material.EmissiveColor != null ? pbModel.Material.EmissiveColor.AsUnityColor() : Color.black,
-                        reflectivityColor = pbModel.Material.ReflectivityColor != null ? pbModel.Material.ReflectivityColor.AsUnityColor() : Color.white,
-                    }
-                    : Utils.SafeUnimplemented<PBRMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Material, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Material)
+                    return Utils.SafeUnimplemented<PBRMaterial, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Material, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.Material.HasMetallic) pb.metallic = pbModel.Material.Metallic;
+                if (pbModel.Material.HasRoughness) pb.roughness = pbModel.Material.Roughness;
+                if (pbModel.Material.HasAlphaTest) pb.alphaTest = pbModel.Material.AlphaTest;
+                if (pbModel.Material.HasDirectIntensity) pb.directIntensity = pbModel.Material.DirectIntensity;
+                if (pbModel.Material.HasMicroSurface) pb.microSurface = pbModel.Material.MicroSurface;
+                if (pbModel.Material.HasSpecularIntensity) pb.specularIntensity = pbModel.Material.SpecularIntensity;
+                if (pbModel.Material.HasAlbedoTexture) pb.albedoTexture = pbModel.Material.AlbedoTexture;
+                if (pbModel.Material.HasAlphaTexture) pb.alphaTexture = pbModel.Material.AlphaTexture;
+                if (pbModel.Material.HasBumpTexture) pb.bumpTexture = pbModel.Material.BumpTexture;
+                if (pbModel.Material.HasCastShadows) pb.castShadows = pbModel.Material.CastShadows;
+                if (pbModel.Material.HasEmissiveIntensity) pb.emissiveIntensity = pbModel.Material.EmissiveIntensity;
+                if (pbModel.Material.HasEmissiveTexture) pb.emissiveTexture = pbModel.Material.EmissiveTexture;
+                if (pbModel.Material.HasTransparencyMode) pb.transparencyMode = (int)pbModel.Material.TransparencyMode;
+                if (pbModel.Material.AlbedoColor != null) pb.albedoColor = pbModel.Material.AlbedoColor.AsUnityColor();
+                if (pbModel.Material.EmissiveColor != null) pb.emissiveColor = pbModel.Material.EmissiveColor.AsUnityColor();
+                if (pbModel.Material.ReflectivityColor != null) pb.reflectivityColor = pbModel.Material.ReflectivityColor.AsUnityColor();
+                
+                return pb;
+            }
         }
 
         enum TransparencyMode

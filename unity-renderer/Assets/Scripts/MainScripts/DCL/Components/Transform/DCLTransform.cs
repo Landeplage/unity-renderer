@@ -25,15 +25,15 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Transform)
-                    return new Model
-                    {
-                        position = pbModel.Transform.Position.AsUnityVector3(),
-                        scale = pbModel.Transform.Scale.AsUnityVector3(),
-                        rotation = pbModel.Transform.Rotation.AsUnityQuaternion(),
-                    };
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Transform)
+                    return Utils.SafeUnimplemented<DCLTransform, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Transform, pbModel.PayloadCase);
 
-                return Utils.SafeUnimplemented<DCLTransform, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Transform, pbModel.PayloadCase);
+                var pb = new Model();
+                if (pbModel.Transform.Position != null) pb.position = pbModel.Transform.Position.AsUnityVector3();
+                if (pbModel.Transform.Scale != null) pb.scale = pbModel.Transform.Scale.AsUnityVector3();
+                if (pbModel.Transform.Rotation != null) pb.rotation = pbModel.Transform.Rotation.AsUnityQuaternion();
+
+                return pb;
             }
 
         }

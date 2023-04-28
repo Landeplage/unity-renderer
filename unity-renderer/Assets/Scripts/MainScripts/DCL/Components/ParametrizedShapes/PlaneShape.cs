@@ -18,18 +18,21 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.PlaneShape
-                    ? new Model
-                    {
-                        uvs = pbModel.PlaneShape.Uvs.ToArray(),
-                        height = pbModel.PlaneShape.Height,
-                        width = pbModel.PlaneShape.Width,
-                        visible = pbModel.PlaneShape.Visible,
-                        withCollisions = pbModel.PlaneShape.WithCollisions,
-                        isPointerBlocker = pbModel.PlaneShape.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<PlaneShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.PlaneShape, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.PlaneShape)
+                    return Utils.SafeUnimplemented<PlaneShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.PlaneShape, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.PlaneShape.Uvs is { Count: > 0 }) pb.uvs = pbModel.PlaneShape.Uvs.ToArray();
+                if (pbModel.PlaneShape.HasHeight) pb.height = pbModel.PlaneShape.Height;
+                if (pbModel.PlaneShape.HasWidth) pb.width = pbModel.PlaneShape.Width;
+                if (pbModel.PlaneShape.HasVisible) pb.visible = pbModel.PlaneShape.Visible;
+                if (pbModel.PlaneShape.HasWithCollisions) pb.withCollisions = pbModel.PlaneShape.WithCollisions;
+                if (pbModel.PlaneShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.PlaneShape.IsPointerBlocker;
+                
+                return pb;
+            }
         }
 
         public PlaneShape() { model = new Model(); }

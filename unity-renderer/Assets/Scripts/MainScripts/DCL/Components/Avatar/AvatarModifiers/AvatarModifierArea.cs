@@ -23,15 +23,18 @@ public class AvatarModifierArea : BaseComponent
         public override BaseModel GetDataFromJSON(string json) =>
             Utils.SafeFromJson<Model>(json);
 
-        public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-            pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea
-                ? new Model
-                {
-                    modifiers = pbModel.AvatarModifierArea.Modifiers.ToArray(),
-                    excludeIds = pbModel.AvatarModifierArea.ExcludeIds.ToArray(),
-                    area = { box = pbModel.AvatarModifierArea.Area.Box.AsUnityVector3() },
-                }
-                : Utils.SafeUnimplemented<AvatarModifierArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea, actual: pbModel.PayloadCase);
+        public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+        {
+            if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea)
+                return Utils.SafeUnimplemented<AvatarModifierArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea, actual: pbModel.PayloadCase);
+
+            var pb = new Model();
+            if (pbModel.AvatarModifierArea.Modifiers.Count != 0) pb.modifiers = pbModel.AvatarModifierArea.Modifiers.ToArray();
+            if (pbModel.AvatarModifierArea.ExcludeIds.Count != 0) pb.excludeIds = pbModel.AvatarModifierArea.ExcludeIds.ToArray();
+            if (pbModel.AvatarModifierArea.Area.Box != null) pb.area.box = pbModel.AvatarModifierArea.Area.Box.AsUnityVector3();
+
+            return pb;
+        }
     }
 
     private Model cachedModel = new ();

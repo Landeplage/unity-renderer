@@ -45,34 +45,44 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiText
-                    ? new Model
-                    {
-                        outlineWidth = pbModel.UiText.OutlineWidth,
-                        outlineColor = pbModel.UiText.OutlineColor.AsUnityColor(),
-                        color = pbModel.UiText.Color.AsUnityColor(),
-                        adaptWidth = pbModel.UiText.AdaptWidth,
-                        adaptHeight = pbModel.UiText.AdaptHeight,
-                        fontSize = pbModel.UiText.FontSize,
-                        fontAutoSize = pbModel.UiText.FontAutoSize,
-                        font = pbModel.UiText.Font,
-                        value = pbModel.UiText.Value,
-                        lineSpacing = pbModel.UiText.LineSpacing,
-                        lineCount = pbModel.UiText.LineCount,
-                        hTextAlign = pbModel.UiText.HTextAlign,
-                        vTextAlign = pbModel.UiText.VTextAlign,
-                        textWrapping = pbModel.UiText.TextWrapping,
-                        shadowBlur = pbModel.UiText.ShadowBlur,
-                        shadowOffsetX = pbModel.UiText.ShadowOffsetX,
-                        shadowOffsetY = pbModel.UiText.ShadowOffsetY,
-                        shadowColor = pbModel.UiText.ShadowColor.AsUnityColor(),
-                        paddingTop = pbModel.UiText.PaddingTop,
-                        paddingRight = pbModel.UiText.PaddingRight,
-                        paddingBottom = pbModel.UiText.PaddingBottom,
-                        paddingLeft = pbModel.UiText.PaddingLeft
-                    }
-                    : Utils.SafeUnimplemented<UIText, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiText, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiText)
+                    return Utils.SafeUnimplemented<UIText, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiText, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.UiText.HasOutlineWidth) pb.outlineWidth = pbModel.UiText.OutlineWidth;
+                if (pbModel.UiText.OutlineColor != null) pb.outlineColor = pbModel.UiText.OutlineColor.AsUnityColor();
+                if (pbModel.UiText.Color != null) pb.color = pbModel.UiText.Color.AsUnityColor();
+                if (pbModel.UiText.HasAdaptWidth) pb.adaptWidth = pbModel.UiText.AdaptWidth;
+                if (pbModel.UiText.HasAdaptHeight) pb.adaptHeight = pbModel.UiText.AdaptHeight;
+                if (pbModel.UiText.HasFontSize) pb.fontSize = pbModel.UiText.FontSize;
+                if (pbModel.UiText.HasFontAutoSize) pb.fontAutoSize = pbModel.UiText.FontAutoSize;
+                if (pbModel.UiText.HasFont) pb.font = pbModel.UiText.Font;
+                if (pbModel.UiText.HasValue) pb.value = pbModel.UiText.Value;
+                if (pbModel.UiText.HasLineSpacing) pb.lineSpacing = pbModel.UiText.LineSpacing;
+                if (pbModel.UiText.HasLineCount) pb.lineCount = pbModel.UiText.LineCount;
+                if (pbModel.UiText.HasHTextAlign) pb.hTextAlign = pbModel.UiText.HTextAlign;
+                if (pbModel.UiText.HasVTextAlign) pb.vTextAlign = pbModel.UiText.VTextAlign;
+                if (pbModel.UiText.HasTextWrapping) pb.textWrapping = pbModel.UiText.TextWrapping;
+                if (pbModel.UiText.HasShadowBlur) pb.shadowBlur = pbModel.UiText.ShadowBlur;
+                if (pbModel.UiText.HasShadowOffsetX) pb.shadowOffsetX = pbModel.UiText.ShadowOffsetX;
+                if (pbModel.UiText.HasShadowOffsetY) pb.shadowOffsetY = pbModel.UiText.ShadowOffsetY;
+                if (pbModel.UiText.ShadowColor != null) pb.shadowColor = pbModel.UiText.ShadowColor.AsUnityColor();
+                if (pbModel.UiText.HasPaddingTop) pb.paddingTop = pbModel.UiText.PaddingTop;
+                if (pbModel.UiText.HasPaddingRight) pb.paddingRight = pbModel.UiText.PaddingRight;
+                if (pbModel.UiText.HasPaddingBottom) pb.paddingBottom = pbModel.UiText.PaddingBottom;
+                if (pbModel.UiText.HasPaddingLeft) pb.paddingLeft = pbModel.UiText.PaddingLeft;
+                if (pbModel.UiText.HasOpacity) pb.opacity = pbModel.UiText.Opacity;
+                if (pbModel.UiText.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiText.Width);
+                if (pbModel.UiText.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiText.Height);
+                if (pbModel.UiText.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiText.PositionX);
+                if (pbModel.UiText.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiText.PositionY);
+                if (pbModel.UiText.HasVisible) pb.visible = pbModel.UiText.Visible;
+                if (pbModel.UiText.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiText.IsPointerBlocker;
+                
+                return pb;
+            }
         }
 
         public override string referencesContainerPrefabName => "UIText";

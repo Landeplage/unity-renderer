@@ -26,16 +26,18 @@ namespace DCL
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Texture
-                    ? new Model
-                    {
-                        src = pbModel.Texture.Src,
-                        wrap = (BabylonWrapMode)pbModel.Texture.Wrap,
-                        samplingMode = (FilterMode)pbModel.Texture.SamplingMode,
-                    }
-                    : Utils.SafeUnimplemented<DCLTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Texture, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Texture)
+                    return Utils.SafeUnimplemented<DCLTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Texture, actual: pbModel.PayloadCase);
 
+                var pb = new Model();
+                if (pbModel.Texture.HasSrc) pb.src = pbModel.Texture.Src;
+                if (pbModel.Texture.HasWrap) pb.wrap = (BabylonWrapMode)pbModel.Texture.Wrap;
+                if (pbModel.Texture.HasSamplingMode) pb.samplingMode = (FilterMode)pbModel.Texture.SamplingMode;
+                
+                return pb;
+            }
         }
 
         public enum BabylonWrapMode

@@ -49,50 +49,50 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiInputText
-                    ? new Model
-                    {
-                        outlineWidth = pbModel.UiInputText.OutlineWidth,
-                        outlineColor = pbModel.UiInputText.OutlineColor.AsUnityColor(),
-                        color = pbModel.UiInputText.Color.AsUnityColor(),
-                        fontSize = pbModel.UiInputText.FontSize,
-                        font = pbModel.UiInputText.Font,
-                        value = pbModel.UiInputText.Value,
-                        hTextAlign = pbModel.UiInputText.HTextAlign,
-                        vTextAlign = pbModel.UiInputText.VTextAlign,
-                        textWrapping = pbModel.UiInputText.TextWrapping,
-                        shadowBlur = pbModel.UiInputText.ShadowBlur,
-                        shadowOffsetX = pbModel.UiInputText.ShadowOffsetX,
-                        shadowOffsetY = pbModel.UiInputText.ShadowOffsetY,
-                        shadowColor = pbModel.UiInputText.ShadowColor.AsUnityColor(),
-                        paddingTop = pbModel.UiInputText.PaddingTop,
-                        paddingRight = pbModel.UiInputText.PaddingRight,
-                        paddingBottom = pbModel.UiInputText.PaddingBottom,
-                        paddingLeft = pbModel.UiInputText.PaddingLeft,
-                        placeholder = pbModel.UiInputText.Placeholder,
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiInputText)
+                    return Utils.SafeUnimplemented<UIInputText, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiInputText, actual: pbModel.PayloadCase);
 
-                        focusedBackground = pbModel.UiInputText.FocusedBackground.AsUnityColor(),
+                var pb = new Model();
+                if (pbModel.UiInputText.HasOutlineWidth) pb.outlineWidth = pbModel.UiInputText.OutlineWidth;
+                if (pbModel.UiInputText.OutlineColor != null) pb.outlineColor = pbModel.UiInputText.OutlineColor.AsUnityColor();
+                if (pbModel.UiInputText.Color != null) pb.color = pbModel.UiInputText.Color.AsUnityColor();
+                if (pbModel.UiInputText.HasFontSize) pb.fontSize = pbModel.UiInputText.FontSize;
+                if (pbModel.UiInputText.HasFont) pb.font = pbModel.UiInputText.Font;
+                if (pbModel.UiInputText.HasValue) pb.value = pbModel.UiInputText.Value;
+                if (pbModel.UiInputText.HasHTextAlign) pb.hTextAlign = pbModel.UiInputText.HTextAlign;
+                if (pbModel.UiInputText.HasVTextAlign) pb.vTextAlign = pbModel.UiInputText.VTextAlign;
+                if (pbModel.UiInputText.HasTextWrapping) pb.textWrapping = pbModel.UiInputText.TextWrapping;
+                if (pbModel.UiInputText.HasShadowBlur) pb.shadowBlur = pbModel.UiInputText.ShadowBlur;
+                if (pbModel.UiInputText.HasShadowOffsetX) pb.shadowOffsetX = pbModel.UiInputText.ShadowOffsetX;
+                if (pbModel.UiInputText.HasShadowOffsetY) pb.shadowOffsetY = pbModel.UiInputText.ShadowOffsetY;
+                if (pbModel.UiInputText.ShadowColor != null) pb.shadowColor = pbModel.UiInputText.ShadowColor.AsUnityColor();
+                if (pbModel.UiInputText.HasPaddingTop) pb.paddingTop = pbModel.UiInputText.PaddingTop;
+                if (pbModel.UiInputText.HasPaddingRight) pb.paddingRight = pbModel.UiInputText.PaddingRight;
+                if (pbModel.UiInputText.HasPaddingBottom) pb.paddingBottom = pbModel.UiInputText.PaddingBottom;
+                if (pbModel.UiInputText.HasPaddingLeft) pb.paddingLeft = pbModel.UiInputText.PaddingLeft;
+                if (pbModel.UiInputText.HasPlaceholder) pb.placeholder = pbModel.UiInputText.Placeholder;
+                if (pbModel.UiInputText.FocusedBackground != null) pb.focusedBackground = pbModel.UiInputText.FocusedBackground.AsUnityColor();
+                if (pbModel.UiInputText.HasOnTextSubmit) pb.onTextSubmit = pbModel.UiInputText.OnTextSubmit;
+                if (pbModel.UiInputText.HasOnTextChanged) pb.onChanged = pbModel.UiInputText.OnTextChanged;
+                if (pbModel.UiInputText.HasOnFocus) pb.onFocus = pbModel.UiInputText.OnFocus;
+                if (pbModel.UiInputText.HasOnBlur) pb.onBlur = pbModel.UiInputText.OnBlur;
+                if (pbModel.UiInputText.HasOnTextChanged) pb.onTextChanged = pbModel.UiInputText.OnTextChanged;
+                if (pbModel.UiInputText.HasName) pb.name = pbModel.UiInputText.Name;
+                if (pbModel.UiInputText.HasParentComponent) pb.parentComponent = pbModel.UiInputText.ParentComponent;
+                if (pbModel.UiInputText.HasVisible) pb.visible = pbModel.UiInputText.Visible;
+                if (pbModel.UiInputText.HasOpacity) pb.opacity = pbModel.UiInputText.Opacity;
+                if (pbModel.UiInputText.HasHAlign) pb.hAlign = pbModel.UiInputText.HAlign;
+                if (pbModel.UiInputText.HasVAlign) pb.vAlign = pbModel.UiInputText.VAlign;
+                if (pbModel.UiInputText.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiInputText.IsPointerBlocker;
+                if (pbModel.UiInputText.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiShape.Width);
+                if (pbModel.UiInputText.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiShape.Height);
+                if (pbModel.UiInputText.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiShape.PositionX);
+                if (pbModel.UiInputText.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiShape.PositionY);
 
-                        onTextSubmit = pbModel.UiInputText.OnTextSubmit,
-                        onChanged = pbModel.UiInputText.OnTextChanged,
-                        onFocus = pbModel.UiInputText.OnFocus,
-                        onBlur = pbModel.UiInputText.OnBlur,
-                        onTextChanged = pbModel.UiInputText.OnTextChanged,
-
-                        name = pbModel.UiInputText.Name,
-                        parentComponent = pbModel.UiInputText.ParentComponent,
-                        visible = pbModel.UiInputText.Visible,
-                        opacity = pbModel.UiInputText.Opacity,
-                        hAlign = pbModel.UiInputText.HAlign,
-                        vAlign = pbModel.UiInputText.VAlign,
-                        width = pbModel.UiShape.Width.AsUiValue(),
-                        height = pbModel.UiShape.Height.AsUiValue(),
-                        positionX = pbModel.UiShape.PositionX.AsUiValue(),
-                        positionY = pbModel.UiShape.PositionY.AsUiValue(),
-                        isPointerBlocker = pbModel.UiInputText.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<UIInputText, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiInputText, actual: pbModel.PayloadCase);
+                return pb;
+            }
         }
 
         public override string referencesContainerPrefabName => "UIInputText";

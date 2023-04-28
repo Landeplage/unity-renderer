@@ -18,15 +18,19 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
-                    ? new Model
-                    {
-                        uuid = pbModel.UuidCallback.Uuid,
-                        type = pbModel.UuidCallback.Type,
-                        distance = pbModel.UuidCallback.Distance,
-                    }
-                    : Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UuidCallback)
+                    return Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+
+                if (pbModel.UuidCallback.HasUuid) pb.uuid = pbModel.UuidCallback.Uuid;
+                if (pbModel.UuidCallback.HasType) pb.type = pbModel.UuidCallback.Type;
+                if (pbModel.UuidCallback.HasDistance) pb.distance = pbModel.UuidCallback.Distance;
+
+                return pb;
+            }
         }
 
         internal OnPointerEventColliders pointerEventColliders;

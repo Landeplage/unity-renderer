@@ -32,34 +32,33 @@ public class AvatarModel : BaseModel
 
     public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
     {
-        if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AvatarShape)
+        if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AvatarShape)
+            return Utils.SafeUnimplemented<AvatarModel, AvatarModel>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarShape, actual: pbModel.PayloadCase);
+        
+        var model = new AvatarModel();
+        if (pbModel.AvatarShape.HasId) model.id = pbModel.AvatarShape.Id;
+        if (pbModel.AvatarShape.HasName) model.name = pbModel.AvatarShape.Name;
+        if (pbModel.AvatarShape.HasTalking) model.talking = pbModel.AvatarShape.Talking;
+        if (pbModel.AvatarShape.HasBodyShape) model.bodyShape = pbModel.AvatarShape.BodyShape;
+        if (pbModel.AvatarShape.EyeColor != null) model.eyeColor = pbModel.AvatarShape.EyeColor.AsUnityColor();
+        if (pbModel.AvatarShape.HairColor != null) model.hairColor = pbModel.AvatarShape.HairColor.AsUnityColor();
+        if (pbModel.AvatarShape.SkinColor != null) model.skinColor = pbModel.AvatarShape.SkinColor.AsUnityColor();
+        if (pbModel.AvatarShape.HasExpressionTriggerId) model.expressionTriggerId = pbModel.AvatarShape.ExpressionTriggerId;
+        if (pbModel.AvatarShape.HasExpressionTriggerTimestamp) model.expressionTriggerTimestamp = pbModel.AvatarShape.ExpressionTriggerTimestamp;
+        if (pbModel.AvatarShape.Wearables is { Count: > 0 }) model.wearables = pbModel.AvatarShape.Wearables.ToList();
+        if (pbModel.AvatarShape.Emotes is { Count: > 0 })
         {
-            var model = new AvatarModel
-            {
-                id = pbModel.AvatarShape.Id,
-                name = pbModel.AvatarShape.Name,
-                talking = pbModel.AvatarShape.Talking,
-                bodyShape = pbModel.AvatarShape.BodyShape,
-                eyeColor = pbModel.AvatarShape.EyeColor.AsUnityColor(),
-                hairColor = pbModel.AvatarShape.HairColor.AsUnityColor(),
-                skinColor = pbModel.AvatarShape.SkinColor.AsUnityColor(),
-                expressionTriggerId = pbModel.AvatarShape.ExpressionTriggerId,
-                expressionTriggerTimestamp = pbModel.AvatarShape.ExpressionTriggerTimestamp,
-
-                wearables = pbModel.AvatarShape.Wearables.ToList(),
-                emotes = new List<AvatarEmoteEntry>(pbModel.AvatarShape.Emotes.Count),
-            };
-
+            model.emotes = new List<AvatarEmoteEntry>(pbModel.AvatarShape.Emotes.Count);
             for (var i = 0; i < pbModel.AvatarShape.Emotes.Count; i++)
             {
-                model.emotes[i].slot = pbModel.AvatarShape.Emotes[i].Slot;
-                model.emotes[i].urn = pbModel.AvatarShape.Emotes[i].Urn;
+                if (pbModel.AvatarShape.Emotes[i] == null) continue;
+                if (pbModel.AvatarShape.Emotes[i].HasSlot) model.emotes[i].slot = pbModel.AvatarShape.Emotes[i].Slot;
+                if (pbModel.AvatarShape.Emotes[i].HasUrn) model.emotes[i].urn = pbModel.AvatarShape.Emotes[i].Urn;
             }
-
-            return model;
         }
 
-        return Utils.SafeUnimplemented<AvatarModel, AvatarModel>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarShape, actual: pbModel.PayloadCase);
+        return model;
+
     }
 
     public bool HaveSameWearablesAndColors(AvatarModel other)

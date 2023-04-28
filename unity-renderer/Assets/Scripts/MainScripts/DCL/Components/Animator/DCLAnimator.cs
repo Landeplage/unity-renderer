@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DCL.Helpers;
 using UnityEngine;
-using DCL.Controllers;
 using Decentraland.Sdk.Ecs6;
-using System.Linq;
 
 namespace DCL.Components
 {
@@ -43,23 +41,22 @@ namespace DCL.Components
                 if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Animator)
                     return Utils.SafeUnimplemented<DCLAnimator, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Animator, actual: pbModel.PayloadCase);
 
-                var model = new Model
-                {
-                    states = new DCLAnimationState[pbModel.Animator.States.Count],
-                };
+                if (pbModel.Animator.States.Count == 0)
+                    return new Model();
+
+                var model = new Model { states = new DCLAnimationState[pbModel.Animator.States.Count] };
 
                 for (var i = 0; i < pbModel.Animator.States.Count; i++)
                 {
-                    model.states[i] = new DCLAnimationState()
-                    {
-                        name = pbModel.Animator.States[i].Name,
-                        clip = pbModel.Animator.States[i].Clip,
-                        playing = pbModel.Animator.States[i].Playing,
-                        weight = pbModel.Animator.States[i].Weight,
-                        speed = pbModel.Animator.States[i].Speed,
-                        looping = pbModel.Animator.States[i].Looping,
-                        shouldReset = pbModel.Animator.States[i].ShouldReset
-                    };
+                    model.states[i] = new DCLAnimationState();
+
+                    if (pbModel.Animator.States[i].HasName) model.states[i].name = pbModel.Animator.States[i].Name;
+                    if (pbModel.Animator.States[i].HasClip) model.states[i].clip = pbModel.Animator.States[i].Clip;
+                    if (pbModel.Animator.States[i].HasPlaying) model.states[i].playing = pbModel.Animator.States[i].Playing;
+                    if (pbModel.Animator.States[i].HasWeight) model.states[i].weight = pbModel.Animator.States[i].Weight;
+                    if (pbModel.Animator.States[i].HasSpeed) model.states[i].speed = pbModel.Animator.States[i].Speed;
+                    if (pbModel.Animator.States[i].HasLooping) model.states[i].looping = pbModel.Animator.States[i].Looping;
+                    if (pbModel.Animator.States[i].HasShouldReset) model.states[i].shouldReset = pbModel.Animator.States[i].ShouldReset;
                 }
 
                 return model;

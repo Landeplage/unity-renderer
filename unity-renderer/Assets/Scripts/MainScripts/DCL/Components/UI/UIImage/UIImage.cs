@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using DCL.Controllers;
 using DCL.Helpers;
 using DCL.Models;
 using System.Collections;
@@ -27,22 +26,27 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiImage
-                    ? new Model
-                    {
-                        source = pbModel.UiImage.Source,
-                        sourceLeft = pbModel.UiImage.SourceLeft,
-                        sourceTop = pbModel.UiImage.SourceTop,
-                        sourceWidth = pbModel.UiImage.SourceWidth,
-                        sourceHeight = pbModel.UiImage.SourceHeight,
-                        paddingTop = pbModel.UiImage.PaddingTop,
-                        paddingRight = pbModel.UiImage.PaddingRight,
-                        paddingBottom = pbModel.UiImage.PaddingBottom,
-                        paddingLeft = pbModel.UiImage.PaddingLeft,
-                        sizeInPixels = pbModel.UiImage.SizeInPixels,
-                    }
-                    : Utils.SafeUnimplemented<UIImage, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiImage, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiImage)
+                    return Utils.SafeUnimplemented<UIImage, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiImage, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.UiImage.HasSource) pb.source = pbModel.UiImage.Source;
+                if (pbModel.UiImage.HasSourceLeft) pb.sourceLeft = pbModel.UiImage.SourceLeft;
+                if (pbModel.UiImage.HasSourceTop) pb.sourceTop = pbModel.UiImage.SourceTop;
+                if (pbModel.UiImage.HasSourceWidth) pb.sourceWidth = pbModel.UiImage.SourceWidth;
+                if (pbModel.UiImage.HasSourceHeight) pb.sourceHeight = pbModel.UiImage.SourceHeight;
+                if (pbModel.UiImage.HasPaddingTop) pb.paddingTop = pbModel.UiImage.PaddingTop;
+                if (pbModel.UiImage.HasPaddingRight) pb.paddingRight = pbModel.UiImage.PaddingRight;
+                if (pbModel.UiImage.HasPaddingBottom) pb.paddingBottom = pbModel.UiImage.PaddingBottom;
+                if (pbModel.UiImage.HasPaddingLeft) pb.paddingLeft = pbModel.UiImage.PaddingLeft;
+                if (pbModel.UiImage.HasSizeInPixels) pb.sizeInPixels = pbModel.UiImage.SizeInPixels;
+                if (pbModel.UiImage.HasVisible) pb.visible = pbModel.UiImage.Visible;
+                if (pbModel.UiImage.HasOpacity) pb.opacity = pbModel.UiImage.Opacity;
+                
+                return pb;
+            }
         }
 
         public override string referencesContainerPrefabName => "UIImage";

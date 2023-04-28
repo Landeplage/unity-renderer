@@ -42,16 +42,20 @@ namespace DCL.Components
                 Utils.SafeFromJson<AvatarModel>(json);
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AvatarTexture)
-                    return new AvatarModel
-                    {
-                        src = pbModel.AvatarTexture.UserId,
-                        wrap = (BabylonWrapMode)pbModel.AvatarTexture.Wrap,
-                        samplingMode = (FilterMode)pbModel.AvatarTexture.SamplingMode,
-                        userId = pbModel.AvatarTexture.UserId,
-                    };
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AvatarTexture)
+                    return Utils.SafeUnimplemented<DCLTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarTexture, actual: pbModel.PayloadCase);
 
-                return Utils.SafeUnimplemented<DCLTexture, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarTexture, actual: pbModel.PayloadCase);
+                var pb = new AvatarModel();
+                if (pbModel.AvatarTexture.HasWrap) pb.wrap = (BabylonWrapMode)pbModel.AvatarTexture.Wrap;
+                if (pbModel.AvatarTexture.HasSamplingMode) pb.samplingMode = (FilterMode)pbModel.AvatarTexture.SamplingMode;
+                if (pbModel.AvatarTexture.HasUserId)
+                {
+                    pb.src = pbModel.AvatarTexture.UserId;
+                    pb.userId = pbModel.AvatarTexture.UserId;
+                }
+                
+                return pb;
+
             }
         }
 

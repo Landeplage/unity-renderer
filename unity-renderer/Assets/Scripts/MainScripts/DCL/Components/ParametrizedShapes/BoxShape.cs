@@ -18,16 +18,16 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.BoxShape)
-                    return new Model
-                    {
-                        visible = pbModel.BoxShape.Visible,
-                        withCollisions = pbModel.BoxShape.WithCollisions,
-                        isPointerBlocker = pbModel.BoxShape.IsPointerBlocker,
-                        uvs = pbModel.BoxShape.Uvs.ToArray(),
-                    };
-
-                return Utils.SafeUnimplemented<BoxShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.BoxShape, actual: pbModel.PayloadCase);
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.BoxShape)
+                    return Utils.SafeUnimplemented<BoxShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.BoxShape, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.BoxShape.HasVisible) pb.visible = pbModel.BoxShape.Visible;
+                if (pbModel.BoxShape.HasWithCollisions) pb.withCollisions = pbModel.BoxShape.WithCollisions;
+                if (pbModel.BoxShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.BoxShape.IsPointerBlocker;
+                if (pbModel.BoxShape.Uvs is { Count: > 0 }) pb.uvs = pbModel.BoxShape.Uvs.ToArray();
+                
+                return pb;
             }
         }
 

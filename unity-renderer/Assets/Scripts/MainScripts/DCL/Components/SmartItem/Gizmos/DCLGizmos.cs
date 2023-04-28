@@ -28,18 +28,21 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Gizmos
-                    ? new Model
-                    {
-                        cycle = pbModel.Gizmos.Cycle,
-                        position = pbModel.Gizmos.Position,
-                        rotation = pbModel.Gizmos.Rotation,
-                        scale = pbModel.Gizmos.Scale,
-                        localReference = pbModel.Gizmos.LocalReference,
-                        selectedGizmo = pbModel.Gizmos.SelectedGizmo,
-                    }
-                    : Utils.SafeUnimplemented<DCLGizmos, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Gizmos, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Gizmos)
+                    return Utils.SafeUnimplemented<DCLGizmos, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Gizmos, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.Gizmos.HasCycle) pb.cycle = pbModel.Gizmos.Cycle;
+                if (pbModel.Gizmos.HasPosition) pb.position = pbModel.Gizmos.Position;
+                if (pbModel.Gizmos.HasRotation) pb.rotation = pbModel.Gizmos.Rotation;
+                if (pbModel.Gizmos.HasScale) pb.scale = pbModel.Gizmos.Scale;
+                if (pbModel.Gizmos.HasLocalReference) pb.localReference = pbModel.Gizmos.LocalReference;
+                if (pbModel.Gizmos.HasSelectedGizmo) pb.selectedGizmo = pbModel.Gizmos.SelectedGizmo;
+
+                return pb;
+            }
         }
 
         private void Awake()

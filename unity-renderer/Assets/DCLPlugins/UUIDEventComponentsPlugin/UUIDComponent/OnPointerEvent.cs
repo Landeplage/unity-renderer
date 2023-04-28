@@ -84,19 +84,22 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UuidCallback
-                    ? new Model
-                    {
-                        uuid = pbModel.UuidCallback.Uuid,
-                        type = pbModel.UuidCallback.Type,
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UuidCallback)
+                    return Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
 
-                        button = pbModel.UuidCallback.Button,
-                        hoverText = pbModel.UuidCallback.HoverText,
-                        distance = pbModel.UuidCallback.Distance,
-                        showFeedback = pbModel.UuidCallback.ShowFeedback,
-                    }
-                    : Utils.SafeUnimplemented<OnPointerEvent, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UuidCallback, actual: pbModel.PayloadCase);
+                var pb = new Model();
+
+                if (pbModel.UuidCallback.HasUuid) pb.uuid = pbModel.UuidCallback.Uuid;
+                if (pbModel.UuidCallback.HasType) pb.type = pbModel.UuidCallback.Type;
+                if (pbModel.UuidCallback.HasButton) pb.button = pbModel.UuidCallback.Button;
+                if (pbModel.UuidCallback.HasHoverText) pb.hoverText = pbModel.UuidCallback.HoverText;
+                if (pbModel.UuidCallback.HasDistance) pb.distance = pbModel.UuidCallback.Distance;
+                if (pbModel.UuidCallback.HasShowFeedback) pb.showFeedback = pbModel.UuidCallback.ShowFeedback;
+
+                return pb;
+            }
 
             public WebInterface.ACTION_BUTTON GetActionButton() =>
                 button switch

@@ -23,22 +23,22 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                if (pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.CylinderShape)
-                    return new Model
-                    {
-                        arc = pbModel.CylinderShape.Arc,
-                        radius = pbModel.CylinderShape.Radius,
-                        openEnded = pbModel.CylinderShape.OpenEnded,
-                        radiusBottom = pbModel.CylinderShape.RadiusBottom,
-                        radiusTop = pbModel.CylinderShape.RadiusTop,
-                        segmentsHeight = pbModel.CylinderShape.SegmentsHeight,
-                        segmentsRadial = pbModel.CylinderShape.SegmentsRadial,
-                        visible = pbModel.CylinderShape.Visible,
-                        withCollisions = pbModel.CylinderShape.WithCollisions,
-                        isPointerBlocker = pbModel.CylinderShape.IsPointerBlocker,
-                    };
-
-                return Utils.SafeUnimplemented<CylinderShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.CylinderShape, actual: pbModel.PayloadCase);
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.CylinderShape)
+                    return Utils.SafeUnimplemented<CylinderShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.CylinderShape, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.CylinderShape.HasArc) pb.arc = pbModel.CylinderShape.Arc;
+                if (pbModel.CylinderShape.HasRadius) pb.radius = pbModel.CylinderShape.Radius;
+                if (pbModel.CylinderShape.HasOpenEnded) pb.openEnded = pbModel.CylinderShape.OpenEnded;
+                if (pbModel.CylinderShape.HasRadiusBottom) pb.radiusBottom = pbModel.CylinderShape.RadiusBottom;
+                if (pbModel.CylinderShape.HasRadiusTop) pb.radiusTop = pbModel.CylinderShape.RadiusTop;
+                if (pbModel.CylinderShape.HasSegmentsHeight) pb.segmentsHeight = pbModel.CylinderShape.SegmentsHeight;
+                if (pbModel.CylinderShape.HasSegmentsRadial) pb.segmentsRadial = pbModel.CylinderShape.SegmentsRadial;
+                if (pbModel.CylinderShape.HasVisible) pb.visible = pbModel.CylinderShape.Visible;
+                if (pbModel.CylinderShape.HasWithCollisions) pb.withCollisions = pbModel.CylinderShape.WithCollisions;
+                if (pbModel.CylinderShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.CylinderShape.IsPointerBlocker;
+                
+                return pb;
             }
         }
 

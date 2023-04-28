@@ -22,15 +22,18 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioStream
-                    ? new Model
-                    {
-                        playing = pbModel.AudioStream.Playing,
-                        url = pbModel.AudioStream.Url,
-                        volume = pbModel.AudioStream.Volume,
-                    }
-                    : Utils.SafeUnimplemented<DCLAudioStream, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioStream, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AudioStream)
+                    return Utils.SafeUnimplemented<DCLAudioStream, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioStream, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.AudioStream.HasPlaying) pb.playing = pbModel.AudioStream.Playing;
+                if (pbModel.AudioStream.HasUrl) pb.url = pbModel.AudioStream.Url;
+                if (pbModel.AudioStream.HasVolume) pb.volume = pbModel.AudioStream.Volume;
+
+                return pb;
+            }
         }
 
         private void Awake() { model = new Model(); }

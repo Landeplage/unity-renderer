@@ -24,18 +24,21 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.AudioSource
-                    ? new Model
-                    {
-                        loop = pbModel.AudioSource.Loop,
-                        pitch = pbModel.AudioSource.Pitch,
-                        playing = pbModel.AudioSource.Playing,
-                        volume = pbModel.AudioSource.Volume,
-                        audioClipId = pbModel.AudioSource.AudioClipId,
-                        playedAtTimestamp = pbModel.AudioSource.PlayedAtTimestamp,
-                    }
-                    : Utils.SafeUnimplemented<DCLAudioSource, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioSource, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AudioSource)
+                    return Utils.SafeUnimplemented<DCLAudioSource, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AudioSource, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.AudioSource.HasLoop) pb.loop = pbModel.AudioSource.Loop;
+                if (pbModel.AudioSource.HasPitch) pb.pitch = pbModel.AudioSource.Pitch;
+                if (pbModel.AudioSource.HasPlaying) pb.playing = pbModel.AudioSource.Playing;
+                if (pbModel.AudioSource.HasVolume) pb.volume = pbModel.AudioSource.Volume;
+                if (pbModel.AudioSource.HasAudioClipId) pb.audioClipId = pbModel.AudioSource.AudioClipId;
+                if (pbModel.AudioSource.HasPlayedAtTimestamp) pb.playedAtTimestamp = pbModel.AudioSource.PlayedAtTimestamp;
+
+                return pb;
+            }
         }
 
         public float playTime => audioSource.time;

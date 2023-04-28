@@ -29,34 +29,36 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.UiScrollRect
-                    ? new Model
-                    {
-                        valueX = pbModel.UiScrollRect.ValueX,
-                        valueY = pbModel.UiScrollRect.ValueY,
-                        backgroundColor = pbModel.UiScrollRect.BackgroundColor.AsUnityColor(),
-                        isHorizontal = pbModel.UiScrollRect.IsHorizontal,
-                        isVertical = pbModel.UiScrollRect.IsVertical,
-                        paddingTop = pbModel.UiScrollRect.PaddingTop,
-                        paddingRight = pbModel.UiScrollRect.PaddingRight,
-                        paddingBottom = pbModel.UiScrollRect.PaddingBottom,
-                        paddingLeft = pbModel.UiScrollRect.PaddingLeft,
-                        OnChanged = pbModel.UiScrollRect.OnChanged,
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiScrollRect)
+                    return Utils.SafeUnimplemented<UIScrollRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiScrollRect, actual: pbModel.PayloadCase);
 
-                        name = pbModel.UiScrollRect.Name,
-                        parentComponent = pbModel.UiScrollRect.ParentComponent,
-                        visible = pbModel.UiScrollRect.Visible,
-                        opacity = pbModel.UiScrollRect.Opacity,
-                        hAlign = pbModel.UiScrollRect.HAlign,
-                        vAlign = pbModel.UiScrollRect.VAlign,
-                        width = pbModel.UiScrollRect.Width.AsUiValue(),
-                        height = pbModel.UiScrollRect.Height.AsUiValue(),
-                        positionX = pbModel.UiScrollRect.PositionX.AsUiValue(),
-                        positionY = pbModel.UiScrollRect.PositionY.AsUiValue(),
-                        isPointerBlocker = pbModel.UiScrollRect.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<UIScrollRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiScrollRect, actual: pbModel.PayloadCase);
+                var pb = new Model();
+                if (pbModel.UiScrollRect.HasValueX) pb.valueX = pbModel.UiScrollRect.ValueX;
+                if (pbModel.UiScrollRect.HasValueY) pb.valueY = pbModel.UiScrollRect.ValueY;
+                if (pbModel.UiScrollRect.BackgroundColor != null) pb.backgroundColor = pbModel.UiScrollRect.BackgroundColor.AsUnityColor();
+                if (pbModel.UiScrollRect.IsHorizontal) pb.isHorizontal = pbModel.UiScrollRect.IsHorizontal;
+                if (pbModel.UiScrollRect.IsVertical) pb.isVertical = pbModel.UiScrollRect.IsVertical;
+                if (pbModel.UiScrollRect.HasPaddingTop) pb.paddingTop = pbModel.UiScrollRect.PaddingTop;
+                if (pbModel.UiScrollRect.HasPaddingRight) pb.paddingRight = pbModel.UiScrollRect.PaddingRight;
+                if (pbModel.UiScrollRect.HasPaddingBottom) pb.paddingBottom = pbModel.UiScrollRect.PaddingBottom;
+                if (pbModel.UiScrollRect.HasPaddingLeft) pb.paddingLeft = pbModel.UiScrollRect.PaddingLeft;
+                if (pbModel.UiScrollRect.HasOnChanged) pb.OnChanged = pbModel.UiScrollRect.OnChanged;
+                if (pbModel.UiScrollRect.HasName) pb.name = pbModel.UiScrollRect.Name;
+                if (pbModel.UiScrollRect.HasParentComponent) pb.parentComponent = pbModel.UiScrollRect.ParentComponent;
+                if (pbModel.UiScrollRect.HasVisible) pb.visible = pbModel.UiScrollRect.Visible;
+                if (pbModel.UiScrollRect.HasOpacity) pb.opacity = pbModel.UiScrollRect.Opacity;
+                if (pbModel.UiScrollRect.HasHAlign) pb.hAlign = pbModel.UiScrollRect.HAlign;
+                if (pbModel.UiScrollRect.HasVAlign) pb.vAlign = pbModel.UiScrollRect.VAlign;
+                if (pbModel.UiScrollRect.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiScrollRect.IsPointerBlocker;
+                if (pbModel.UiScrollRect.Width != null) pb.width = pb.width.FromProtobufUiValue(pbModel.UiScrollRect.Width);
+                if (pbModel.UiScrollRect.Height != null) pb.height = pb.height.FromProtobufUiValue(pbModel.UiScrollRect.Height);
+                if (pbModel.UiScrollRect.PositionX != null) pb.positionX = pb.positionX.FromProtobufUiValue(pbModel.UiScrollRect.PositionX);
+                if (pbModel.UiScrollRect.PositionY != null) pb.positionY = pb.positionY.FromProtobufUiValue(pbModel.UiScrollRect.PositionY);
+
+                return pb;
+            }
         }
 
         public override string referencesContainerPrefabName => "UIScrollRect";

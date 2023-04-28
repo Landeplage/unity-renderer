@@ -19,10 +19,16 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.VideoClip
-                    ? new Model { url = pbModel.VideoClip.Url }
-                    : Utils.SafeUnimplemented<DCLVideoClip, Model>(expected: ComponentBodyPayload.PayloadOneofCase.VideoClip, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.VideoClip)
+                    return Utils.SafeUnimplemented<DCLVideoClip, Model>(expected: ComponentBodyPayload.PayloadOneofCase.VideoClip, actual: pbModel.PayloadCase);
+
+                var pb = new Model();
+                if (pbModel.VideoClip.HasUrl) pb.url = pbModel.VideoClip.Url;
+                
+                return pb;
+            }
         }
 
         public bool isExternalURL { get; private set; }

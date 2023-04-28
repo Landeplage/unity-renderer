@@ -38,10 +38,16 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.Font
-                    ? new Model { src = pbModel.Font.Src }
-                    : Utils.SafeUnimplemented<DCLFont, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Font, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.Font)
+                    return Utils.SafeUnimplemented<DCLFont, Model>(expected: ComponentBodyPayload.PayloadOneofCase.Font, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.Font.HasSrc) pb.src = pbModel.Font.Src;
+                
+                return pb;
+            }
         }
 
         public bool loaded { private set; get; }

@@ -13,15 +13,19 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.SphereShape
-                    ? new Model
-                    {
-                        visible = pbModel.SphereShape.Visible,
-                        withCollisions = pbModel.SphereShape.WithCollisions,
-                        isPointerBlocker = pbModel.SphereShape.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<SphereShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.SphereShape, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.SphereShape)
+                    return Utils.SafeUnimplemented<SphereShape, Model>(
+                        expected: ComponentBodyPayload.PayloadOneofCase.SphereShape, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.SphereShape.HasVisible) pb.visible = pbModel.SphereShape.Visible;
+                if (pbModel.SphereShape.HasWithCollisions) pb.withCollisions = pbModel.SphereShape.WithCollisions;
+                if (pbModel.SphereShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.SphereShape.IsPointerBlocker;
+                
+                return pb;
+            }
         }
 
         public static Mesh mesh;

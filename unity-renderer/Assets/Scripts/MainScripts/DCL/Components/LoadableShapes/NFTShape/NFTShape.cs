@@ -17,18 +17,21 @@ namespace DCL.Components
             public override BaseModel GetDataFromJSON(string json) =>
                 Utils.SafeFromJson<Model>(json);
 
-            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel) =>
-                pbModel.PayloadCase == ComponentBodyPayload.PayloadOneofCase.NftShape
-                    ? new Model
-                    {
-                        color = pbModel.NftShape.Color.AsUnityColor(),
-                        style = (int)pbModel.NftShape.Style,
-                        src = pbModel.NftShape.Src,
-                        visible = pbModel.NftShape.Visible,
-                        withCollisions = pbModel.NftShape.WithCollisions,
-                        isPointerBlocker = pbModel.NftShape.IsPointerBlocker,
-                    }
-                    : Utils.SafeUnimplemented<NFTShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.NftShape, actual: pbModel.PayloadCase);
+            public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
+            {
+                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.NftShape)
+                    return Utils.SafeUnimplemented<NFTShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.NftShape, actual: pbModel.PayloadCase);
+                
+                var pb = new Model();
+                if (pbModel.NftShape.Color == null) pb.color = pbModel.NftShape.Color.AsUnityColor();
+                if (pbModel.NftShape.HasStyle) pb.style = (int)pbModel.NftShape.Style;
+                if (pbModel.NftShape.HasSrc) pb.src = pbModel.NftShape.Src;
+                if (pbModel.NftShape.HasVisible) pb.visible = pbModel.NftShape.Visible;
+                if (pbModel.NftShape.HasWithCollisions) pb.withCollisions = pbModel.NftShape.WithCollisions;
+                if (pbModel.NftShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.NftShape.IsPointerBlocker;
+                
+                return pb;
+            }
         }
 
         public override string componentName => "NFT Shape";

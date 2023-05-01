@@ -4,6 +4,7 @@ using DCL.Models;
 using System.Collections;
 using UnityEngine;
 using Decentraland.Sdk.Ecs6;
+using MainScripts.DCL.Components;
 
 namespace DCL.Components
 {
@@ -32,6 +33,18 @@ namespace DCL.Components
                     return Utils.SafeUnimplemented<UIImage, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiImage, actual: pbModel.PayloadCase);
 
                 var pb = new Model();
+                if (pbModel.UiImage.HasName) pb.name = pbModel.UiImage.Name;
+                if (pbModel.UiImage.HasParentComponent) pb.parentComponent = pbModel.UiImage.ParentComponent;
+                if (pbModel.UiImage.HasVisible) pb.visible = pbModel.UiImage.Visible;
+                if (pbModel.UiImage.HasOpacity) pb.opacity = pbModel.UiImage.Opacity;
+                if (pbModel.UiImage.HasHAlign) pb.hAlign = pbModel.UiImage.HAlign;
+                if (pbModel.UiImage.HasVAlign) pb.vAlign = pbModel.UiImage.VAlign;
+                if (pbModel.UiImage.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiImage.Width);
+                if (pbModel.UiImage.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiImage.Height);
+                if (pbModel.UiImage.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiImage.PositionX);
+                if (pbModel.UiImage.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiImage.PositionY);
+                if (pbModel.UiImage.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiImage.IsPointerBlocker;
+
                 if (pbModel.UiImage.HasSource) pb.source = pbModel.UiImage.Source;
                 if (pbModel.UiImage.HasSourceLeft) pb.sourceLeft = pbModel.UiImage.SourceLeft;
                 if (pbModel.UiImage.HasSourceTop) pb.sourceTop = pbModel.UiImage.SourceTop;
@@ -42,9 +55,7 @@ namespace DCL.Components
                 if (pbModel.UiImage.HasPaddingBottom) pb.paddingBottom = pbModel.UiImage.PaddingBottom;
                 if (pbModel.UiImage.HasPaddingLeft) pb.paddingLeft = pbModel.UiImage.PaddingLeft;
                 if (pbModel.UiImage.HasSizeInPixels) pb.sizeInPixels = pbModel.UiImage.SizeInPixels;
-                if (pbModel.UiImage.HasVisible) pb.visible = pbModel.UiImage.Visible;
-                if (pbModel.UiImage.HasOpacity) pb.opacity = pbModel.UiImage.Opacity;
-                
+
                 return pb;
             }
         }

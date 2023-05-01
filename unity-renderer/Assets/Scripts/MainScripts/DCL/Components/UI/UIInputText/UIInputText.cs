@@ -55,6 +55,18 @@ namespace DCL.Components
                     return Utils.SafeUnimplemented<UIInputText, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiInputText, actual: pbModel.PayloadCase);
 
                 var pb = new Model();
+                if (pbModel.UiInputText.HasName) pb.name = pbModel.UiInputText.Name;
+                if (pbModel.UiInputText.HasParentComponent) pb.parentComponent = pbModel.UiInputText.ParentComponent;
+                if (pbModel.UiInputText.HasVisible) pb.visible = pbModel.UiInputText.Visible;
+                if (pbModel.UiInputText.HasOpacity) pb.opacity = pbModel.UiInputText.Opacity;
+                if (pbModel.UiInputText.HasHAlign) pb.hAlign = pbModel.UiInputText.HAlign;
+                if (pbModel.UiInputText.HasVAlign) pb.vAlign = pbModel.UiInputText.VAlign;
+                if (pbModel.UiInputText.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiInputText.Width);
+                if (pbModel.UiInputText.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiInputText.Height);
+                if (pbModel.UiInputText.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiInputText.PositionX);
+                if (pbModel.UiInputText.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiInputText.PositionY);
+                if (pbModel.UiInputText.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiInputText.IsPointerBlocker;
+
                 if (pbModel.UiInputText.HasOutlineWidth) pb.outlineWidth = pbModel.UiInputText.OutlineWidth;
                 if (pbModel.UiInputText.OutlineColor != null) pb.outlineColor = pbModel.UiInputText.OutlineColor.AsUnityColor();
                 if (pbModel.UiInputText.Color != null) pb.color = pbModel.UiInputText.Color.AsUnityColor();
@@ -79,17 +91,6 @@ namespace DCL.Components
                 if (pbModel.UiInputText.HasOnFocus) pb.onFocus = pbModel.UiInputText.OnFocus;
                 if (pbModel.UiInputText.HasOnBlur) pb.onBlur = pbModel.UiInputText.OnBlur;
                 if (pbModel.UiInputText.HasOnTextChanged) pb.onTextChanged = pbModel.UiInputText.OnTextChanged;
-                if (pbModel.UiInputText.HasName) pb.name = pbModel.UiInputText.Name;
-                if (pbModel.UiInputText.HasParentComponent) pb.parentComponent = pbModel.UiInputText.ParentComponent;
-                if (pbModel.UiInputText.HasVisible) pb.visible = pbModel.UiInputText.Visible;
-                if (pbModel.UiInputText.HasOpacity) pb.opacity = pbModel.UiInputText.Opacity;
-                if (pbModel.UiInputText.HasHAlign) pb.hAlign = pbModel.UiInputText.HAlign;
-                if (pbModel.UiInputText.HasVAlign) pb.vAlign = pbModel.UiInputText.VAlign;
-                if (pbModel.UiInputText.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiInputText.IsPointerBlocker;
-                if (pbModel.UiInputText.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiInputText.Width);
-                if (pbModel.UiInputText.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiInputText.Height);
-                if (pbModel.UiInputText.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiInputText.PositionX);
-                if (pbModel.UiInputText.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiInputText.PositionY);
 
                 return pb;
             }

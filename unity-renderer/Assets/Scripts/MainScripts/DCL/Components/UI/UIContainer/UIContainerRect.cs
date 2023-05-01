@@ -25,8 +25,6 @@ namespace DCL.Components
                     return Utils.SafeUnimplemented<UIContainerRect, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiContainerRect, actual: pbModel.PayloadCase);
 
                 var pb = new Model();
-                if (pbModel.UiContainerRect.Color != null) pb.color = pbModel.UiContainerRect.Color.AsUnityColor();
-                if (pbModel.UiContainerRect.HasThickness) pb.thickness = pbModel.UiContainerRect.Thickness;
                 if (pbModel.UiContainerRect.HasName) pb.name = pbModel.UiContainerRect.Name;
                 if (pbModel.UiContainerRect.HasParentComponent) pb.parentComponent = pbModel.UiContainerRect.ParentComponent;
                 if (pbModel.UiContainerRect.HasVisible) pb.visible = pbModel.UiContainerRect.Visible;
@@ -38,6 +36,9 @@ namespace DCL.Components
                 if (pbModel.UiContainerRect.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiContainerRect.PositionX);
                 if (pbModel.UiContainerRect.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiContainerRect.PositionY);
                 if (pbModel.UiContainerRect.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiContainerRect.IsPointerBlocker;
+
+                if (pbModel.UiContainerRect.Color != null) pb.color = pbModel.UiContainerRect.Color.AsUnityColor();
+                if (pbModel.UiContainerRect.HasThickness) pb.thickness = pbModel.UiContainerRect.Thickness;
 
                 return pb;
             }

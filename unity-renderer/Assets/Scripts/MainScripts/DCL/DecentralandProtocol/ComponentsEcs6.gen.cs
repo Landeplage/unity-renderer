@@ -430,8 +430,46 @@ namespace Decentraland.Sdk.Ecs6 {
             "Y29tcG9uZW50QgoKCF92YWx1ZV94QgoKCF92YWx1ZV95QhMKEV9iYWNrZ3Jv",
             "dW5kX2NvbG9yQhAKDl9pc19ob3Jpem9udGFsQg4KDF9pc192ZXJ0aWNhbEIO",
             "CgxfcGFkZGluZ190b3BCEAoOX3BhZGRpbmdfcmlnaHRCEQoPX3BhZGRpbmdf",
-            "Ym90dG9tQg8KDV9wYWRkaW5nX2xlZnRCDQoLX29uX2NoYW5nZWRiBnByb3Rv",
-            "Mw=="));
+            "Ym90dG9tQg8KDV9wYWRkaW5nX2xlZnRCDQoLX29uX2NoYW5nZWQivgQKHkVD",
+            "UzZDb21wb25lbnRVaVdvcmxkU3BhY2VTaGFwZRIRCgRuYW1lGAEgASgJSACI",
+            "AQESFAoHdmlzaWJsZRgCIAEoCEgBiAEBEhQKB29wYWNpdHkYAyABKAJIAogB",
+            "ARIUCgdoX2FsaWduGAQgASgJSAOIAQESFAoHdl9hbGlnbhgFIAEoCUgEiAEB",
+            "EjIKBXdpZHRoGAYgASgLMh4uZGVjZW50cmFsYW5kLnNkay5lY3M2LlVpVmFs",
+            "dWVIBYgBARIzCgZoZWlnaHQYByABKAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVj",
+            "czYuVWlWYWx1ZUgGiAEBEjcKCnBvc2l0aW9uX3gYCCABKAsyHi5kZWNlbnRy",
+            "YWxhbmQuc2RrLmVjczYuVWlWYWx1ZUgHiAEBEjcKCnBvc2l0aW9uX3kYCSAB",
+            "KAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVjczYuVWlWYWx1ZUgIiAEBEh8KEmlz",
+            "X3BvaW50ZXJfYmxvY2tlchgKIAEoCEgJiAEBEh0KEHBhcmVudF9jb21wb25l",
+            "bnQYCyABKAlICogBAUIHCgVfbmFtZUIKCghfdmlzaWJsZUIKCghfb3BhY2l0",
+            "eUIKCghfaF9hbGlnbkIKCghfdl9hbGlnbkIICgZfd2lkdGhCCQoHX2hlaWdo",
+            "dEINCgtfcG9zaXRpb25feEINCgtfcG9zaXRpb25feUIVChNfaXNfcG9pbnRl",
+            "cl9ibG9ja2VyQhMKEV9wYXJlbnRfY29tcG9uZW50Ir8ECh9FQ1M2Q29tcG9u",
+            "ZW50VWlTY3JlZW5TcGFjZVNoYXBlEhEKBG5hbWUYASABKAlIAIgBARIUCgd2",
+            "aXNpYmxlGAIgASgISAGIAQESFAoHb3BhY2l0eRgDIAEoAkgCiAEBEhQKB2hf",
+            "YWxpZ24YBCABKAlIA4gBARIUCgd2X2FsaWduGAUgASgJSASIAQESMgoFd2lk",
+            "dGgYBiABKAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVjczYuVWlWYWx1ZUgFiAEB",
+            "EjMKBmhlaWdodBgHIAEoCzIeLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VaVZh",
+            "bHVlSAaIAQESNwoKcG9zaXRpb25feBgIIAEoCzIeLmRlY2VudHJhbGFuZC5z",
+            "ZGsuZWNzNi5VaVZhbHVlSAeIAQESNwoKcG9zaXRpb25feRgJIAEoCzIeLmRl",
+            "Y2VudHJhbGFuZC5zZGsuZWNzNi5VaVZhbHVlSAiIAQESHwoSaXNfcG9pbnRl",
+            "cl9ibG9ja2VyGAogASgISAmIAQESHQoQcGFyZW50X2NvbXBvbmVudBgLIAEo",
+            "CUgKiAEBQgcKBV9uYW1lQgoKCF92aXNpYmxlQgoKCF9vcGFjaXR5QgoKCF9o",
+            "X2FsaWduQgoKCF92X2FsaWduQggKBl93aWR0aEIJCgdfaGVpZ2h0Qg0KC19w",
+            "b3NpdGlvbl94Qg0KC19wb3NpdGlvbl95QhUKE19pc19wb2ludGVyX2Jsb2Nr",
+            "ZXJCEwoRX3BhcmVudF9jb21wb25lbnQivgQKHkVDUzZDb21wb25lbnRVaUZ1",
+            "bGxTY3JlZW5TaGFwZRIRCgRuYW1lGAEgASgJSACIAQESFAoHdmlzaWJsZRgC",
+            "IAEoCEgBiAEBEhQKB29wYWNpdHkYAyABKAJIAogBARIUCgdoX2FsaWduGAQg",
+            "ASgJSAOIAQESFAoHdl9hbGlnbhgFIAEoCUgEiAEBEjIKBXdpZHRoGAYgASgL",
+            "Mh4uZGVjZW50cmFsYW5kLnNkay5lY3M2LlVpVmFsdWVIBYgBARIzCgZoZWln",
+            "aHQYByABKAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVjczYuVWlWYWx1ZUgGiAEB",
+            "EjcKCnBvc2l0aW9uX3gYCCABKAsyHi5kZWNlbnRyYWxhbmQuc2RrLmVjczYu",
+            "VWlWYWx1ZUgHiAEBEjcKCnBvc2l0aW9uX3kYCSABKAsyHi5kZWNlbnRyYWxh",
+            "bmQuc2RrLmVjczYuVWlWYWx1ZUgIiAEBEh8KEmlzX3BvaW50ZXJfYmxvY2tl",
+            "chgKIAEoCEgJiAEBEh0KEHBhcmVudF9jb21wb25lbnQYCyABKAlICogBAUIH",
+            "CgVfbmFtZUIKCghfdmlzaWJsZUIKCghfb3BhY2l0eUIKCghfaF9hbGlnbkIK",
+            "Cghfdl9hbGlnbkIICgZfd2lkdGhCCQoHX2hlaWdodEINCgtfcG9zaXRpb25f",
+            "eEINCgtfcG9zaXRpb25feUIVChNfaXNfcG9pbnRlcl9ibG9ja2VyQhMKEV9w",
+            "YXJlbnRfY29tcG9uZW50YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Decentraland.Common.VectorsReflection.Descriptor, global::Decentraland.Common.ColorsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -474,7 +512,10 @@ namespace Decentraland.Sdk.Ecs6 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiText), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiText.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "FontAutoSize", "Font", "Value", "LineSpacing", "LineCount", "AdaptWidth", "AdaptHeight", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "FontAutoSize", "Font", "Value", "LineSpacing", "LineCount", "AdaptWidth", "AdaptHeight", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiInputText), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiInputText.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "Font", "Value", "Placeholder", "Margin", "FocusedBackground", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnTextChanged", "OnFocus", "OnBlur", "OnTextSubmit" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "OutlineWidth", "OutlineColor", "Color", "FontSize", "Font", "Value", "Placeholder", "Margin", "FocusedBackground", "TextWrapping", "ShadowBlur", "ShadowOffsetX", "ShadowOffsetY", "ShadowColor", "HTextAlign", "VTextAlign", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnTextChanged", "OnFocus", "OnBlur", "OnTextSubmit" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiImage), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiImage.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "SourceLeft", "SourceTop", "SourceWidth", "SourceHeight", "Source", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "SizeInPixels", "OnClick" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "SourceLeft", "SourceTop", "SourceWidth", "SourceHeight", "Source", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "SizeInPixels", "OnClick" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "ValueX", "ValueY", "BackgroundColor", "IsHorizontal", "IsVertical", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnChanged" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "ValueX", "ValueY", "BackgroundColor", "IsHorizontal", "IsVertical", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnChanged" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "ValueX", "ValueY", "BackgroundColor", "IsHorizontal", "IsVertical", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnChanged" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent", "ValueX", "ValueY", "BackgroundColor", "IsHorizontal", "IsVertical", "PaddingTop", "PaddingRight", "PaddingBottom", "PaddingLeft", "OnChanged" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape), global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape.Parser, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent" }, new[]{ "Name", "Visible", "Opacity", "HAlign", "VAlign", "Width", "Height", "PositionX", "PositionY", "IsPointerBlocker", "ParentComponent" }, null, null, null)
           }));
     }
     #endregion
@@ -24444,6 +24485,2085 @@ namespace Decentraland.Sdk.Ecs6 {
             break;
           }
           case 170: {
+            ParentComponent = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// CLASS_ID.UI_WORLD_SPACE_SHAPE
+  /// </summary>
+  public sealed partial class ECS6ComponentUiWorldSpaceShape : pb::IMessage<ECS6ComponentUiWorldSpaceShape>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ECS6ComponentUiWorldSpaceShape> _parser = new pb::MessageParser<ECS6ComponentUiWorldSpaceShape>(() => new ECS6ComponentUiWorldSpaceShape());
+    private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<ECS6ComponentUiWorldSpaceShape> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Decentraland.Sdk.Ecs6.ComponentsEcs6Reflection.Descriptor.MessageTypes[40]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiWorldSpaceShape() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiWorldSpaceShape(ECS6ComponentUiWorldSpaceShape other) : this() {
+      _hasBits0 = other._hasBits0;
+      name_ = other.name_;
+      visible_ = other.visible_;
+      opacity_ = other.opacity_;
+      hAlign_ = other.hAlign_;
+      vAlign_ = other.vAlign_;
+      width_ = other.width_ != null ? other.width_.Clone() : null;
+      height_ = other.height_ != null ? other.height_.Clone() : null;
+      positionX_ = other.positionX_ != null ? other.positionX_.Clone() : null;
+      positionY_ = other.positionY_ != null ? other.positionY_.Clone() : null;
+      isPointerBlocker_ = other.isPointerBlocker_;
+      parentComponent_ = other.parentComponent_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiWorldSpaceShape Clone() {
+      return new ECS6ComponentUiWorldSpaceShape(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_;
+    /// <summary>
+    /// UiShape
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_ ?? ""; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "name" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasName {
+      get { return name_ != null; }
+    }
+    /// <summary>Clears the value of the "name" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearName() {
+      name_ = null;
+    }
+
+    /// <summary>Field number for the "visible" field.</summary>
+    public const int VisibleFieldNumber = 2;
+    private bool visible_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Visible {
+      get { if ((_hasBits0 & 1) != 0) { return visible_; } else { return false; } }
+      set {
+        _hasBits0 |= 1;
+        visible_ = value;
+      }
+    }
+    /// <summary>Gets whether the "visible" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasVisible {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "visible" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearVisible() {
+      _hasBits0 &= ~1;
+    }
+
+    /// <summary>Field number for the "opacity" field.</summary>
+    public const int OpacityFieldNumber = 3;
+    private float opacity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Opacity {
+      get { if ((_hasBits0 & 2) != 0) { return opacity_; } else { return 0F; } }
+      set {
+        _hasBits0 |= 2;
+        opacity_ = value;
+      }
+    }
+    /// <summary>Gets whether the "opacity" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasOpacity {
+      get { return (_hasBits0 & 2) != 0; }
+    }
+    /// <summary>Clears the value of the "opacity" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearOpacity() {
+      _hasBits0 &= ~2;
+    }
+
+    /// <summary>Field number for the "h_align" field.</summary>
+    public const int HAlignFieldNumber = 4;
+    private string hAlign_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string HAlign {
+      get { return hAlign_ ?? ""; }
+      set {
+        hAlign_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "h_align" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasHAlign {
+      get { return hAlign_ != null; }
+    }
+    /// <summary>Clears the value of the "h_align" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearHAlign() {
+      hAlign_ = null;
+    }
+
+    /// <summary>Field number for the "v_align" field.</summary>
+    public const int VAlignFieldNumber = 5;
+    private string vAlign_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string VAlign {
+      get { return vAlign_ ?? ""; }
+      set {
+        vAlign_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "v_align" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasVAlign {
+      get { return vAlign_ != null; }
+    }
+    /// <summary>Clears the value of the "v_align" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearVAlign() {
+      vAlign_ = null;
+    }
+
+    /// <summary>Field number for the "width" field.</summary>
+    public const int WidthFieldNumber = 6;
+    private global::Decentraland.Sdk.Ecs6.UiValue width_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue Width {
+      get { return width_; }
+      set {
+        width_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 7;
+    private global::Decentraland.Sdk.Ecs6.UiValue height_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "position_x" field.</summary>
+    public const int PositionXFieldNumber = 8;
+    private global::Decentraland.Sdk.Ecs6.UiValue positionX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue PositionX {
+      get { return positionX_; }
+      set {
+        positionX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "position_y" field.</summary>
+    public const int PositionYFieldNumber = 9;
+    private global::Decentraland.Sdk.Ecs6.UiValue positionY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue PositionY {
+      get { return positionY_; }
+      set {
+        positionY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_pointer_blocker" field.</summary>
+    public const int IsPointerBlockerFieldNumber = 10;
+    private bool isPointerBlocker_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsPointerBlocker {
+      get { if ((_hasBits0 & 4) != 0) { return isPointerBlocker_; } else { return false; } }
+      set {
+        _hasBits0 |= 4;
+        isPointerBlocker_ = value;
+      }
+    }
+    /// <summary>Gets whether the "is_pointer_blocker" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasIsPointerBlocker {
+      get { return (_hasBits0 & 4) != 0; }
+    }
+    /// <summary>Clears the value of the "is_pointer_blocker" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearIsPointerBlocker() {
+      _hasBits0 &= ~4;
+    }
+
+    /// <summary>Field number for the "parent_component" field.</summary>
+    public const int ParentComponentFieldNumber = 11;
+    private string parentComponent_;
+    /// <summary>
+    /// UiShape
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ParentComponent {
+      get { return parentComponent_ ?? ""; }
+      set {
+        parentComponent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "parent_component" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasParentComponent {
+      get { return parentComponent_ != null; }
+    }
+    /// <summary>Clears the value of the "parent_component" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearParentComponent() {
+      parentComponent_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as ECS6ComponentUiWorldSpaceShape);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(ECS6ComponentUiWorldSpaceShape other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Visible != other.Visible) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Opacity, other.Opacity)) return false;
+      if (HAlign != other.HAlign) return false;
+      if (VAlign != other.VAlign) return false;
+      if (!object.Equals(Width, other.Width)) return false;
+      if (!object.Equals(Height, other.Height)) return false;
+      if (!object.Equals(PositionX, other.PositionX)) return false;
+      if (!object.Equals(PositionY, other.PositionY)) return false;
+      if (IsPointerBlocker != other.IsPointerBlocker) return false;
+      if (ParentComponent != other.ParentComponent) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HasName) hash ^= Name.GetHashCode();
+      if (HasVisible) hash ^= Visible.GetHashCode();
+      if (HasOpacity) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Opacity);
+      if (HasHAlign) hash ^= HAlign.GetHashCode();
+      if (HasVAlign) hash ^= VAlign.GetHashCode();
+      if (width_ != null) hash ^= Width.GetHashCode();
+      if (height_ != null) hash ^= Height.GetHashCode();
+      if (positionX_ != null) hash ^= PositionX.GetHashCode();
+      if (positionY_ != null) hash ^= PositionY.GetHashCode();
+      if (HasIsPointerBlocker) hash ^= IsPointerBlocker.GetHashCode();
+      if (HasParentComponent) hash ^= ParentComponent.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (HasName) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (HasVisible) {
+        output.WriteRawTag(16);
+        output.WriteBool(Visible);
+      }
+      if (HasOpacity) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Opacity);
+      }
+      if (HasHAlign) {
+        output.WriteRawTag(34);
+        output.WriteString(HAlign);
+      }
+      if (HasVAlign) {
+        output.WriteRawTag(42);
+        output.WriteString(VAlign);
+      }
+      if (width_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Width);
+      }
+      if (height_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Height);
+      }
+      if (positionX_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(PositionX);
+      }
+      if (positionY_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsPointerBlocker);
+      }
+      if (HasParentComponent) {
+        output.WriteRawTag(90);
+        output.WriteString(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (HasName) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (HasVisible) {
+        output.WriteRawTag(16);
+        output.WriteBool(Visible);
+      }
+      if (HasOpacity) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Opacity);
+      }
+      if (HasHAlign) {
+        output.WriteRawTag(34);
+        output.WriteString(HAlign);
+      }
+      if (HasVAlign) {
+        output.WriteRawTag(42);
+        output.WriteString(VAlign);
+      }
+      if (width_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Width);
+      }
+      if (height_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Height);
+      }
+      if (positionX_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(PositionX);
+      }
+      if (positionY_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsPointerBlocker);
+      }
+      if (HasParentComponent) {
+        output.WriteRawTag(90);
+        output.WriteString(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (HasName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (HasVisible) {
+        size += 1 + 1;
+      }
+      if (HasOpacity) {
+        size += 1 + 4;
+      }
+      if (HasHAlign) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HAlign);
+      }
+      if (HasVAlign) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(VAlign);
+      }
+      if (width_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Width);
+      }
+      if (height_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Height);
+      }
+      if (positionX_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PositionX);
+      }
+      if (positionY_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        size += 1 + 1;
+      }
+      if (HasParentComponent) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(ECS6ComponentUiWorldSpaceShape other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HasName) {
+        Name = other.Name;
+      }
+      if (other.HasVisible) {
+        Visible = other.Visible;
+      }
+      if (other.HasOpacity) {
+        Opacity = other.Opacity;
+      }
+      if (other.HasHAlign) {
+        HAlign = other.HAlign;
+      }
+      if (other.HasVAlign) {
+        VAlign = other.VAlign;
+      }
+      if (other.width_ != null) {
+        if (width_ == null) {
+          Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        Width.MergeFrom(other.Width);
+      }
+      if (other.height_ != null) {
+        if (height_ == null) {
+          Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        Height.MergeFrom(other.Height);
+      }
+      if (other.positionX_ != null) {
+        if (positionX_ == null) {
+          PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        PositionX.MergeFrom(other.PositionX);
+      }
+      if (other.positionY_ != null) {
+        if (positionY_ == null) {
+          PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        PositionY.MergeFrom(other.PositionY);
+      }
+      if (other.HasIsPointerBlocker) {
+        IsPointerBlocker = other.IsPointerBlocker;
+      }
+      if (other.HasParentComponent) {
+        ParentComponent = other.ParentComponent;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Visible = input.ReadBool();
+            break;
+          }
+          case 29: {
+            Opacity = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            HAlign = input.ReadString();
+            break;
+          }
+          case 42: {
+            VAlign = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (width_ == null) {
+              Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Width);
+            break;
+          }
+          case 58: {
+            if (height_ == null) {
+              Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Height);
+            break;
+          }
+          case 66: {
+            if (positionX_ == null) {
+              PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionX);
+            break;
+          }
+          case 74: {
+            if (positionY_ == null) {
+              PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionY);
+            break;
+          }
+          case 80: {
+            IsPointerBlocker = input.ReadBool();
+            break;
+          }
+          case 90: {
+            ParentComponent = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Visible = input.ReadBool();
+            break;
+          }
+          case 29: {
+            Opacity = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            HAlign = input.ReadString();
+            break;
+          }
+          case 42: {
+            VAlign = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (width_ == null) {
+              Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Width);
+            break;
+          }
+          case 58: {
+            if (height_ == null) {
+              Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Height);
+            break;
+          }
+          case 66: {
+            if (positionX_ == null) {
+              PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionX);
+            break;
+          }
+          case 74: {
+            if (positionY_ == null) {
+              PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionY);
+            break;
+          }
+          case 80: {
+            IsPointerBlocker = input.ReadBool();
+            break;
+          }
+          case 90: {
+            ParentComponent = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// CLASS_ID.UI_SCREEN_SPACE_SHAPE
+  /// </summary>
+  public sealed partial class ECS6ComponentUiScreenSpaceShape : pb::IMessage<ECS6ComponentUiScreenSpaceShape>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ECS6ComponentUiScreenSpaceShape> _parser = new pb::MessageParser<ECS6ComponentUiScreenSpaceShape>(() => new ECS6ComponentUiScreenSpaceShape());
+    private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<ECS6ComponentUiScreenSpaceShape> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Decentraland.Sdk.Ecs6.ComponentsEcs6Reflection.Descriptor.MessageTypes[41]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiScreenSpaceShape() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiScreenSpaceShape(ECS6ComponentUiScreenSpaceShape other) : this() {
+      _hasBits0 = other._hasBits0;
+      name_ = other.name_;
+      visible_ = other.visible_;
+      opacity_ = other.opacity_;
+      hAlign_ = other.hAlign_;
+      vAlign_ = other.vAlign_;
+      width_ = other.width_ != null ? other.width_.Clone() : null;
+      height_ = other.height_ != null ? other.height_.Clone() : null;
+      positionX_ = other.positionX_ != null ? other.positionX_.Clone() : null;
+      positionY_ = other.positionY_ != null ? other.positionY_.Clone() : null;
+      isPointerBlocker_ = other.isPointerBlocker_;
+      parentComponent_ = other.parentComponent_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiScreenSpaceShape Clone() {
+      return new ECS6ComponentUiScreenSpaceShape(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_;
+    /// <summary>
+    /// UiShape
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_ ?? ""; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "name" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasName {
+      get { return name_ != null; }
+    }
+    /// <summary>Clears the value of the "name" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearName() {
+      name_ = null;
+    }
+
+    /// <summary>Field number for the "visible" field.</summary>
+    public const int VisibleFieldNumber = 2;
+    private bool visible_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Visible {
+      get { if ((_hasBits0 & 1) != 0) { return visible_; } else { return false; } }
+      set {
+        _hasBits0 |= 1;
+        visible_ = value;
+      }
+    }
+    /// <summary>Gets whether the "visible" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasVisible {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "visible" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearVisible() {
+      _hasBits0 &= ~1;
+    }
+
+    /// <summary>Field number for the "opacity" field.</summary>
+    public const int OpacityFieldNumber = 3;
+    private float opacity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Opacity {
+      get { if ((_hasBits0 & 2) != 0) { return opacity_; } else { return 0F; } }
+      set {
+        _hasBits0 |= 2;
+        opacity_ = value;
+      }
+    }
+    /// <summary>Gets whether the "opacity" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasOpacity {
+      get { return (_hasBits0 & 2) != 0; }
+    }
+    /// <summary>Clears the value of the "opacity" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearOpacity() {
+      _hasBits0 &= ~2;
+    }
+
+    /// <summary>Field number for the "h_align" field.</summary>
+    public const int HAlignFieldNumber = 4;
+    private string hAlign_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string HAlign {
+      get { return hAlign_ ?? ""; }
+      set {
+        hAlign_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "h_align" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasHAlign {
+      get { return hAlign_ != null; }
+    }
+    /// <summary>Clears the value of the "h_align" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearHAlign() {
+      hAlign_ = null;
+    }
+
+    /// <summary>Field number for the "v_align" field.</summary>
+    public const int VAlignFieldNumber = 5;
+    private string vAlign_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string VAlign {
+      get { return vAlign_ ?? ""; }
+      set {
+        vAlign_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "v_align" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasVAlign {
+      get { return vAlign_ != null; }
+    }
+    /// <summary>Clears the value of the "v_align" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearVAlign() {
+      vAlign_ = null;
+    }
+
+    /// <summary>Field number for the "width" field.</summary>
+    public const int WidthFieldNumber = 6;
+    private global::Decentraland.Sdk.Ecs6.UiValue width_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue Width {
+      get { return width_; }
+      set {
+        width_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 7;
+    private global::Decentraland.Sdk.Ecs6.UiValue height_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "position_x" field.</summary>
+    public const int PositionXFieldNumber = 8;
+    private global::Decentraland.Sdk.Ecs6.UiValue positionX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue PositionX {
+      get { return positionX_; }
+      set {
+        positionX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "position_y" field.</summary>
+    public const int PositionYFieldNumber = 9;
+    private global::Decentraland.Sdk.Ecs6.UiValue positionY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue PositionY {
+      get { return positionY_; }
+      set {
+        positionY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_pointer_blocker" field.</summary>
+    public const int IsPointerBlockerFieldNumber = 10;
+    private bool isPointerBlocker_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsPointerBlocker {
+      get { if ((_hasBits0 & 4) != 0) { return isPointerBlocker_; } else { return false; } }
+      set {
+        _hasBits0 |= 4;
+        isPointerBlocker_ = value;
+      }
+    }
+    /// <summary>Gets whether the "is_pointer_blocker" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasIsPointerBlocker {
+      get { return (_hasBits0 & 4) != 0; }
+    }
+    /// <summary>Clears the value of the "is_pointer_blocker" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearIsPointerBlocker() {
+      _hasBits0 &= ~4;
+    }
+
+    /// <summary>Field number for the "parent_component" field.</summary>
+    public const int ParentComponentFieldNumber = 11;
+    private string parentComponent_;
+    /// <summary>
+    /// UiShape
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ParentComponent {
+      get { return parentComponent_ ?? ""; }
+      set {
+        parentComponent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "parent_component" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasParentComponent {
+      get { return parentComponent_ != null; }
+    }
+    /// <summary>Clears the value of the "parent_component" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearParentComponent() {
+      parentComponent_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as ECS6ComponentUiScreenSpaceShape);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(ECS6ComponentUiScreenSpaceShape other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Visible != other.Visible) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Opacity, other.Opacity)) return false;
+      if (HAlign != other.HAlign) return false;
+      if (VAlign != other.VAlign) return false;
+      if (!object.Equals(Width, other.Width)) return false;
+      if (!object.Equals(Height, other.Height)) return false;
+      if (!object.Equals(PositionX, other.PositionX)) return false;
+      if (!object.Equals(PositionY, other.PositionY)) return false;
+      if (IsPointerBlocker != other.IsPointerBlocker) return false;
+      if (ParentComponent != other.ParentComponent) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HasName) hash ^= Name.GetHashCode();
+      if (HasVisible) hash ^= Visible.GetHashCode();
+      if (HasOpacity) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Opacity);
+      if (HasHAlign) hash ^= HAlign.GetHashCode();
+      if (HasVAlign) hash ^= VAlign.GetHashCode();
+      if (width_ != null) hash ^= Width.GetHashCode();
+      if (height_ != null) hash ^= Height.GetHashCode();
+      if (positionX_ != null) hash ^= PositionX.GetHashCode();
+      if (positionY_ != null) hash ^= PositionY.GetHashCode();
+      if (HasIsPointerBlocker) hash ^= IsPointerBlocker.GetHashCode();
+      if (HasParentComponent) hash ^= ParentComponent.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (HasName) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (HasVisible) {
+        output.WriteRawTag(16);
+        output.WriteBool(Visible);
+      }
+      if (HasOpacity) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Opacity);
+      }
+      if (HasHAlign) {
+        output.WriteRawTag(34);
+        output.WriteString(HAlign);
+      }
+      if (HasVAlign) {
+        output.WriteRawTag(42);
+        output.WriteString(VAlign);
+      }
+      if (width_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Width);
+      }
+      if (height_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Height);
+      }
+      if (positionX_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(PositionX);
+      }
+      if (positionY_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsPointerBlocker);
+      }
+      if (HasParentComponent) {
+        output.WriteRawTag(90);
+        output.WriteString(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (HasName) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (HasVisible) {
+        output.WriteRawTag(16);
+        output.WriteBool(Visible);
+      }
+      if (HasOpacity) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Opacity);
+      }
+      if (HasHAlign) {
+        output.WriteRawTag(34);
+        output.WriteString(HAlign);
+      }
+      if (HasVAlign) {
+        output.WriteRawTag(42);
+        output.WriteString(VAlign);
+      }
+      if (width_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Width);
+      }
+      if (height_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Height);
+      }
+      if (positionX_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(PositionX);
+      }
+      if (positionY_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsPointerBlocker);
+      }
+      if (HasParentComponent) {
+        output.WriteRawTag(90);
+        output.WriteString(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (HasName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (HasVisible) {
+        size += 1 + 1;
+      }
+      if (HasOpacity) {
+        size += 1 + 4;
+      }
+      if (HasHAlign) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HAlign);
+      }
+      if (HasVAlign) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(VAlign);
+      }
+      if (width_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Width);
+      }
+      if (height_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Height);
+      }
+      if (positionX_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PositionX);
+      }
+      if (positionY_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        size += 1 + 1;
+      }
+      if (HasParentComponent) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(ECS6ComponentUiScreenSpaceShape other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HasName) {
+        Name = other.Name;
+      }
+      if (other.HasVisible) {
+        Visible = other.Visible;
+      }
+      if (other.HasOpacity) {
+        Opacity = other.Opacity;
+      }
+      if (other.HasHAlign) {
+        HAlign = other.HAlign;
+      }
+      if (other.HasVAlign) {
+        VAlign = other.VAlign;
+      }
+      if (other.width_ != null) {
+        if (width_ == null) {
+          Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        Width.MergeFrom(other.Width);
+      }
+      if (other.height_ != null) {
+        if (height_ == null) {
+          Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        Height.MergeFrom(other.Height);
+      }
+      if (other.positionX_ != null) {
+        if (positionX_ == null) {
+          PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        PositionX.MergeFrom(other.PositionX);
+      }
+      if (other.positionY_ != null) {
+        if (positionY_ == null) {
+          PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        PositionY.MergeFrom(other.PositionY);
+      }
+      if (other.HasIsPointerBlocker) {
+        IsPointerBlocker = other.IsPointerBlocker;
+      }
+      if (other.HasParentComponent) {
+        ParentComponent = other.ParentComponent;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Visible = input.ReadBool();
+            break;
+          }
+          case 29: {
+            Opacity = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            HAlign = input.ReadString();
+            break;
+          }
+          case 42: {
+            VAlign = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (width_ == null) {
+              Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Width);
+            break;
+          }
+          case 58: {
+            if (height_ == null) {
+              Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Height);
+            break;
+          }
+          case 66: {
+            if (positionX_ == null) {
+              PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionX);
+            break;
+          }
+          case 74: {
+            if (positionY_ == null) {
+              PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionY);
+            break;
+          }
+          case 80: {
+            IsPointerBlocker = input.ReadBool();
+            break;
+          }
+          case 90: {
+            ParentComponent = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Visible = input.ReadBool();
+            break;
+          }
+          case 29: {
+            Opacity = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            HAlign = input.ReadString();
+            break;
+          }
+          case 42: {
+            VAlign = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (width_ == null) {
+              Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Width);
+            break;
+          }
+          case 58: {
+            if (height_ == null) {
+              Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Height);
+            break;
+          }
+          case 66: {
+            if (positionX_ == null) {
+              PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionX);
+            break;
+          }
+          case 74: {
+            if (positionY_ == null) {
+              PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionY);
+            break;
+          }
+          case 80: {
+            IsPointerBlocker = input.ReadBool();
+            break;
+          }
+          case 90: {
+            ParentComponent = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// CLASS_ID.UI_FULLSCREEN_SHAPE
+  /// </summary>
+  public sealed partial class ECS6ComponentUiFullScreenShape : pb::IMessage<ECS6ComponentUiFullScreenShape>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ECS6ComponentUiFullScreenShape> _parser = new pb::MessageParser<ECS6ComponentUiFullScreenShape>(() => new ECS6ComponentUiFullScreenShape());
+    private pb::UnknownFieldSet _unknownFields;
+    private int _hasBits0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<ECS6ComponentUiFullScreenShape> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Decentraland.Sdk.Ecs6.ComponentsEcs6Reflection.Descriptor.MessageTypes[42]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiFullScreenShape() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiFullScreenShape(ECS6ComponentUiFullScreenShape other) : this() {
+      _hasBits0 = other._hasBits0;
+      name_ = other.name_;
+      visible_ = other.visible_;
+      opacity_ = other.opacity_;
+      hAlign_ = other.hAlign_;
+      vAlign_ = other.vAlign_;
+      width_ = other.width_ != null ? other.width_.Clone() : null;
+      height_ = other.height_ != null ? other.height_.Clone() : null;
+      positionX_ = other.positionX_ != null ? other.positionX_.Clone() : null;
+      positionY_ = other.positionY_ != null ? other.positionY_.Clone() : null;
+      isPointerBlocker_ = other.isPointerBlocker_;
+      parentComponent_ = other.parentComponent_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ECS6ComponentUiFullScreenShape Clone() {
+      return new ECS6ComponentUiFullScreenShape(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_;
+    /// <summary>
+    /// UiShape
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Name {
+      get { return name_ ?? ""; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "name" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasName {
+      get { return name_ != null; }
+    }
+    /// <summary>Clears the value of the "name" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearName() {
+      name_ = null;
+    }
+
+    /// <summary>Field number for the "visible" field.</summary>
+    public const int VisibleFieldNumber = 2;
+    private bool visible_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Visible {
+      get { if ((_hasBits0 & 1) != 0) { return visible_; } else { return false; } }
+      set {
+        _hasBits0 |= 1;
+        visible_ = value;
+      }
+    }
+    /// <summary>Gets whether the "visible" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasVisible {
+      get { return (_hasBits0 & 1) != 0; }
+    }
+    /// <summary>Clears the value of the "visible" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearVisible() {
+      _hasBits0 &= ~1;
+    }
+
+    /// <summary>Field number for the "opacity" field.</summary>
+    public const int OpacityFieldNumber = 3;
+    private float opacity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float Opacity {
+      get { if ((_hasBits0 & 2) != 0) { return opacity_; } else { return 0F; } }
+      set {
+        _hasBits0 |= 2;
+        opacity_ = value;
+      }
+    }
+    /// <summary>Gets whether the "opacity" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasOpacity {
+      get { return (_hasBits0 & 2) != 0; }
+    }
+    /// <summary>Clears the value of the "opacity" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearOpacity() {
+      _hasBits0 &= ~2;
+    }
+
+    /// <summary>Field number for the "h_align" field.</summary>
+    public const int HAlignFieldNumber = 4;
+    private string hAlign_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string HAlign {
+      get { return hAlign_ ?? ""; }
+      set {
+        hAlign_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "h_align" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasHAlign {
+      get { return hAlign_ != null; }
+    }
+    /// <summary>Clears the value of the "h_align" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearHAlign() {
+      hAlign_ = null;
+    }
+
+    /// <summary>Field number for the "v_align" field.</summary>
+    public const int VAlignFieldNumber = 5;
+    private string vAlign_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string VAlign {
+      get { return vAlign_ ?? ""; }
+      set {
+        vAlign_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "v_align" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasVAlign {
+      get { return vAlign_ != null; }
+    }
+    /// <summary>Clears the value of the "v_align" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearVAlign() {
+      vAlign_ = null;
+    }
+
+    /// <summary>Field number for the "width" field.</summary>
+    public const int WidthFieldNumber = 6;
+    private global::Decentraland.Sdk.Ecs6.UiValue width_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue Width {
+      get { return width_; }
+      set {
+        width_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 7;
+    private global::Decentraland.Sdk.Ecs6.UiValue height_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "position_x" field.</summary>
+    public const int PositionXFieldNumber = 8;
+    private global::Decentraland.Sdk.Ecs6.UiValue positionX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue PositionX {
+      get { return positionX_; }
+      set {
+        positionX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "position_y" field.</summary>
+    public const int PositionYFieldNumber = 9;
+    private global::Decentraland.Sdk.Ecs6.UiValue positionY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.UiValue PositionY {
+      get { return positionY_; }
+      set {
+        positionY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_pointer_blocker" field.</summary>
+    public const int IsPointerBlockerFieldNumber = 10;
+    private bool isPointerBlocker_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsPointerBlocker {
+      get { if ((_hasBits0 & 4) != 0) { return isPointerBlocker_; } else { return false; } }
+      set {
+        _hasBits0 |= 4;
+        isPointerBlocker_ = value;
+      }
+    }
+    /// <summary>Gets whether the "is_pointer_blocker" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasIsPointerBlocker {
+      get { return (_hasBits0 & 4) != 0; }
+    }
+    /// <summary>Clears the value of the "is_pointer_blocker" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearIsPointerBlocker() {
+      _hasBits0 &= ~4;
+    }
+
+    /// <summary>Field number for the "parent_component" field.</summary>
+    public const int ParentComponentFieldNumber = 11;
+    private string parentComponent_;
+    /// <summary>
+    /// UiShape
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ParentComponent {
+      get { return parentComponent_ ?? ""; }
+      set {
+        parentComponent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "parent_component" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasParentComponent {
+      get { return parentComponent_ != null; }
+    }
+    /// <summary>Clears the value of the "parent_component" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearParentComponent() {
+      parentComponent_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as ECS6ComponentUiFullScreenShape);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(ECS6ComponentUiFullScreenShape other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (Visible != other.Visible) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Opacity, other.Opacity)) return false;
+      if (HAlign != other.HAlign) return false;
+      if (VAlign != other.VAlign) return false;
+      if (!object.Equals(Width, other.Width)) return false;
+      if (!object.Equals(Height, other.Height)) return false;
+      if (!object.Equals(PositionX, other.PositionX)) return false;
+      if (!object.Equals(PositionY, other.PositionY)) return false;
+      if (IsPointerBlocker != other.IsPointerBlocker) return false;
+      if (ParentComponent != other.ParentComponent) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HasName) hash ^= Name.GetHashCode();
+      if (HasVisible) hash ^= Visible.GetHashCode();
+      if (HasOpacity) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Opacity);
+      if (HasHAlign) hash ^= HAlign.GetHashCode();
+      if (HasVAlign) hash ^= VAlign.GetHashCode();
+      if (width_ != null) hash ^= Width.GetHashCode();
+      if (height_ != null) hash ^= Height.GetHashCode();
+      if (positionX_ != null) hash ^= PositionX.GetHashCode();
+      if (positionY_ != null) hash ^= PositionY.GetHashCode();
+      if (HasIsPointerBlocker) hash ^= IsPointerBlocker.GetHashCode();
+      if (HasParentComponent) hash ^= ParentComponent.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (HasName) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (HasVisible) {
+        output.WriteRawTag(16);
+        output.WriteBool(Visible);
+      }
+      if (HasOpacity) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Opacity);
+      }
+      if (HasHAlign) {
+        output.WriteRawTag(34);
+        output.WriteString(HAlign);
+      }
+      if (HasVAlign) {
+        output.WriteRawTag(42);
+        output.WriteString(VAlign);
+      }
+      if (width_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Width);
+      }
+      if (height_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Height);
+      }
+      if (positionX_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(PositionX);
+      }
+      if (positionY_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsPointerBlocker);
+      }
+      if (HasParentComponent) {
+        output.WriteRawTag(90);
+        output.WriteString(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (HasName) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (HasVisible) {
+        output.WriteRawTag(16);
+        output.WriteBool(Visible);
+      }
+      if (HasOpacity) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Opacity);
+      }
+      if (HasHAlign) {
+        output.WriteRawTag(34);
+        output.WriteString(HAlign);
+      }
+      if (HasVAlign) {
+        output.WriteRawTag(42);
+        output.WriteString(VAlign);
+      }
+      if (width_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(Width);
+      }
+      if (height_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(Height);
+      }
+      if (positionX_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(PositionX);
+      }
+      if (positionY_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsPointerBlocker);
+      }
+      if (HasParentComponent) {
+        output.WriteRawTag(90);
+        output.WriteString(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (HasName) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (HasVisible) {
+        size += 1 + 1;
+      }
+      if (HasOpacity) {
+        size += 1 + 4;
+      }
+      if (HasHAlign) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HAlign);
+      }
+      if (HasVAlign) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(VAlign);
+      }
+      if (width_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Width);
+      }
+      if (height_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Height);
+      }
+      if (positionX_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PositionX);
+      }
+      if (positionY_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PositionY);
+      }
+      if (HasIsPointerBlocker) {
+        size += 1 + 1;
+      }
+      if (HasParentComponent) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ParentComponent);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(ECS6ComponentUiFullScreenShape other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HasName) {
+        Name = other.Name;
+      }
+      if (other.HasVisible) {
+        Visible = other.Visible;
+      }
+      if (other.HasOpacity) {
+        Opacity = other.Opacity;
+      }
+      if (other.HasHAlign) {
+        HAlign = other.HAlign;
+      }
+      if (other.HasVAlign) {
+        VAlign = other.VAlign;
+      }
+      if (other.width_ != null) {
+        if (width_ == null) {
+          Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        Width.MergeFrom(other.Width);
+      }
+      if (other.height_ != null) {
+        if (height_ == null) {
+          Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        Height.MergeFrom(other.Height);
+      }
+      if (other.positionX_ != null) {
+        if (positionX_ == null) {
+          PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        PositionX.MergeFrom(other.PositionX);
+      }
+      if (other.positionY_ != null) {
+        if (positionY_ == null) {
+          PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+        }
+        PositionY.MergeFrom(other.PositionY);
+      }
+      if (other.HasIsPointerBlocker) {
+        IsPointerBlocker = other.IsPointerBlocker;
+      }
+      if (other.HasParentComponent) {
+        ParentComponent = other.ParentComponent;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Visible = input.ReadBool();
+            break;
+          }
+          case 29: {
+            Opacity = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            HAlign = input.ReadString();
+            break;
+          }
+          case 42: {
+            VAlign = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (width_ == null) {
+              Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Width);
+            break;
+          }
+          case 58: {
+            if (height_ == null) {
+              Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Height);
+            break;
+          }
+          case 66: {
+            if (positionX_ == null) {
+              PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionX);
+            break;
+          }
+          case 74: {
+            if (positionY_ == null) {
+              PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionY);
+            break;
+          }
+          case 80: {
+            IsPointerBlocker = input.ReadBool();
+            break;
+          }
+          case 90: {
+            ParentComponent = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Visible = input.ReadBool();
+            break;
+          }
+          case 29: {
+            Opacity = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            HAlign = input.ReadString();
+            break;
+          }
+          case 42: {
+            VAlign = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (width_ == null) {
+              Width = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Width);
+            break;
+          }
+          case 58: {
+            if (height_ == null) {
+              Height = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(Height);
+            break;
+          }
+          case 66: {
+            if (positionX_ == null) {
+              PositionX = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionX);
+            break;
+          }
+          case 74: {
+            if (positionY_ == null) {
+              PositionY = new global::Decentraland.Sdk.Ecs6.UiValue();
+            }
+            input.ReadMessage(PositionY);
+            break;
+          }
+          case 80: {
+            IsPointerBlocker = input.ReadBool();
+            break;
+          }
+          case 90: {
             ParentComponent = input.ReadString();
             break;
           }

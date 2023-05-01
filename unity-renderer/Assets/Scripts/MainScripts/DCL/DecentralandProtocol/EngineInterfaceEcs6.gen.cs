@@ -30,7 +30,7 @@ namespace Decentraland.Sdk.Ecs6 {
             "bXBvbmVudHNfZWNzNi5wcm90byIiChNPcGVuRXh0ZXJuYWxVcmxCb2R5EgsK",
             "A3VybBgBIAEoCSJnChFPcGVuTkZURGlhbG9nQm9keRIeChZhc3NldF9jb250",
             "cmFjdF9hZGRyZXNzGAEgASgJEhAKCHRva2VuX2lkGAIgASgJEhQKB2NvbW1l",
-            "bnQYAyABKAlIAIgBAUIKCghfY29tbWVudCK1FQoUQ29tcG9uZW50Qm9keVBh",
+            "bnQYAyABKAlIAIgBAUIKCghfY29tbWVudCK8FwoUQ29tcG9uZW50Qm9keVBh",
             "eWxvYWQSVgoUYXZhdGFyX21vZGlmaWVyX2FyZWEYASABKAsyNi5kZWNlbnRy",
             "YWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudEF2YXRhck1vZGlmaWVyQXJl",
             "YUgAEkIKCXRyYW5zZm9ybRgCIAEoCzItLmRlY2VudHJhbGFuZC5zZGsuZWNz",
@@ -91,59 +91,64 @@ namespace Decentraland.Sdk.Ecs6 {
             "dFRleHRIABI/Cgh1aV9pbWFnZRglIAEoCzIrLmRlY2VudHJhbGFuZC5zZGsu",
             "ZWNzNi5FQ1M2Q29tcG9uZW50VWlJbWFnZUgAEkoKDnVpX3Njcm9sbF9yZWN0",
             "GCYgASgLMjAuZGVjZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRV",
-            "aVNjcm9sbFJlY3RIAEIJCgdwYXlsb2FkIh4KEENyZWF0ZUVudGl0eUJvZHkS",
-            "CgoCaWQYASABKAkiHgoQUmVtb3ZlRW50aXR5Qm9keRIKCgJpZBgBIAEoCSKT",
-            "AQoZVXBkYXRlRW50aXR5Q29tcG9uZW50Qm9keRIRCgllbnRpdHlfaWQYASAB",
-            "KAkSEAoIY2xhc3NfaWQYAiABKAUSDAoEbmFtZRgDIAEoCRJDCg5jb21wb25l",
-            "bnRfZGF0YRgEIAEoCzIrLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Db21wb25l",
-            "bnRCb2R5UGF5bG9hZCJIChlBdHRhY2hFbnRpdHlDb21wb25lbnRCb2R5EhEK",
-            "CWVudGl0eV9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgoKAmlkGAMgASgJIjcK",
-            "FENvbXBvbmVudFJlbW92ZWRCb2R5EhEKCWVudGl0eV9pZBgBIAEoCRIMCgRu",
-            "YW1lGAIgASgJIjsKE1NldEVudGl0eVBhcmVudEJvZHkSEQoJZW50aXR5X2lk",
-            "GAEgASgJEhEKCXBhcmVudF9pZBgCIAEoCSK2AgoJUXVlcnlCb2R5EhAKCHF1",
-            "ZXJ5X2lkGAEgASgJEjoKB3BheWxvYWQYAiABKAsyKS5kZWNlbnRyYWxhbmQu",
-            "c2RrLmVjczYuUXVlcnlCb2R5LlJheVF1ZXJ5GnYKA1JheRIsCgZvcmlnaW4Y",
-            "ASABKAsyHC5kZWNlbnRyYWxhbmQuY29tbW9uLlZlY3RvcjMSLwoJZGlyZWN0",
-            "aW9uGAIgASgLMhwuZGVjZW50cmFsYW5kLmNvbW1vbi5WZWN0b3IzEhAKCGRp",
-            "c3RhbmNlGAMgASgCGmMKCFJheVF1ZXJ5EhAKCHF1ZXJ5X2lkGAEgASgJEhIK",
-            "CnF1ZXJ5X3R5cGUYAiABKAkSMQoDcmF5GAMgASgLMiQuZGVjZW50cmFsYW5k",
-            "LnNkay5lY3M2LlF1ZXJ5Qm9keS5SYXkiQgoUQ29tcG9uZW50Q3JlYXRlZEJv",
-            "ZHkSCgoCaWQYASABKAkSEAoIY2xhc3NfaWQYAiABKAUSDAoEbmFtZRgDIAEo",
-            "CSIjChVDb21wb25lbnREaXNwb3NlZEJvZHkSCgoCaWQYASABKAkiZwoUQ29t",
-            "cG9uZW50VXBkYXRlZEJvZHkSCgoCaWQYASABKAkSQwoOY29tcG9uZW50X2Rh",
-            "dGEYAiABKAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuQ29tcG9uZW50Qm9k",
-            "eVBheWxvYWQiGgoYSW5pdE1lc3NhZ2VzRmluaXNoZWRCb2R5ItUHChNFbnRp",
-            "dHlBY3Rpb25QYXlsb2FkEkcKEW9wZW5fZXh0ZXJuYWxfdXJsGAEgASgLMiou",
-            "ZGVjZW50cmFsYW5kLnNkay5lY3M2Lk9wZW5FeHRlcm5hbFVybEJvZHlIABJD",
-            "Cg9vcGVuX25mdF9kaWFsb2cYAiABKAsyKC5kZWNlbnRyYWxhbmQuc2RrLmVj",
-            "czYuT3Blbk5GVERpYWxvZ0JvZHlIABJACg1jcmVhdGVfZW50aXR5GAMgASgL",
-            "MicuZGVjZW50cmFsYW5kLnNkay5lY3M2LkNyZWF0ZUVudGl0eUJvZHlIABJA",
-            "Cg1yZW1vdmVfZW50aXR5GAQgASgLMicuZGVjZW50cmFsYW5kLnNkay5lY3M2",
-            "LlJlbW92ZUVudGl0eUJvZHlIABJTChd1cGRhdGVfZW50aXR5X2NvbXBvbmVu",
-            "dBgFIAEoCzIwLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5VcGRhdGVFbnRpdHlD",
-            "b21wb25lbnRCb2R5SAASUwoXYXR0YWNoX2VudGl0eV9jb21wb25lbnQYBiAB",
-            "KAsyMC5kZWNlbnRyYWxhbmQuc2RrLmVjczYuQXR0YWNoRW50aXR5Q29tcG9u",
-            "ZW50Qm9keUgAEkgKEWNvbXBvbmVudF9yZW1vdmVkGAcgASgLMisuZGVjZW50",
-            "cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudFJlbW92ZWRCb2R5SAASRwoRc2V0",
-            "X2VudGl0eV9wYXJlbnQYCCABKAsyKi5kZWNlbnRyYWxhbmQuc2RrLmVjczYu",
-            "U2V0RW50aXR5UGFyZW50Qm9keUgAEjEKBXF1ZXJ5GAkgASgLMiAuZGVjZW50",
-            "cmFsYW5kLnNkay5lY3M2LlF1ZXJ5Qm9keUgAEkgKEWNvbXBvbmVudF9jcmVh",
-            "dGVkGAogASgLMisuZGVjZW50cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudENy",
-            "ZWF0ZWRCb2R5SAASSgoSY29tcG9uZW50X2Rpc3Bvc2VkGAsgASgLMiwuZGVj",
-            "ZW50cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudERpc3Bvc2VkQm9keUgAEkgK",
-            "EWNvbXBvbmVudF91cGRhdGVkGAwgASgLMisuZGVjZW50cmFsYW5kLnNkay5l",
-            "Y3M2LkNvbXBvbmVudFVwZGF0ZWRCb2R5SAASUQoWaW5pdF9tZXNzYWdlc19m",
-            "aW5pc2hlZBgNIAEoCzIvLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Jbml0TWVz",
-            "c2FnZXNGaW5pc2hlZEJvZHlIAEIJCgdwYXlsb2FkImUKDEVudGl0eUFjdGlv",
-            "bhIQCgN0YWcYAiABKAlIAIgBARI7CgdwYXlsb2FkGAMgASgLMiouZGVjZW50",
-            "cmFsYW5kLnNkay5lY3M2LkVudGl0eUFjdGlvblBheWxvYWRCBgoEX3RhZ2IG",
-            "cHJvdG8z"));
+            "aVNjcm9sbFJlY3RIABJVChR1aV93b3JsZF9zcGFjZV9zaGFwZRgnIAEoCzI1",
+            "LmRlY2VudHJhbGFuZC5zZGsuZWNzNi5FQ1M2Q29tcG9uZW50VWlXb3JsZFNw",
+            "YWNlU2hhcGVIABJXChV1aV9zY3JlZW5fc3BhY2Vfc2hhcGUYKCABKAsyNi5k",
+            "ZWNlbnRyYWxhbmQuc2RrLmVjczYuRUNTNkNvbXBvbmVudFVpU2NyZWVuU3Bh",
+            "Y2VTaGFwZUgAElUKFHVpX2Z1bGxfc2NyZWVuX3NoYXBlGCkgASgLMjUuZGVj",
+            "ZW50cmFsYW5kLnNkay5lY3M2LkVDUzZDb21wb25lbnRVaUZ1bGxTY3JlZW5T",
+            "aGFwZUgAQgkKB3BheWxvYWQiHgoQQ3JlYXRlRW50aXR5Qm9keRIKCgJpZBgB",
+            "IAEoCSIeChBSZW1vdmVFbnRpdHlCb2R5EgoKAmlkGAEgASgJIpMBChlVcGRh",
+            "dGVFbnRpdHlDb21wb25lbnRCb2R5EhEKCWVudGl0eV9pZBgBIAEoCRIQCghj",
+            "bGFzc19pZBgCIAEoBRIMCgRuYW1lGAMgASgJEkMKDmNvbXBvbmVudF9kYXRh",
+            "GAQgASgLMisuZGVjZW50cmFsYW5kLnNkay5lY3M2LkNvbXBvbmVudEJvZHlQ",
+            "YXlsb2FkIkgKGUF0dGFjaEVudGl0eUNvbXBvbmVudEJvZHkSEQoJZW50aXR5",
+            "X2lkGAEgASgJEgwKBG5hbWUYAiABKAkSCgoCaWQYAyABKAkiNwoUQ29tcG9u",
+            "ZW50UmVtb3ZlZEJvZHkSEQoJZW50aXR5X2lkGAEgASgJEgwKBG5hbWUYAiAB",
+            "KAkiOwoTU2V0RW50aXR5UGFyZW50Qm9keRIRCgllbnRpdHlfaWQYASABKAkS",
+            "EQoJcGFyZW50X2lkGAIgASgJIrYCCglRdWVyeUJvZHkSEAoIcXVlcnlfaWQY",
+            "ASABKAkSOgoHcGF5bG9hZBgCIAEoCzIpLmRlY2VudHJhbGFuZC5zZGsuZWNz",
+            "Ni5RdWVyeUJvZHkuUmF5UXVlcnkadgoDUmF5EiwKBm9yaWdpbhgBIAEoCzIc",
+            "LmRlY2VudHJhbGFuZC5jb21tb24uVmVjdG9yMxIvCglkaXJlY3Rpb24YAiAB",
+            "KAsyHC5kZWNlbnRyYWxhbmQuY29tbW9uLlZlY3RvcjMSEAoIZGlzdGFuY2UY",
+            "AyABKAIaYwoIUmF5UXVlcnkSEAoIcXVlcnlfaWQYASABKAkSEgoKcXVlcnlf",
+            "dHlwZRgCIAEoCRIxCgNyYXkYAyABKAsyJC5kZWNlbnRyYWxhbmQuc2RrLmVj",
+            "czYuUXVlcnlCb2R5LlJheSJCChRDb21wb25lbnRDcmVhdGVkQm9keRIKCgJp",
+            "ZBgBIAEoCRIQCghjbGFzc19pZBgCIAEoBRIMCgRuYW1lGAMgASgJIiMKFUNv",
+            "bXBvbmVudERpc3Bvc2VkQm9keRIKCgJpZBgBIAEoCSJnChRDb21wb25lbnRV",
+            "cGRhdGVkQm9keRIKCgJpZBgBIAEoCRJDCg5jb21wb25lbnRfZGF0YRgCIAEo",
+            "CzIrLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5Db21wb25lbnRCb2R5UGF5bG9h",
+            "ZCIaChhJbml0TWVzc2FnZXNGaW5pc2hlZEJvZHki1QcKE0VudGl0eUFjdGlv",
+            "blBheWxvYWQSRwoRb3Blbl9leHRlcm5hbF91cmwYASABKAsyKi5kZWNlbnRy",
+            "YWxhbmQuc2RrLmVjczYuT3BlbkV4dGVybmFsVXJsQm9keUgAEkMKD29wZW5f",
+            "bmZ0X2RpYWxvZxgCIAEoCzIoLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5PcGVu",
+            "TkZURGlhbG9nQm9keUgAEkAKDWNyZWF0ZV9lbnRpdHkYAyABKAsyJy5kZWNl",
+            "bnRyYWxhbmQuc2RrLmVjczYuQ3JlYXRlRW50aXR5Qm9keUgAEkAKDXJlbW92",
+            "ZV9lbnRpdHkYBCABKAsyJy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuUmVtb3Zl",
+            "RW50aXR5Qm9keUgAElMKF3VwZGF0ZV9lbnRpdHlfY29tcG9uZW50GAUgASgL",
+            "MjAuZGVjZW50cmFsYW5kLnNkay5lY3M2LlVwZGF0ZUVudGl0eUNvbXBvbmVu",
+            "dEJvZHlIABJTChdhdHRhY2hfZW50aXR5X2NvbXBvbmVudBgGIAEoCzIwLmRl",
+            "Y2VudHJhbGFuZC5zZGsuZWNzNi5BdHRhY2hFbnRpdHlDb21wb25lbnRCb2R5",
+            "SAASSAoRY29tcG9uZW50X3JlbW92ZWQYByABKAsyKy5kZWNlbnRyYWxhbmQu",
+            "c2RrLmVjczYuQ29tcG9uZW50UmVtb3ZlZEJvZHlIABJHChFzZXRfZW50aXR5",
+            "X3BhcmVudBgIIAEoCzIqLmRlY2VudHJhbGFuZC5zZGsuZWNzNi5TZXRFbnRp",
+            "dHlQYXJlbnRCb2R5SAASMQoFcXVlcnkYCSABKAsyIC5kZWNlbnRyYWxhbmQu",
+            "c2RrLmVjczYuUXVlcnlCb2R5SAASSAoRY29tcG9uZW50X2NyZWF0ZWQYCiAB",
+            "KAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuQ29tcG9uZW50Q3JlYXRlZEJv",
+            "ZHlIABJKChJjb21wb25lbnRfZGlzcG9zZWQYCyABKAsyLC5kZWNlbnRyYWxh",
+            "bmQuc2RrLmVjczYuQ29tcG9uZW50RGlzcG9zZWRCb2R5SAASSAoRY29tcG9u",
+            "ZW50X3VwZGF0ZWQYDCABKAsyKy5kZWNlbnRyYWxhbmQuc2RrLmVjczYuQ29t",
+            "cG9uZW50VXBkYXRlZEJvZHlIABJRChZpbml0X21lc3NhZ2VzX2ZpbmlzaGVk",
+            "GA0gASgLMi8uZGVjZW50cmFsYW5kLnNkay5lY3M2LkluaXRNZXNzYWdlc0Zp",
+            "bmlzaGVkQm9keUgAQgkKB3BheWxvYWQiZQoMRW50aXR5QWN0aW9uEhAKA3Rh",
+            "ZxgCIAEoCUgAiAEBEjsKB3BheWxvYWQYAyABKAsyKi5kZWNlbnRyYWxhbmQu",
+            "c2RrLmVjczYuRW50aXR5QWN0aW9uUGF5bG9hZEIGCgRfdGFnYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Decentraland.Common.VectorsReflection.Descriptor, global::Decentraland.Sdk.Ecs6.ComponentsEcs6Reflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.OpenExternalUrlBody), global::Decentraland.Sdk.Ecs6.OpenExternalUrlBody.Parser, new[]{ "Url" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.OpenNFTDialogBody), global::Decentraland.Sdk.Ecs6.OpenNFTDialogBody.Parser, new[]{ "AssetContractAddress", "TokenId", "Comment" }, new[]{ "Comment" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentBodyPayload), global::Decentraland.Sdk.Ecs6.ComponentBodyPayload.Parser, new[]{ "AvatarModifierArea", "Transform", "AttachToAvatar", "Billboard", "BoxShape", "SphereShape", "CircleShape", "PlaneShape", "ConeShape", "CylinderShape", "GltfShape", "NftShape", "Texture", "Animator", "ObjShape", "Font", "TextShape", "Material", "BasicMaterial", "UuidCallback", "SmartItem", "VideoClip", "VideoTexture", "CameraModeArea", "AvatarTexture", "AudioClip", "AudioSource", "AudioStream", "AvatarShape", "Gizmos", "UiShape", "UiContainerRect", "UiContainerStack", "UiButton", "UiText", "UiInputText", "UiImage", "UiScrollRect" }, new[]{ "Payload" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.ComponentBodyPayload), global::Decentraland.Sdk.Ecs6.ComponentBodyPayload.Parser, new[]{ "AvatarModifierArea", "Transform", "AttachToAvatar", "Billboard", "BoxShape", "SphereShape", "CircleShape", "PlaneShape", "ConeShape", "CylinderShape", "GltfShape", "NftShape", "Texture", "Animator", "ObjShape", "Font", "TextShape", "Material", "BasicMaterial", "UuidCallback", "SmartItem", "VideoClip", "VideoTexture", "CameraModeArea", "AvatarTexture", "AudioClip", "AudioSource", "AudioStream", "AvatarShape", "Gizmos", "UiShape", "UiContainerRect", "UiContainerStack", "UiButton", "UiText", "UiInputText", "UiImage", "UiScrollRect", "UiWorldSpaceShape", "UiScreenSpaceShape", "UiFullScreenShape" }, new[]{ "Payload" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.CreateEntityBody), global::Decentraland.Sdk.Ecs6.CreateEntityBody.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.RemoveEntityBody), global::Decentraland.Sdk.Ecs6.RemoveEntityBody.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Decentraland.Sdk.Ecs6.UpdateEntityComponentBody), global::Decentraland.Sdk.Ecs6.UpdateEntityComponentBody.Parser, new[]{ "EntityId", "ClassId", "Name", "ComponentData" }, null, null, null, null),
@@ -777,6 +782,15 @@ namespace Decentraland.Sdk.Ecs6 {
         case PayloadOneofCase.UiScrollRect:
           UiScrollRect = other.UiScrollRect.Clone();
           break;
+        case PayloadOneofCase.UiWorldSpaceShape:
+          UiWorldSpaceShape = other.UiWorldSpaceShape.Clone();
+          break;
+        case PayloadOneofCase.UiScreenSpaceShape:
+          UiScreenSpaceShape = other.UiScreenSpaceShape.Clone();
+          break;
+        case PayloadOneofCase.UiFullScreenShape:
+          UiFullScreenShape = other.UiFullScreenShape.Clone();
+          break;
       }
 
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1244,6 +1258,42 @@ namespace Decentraland.Sdk.Ecs6 {
       }
     }
 
+    /// <summary>Field number for the "ui_world_space_shape" field.</summary>
+    public const int UiWorldSpaceShapeFieldNumber = 39;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape UiWorldSpaceShape {
+      get { return payloadCase_ == PayloadOneofCase.UiWorldSpaceShape ? (global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape) payload_ : null; }
+      set {
+        payload_ = value;
+        payloadCase_ = value == null ? PayloadOneofCase.None : PayloadOneofCase.UiWorldSpaceShape;
+      }
+    }
+
+    /// <summary>Field number for the "ui_screen_space_shape" field.</summary>
+    public const int UiScreenSpaceShapeFieldNumber = 40;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape UiScreenSpaceShape {
+      get { return payloadCase_ == PayloadOneofCase.UiScreenSpaceShape ? (global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape) payload_ : null; }
+      set {
+        payload_ = value;
+        payloadCase_ = value == null ? PayloadOneofCase.None : PayloadOneofCase.UiScreenSpaceShape;
+      }
+    }
+
+    /// <summary>Field number for the "ui_full_screen_shape" field.</summary>
+    public const int UiFullScreenShapeFieldNumber = 41;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape UiFullScreenShape {
+      get { return payloadCase_ == PayloadOneofCase.UiFullScreenShape ? (global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape) payload_ : null; }
+      set {
+        payload_ = value;
+        payloadCase_ = value == null ? PayloadOneofCase.None : PayloadOneofCase.UiFullScreenShape;
+      }
+    }
+
     private object payload_;
     /// <summary>Enum of possible cases for the "payload" oneof.</summary>
     public enum PayloadOneofCase {
@@ -1286,6 +1336,9 @@ namespace Decentraland.Sdk.Ecs6 {
       UiInputText = 36,
       UiImage = 37,
       UiScrollRect = 38,
+      UiWorldSpaceShape = 39,
+      UiScreenSpaceShape = 40,
+      UiFullScreenShape = 41,
     }
     private PayloadOneofCase payloadCase_ = PayloadOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1354,6 +1407,9 @@ namespace Decentraland.Sdk.Ecs6 {
       if (!object.Equals(UiInputText, other.UiInputText)) return false;
       if (!object.Equals(UiImage, other.UiImage)) return false;
       if (!object.Equals(UiScrollRect, other.UiScrollRect)) return false;
+      if (!object.Equals(UiWorldSpaceShape, other.UiWorldSpaceShape)) return false;
+      if (!object.Equals(UiScreenSpaceShape, other.UiScreenSpaceShape)) return false;
+      if (!object.Equals(UiFullScreenShape, other.UiFullScreenShape)) return false;
       if (PayloadCase != other.PayloadCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1400,6 +1456,9 @@ namespace Decentraland.Sdk.Ecs6 {
       if (payloadCase_ == PayloadOneofCase.UiInputText) hash ^= UiInputText.GetHashCode();
       if (payloadCase_ == PayloadOneofCase.UiImage) hash ^= UiImage.GetHashCode();
       if (payloadCase_ == PayloadOneofCase.UiScrollRect) hash ^= UiScrollRect.GetHashCode();
+      if (payloadCase_ == PayloadOneofCase.UiWorldSpaceShape) hash ^= UiWorldSpaceShape.GetHashCode();
+      if (payloadCase_ == PayloadOneofCase.UiScreenSpaceShape) hash ^= UiScreenSpaceShape.GetHashCode();
+      if (payloadCase_ == PayloadOneofCase.UiFullScreenShape) hash ^= UiFullScreenShape.GetHashCode();
       hash ^= (int) payloadCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1571,6 +1630,18 @@ namespace Decentraland.Sdk.Ecs6 {
         output.WriteRawTag(178, 2);
         output.WriteMessage(UiScrollRect);
       }
+      if (payloadCase_ == PayloadOneofCase.UiWorldSpaceShape) {
+        output.WriteRawTag(186, 2);
+        output.WriteMessage(UiWorldSpaceShape);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiScreenSpaceShape) {
+        output.WriteRawTag(194, 2);
+        output.WriteMessage(UiScreenSpaceShape);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiFullScreenShape) {
+        output.WriteRawTag(202, 2);
+        output.WriteMessage(UiFullScreenShape);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1733,6 +1804,18 @@ namespace Decentraland.Sdk.Ecs6 {
         output.WriteRawTag(178, 2);
         output.WriteMessage(UiScrollRect);
       }
+      if (payloadCase_ == PayloadOneofCase.UiWorldSpaceShape) {
+        output.WriteRawTag(186, 2);
+        output.WriteMessage(UiWorldSpaceShape);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiScreenSpaceShape) {
+        output.WriteRawTag(194, 2);
+        output.WriteMessage(UiScreenSpaceShape);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiFullScreenShape) {
+        output.WriteRawTag(202, 2);
+        output.WriteMessage(UiFullScreenShape);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1856,6 +1939,15 @@ namespace Decentraland.Sdk.Ecs6 {
       }
       if (payloadCase_ == PayloadOneofCase.UiScrollRect) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(UiScrollRect);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiWorldSpaceShape) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UiWorldSpaceShape);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiScreenSpaceShape) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UiScreenSpaceShape);
+      }
+      if (payloadCase_ == PayloadOneofCase.UiFullScreenShape) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(UiFullScreenShape);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2097,6 +2189,24 @@ namespace Decentraland.Sdk.Ecs6 {
             UiScrollRect = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScrollRect();
           }
           UiScrollRect.MergeFrom(other.UiScrollRect);
+          break;
+        case PayloadOneofCase.UiWorldSpaceShape:
+          if (UiWorldSpaceShape == null) {
+            UiWorldSpaceShape = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape();
+          }
+          UiWorldSpaceShape.MergeFrom(other.UiWorldSpaceShape);
+          break;
+        case PayloadOneofCase.UiScreenSpaceShape:
+          if (UiScreenSpaceShape == null) {
+            UiScreenSpaceShape = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape();
+          }
+          UiScreenSpaceShape.MergeFrom(other.UiScreenSpaceShape);
+          break;
+        case PayloadOneofCase.UiFullScreenShape:
+          if (UiFullScreenShape == null) {
+            UiFullScreenShape = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape();
+          }
+          UiFullScreenShape.MergeFrom(other.UiFullScreenShape);
           break;
       }
 
@@ -2457,6 +2567,33 @@ namespace Decentraland.Sdk.Ecs6 {
             UiScrollRect = subBuilder;
             break;
           }
+          case 314: {
+            global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape subBuilder = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape();
+            if (payloadCase_ == PayloadOneofCase.UiWorldSpaceShape) {
+              subBuilder.MergeFrom(UiWorldSpaceShape);
+            }
+            input.ReadMessage(subBuilder);
+            UiWorldSpaceShape = subBuilder;
+            break;
+          }
+          case 322: {
+            global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape subBuilder = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape();
+            if (payloadCase_ == PayloadOneofCase.UiScreenSpaceShape) {
+              subBuilder.MergeFrom(UiScreenSpaceShape);
+            }
+            input.ReadMessage(subBuilder);
+            UiScreenSpaceShape = subBuilder;
+            break;
+          }
+          case 330: {
+            global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape subBuilder = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape();
+            if (payloadCase_ == PayloadOneofCase.UiFullScreenShape) {
+              subBuilder.MergeFrom(UiFullScreenShape);
+            }
+            input.ReadMessage(subBuilder);
+            UiFullScreenShape = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -2812,6 +2949,33 @@ namespace Decentraland.Sdk.Ecs6 {
             }
             input.ReadMessage(subBuilder);
             UiScrollRect = subBuilder;
+            break;
+          }
+          case 314: {
+            global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape subBuilder = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiWorldSpaceShape();
+            if (payloadCase_ == PayloadOneofCase.UiWorldSpaceShape) {
+              subBuilder.MergeFrom(UiWorldSpaceShape);
+            }
+            input.ReadMessage(subBuilder);
+            UiWorldSpaceShape = subBuilder;
+            break;
+          }
+          case 322: {
+            global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape subBuilder = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiScreenSpaceShape();
+            if (payloadCase_ == PayloadOneofCase.UiScreenSpaceShape) {
+              subBuilder.MergeFrom(UiScreenSpaceShape);
+            }
+            input.ReadMessage(subBuilder);
+            UiScreenSpaceShape = subBuilder;
+            break;
+          }
+          case 330: {
+            global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape subBuilder = new global::Decentraland.Sdk.Ecs6.ECS6ComponentUiFullScreenShape();
+            if (payloadCase_ == PayloadOneofCase.UiFullScreenShape) {
+              subBuilder.MergeFrom(UiFullScreenShape);
+            }
+            input.ReadMessage(subBuilder);
+            UiFullScreenShape = subBuilder;
             break;
           }
         }

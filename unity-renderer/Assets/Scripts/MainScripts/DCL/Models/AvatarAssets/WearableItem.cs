@@ -135,6 +135,7 @@ public class WearableItem
         return new ContentProvider
         {
             baseUrl = baseUrl,
+            assetBundlesBaseUrl = baseUrlBundles,
             contents = contents.Select(mapping => new ContentServerUtils.MappingPair()
                                    { file = mapping.key, hash = mapping.hash })
                                .ToList()

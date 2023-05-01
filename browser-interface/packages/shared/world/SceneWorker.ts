@@ -33,6 +33,7 @@ import { incrementAvatarSceneMessages } from 'shared/session/getPerformanceInfo'
 import { LoadableScene } from 'shared/types'
 import { PositionReport } from './positionThings'
 import { EntityAction } from 'shared/protocol/decentraland/sdk/ecs6/engine_interface_ecs6.gen'
+import { joinBuffers } from 'lib/javascript/uint8arrays'
 
 export enum SceneWorkerReadyState {
   LOADING = 1 << 0,
@@ -187,7 +188,10 @@ export class SceneWorker {
       sendProtoSceneEvent: (e) => {
         this.rpcContext.events.push(e)
       },
-      sendBatch: this.sendBatch.bind(this)
+      sendBatch: this.sendBatch.bind(this),
+      readFile: this.readFile.bind(this),
+      initialEntitiesTick0: Uint8Array.of(),
+      hasMainCrdt: false
     }
 
     // if the scene metadata has a base parcel, then we set it as the position
@@ -221,6 +225,29 @@ export class SceneWorker {
         }
       }
     }
+  }
+
+  async readFile(fileName: string) {
+    // filenames are lower cased as per https://adr.decentraland.org/adr/ADR-80
+    const normalized = fileName.toLowerCase()
+
+    // and we iterate over the entity content mappings to resolve the file hash
+    for (const { file, hash } of this.rpcContext.sceneData.entity.content) {
+      if (file.toLowerCase() === normalized) {
+        // fetch the actual content
+        const baseUrl = this.rpcContext.sceneData.baseUrl.endsWith('/')
+          ? this.rpcContext.sceneData.baseUrl
+          : this.rpcContext.sceneData.baseUrl + '/'
+        const url = baseUrl + hash
+        const response = await fetch(url)
+
+        if (!response.ok) throw new Error(`Error fetching file ${file} from ${url}`)
+
+        return { hash, content: new Uint8Array(await response.arrayBuffer()) }
+      }
+    }
+
+    throw new Error(`File ${fileName} not found`)
   }
 
   dispose() {
@@ -311,6 +338,22 @@ export class SceneWorker {
       sceneName: getSceneNameFromJsonData(this.loadableScene.entity.metadata),
       sdk7: this.rpcContext.sdk7
     })
+
+    let mainCrdt = Uint8Array.of()
+
+    try {
+      if (this.rpcContext.sceneData.entity.content.some(($) => $.file.toLowerCase() === 'main.crdt')) {
+        const file = await this.readFile('main.crdt')
+        mainCrdt = file.content
+      }
+    } catch (err: any) {
+      this.logger.error(err)
+    }
+
+    // this is the tick#0 as specified in ADR-133 and ADR-148
+    const result = await this.rpcContext.rpcSceneControllerService.sendCrdt({ payload: mainCrdt })
+    this.rpcContext.initialEntitiesTick0 = joinBuffers(mainCrdt, result.payload)
+    this.rpcContext.hasMainCrdt = mainCrdt.length > 0
 
     // from now on, the sceneData object is read-only
     Object.freeze(this.rpcContext.sceneData)

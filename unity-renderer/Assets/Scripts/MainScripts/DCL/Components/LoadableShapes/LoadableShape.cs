@@ -23,21 +23,21 @@ namespace DCL.Components
                 switch (pbModel.PayloadCase)
                 {
                     case ComponentBodyPayload.PayloadOneofCase.GltfShape:
-                        var pb = new Model();
-                        if (pbModel.GltfShape.HasSrc) pb.src = pbModel.GltfShape.Src;
-                        if (pbModel.GltfShape.HasWithCollisions) pb.withCollisions = pbModel.GltfShape.WithCollisions;
-                        if (pbModel.GltfShape.HasVisible) pb.visible = pbModel.GltfShape.Visible;
-                        if (pbModel.GltfShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.GltfShape.IsPointerBlocker;
-                        
-                        return pb;
+                        var gltfModel = new Model();
+                        if (pbModel.GltfShape.HasSrc) gltfModel.src = pbModel.GltfShape.Src;
+                        if (pbModel.GltfShape.HasWithCollisions) gltfModel.withCollisions = pbModel.GltfShape.WithCollisions;
+                        if (pbModel.GltfShape.HasVisible) gltfModel.visible = pbModel.GltfShape.Visible;
+                        if (pbModel.GltfShape.HasIsPointerBlocker) gltfModel.isPointerBlocker = pbModel.GltfShape.IsPointerBlocker;
+
+                        return gltfModel;
                     case ComponentBodyPayload.PayloadOneofCase.ObjShape:
-                        var fromPb = new Model();
-                        if (pbModel.ObjShape.HasSrc) fromPb.src = pbModel.ObjShape.Src;
-                        if (pbModel.ObjShape.HasWithCollisions) fromPb.withCollisions = pbModel.ObjShape.WithCollisions;
-                        if (pbModel.ObjShape.HasVisible) fromPb.visible = pbModel.ObjShape.Visible;
-                        if (pbModel.ObjShape.HasIsPointerBlocker) fromPb.isPointerBlocker = pbModel.ObjShape.IsPointerBlocker;
-                        
-                        return fromPb;
+                        var objModel = new Model();
+                        if (pbModel.ObjShape.HasSrc) objModel.src = pbModel.ObjShape.Src;
+                        if (pbModel.ObjShape.HasWithCollisions) objModel.withCollisions = pbModel.ObjShape.WithCollisions;
+                        if (pbModel.ObjShape.HasVisible) objModel.visible = pbModel.ObjShape.Visible;
+                        if (pbModel.ObjShape.HasIsPointerBlocker) objModel.isPointerBlocker = pbModel.ObjShape.IsPointerBlocker;
+
+                        return objModel;
                     default:
                         return Utils.SafeUnimplemented<LoadableShape, Model>(
                             expected: ComponentBodyPayload.PayloadOneofCase.GltfShape, actual: pbModel.PayloadCase);

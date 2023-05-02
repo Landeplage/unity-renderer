@@ -110,23 +110,57 @@ namespace DCL.Components
 
             public override BaseModel GetDataFromPb(ComponentBodyPayload pbModel)
             {
-                if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.UiShape)
-                    return Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
 
-                var pb = new Model();
-                if (pbModel.UiShape.HasName) pb.name = pbModel.UiShape.Name;
-                if (pbModel.UiShape.HasParentComponent) pb.parentComponent = pbModel.UiShape.ParentComponent;
-                if (pbModel.UiShape.HasVisible) pb.visible = pbModel.UiShape.Visible;
-                if (pbModel.UiShape.HasOpacity) pb.opacity = pbModel.UiShape.Opacity;
-                if (pbModel.UiShape.HasHAlign) pb.hAlign = pbModel.UiShape.HAlign;
-                if (pbModel.UiShape.HasVAlign) pb.vAlign = pbModel.UiShape.VAlign;
-                if (pbModel.UiShape.Width != null) pb.width = SDK6DataMapExtensions.FromProtobuf(pb.width, pbModel.UiShape.Width);
-                if (pbModel.UiShape.Height != null) pb.height = SDK6DataMapExtensions.FromProtobuf(pb.height, pbModel.UiShape.Height);
-                if (pbModel.UiShape.PositionX != null) pb.positionX = SDK6DataMapExtensions.FromProtobuf(pb.positionX, pbModel.UiShape.PositionX);
-                if (pbModel.UiShape.PositionY != null) pb.positionY = SDK6DataMapExtensions.FromProtobuf(pb.positionY, pbModel.UiShape.PositionY);
-                if (pbModel.UiShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.UiShape.IsPointerBlocker;
+                switch (pbModel.PayloadCase)
+                {
+                    case ComponentBodyPayload.PayloadOneofCase.UiShape:
+                        var uiShapeModel = new Model();
+                        if (pbModel.UiShape.HasName) uiShapeModel.name = pbModel.UiShape.Name;
+                        if (pbModel.UiShape.HasParentComponent) uiShapeModel.parentComponent = pbModel.UiShape.ParentComponent;
+                        if (pbModel.UiShape.HasVisible) uiShapeModel.visible = pbModel.UiShape.Visible;
+                        if (pbModel.UiShape.HasOpacity) uiShapeModel.opacity = pbModel.UiShape.Opacity;
+                        if (pbModel.UiShape.HasHAlign) uiShapeModel.hAlign = pbModel.UiShape.HAlign;
+                        if (pbModel.UiShape.HasVAlign) uiShapeModel.vAlign = pbModel.UiShape.VAlign;
+                        if (pbModel.UiShape.Width != null) uiShapeModel.width = SDK6DataMapExtensions.FromProtobuf(uiShapeModel.width, pbModel.UiShape.Width);
+                        if (pbModel.UiShape.Height != null) uiShapeModel.height = SDK6DataMapExtensions.FromProtobuf(uiShapeModel.height, pbModel.UiShape.Height);
+                        if (pbModel.UiShape.PositionX != null) uiShapeModel.positionX = SDK6DataMapExtensions.FromProtobuf(uiShapeModel.positionX, pbModel.UiShape.PositionX);
+                        if (pbModel.UiShape.PositionY != null) uiShapeModel.positionY = SDK6DataMapExtensions.FromProtobuf(uiShapeModel.positionY, pbModel.UiShape.PositionY);
+                        if (pbModel.UiShape.HasIsPointerBlocker) uiShapeModel.isPointerBlocker = pbModel.UiShape.IsPointerBlocker;
+                        return uiShapeModel;
 
-                return pb;
+                    case ComponentBodyPayload.PayloadOneofCase.UiScreenSpaceShape:
+                        var screenSpaceModel = new Model();
+                        if (pbModel.UiScreenSpaceShape.HasName) screenSpaceModel.name = pbModel.UiScreenSpaceShape.Name;
+                        if (pbModel.UiScreenSpaceShape.HasParentComponent) screenSpaceModel.parentComponent = pbModel.UiScreenSpaceShape.ParentComponent;
+                        if (pbModel.UiScreenSpaceShape.HasVisible) screenSpaceModel.visible = pbModel.UiScreenSpaceShape.Visible;
+                        if (pbModel.UiScreenSpaceShape.HasOpacity) screenSpaceModel.opacity = pbModel.UiScreenSpaceShape.Opacity;
+                        if (pbModel.UiScreenSpaceShape.HasHAlign) screenSpaceModel.hAlign = pbModel.UiScreenSpaceShape.HAlign;
+                        if (pbModel.UiScreenSpaceShape.HasVAlign) screenSpaceModel.vAlign = pbModel.UiScreenSpaceShape.VAlign;
+                        if (pbModel.UiScreenSpaceShape.Width != null) screenSpaceModel.width = SDK6DataMapExtensions.FromProtobuf(screenSpaceModel.width, pbModel.UiScreenSpaceShape.Width);
+                        if (pbModel.UiScreenSpaceShape.Height != null) screenSpaceModel.height = SDK6DataMapExtensions.FromProtobuf(screenSpaceModel.height, pbModel.UiScreenSpaceShape.Height);
+                        if (pbModel.UiScreenSpaceShape.PositionX != null) screenSpaceModel.positionX = SDK6DataMapExtensions.FromProtobuf(screenSpaceModel.positionX, pbModel.UiScreenSpaceShape.PositionX);
+                        if (pbModel.UiScreenSpaceShape.PositionY != null) screenSpaceModel.positionY = SDK6DataMapExtensions.FromProtobuf(screenSpaceModel.positionY, pbModel.UiScreenSpaceShape.PositionY);
+                        if (pbModel.UiScreenSpaceShape.HasIsPointerBlocker) screenSpaceModel.isPointerBlocker = pbModel.UiScreenSpaceShape.IsPointerBlocker;
+                        return screenSpaceModel;
+
+                    case ComponentBodyPayload.PayloadOneofCase.UiFullScreenShape:
+                        var fullScreenModel = new Model();
+                        if (pbModel.UiFullScreenShape.HasName) fullScreenModel.name = pbModel.UiFullScreenShape.Name;
+                        if (pbModel.UiFullScreenShape.HasParentComponent) fullScreenModel.parentComponent = pbModel.UiFullScreenShape.ParentComponent;
+                        if (pbModel.UiFullScreenShape.HasVisible) fullScreenModel.visible = pbModel.UiFullScreenShape.Visible;
+                        if (pbModel.UiFullScreenShape.HasOpacity) fullScreenModel.opacity = pbModel.UiFullScreenShape.Opacity;
+                        if (pbModel.UiFullScreenShape.HasHAlign) fullScreenModel.hAlign = pbModel.UiFullScreenShape.HAlign;
+                        if (pbModel.UiFullScreenShape.HasVAlign) fullScreenModel.vAlign = pbModel.UiFullScreenShape.VAlign;
+                        if (pbModel.UiFullScreenShape.Width != null) fullScreenModel.width = SDK6DataMapExtensions.FromProtobuf(fullScreenModel.width, pbModel.UiFullScreenShape.Width);
+                        if (pbModel.UiFullScreenShape.Height != null) fullScreenModel.height = SDK6DataMapExtensions.FromProtobuf(fullScreenModel.height, pbModel.UiFullScreenShape.Height);
+                        if (pbModel.UiFullScreenShape.PositionX != null) fullScreenModel.positionX = SDK6DataMapExtensions.FromProtobuf(fullScreenModel.positionX, pbModel.UiFullScreenShape.PositionX);
+                        if (pbModel.UiFullScreenShape.PositionY != null) fullScreenModel.positionY = SDK6DataMapExtensions.FromProtobuf(fullScreenModel.positionY, pbModel.UiFullScreenShape.PositionY);
+                        if (pbModel.UiFullScreenShape.HasIsPointerBlocker) fullScreenModel.isPointerBlocker = pbModel.UiFullScreenShape.IsPointerBlocker;
+                        return fullScreenModel;
+
+                    default:
+                        return Utils.SafeUnimplemented<UIShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.UiShape, actual: pbModel.PayloadCase);
+                }
             }
         }
 

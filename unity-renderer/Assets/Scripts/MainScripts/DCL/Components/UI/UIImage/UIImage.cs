@@ -56,6 +56,9 @@ namespace DCL.Components
                 if (pbModel.UiImage.HasPaddingLeft) pb.paddingLeft = pbModel.UiImage.PaddingLeft;
                 if (pbModel.UiImage.HasSizeInPixels) pb.sizeInPixels = pbModel.UiImage.SizeInPixels;
 
+                if (pbModel.UiImage.HasOnClick) pb.onClick = pbModel.UiImage.OnClick;
+
+
                 return pb;
             }
         }

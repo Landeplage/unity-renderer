@@ -16,7 +16,7 @@ public class AvatarModifierArea : BaseComponent
     public class Model : BaseModel
     {
         // TODO: Change to TriggerArea and handle deserialization with subclasses
-        public BoxTriggerArea area;
+        public BoxTriggerArea area = new ();
         public string[] modifiers;
         public string[] excludeIds;
 
@@ -29,6 +29,7 @@ public class AvatarModifierArea : BaseComponent
                 return Utils.SafeUnimplemented<AvatarModifierArea, Model>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarModifierArea, actual: pbModel.PayloadCase);
 
             var pb = new Model();
+
             if (pbModel.AvatarModifierArea.Modifiers.Count != 0) pb.modifiers = pbModel.AvatarModifierArea.Modifiers.ToArray();
             if (pbModel.AvatarModifierArea.ExcludeIds.Count != 0) pb.excludeIds = pbModel.AvatarModifierArea.ExcludeIds.ToArray();
             if (pbModel.AvatarModifierArea.Area.Box != null) pb.area.box = pbModel.AvatarModifierArea.Area.Box.AsUnityVector3();

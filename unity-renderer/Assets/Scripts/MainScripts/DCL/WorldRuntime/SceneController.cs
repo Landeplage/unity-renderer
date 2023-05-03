@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DCL.Components;
-using MainScripts.DCL.WorldRuntime.KernelCommunication.WebSocketCommunication;
 using Unity.Profiling;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -168,7 +167,6 @@ namespace DCL
 
         public bool ProcessMessage(QueuedSceneMessage_Scene msgObject, out CustomYieldInstruction yieldInstruction)
         {
-            SDK6_Stats.precessedMessages.Value++;
             k_processMessage.Begin();
 
             int sceneNumber = msgObject.sceneNumber;
@@ -382,8 +380,6 @@ namespace DCL
 
         public void SendSceneMessage(string chunk)
         {
-            SDK6_Stats.messagesTotalSize.Value += System.Text.Encoding.UTF8.GetByteCount(chunk) / 1024.0f;
-            SDK6_Stats.sentMessagesAmount.Value ++;
 
             k_sendSceneMessage.Begin();
 

@@ -154,7 +154,7 @@ namespace Decentraland.Sdk.Ecs6 {
             "X3BhZGRpbmdfbGVmdEIMCgpfYmlsbGJvYXJkQgoKCF92aXNpYmxlIuYGChVF",
             "Q1M2Q29tcG9uZW50TWF0ZXJpYWwSFwoKYWxwaGFfdGVzdBgBIAEoAkgAiAEB",
             "EjYKDGFsYmVkb19jb2xvchgCIAEoCzIbLmRlY2VudHJhbGFuZC5jb21tb24u",
-            "Q29sb3IzSAGIAQESOAoOZW1pc3NpdmVfY29sb3IYAyABKAsyGy5kZWNlbnRy",
+            "Q29sb3I0SAGIAQESOAoOZW1pc3NpdmVfY29sb3IYAyABKAsyGy5kZWNlbnRy",
             "YWxhbmQuY29tbW9uLkNvbG9yM0gCiAEBEhUKCG1ldGFsbGljGAQgASgCSAOI",
             "AQESFgoJcm91Z2huZXNzGAUgASgCSASIAQESPAoScmVmbGVjdGl2aXR5X2Nv",
             "bG9yGAYgASgLMhsuZGVjZW50cmFsYW5kLmNvbW1vbi5Db2xvcjNIBYgBARId",
@@ -8838,10 +8838,10 @@ namespace Decentraland.Sdk.Ecs6 {
 
     /// <summary>Field number for the "albedo_color" field.</summary>
     public const int AlbedoColorFieldNumber = 2;
-    private global::Decentraland.Common.Color3 albedoColor_;
+    private global::Decentraland.Common.Color4 albedoColor_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Decentraland.Common.Color3 AlbedoColor {
+    public global::Decentraland.Common.Color4 AlbedoColor {
       get { return albedoColor_; }
       set {
         albedoColor_ = value;
@@ -9453,7 +9453,7 @@ namespace Decentraland.Sdk.Ecs6 {
       }
       if (other.albedoColor_ != null) {
         if (albedoColor_ == null) {
-          AlbedoColor = new global::Decentraland.Common.Color3();
+          AlbedoColor = new global::Decentraland.Common.Color4();
         }
         AlbedoColor.MergeFrom(other.AlbedoColor);
       }
@@ -9526,7 +9526,7 @@ namespace Decentraland.Sdk.Ecs6 {
           }
           case 18: {
             if (albedoColor_ == null) {
-              AlbedoColor = new global::Decentraland.Common.Color3();
+              AlbedoColor = new global::Decentraland.Common.Color4();
             }
             input.ReadMessage(AlbedoColor);
             break;
@@ -9614,7 +9614,7 @@ namespace Decentraland.Sdk.Ecs6 {
           }
           case 18: {
             if (albedoColor_ == null) {
-              AlbedoColor = new global::Decentraland.Common.Color3();
+              AlbedoColor = new global::Decentraland.Common.Color4();
             }
             input.ReadMessage(AlbedoColor);
             break;

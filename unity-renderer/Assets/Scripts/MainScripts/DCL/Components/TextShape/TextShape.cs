@@ -59,7 +59,7 @@ namespace DCL.Components
                     return Utils.SafeUnimplemented<TextShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.TextShape, actual: pbModel.PayloadCase);
 
                 var model = new Model();
-                
+
                 try {
                     if (pbModel.TextShape.HasBillboard) model.billboard = pbModel.TextShape.Billboard;
                     if (pbModel.TextShape.Color != null) model.color = pbModel.TextShape.Color.AsUnityColor();
@@ -85,7 +85,7 @@ namespace DCL.Components
                     if (pbModel.TextShape.HasHTextAlign) model.hTextAlign = pbModel.TextShape.HTextAlign;
                     if (pbModel.TextShape.HasFontSize) model.fontAutoSize = pbModel.TextShape.FontSize == 0;
                     if (pbModel.TextShape.HasFontSize) model.fontSize = pbModel.TextShape.FontSize;
-                    if (pbModel.TextShape.HasLineSpacing) model.lineSpacing = float.Parse(pbModel.TextShape.LineSpacing[..^2]); // TODO [SDK6_REFACTOR] revise this, is failing
+                    // if (pbModel.TextShape.HasLineSpacing) model.lineSpacing = float.Parse(pbModel.TextShape.LineSpacing[..^2]); // TODO [SDK6_REFACTOR] revise this, is failing
                 }
                 catch (Exception e)
                 {

@@ -34,7 +34,7 @@ public class AvatarModel : BaseModel
     {
         if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.AvatarShape)
             return Utils.SafeUnimplemented<AvatarModel, AvatarModel>(expected: ComponentBodyPayload.PayloadOneofCase.AvatarShape, actual: pbModel.PayloadCase);
-        
+
         var model = new AvatarModel();
         if (pbModel.AvatarShape.HasId) model.id = pbModel.AvatarShape.Id;
         if (pbModel.AvatarShape.HasName) model.name = pbModel.AvatarShape.Name;
@@ -52,8 +52,11 @@ public class AvatarModel : BaseModel
             for (var i = 0; i < pbModel.AvatarShape.Emotes.Count; i++)
             {
                 if (pbModel.AvatarShape.Emotes[i] == null) continue;
-                if (pbModel.AvatarShape.Emotes[i].HasSlot) model.emotes[i].slot = pbModel.AvatarShape.Emotes[i].Slot;
-                if (pbModel.AvatarShape.Emotes[i].HasUrn) model.emotes[i].urn = pbModel.AvatarShape.Emotes[i].Urn;
+                AvatarEmoteEntry emote = new AvatarEmoteEntry();
+
+                if (pbModel.AvatarShape.Emotes[i].HasSlot) emote.slot = pbModel.AvatarShape.Emotes[i].Slot;
+                if (pbModel.AvatarShape.Emotes[i].HasUrn) emote.urn = pbModel.AvatarShape.Emotes[i].Urn;
+                model.emotes.Add(emote);
             }
         }
 

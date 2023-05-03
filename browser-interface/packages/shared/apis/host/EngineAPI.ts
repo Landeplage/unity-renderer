@@ -17,25 +17,7 @@ export function registerEngineApiServiceServerImplementation(port: RpcServerPort
           // can't be uncomment until we remove that dependency
           // if (ctx.sdk7) throw new Error('Cannot use SDK6 APIs on SDK7 scene')
 
-          // const actions: EntityAction[] = []
-
-          // for (const action of req.actions) {
-          //   const actionType = eaTypeToStr(action.type)
-          //   if (actionType && action.payload) {
-          //     actions.push({
-          //       type: actionType,
-          //       tag: action.tag,
-          //       payload: getPayload(action.type, action.payload as any)
-          //     })
-          //   }
-          // }
-
-          // if (actions.length) {
-          //   ctx.sendBatch(actions)
-          // }
-
           if (req.actions.length) {
-            console.log({ newActions: req.actions })
             ctx.sendBatch(req.actions)
             await ctx.rpcSceneControllerService.sendBatch({ actions: req.actions })
           }

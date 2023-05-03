@@ -63,7 +63,7 @@
     "@dcl/legacy-ecs": "^6.11.11",
     "@dcl/protocol": "https://sdk-team-cdn.decentraland.org/@dcl/protocol/branch//dcl-protocol-1.0.0-4871588302.commit-6762351.tgz",
     "@dcl/rpc": "^1.1.1",
-    "@dcl/scene-runtime": "https://sdk-team-cdn.decentraland.org/@dcl/scene-runtime/branch/refactor/sdk6-component-serialization/dcl-scene-runtime-7.0.6-20230503120223.commit-eb6637e.tgz",
+    "@dcl/scene-runtime": "https://sdk-team-cdn.decentraland.org/@dcl/scene-runtime/branch/refactor/sdk6-component-serialization/dcl-scene-runtime-7.0.6-20230503122427.commit-8cce6e5.tgz",
     "@dcl/schemas": "^6.11.1",
     "@dcl/urn-resolver": "^2.0.3",
     "@types/mocha": "^10.0.1",

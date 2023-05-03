@@ -428,12 +428,18 @@ namespace DCL
 
                     targetComponent.Initialize(scene, entity);
 
-                    if (data is string json)
-                        targetComponent.UpdateFromJSON(json);
-                    else if (data is Decentraland.Sdk.Ecs6.ComponentBodyPayload payload)
-                        targetComponent.UpdateFromPb(payload);
-                    else
-                        targetComponent.UpdateFromModel(data as BaseModel);
+                    switch (data)
+                    {
+                        case string json:
+                            targetComponent.UpdateFromJSON(json);
+                            break;
+                        case ComponentBodyPayload payload:
+                            targetComponent.UpdateFromPb(payload);
+                            break;
+                        default:
+                            targetComponent.UpdateFromModel(data as BaseModel);
+                            break;
+                    }
 
                     wasCreated = true;
                 }

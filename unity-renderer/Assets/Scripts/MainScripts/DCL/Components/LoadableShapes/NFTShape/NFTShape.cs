@@ -21,15 +21,15 @@ namespace DCL.Components
             {
                 if (pbModel.PayloadCase != ComponentBodyPayload.PayloadOneofCase.NftShape)
                     return Utils.SafeUnimplemented<NFTShape, Model>(expected: ComponentBodyPayload.PayloadOneofCase.NftShape, actual: pbModel.PayloadCase);
-                
+
                 var pb = new Model();
-                if (pbModel.NftShape.Color == null) pb.color = pbModel.NftShape.Color.AsUnityColor();
+                if (pbModel.NftShape.Color != null) pb.color = pbModel.NftShape.Color.AsUnityColor();
                 if (pbModel.NftShape.HasStyle) pb.style = (int)pbModel.NftShape.Style;
                 if (pbModel.NftShape.HasSrc) pb.src = pbModel.NftShape.Src;
                 if (pbModel.NftShape.HasVisible) pb.visible = pbModel.NftShape.Visible;
                 if (pbModel.NftShape.HasWithCollisions) pb.withCollisions = pbModel.NftShape.WithCollisions;
                 if (pbModel.NftShape.HasIsPointerBlocker) pb.isPointerBlocker = pbModel.NftShape.IsPointerBlocker;
-                
+
                 return pb;
             }
         }

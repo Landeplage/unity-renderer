@@ -371,14 +371,21 @@ export class SceneWorker {
 
     worker.addEventListener('message', (event) => {
       if (event.data?.type === 'actions') {
-        console.log(`Received actions ${event.data.bytes?.length} bytes`)
+        if (event.data.bytes?.length > 50e3) {
+          this.logger.log(`Received actions > 50k: ${event.data.bytes?.length} bytes`)
+        }
         if (WSS_ENABLED || FORCE_SEND_MESSAGE) {
-          const sceneId = this.loadableScene.id
-          nativeMsgBridge.sdk6BinaryMessage(sceneId, event.data.bytes, event.data.bytes.length)
-        } else {
           this.rpcContext.rpcSceneControllerService.sendBatch({ payload: event.data.bytes }).catch((err) => {
             this.logger.error('Error sending binary actions from Worker to Renderer', err)
           })
+        } else {
+          const sceneId = this.loadableScene.id
+          nativeMsgBridge.sdk6BinaryMessage(sceneId, event.data.bytes, event.data.bytes.length)
+        }
+
+        this.ready |= SceneWorkerReadyState.RECEIVED_MESSAGES
+        if (!(this.ready & SceneWorkerReadyState.INITIALIZED)) {
+          this.ready |= SceneWorkerReadyState.INITIALIZED
         }
       }
     })

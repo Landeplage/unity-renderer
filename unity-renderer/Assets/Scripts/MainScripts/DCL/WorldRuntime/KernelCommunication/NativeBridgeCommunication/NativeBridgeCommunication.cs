@@ -5,6 +5,7 @@ using DCL.Models;
 using Decentraland.Renderer.RendererServices;
 using Decentraland.Sdk.Ecs6;
 using MainScripts.DCL.Components;
+using System.IO;
 using UnityEngine;
 using Ray = DCL.Models.Ray;
 
@@ -13,6 +14,7 @@ public class NativeBridgeCommunication : IKernelCommunication
     private static string currentEntityId;
     private static int currentSceneNumber;
     private static string currentTag;
+    private static byte[] preallocatedReaderBuffer = new byte[88388608];
 
     private static IMessageQueueHandler queueHandler;
 
@@ -332,10 +334,13 @@ public class NativeBridgeCommunication : IKernelCommunication
     internal static unsafe void Sdk6BinaryMessage(int intPtr, int length)
     {
         IntPtr ptr = new IntPtr(intPtr);
-        var reader = new ReadOnlySpan<byte>(ptr.ToPointer(), length);
+        
+        var readonlySpan = new ReadOnlySpan<byte>(ptr.ToPointer(), length);
+        readonlySpan.CopyTo(preallocatedReaderBuffer);
+
         try
         {
-            RendererManyEntityActions sceneRequest = RendererManyEntityActions.Parser.ParseFrom(reader);
+            RendererManyEntityActions sceneRequest = RendererManyEntityActions.Parser.ParseFrom(preallocatedReaderBuffer, 0, length);
             foreach(var action in sceneRequest.Actions)
                 queueHandler.EnqueueSceneMessage(new QueuedSceneMessage_Scene
                 {

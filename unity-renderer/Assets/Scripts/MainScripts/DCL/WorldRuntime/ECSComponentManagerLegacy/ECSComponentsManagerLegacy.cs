@@ -66,7 +66,8 @@ namespace DCL
         {
             k_AddSharedComponent.Begin();
             if (component == null)
-            {
+            {            k_AddSharedComponent.End();
+
                 return;
             }
 
@@ -89,14 +90,20 @@ namespace DCL
             k_RemoveSharedComponent.Begin();
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
+                k_RemoveSharedComponent.End();
                 return;
             }
             if (!entityComponents.TryGetValue(targetType, out ISharedComponent component))
             {
+                k_RemoveSharedComponent.End();
                 return;
             }
+
             if (component == null)
+            {
+                k_RemoveSharedComponent.End();
                 return;
+            }
 
             entityComponents.Remove(targetType);
 
@@ -122,7 +129,10 @@ namespace DCL
                 component = entityComponents.Values.FirstOrDefault(x => x is T) as T;
 
                 if (component != null)
+                {
+                    k_TryGetComponent.End();
                     return component;
+                }
             }
 
             if (entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entitySharedComponents))
@@ -130,11 +140,13 @@ namespace DCL
                 component = entitySharedComponents.Values.FirstOrDefault(x => x is T) as T;
 
                 if (component != null)
+                {
+                    k_TryGetComponent.End();
                     return component;
+                }
             }
 
             k_TryGetComponent.End();
-
             return null;
         }
 
@@ -145,6 +157,7 @@ namespace DCL
             k_TryGetBaseComponent.Begin();
             if (entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
+                k_TryGetBaseComponent.End();
                 return entityComponents.TryGetValue(componentId, out component);
             }
             component = null;
@@ -161,6 +174,8 @@ namespace DCL
             component = null;
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
+                k_TryGetSharedComponent.End();
+
                 return false;
             }
 
@@ -188,11 +203,15 @@ namespace DCL
             k_GetSharedComponent.Begin();
             if (!entitiesSharedComponents.TryGetValue(entity.entityId, out Dictionary<Type, ISharedComponent> entityComponents))
             {
+                k_GetSharedComponent.End();
+
                 return null;
             }
 
             if (entityComponents.TryGetValue(targetType, out ISharedComponent component))
             {
+                k_GetSharedComponent.End();
+
                 return component;
             }
             k_GetSharedComponent.End();
@@ -207,6 +226,8 @@ namespace DCL
             k_HasComponent.Begin();
             if (entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
             {
+                k_HasComponent.End();
+
                 return entityComponents.ContainsKey(componentId);
             }
             k_HasComponent.End();
@@ -220,7 +241,8 @@ namespace DCL
         {
             k_HasSharedComponent.Begin();
             if (TryGetSharedComponent(entity, componentId, out ISharedComponent component))
-            {
+            {            k_HasSharedComponent.End();
+
                 return component != null;
             }
             k_HasSharedComponent.End();
@@ -267,11 +289,13 @@ namespace DCL
         {
             k_GetComponentsById.Begin();
             if (!entitiesComponents.TryGetValue(entity.entityId, out Dictionary<CLASS_ID_COMPONENT, IEntityComponent> entityComponents))
-            {
+            {            k_GetComponentsById.End();
+
                 return null;
             }
             if (entityComponents.TryGetValue(componentId, out IEntityComponent component))
-            {
+            {            k_GetComponentsById.End();
+
                 return component;
             }
 
@@ -440,21 +464,34 @@ namespace DCL
         public ISharedComponent SceneSharedComponentCreate(string id, int classId)
         {
             k_SceneSharedComponentCreate.Begin();
+
             if (disposableComponents.TryGetValue(id, out ISharedComponent component))
+            {
+                k_SceneSharedComponentCreate.End();
+
                 return component;
+            }
 
             IRuntimeComponentFactory factory = componentFactory;
 
             if (factory.createConditions.ContainsKey(classId))
             {
                 if (!factory.createConditions[(int)classId].Invoke(scene.sceneData.sceneNumber, classId))
+                {
+                    k_SceneSharedComponentCreate.End();
+
                     return null;
+                }
             }
 
             ISharedComponent newComponent = componentFactory.CreateComponent(classId) as ISharedComponent;
 
             if (newComponent == null)
+            {
+                k_SceneSharedComponentCreate.End();
+
                 return null;
+            }
 
             AddSceneSharedComponent(id, newComponent);
 
@@ -480,7 +517,10 @@ namespace DCL
             IDCLEntity entity = scene.GetEntityById(entityId);
 
             if (entity == null)
+            {            k_SceneSharedComponentAttach.End();
+
                 return;
+            }
 
             if (disposableComponents.TryGetValue(componentId, out ISharedComponent sharedComponent))
             {
@@ -488,13 +528,17 @@ namespace DCL
             }
             k_SceneSharedComponentAttach.End();
         }
+        static readonly ProfilerMarker k_EntityComponentCreateOrUpdate = new ("ECSComponentsManagerLegacy_EntityComponentCreateOrUpdate");
 
         public IEntityComponent EntityComponentCreateOrUpdate(long entityId, CLASS_ID_COMPONENT classId, object data)
         {
+            k_EntityComponentCreateOrUpdate.Begin();
             IDCLEntity entity = scene.GetEntityById(entityId);
 
             if (entity == null)
             {
+                k_EntityComponentCreateOrUpdate.End();
+
                 Debug.LogError($"scene '{scene.sceneData.sceneNumber}': Can't create entity component if the entity {entityId} doesn't exist!");
                 return null;
             }
@@ -542,6 +586,7 @@ namespace DCL
 
             physicsSyncController.MarkDirty();
             cullingController.MarkDirty();
+            k_EntityComponentCreateOrUpdate.End();
 
             return targetComponent;
         }
@@ -554,12 +599,16 @@ namespace DCL
             k_EntityComponentUpdate.Begin();
             if (entity == null)
             {
+                k_EntityComponentUpdate.End();
+
                 Debug.LogError($"Can't update the {classId} component of a nonexistent entity!", scene.GetSceneTransform());
                 return null;
             }
 
             if (!HasComponent(entity, classId))
             {
+                k_EntityComponentUpdate.End();
+
                 Debug.LogError($"Entity {entity.entityId} doesn't have a {classId} component to update!", scene.GetSceneTransform());
                 return null;
             }
@@ -591,6 +640,8 @@ namespace DCL
             k_SceneSharedComponentUpdate.Begin();
             if (disposableComponents.TryGetValue(id, out ISharedComponent sharedComponent))
             {
+                k_SceneSharedComponentUpdate.End();
+
                 sharedComponent.UpdateFromModel(model);
                 return sharedComponent;
             }
@@ -607,6 +658,8 @@ namespace DCL
             if (disposableComponents.TryGetValue(id, out ISharedComponent disposableComponent))
             {
                 disposableComponent.UpdateFromJSON(json);
+                k_SceneSharedComponentUpdateJSON.End();
+
                 return disposableComponent;
             }
 
@@ -622,7 +675,8 @@ namespace DCL
             IDCLEntity entity = scene.GetEntityById(entityId);
 
             if (entity == null)
-            {
+            {            k_EntityComponentRemove.End();
+
                 return;
             }
 
@@ -633,6 +687,7 @@ namespace DCL
                     {
                         baseShape.DetachFrom(entity);
                     }
+                    k_EntityComponentRemove.End();
 
                     return;
 
@@ -643,6 +698,7 @@ namespace DCL
                             Utils.SafeDestroy(component.GetTransform().gameObject);
                             RemoveComponent(entity, CLASS_ID_COMPONENT.UUID_ON_CLICK);
                         }
+                        k_EntityComponentRemove.End();
 
                         return;
                     }
@@ -653,7 +709,8 @@ namespace DCL
                             Utils.SafeDestroy(component.GetTransform().gameObject);
                             RemoveComponent(entity, CLASS_ID_COMPONENT.UUID_ON_DOWN);
                         }
-                    }
+                    }            k_EntityComponentRemove.End();
+
                     return;
                 case ComponentNameLiterals.OnPointerUp:
                     {
@@ -662,7 +719,8 @@ namespace DCL
                             Utils.SafeDestroy(component.GetTransform().gameObject);
                             RemoveComponent(entity, CLASS_ID_COMPONENT.UUID_ON_UP);
                         }
-                    }
+                    }            k_EntityComponentRemove.End();
+
                     return;
                 case ComponentNameLiterals.OnPointerHoverEnter:
                     {
@@ -671,7 +729,8 @@ namespace DCL
                             Utils.SafeDestroy(component.GetTransform().gameObject);
                             RemoveComponent(entity, CLASS_ID_COMPONENT.UUID_ON_HOVER_ENTER);
                         }
-                    }
+                    }            k_EntityComponentRemove.End();
+
                     return;
                 case ComponentNameLiterals.OnPointerHoverExit:
                     {
@@ -680,7 +739,8 @@ namespace DCL
                             Utils.SafeDestroy(component.GetTransform().gameObject);
                             RemoveComponent(entity, CLASS_ID_COMPONENT.UUID_ON_HOVER_EXIT);
                         }
-                    }
+                    }            k_EntityComponentRemove.End();
+
                     return;
                 case "transform":
                     {
@@ -689,7 +749,8 @@ namespace DCL
                             component.Cleanup();
                             RemoveComponent(entity, CLASS_ID_COMPONENT.AVATAR_ATTACH);
                         }
-                    }
+                    }            k_EntityComponentRemove.End();
+
                     return;
 
                 default:

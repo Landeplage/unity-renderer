@@ -69,7 +69,7 @@ export class NativeMessagesBridge {
   private callUnloadParcelScene!: (sceneId: string) => void
 
   private callBinaryMessage!: (ptr: number, length: number, sceneId: string) => void
-  private callSdk6BinaryMessage!: (ptr: number, length: number, sceneId: string) => void
+  private callSdk6BinaryMessage!: (ptr: number, length: number) => void
 
   private currentSceneId: string = ''
   private currentTag: string = ''
@@ -313,10 +313,11 @@ export class NativeMessagesBridge {
     this.callBinaryMessage(ptr, messageLength, sceneId)
   }
 
-  public sdk6BinaryMessage(sceneId: string, message: Uint8Array, messageLength: number) {
+  public sdk6BinaryMessage(sceneNumber: number, message: Uint8Array, messageLength: number) {
     const ptr = this.binarySdk6MessageMemBlockPtr
     this.unityModule.HEAPU8.set(message, ptr)
-    this.callSdk6BinaryMessage(ptr, messageLength, sceneId)
+    this.setSceneNumber(sceneNumber)
+    this.callSdk6BinaryMessage(ptr, messageLength)
   }
 }
 

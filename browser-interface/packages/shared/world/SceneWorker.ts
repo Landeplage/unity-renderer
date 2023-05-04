@@ -379,8 +379,11 @@ export class SceneWorker {
             this.logger.error('Error sending binary actions from Worker to Renderer', err)
           })
         } else {
-          const sceneId = this.loadableScene.id
-          nativeMsgBridge.sdk6BinaryMessage(sceneId, event.data.bytes, event.data.bytes.length)
+          nativeMsgBridge.sdk6BinaryMessage(
+            this.rpcContext.sceneData.sceneNumber,
+            event.data.bytes,
+            event.data.bytes.length
+          )
         }
 
         this.ready |= SceneWorkerReadyState.RECEIVED_MESSAGES

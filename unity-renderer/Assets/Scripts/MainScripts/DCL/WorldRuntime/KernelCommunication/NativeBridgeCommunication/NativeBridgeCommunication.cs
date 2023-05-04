@@ -329,13 +329,13 @@ public class NativeBridgeCommunication : IKernelCommunication
     }
 
     [MonoPInvokeCallback(typeof(JS_Delegate_VII))]
-    internal static void Sdk6BinaryMessage(int intPtr, int length)
+    internal static unsafe void Sdk6BinaryMessage(int intPtr, int length)
     {
-        byte[] data = new byte[length];
-        Marshal.Copy(new IntPtr(intPtr), data, 0, length);
+        IntPtr ptr = new IntPtr(intPtr);
+        var reader = new ReadOnlySpan<byte>(ptr.ToPointer(), length);
         try
         {
-            RendererManyEntityActions sceneRequest = RendererManyEntityActions.Parser.ParseFrom(data);
+            RendererManyEntityActions sceneRequest = RendererManyEntityActions.Parser.ParseFrom(reader);
             foreach(var action in sceneRequest.Actions)
                 queueHandler.EnqueueSceneMessage(new QueuedSceneMessage_Scene
                 {

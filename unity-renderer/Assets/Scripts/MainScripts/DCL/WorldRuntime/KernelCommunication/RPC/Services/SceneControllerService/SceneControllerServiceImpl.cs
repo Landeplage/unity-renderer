@@ -291,7 +291,8 @@ namespace RPC.Services
 
             try
             {
-                foreach(var action in request.Actions)
+                RendererManyEntityActions sceneRequest = RendererManyEntityActions.Parser.ParseFrom(request.Payload);
+                foreach(var action in sceneRequest.Actions)
                     context.crdt.SceneController.EnqueueSceneMessage(new QueuedSceneMessage_Scene
                     {
                         type = QueuedSceneMessage.Type.SCENE_MESSAGE,
@@ -347,7 +348,7 @@ namespace RPC.Services
                            name = from.Payload.ComponentCreated.Name,
                        },
                        EntityActionPayload.PayloadOneofCase.ComponentDisposed => new Protocol.SharedComponentDispose { id = from.Payload.ComponentDisposed.Id },
-                       
+
                        //--- NEW FLOW!
                        EntityActionPayload.PayloadOneofCase.ComponentUpdated => from.Payload.ComponentUpdated,
                        EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => from.Payload.UpdateEntityComponent,

@@ -46,6 +46,10 @@ message SendBatchRequest {
   bytes payload = 1;
 }
 
+message RendererManyEntityActions {
+  repeated decentraland.sdk.ecs6.EntityAction actions = 1;
+}
+
 message SendBatchResponse {}
 
 // The SceneController exists once per RPC port. Every scene is a independent

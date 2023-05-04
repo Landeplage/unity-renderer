@@ -58,7 +58,7 @@ public class NativeBridgeCommunication : IKernelCommunication
         SetCallback_OpenNftDialog(OpenNftDialog);
 
         SetCallback_Query(Query);
-        SetCallback_Sdk6BinaryMessage(Sdk6BinaryMessage)
+        SetCallback_Sdk6BinaryMessage(Sdk6BinaryMessage);
 #endif
     }
     public void Dispose()

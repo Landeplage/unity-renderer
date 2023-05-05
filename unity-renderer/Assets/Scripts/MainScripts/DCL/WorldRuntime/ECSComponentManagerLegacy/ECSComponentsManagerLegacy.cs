@@ -650,20 +650,19 @@ namespace DCL
             return null;
         }
 
-        static readonly ProfilerMarker k_SceneSharedComponentUpdateJSON = new ("ECSComponentsManagerLegacy_SceneSharedComponentUpdateJSON");
 
         public ISharedComponent SceneSharedComponentUpdate(string id, string json)
         {
-            k_SceneSharedComponentUpdateJSON.Begin();
+            k_SceneSharedComponentUpdate.Begin();
             if (disposableComponents.TryGetValue(id, out ISharedComponent disposableComponent))
             {
                 disposableComponent.UpdateFromJSON(json);
-                k_SceneSharedComponentUpdateJSON.End();
+                k_SceneSharedComponentUpdate.End();
 
                 return disposableComponent;
             }
 
-            k_SceneSharedComponentUpdateJSON.End();
+            k_SceneSharedComponentUpdate.End();
             return null;
         }
 

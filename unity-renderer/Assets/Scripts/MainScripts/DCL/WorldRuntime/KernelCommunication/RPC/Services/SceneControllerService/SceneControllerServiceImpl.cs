@@ -291,15 +291,19 @@ namespace RPC.Services
 
             try
             {
-                foreach(var action in request.Actions)
+                for (var i = 0; i < request.Actions.Count; i++)
+                {
+                    EntityAction action = request.Actions[i];
+
                     context.crdt.SceneController.EnqueueSceneMessage(new QueuedSceneMessage_Scene
                     {
                         type = QueuedSceneMessage.Type.SCENE_MESSAGE,
                         method = MapMessagingMethodType(action),
                         sceneNumber = sceneNumber,
-                        payload = ExtractPayload(from: action),
+                        payload = ExtractPayload(from: action, sceneNumber),
                         tag = action.Tag,
                     });
+                }
             }
             catch (Exception e)
             {
@@ -309,7 +313,7 @@ namespace RPC.Services
             return defaultSendBatchResult;
         }
 
-        private object ExtractPayload(EntityAction from)
+        private static object ExtractPayload(EntityAction from, int sceneNumber)
         {
             return from.Payload.PayloadCase switch
                    {
@@ -339,7 +343,7 @@ namespace RPC.Services
                            entityId = from.Payload.SetEntityParent.EntityId,
                            parentId = from.Payload.SetEntityParent.ParentId
                        },
-                       EntityActionPayload.PayloadOneofCase.Query => new QueryMessage { payload = CreateRaycastPayload(from) },
+                       EntityActionPayload.PayloadOneofCase.Query => new QueryMessage { payload = CreateRaycastPayload(from, sceneNumber) },
                        EntityActionPayload.PayloadOneofCase.ComponentCreated => new Protocol.SharedComponentCreate
                        {
                            id = from.Payload.ComponentCreated.Id,
@@ -347,7 +351,7 @@ namespace RPC.Services
                            name = from.Payload.ComponentCreated.Name,
                        },
                        EntityActionPayload.PayloadOneofCase.ComponentDisposed => new Protocol.SharedComponentDispose { id = from.Payload.ComponentDisposed.Id },
-                       
+
                        //--- NEW FLOW!
                        EntityActionPayload.PayloadOneofCase.ComponentUpdated => from.Payload.ComponentUpdated,
                        EntityActionPayload.PayloadOneofCase.UpdateEntityComponent => from.Payload.UpdateEntityComponent,
@@ -357,7 +361,7 @@ namespace RPC.Services
                    };
         }
 
-        private RaycastQuery CreateRaycastPayload(EntityAction action)
+        private static RaycastQuery CreateRaycastPayload(EntityAction action, int sceneNumber)
         {
             var raycastType = action.Payload.Query.Payload.QueryType switch
                 {

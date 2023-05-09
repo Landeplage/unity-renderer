@@ -426,7 +426,7 @@ public class NativeBridgeCommunication : IKernelCommunication
 
         return new RaycastQuery
         {
-            id = action.Payload.Query.QueryId,
+            id = action.Payload.Query.Payload.QueryId,
             raycastType = raycastType,
             ray = ray,
             sceneNumber = currentSceneNumber,

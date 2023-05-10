@@ -65,6 +65,7 @@ namespace DCL.Components
         public override void Initialize(IParcelScene scene, IDCLEntity entity)
         {
             base.Initialize(scene, entity);
+            isOutOfBoundaries = !entity.isInsideSceneBoundaries;
             DataStore.i.sceneBoundariesChecker.Add(entity,this);
         }
 

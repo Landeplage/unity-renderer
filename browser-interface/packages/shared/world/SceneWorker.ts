@@ -383,59 +383,7 @@ export class SceneWorker {
       }
       this.ready |= SceneWorkerReadyState.INITIALIZED
     }
-
-    // if (WSS_ENABLED || FORCE_SEND_MESSAGE) {
-    //   this.sendBatchWss(actions)
-    // } else {
-    //   this.sendBatchNative(actions)
-    // }
   }
-
-  // private sendBatchWss(actions: EntityAction[]): void {
-  //   const sceneId = this.loadableScene.id
-  //   const sceneNumber = this.rpcContext.sceneData.sceneNumber
-  //   const messages: string[] = []
-  //   let len = 0
-
-  //   function flush() {
-  //     if (len) {
-  //       getUnityInstance().SendSceneMessage(messages.join('\n'))
-  //       messages.length = 0
-  //       len = 0
-  //     }
-  //   }
-
-  //   for (let i = 0; i < actions.length; i++) {
-  //     const action = actions[i]
-
-  //     // Check moved from SceneRuntime.ts->DecentralandInterface.componentUpdate() here until we remove base64 support.
-  //     // This way we can still initialize problematic scenes in the Editor, otherwise the protobuf encoding explodes with such messages.
-  //     if (action.payload.json?.length > 49000) {
-  //       this.logger.error('Component payload cannot exceed 49.000 bytes. Skipping message.')
-
-  //       continue
-  //     }
-
-  //     const part = protobufMsgBridge.encodeSceneMessage(sceneId, sceneNumber, action.type, action.payload, action.tag)
-  //     messages.push(part)
-  //     len += part.length
-
-  //     if (len > 1024 * 1024) {
-  //       flush()
-  //     }
-  //   }
-
-  //   flush()
-  // }
-
-  // private sendBatchNative(actions: EntityAction[]): void {
-  //   const sceneId = this.loadableScene.id
-  //   const sceneNumber = this.rpcContext.sceneData.sceneNumber
-  //   for (let i = 0; i < actions.length; i++) {
-  //     const action = actions[i]
-  //     nativeMsgBridge.SendNativeMessage(sceneId, sceneNumber, action)
-  //   }
-  // }
 
   public sendUserViewMatrix(positionReport: Readonly<PositionReport>) {
     if (this.rpcContext.subscribedEvents.has('positionChanged')) {

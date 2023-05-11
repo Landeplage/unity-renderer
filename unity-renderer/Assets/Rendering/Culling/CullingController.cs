@@ -159,9 +159,9 @@ namespace DCL.Rendering
             Vector3 playerPosition = CommonScriptableObjects.playerUnityPosition;
             float currentStartTime = Time.realtimeSinceStartup;
 
-            foreach (Renderer renderer in renderers)
+            foreach (Renderer r in renderers)
             {
-                if (renderer == null)
+                if (r == null)
                     continue;
 
                 if (Time.realtimeSinceStartup - currentStartTime >= CullingControllerSettings.MAX_TIME_BUDGET)
@@ -171,7 +171,7 @@ namespace DCL.Rendering
                     currentStartTime = Time.realtimeSinceStartup;
                 }
 
-                Bounds bounds = MeshesInfoUtils.GetSafeBounds(renderer.bounds, renderer.transform.position);
+                Bounds bounds = MeshesInfoUtils.GetSafeBounds(r.bounds, r.transform.position);
                 Vector3 boundingPoint = bounds.ClosestPoint(playerPosition);
 
                 float distance = Vector3.Distance(playerPosition, boundingPoint);
@@ -185,13 +185,13 @@ namespace DCL.Rendering
                     bounds.Contains(playerPosition) ||
                     // At the end we perform queries for emissive and opaque conditions
                     // these are the last conditions because IsEmissive and IsOpaque are a bit more costly
-                    viewportSize > profile.emissiveSizeThreshold && IsEmissive(renderer) ||
-                    viewportSize > profile.opaqueSizeThreshold && IsOpaque(renderer)
+                    viewportSize > profile.emissiveSizeThreshold && IsEmissive(r) ||
+                    viewportSize > profile.opaqueSizeThreshold && IsOpaque(r)
                 ;
 
                 bool shouldHaveShadow = !settings.enableShadowCulling || TestRendererShadowRule(profile, viewportSize, distance, shadowTexelSize);
 
-                if (renderer is SkinnedMeshRenderer skr)
+                if (r is SkinnedMeshRenderer skr)
                 {
                     Material mat = skr.sharedMaterial;
 
@@ -203,14 +203,14 @@ namespace DCL.Rendering
 
                 if (OnDataReport != null)
                 {
-                    if (!shouldBeVisible && !hiddenRenderers.Contains(renderer))
-                        hiddenRenderers.Add(renderer);
+                    if (!shouldBeVisible && !hiddenRenderers.Contains(r))
+                        hiddenRenderers.Add(r);
 
-                    if (shouldBeVisible && !shouldHaveShadow && !shadowlessRenderers.Contains(renderer))
-                        shadowlessRenderers.Add(renderer);
+                    if (shouldBeVisible && !shouldHaveShadow && !shadowlessRenderers.Contains(r))
+                        shadowlessRenderers.Add(r);
                 }
 
-                SetCullingForRenderer(renderer, shouldBeVisible, shouldHaveShadow);
+                SetCullingForRenderer(r, shouldBeVisible, shouldHaveShadow);
 #if UNITY_EDITOR
                 if (DRAW_GIZMOS)
                     DrawDebugGizmos(shouldBeVisible, bounds, boundingPoint);

@@ -6,12 +6,10 @@ using DCL.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DCL.Components;
-using System.Threading.Tasks;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -232,13 +230,6 @@ namespace DCL
                                 scene.SetEntityParent(entityIdHelper.EntityFromLegacyEntityString(payload.entityId),entityIdHelper.EntityFromLegacyEntityString(payload.parentId));
                             break;
                         }
-                    // case MessagingTypes.SHARED_COMPONENT_UPDATE:
-                    // {
-                    //     if (msgPayload is Protocol.SharedComponentUpdate payload)
-                    //         delayedComponent = scene.componentsManagerLegacy.SceneSharedComponentUpdate(payload.componentId, payload.json) as IDelayedComponent;
-                    //     break;
-                    // }
-                    //--- NEW FLOW!
                     case MessagingTypes.PB_SHARED_COMPONENT_UPDATE:
                     {
                         if (msgPayload is Decentraland.Sdk.Ecs6.ComponentUpdatedBody payload){
@@ -248,13 +239,6 @@ namespace DCL
                         }
                         break;
                     }
-                    // case MessagingTypes.ENTITY_COMPONENT_CREATE_OR_UPDATE:
-                    //     {
-                    //         if (msgPayload is Protocol.EntityComponentCreateOrUpdate payload)
-                    //             delayedComponent = scene.componentsManagerLegacy.EntityComponentCreateOrUpdate(entityIdHelper.EntityFromLegacyEntityString(payload.entityId),
-                    //                 (CLASS_ID_COMPONENT) payload.classId, payload.json) as IDelayedComponent;
-                    //         break;
-                    //     }
                     case MessagingTypes.PB_ENTITY_COMPONENT_CREATE_OR_UPDATE:
                         {
                             if (msgPayload is Decentraland.Sdk.Ecs6.UpdateEntityComponentBody payload) {
